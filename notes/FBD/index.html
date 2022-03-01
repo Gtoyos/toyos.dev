@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>toyos.dev</title>
+        <meta name="description" content="Guillermo Toyos' personal website.">
+        <meta name="author" content="Guillermo Toyos Marfurt">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="/assets/favicon.png">
+        <link href=/global.css rel="stylesheet">
+    </head>
+    <body>
+        <header>
+<div class="cont">            <div class="sombra border logo">
+                <a href="/">
+                    <img id="il" src="/assets/logo.svg">
+                </a>
+            </div> </div>
+            <div onclick="" class="sombra border" id="hmenu">
+                <p><i id="quote">If I have seen further it is by standing on the shoulders of Giants.</i></p>
+            </div>
+        </header>
+        <main class="sombra border">
+
+            <article>
+
+<!-- NOTE START-->
+
+<h1 id="apuntes-libro-curso-fundamentos-de-base-de-datos-fbd-">Apuntes Libro+Curso Fundamentos de Base de Datos (FBD)</h1>
+<p>Este archivo cuenta con los apuntes del curso de bases de datos de la facultad de ingeniería más un resumen del libro del curso Fundamentals of database systems de Elmasri siguiendo la estructura temática del mismo.</p>
+<h1 id="parte-i-introduction-">Parte I (Introduction)</h1>
+<h2 id="introducci-n">Introducción</h2>
+<p>Dato vs Información: El primero son datos procesados e interpretables, tienen un valor semántico. Mientras que un dato es una mera representación simbólica. Ej: 01010 (No representa nada).</p>
+<h3 id="definiciones">Definiciones</h3>
+<p><strong>database</strong>: Colección de datos relacionados. Open fing: Conjunto de datos inter-relacionados </p>
+<p><strong>sistema de información</strong>: Conjunto de componentes que interactúan con el objetivo de almacenar, recuperar y procesar datos e información para crear nueva información.</p>
+<p><strong>database management system (DBMS)</strong>: Es un sistema computarizado que permite a usuarios administrar y mantener una base de datos. Es un software de propósito general que facilita el proceso de definir, construir, manipular y compartir una base de datos entre varios usuarios y aplicaciones. </p>
+<p><strong>Universe of discourse (UoD)</strong>: (Dominio de discurso) The domain of discourse, also called the universe of discourse, universal set, or simply universe, is the set of entities over which certain variables of interest in some formal treatment may range.</p>
+<p><strong>definición de una DB</strong>: Descripción o definición de las estructuras de datos y restricciones que tendrá una base</p>
+<p><strong>construcción de una DB</strong>: Proceso de carga de los datos en la base</p>
+<p><strong>manipulación de una DB</strong>: Proceso de explotación de la base, esto es, la recuperación y modificación de los datos almacenados.</p>
+<p><strong>modelo de datos</strong>: Lenguaje para especificar una base de datos. Especifica: Estructuras,restricciones y operaciones.</p>
+<p><strong>schema</strong>: (Esquema) Descripción de los datos que tenemos y la relación entre ellos (incluye las relaciones de integridad).</p>
+<p><strong>instancia</strong>: Los datos per se que se encuentran en la database.</p>
+<h3 id="caracter-siticas-de-una-base-de-datos">Caracterísiticas de una base de datos</h3>
+<ul>
+<li>Representa un aspecto del universe of discourse (UoD)</li>
+<li>Es una colección coherente de datos con un significado inherente.</li>
+<li>Está diseñada,construida y poblada con datos con un propósito específico. Tiene un grupo de usuarios interesados con aplicaciones preconcebidas.</li>
+</ul>
+<p>Una base de datos puede tener cualquier tamaño y complejidad.</p>
+<h3 id="aspectos-generales">Aspectos Generales</h3>
+<p>Definir una database implica definir sus data types, estructuras y constraints entre los datos que son almacenados. La definición de la DB la almacena el DBMS en una forma de <em>catálogo o diccionario</em> a esto se le llama <em>meta-data</em>. </p>
+<p>Construir una database es el proceso de almacenar datos en un medio de almacenamiento administrado por un DBMS.</p>
+<p>Manipular una base de datos implica usar funciones de tipo <em>query</em> para obtener datos específicos, actualizar cambios del UoD y generar reportes con la data. </p>
+<p>Compartir una DB permite a multiples usuarios y programas acceder a la DB de forma simultanea.</p>
+<p>Un programa interactuá con la DB a través de <em>queries (requests)</em> de datos al DBMS. Una query hace que se devuelvan datos. Se le llama <em>transaction</em> a las operaciones que generan lectura y escritura en una DB. </p>
+<h3 id="dise-o-de-una-db">Diseño de una DB</h3>
+<p>Una DB forma parte del sistema de información (IT) de una organización. Diseñar una DB comienza con el proceso de especificación y análisis. Estos requerimientos se transforman en un <em>diseño conceptual</em> que puede ser representado y manipulado utilizando herramientas computacionales para ser fácilmente transformado en una implementación de una base de datos (Ejemplo: modelo MER). Este diseño luego es traducido a un <em>diseño lógico</em> que se expresa con un modelo de datos implementado en un DBMS. La etapa final es el <em>diseño físico</em> donde se añaden más especificaciones para el acceso y almacenamiento de la DB. El diseño de la DB ess implementado y habitado con datos reales, para reflejar el UoD.</p>
+<p><img src="assets/mer0.png" alt="ejemplos diseño"></p>
+<p><img src="assets/construccionIT.png" alt="etapas de diseño"></p>
+<h3 id="the-database-approach">The Database Approach</h3>
+<p>El approach de usar una DB difiere significativamente del clásico paradigma de tener los datos guardados en simples archivos. Los programas implementaban los archivos y estos estaban estrechamente relacionados. Esto trae problemas...
+En el DB approach un solo repositorio mantiene los datos que es definido una vez para luego ser accedido constantemente por distintos usuarios a través de consultas (queries), transacciones y programas. Las principales características del <em>database approach vs file processing approach</em> son:</p>
+<ol>
+<li>La naturaleza Self-describing de un sistema de base de datos.</li>
+<li>Encapsulamiento entre programas y datos más la abstracción de los mismos.</li>
+<li>Soporte para distintas formas de ver los datos </li>
+<li>Soporte para sharing y procesar accesos de forma simultanea</li>
+</ol>
+<h4 id="self-describing-nature-of-a-db-system">Self-Describing Nature of a DB System</h4>
+<p>Una característica fundamental del acercamiento DB es que un sistema de base de datos no solo contiene la DB per se pero también una definición completa de la estructura de la DB con sus constraints. Esta definición es almacenado en el <em>DBMS catalog</em> que contiene también la info del formato de cada campo. <em>La info del catalogo se le llama meta-data, describe la estructura de la DB primaria</em>. Cabe notar la existencia de bases de datos que no requieren metadata: Los sistemas <em>NOSQL</em>.</p>
+<p>El <em>catalogo</em> es utilizado por el DBMS y por los usuarios. El DBMS no esta escrito para una DB en particular, por lo que accede al catalogo para conocer la estructura de los archivos. Los usuarios necesitan saber la estructura de la DB para poder acceder a ella y realizar las consultas.</p>
+<h4 id="encapsulamiento-entre-programas-y-datos">Encapsulamiento entre Programas y datos</h4>
+<p>Existe una independencia entre los programas y los datos con el db approach. En el procesamiento de archivos tradicional la estructura de los datos estaba dentro del programa, y un cambio en la estructura implica cambiar el programa. Un DBMS provee a los usuarios con una <em>representación conceptual</em> de los datos. Ahorrándole los detalles de como estos se implementan. </p>
+<h4 id="distintas-formas-de-ver-los-datos-y-concurrencia-">Distintas formas de ver los datos y concurrencia.</h4>
+<p>Los DBMS incluyen un control de concurrencia, permitiendo que los users accedan a los datos simultáneamente sin incoherencias (ver: reservar un asiento en dos terminales). A esto se le llama <em>online transaction processing</em>. Es fundamental que una DBMS se asegure de que las transacciones a una base de datos sucedan de forma correcta y eficiente. Una transacción es un proceso que incluye una o más accesos de R/W a una db. Una DBMS debe asegurar las siguientes dos propiedades</p>
+<ul>
+<li>Insolación: Una transacción debe ejecutarse como si fuera la única que existiese.</li>
+<li>Atomicidad: El DBMS debe asegurarse que todas las operaciones de una transacción se ejecutan, o no se ejecuta ninguna.</li>
+</ul>
+<h3 id="actores-en-escena">Actores en escena</h3>
+<p>En grandes organizaciones, muchos actores interactúan con una base de datos en el dia a dia y están interesados en los contenidos de la base de datos en su trabajo. </p>
+<ul>
+<li><p><strong>Administrador de DB</strong>: (Database Administrator DBA) Este es encargado de supervisar la DB y el DBMS y software relacionado. El DBA es responsable de autorizar el acceso a la DB, coordinar y monitorear su uso.</p>
+</li>
+<li><p><strong>Diseñador de DB</strong>: Encargado de identificar los datos que deben ser almacenados y elegir las estructuras adecuadas para representarlos. Deben comunicarse con los usuarios para entender sus requerimientos para llegar a un diseño que los cumpla. Los diseñadores interactúan con cada grupo para generar una <em>visión</em> de la DB. Tras interactuar con varios se integran todas las visiones y requerimientos. Estas tareas se hacen previamente a la implementación de la DB.</p>
+</li>
+<li><p>Usuarios finales: Son los que en su trabajo tienen que acceder a la DB. Se dividen en varias categorías:</p>
+<ol>
+<li><strong>Usuario casual</strong>: accede ocasionalmente a la db, pero precisa información distinta en cada acceso, utiliza una interfaz sofisticada para hacer queries especificas.</li>
+<li><strong>Usuarios naive o parametric</strong>: Son los mayoritarios, hacen queries constantes usando tipos standard de queries y updates llamadas <em>canned transactions</em>, estas fueron programadas y testeadas adecuadamente. Estas se realizan a través de apps, por ejemplo: Acceder al balance de una cuenta del banco.</li>
+<li><strong>Usuarios sofisticados</strong>: ingenieros, científicos y analistas que están familiarizados con los servicios del DBMS para implementar sus propias aplicaciones para sus usos personales.</li>
+<li><strong>Usuarios standalone</strong>: Mantienen DB personales usando programas amigables con menus e interfaces. Ej: Un usuario de Memory$.</li>
+</ol>
+</li>
+<li><p><strong>Analistas de sistemas y Programadores</strong> (software engineers dice el libro xD): Son los que programan las <em>canned transactions</em> que los end users utilizan. Tienen que tener clara las cosas que el DBMS ofrece.</p>
+</li>
+</ul>
+<h3 id="actores-detr-s-de-escena">Actores detrás de escena</h3>
+<p>Son los que no están directamente relacionados con la DB en si pero con el DBMS y sus herramientas. Estos son los diseñadores del propio DBMS (el cual se implementa de a módulos por su complejidad). Estos incluyen pero no se limitan a: Implementación de catálogos, lenguaje para procesar consultas, procesamiento con interfaces, acceder y bufferer datos, controlar concurrencia, manejar seguridad y reliability de datos. Realizar una interface con los demas componentes del sistema, como el OS, compiladores y lenguajes de programación. Otras personas son los que desarrollan plugins y herramientas para incorporar al DBMS, estas son especificas y valiosas. No olvidar el sysadmin que mantiene el hardware que corre la base de datos.</p>
+<h3 id="ventajas-del-dbms-approach">Ventajas del DBMS approach</h3>
+<p>Utilizar un DBMS incluye ventajas adicionales a las ya mencionadas. El DBA debe utilizar las capacidades para cumplir los objetivos relacionados al diseño, administración y el uso de una gran cantidad de usuarios.</p>
+<ol>
+<li><p><strong>Controlar redundancia</strong>: Como la data esta en un solo lugar, ya no están los problemas de tener varias copias en muchas maquinas y tener que preocuparse por el syncing y bla bla bla. Ni hablar de que cuando hay muchos datos estoy malgastando espacio. A su vez se da lugar a inconsistencias. En el db approach cada item lógico esta en <em>un solo lugar</em>. Esto se le conoce como <strong>data normalization</strong>, y asegura la consistencia de la DB y ahorra espacio. Sin embargo, a veces es bueno tener redundancia para aumentar la performance de las consultas. Por ejemplo, es mejor acceder a un solo archivo donde hay un record redundante que tener dos archivos separados. A esto se le llama <strong>desnormalizacion</strong> un DBMS debe ser capaz de controlar su redundancia y evitar las inconsistencias entre archivos. </p>
+</li>
+<li><p><strong>Acceso restringido</strong>: Un DBMS debe tener un sub-sistema de autorización de acceso a los datos, cuentas de usuario con políticas de seguridad para determinar quien puede modificar y leer información</p>
+</li>
+<li><p><strong>Almacenamiento persistente de objetos</strong> Las database orientadas a objetos pueden almacenar los objetos con estructuras definidas por class de c++ o Java por ej. Para almacenar instancias de forma persistente. Estos sistemas ofrecen compatibilidad con los objetos de lenguaje de programación</p>
+</li>
+<li><p><strong>Proveer de estructuras de almacenamiento y técnicas de consulta eficientes</strong>: Un DBMS debe proveer de estructuras especializadas para aumentar la búsqueda en el disco de algún registro. Se usan archivos auxiliares llamados <strong>indexes</strong>. Los registros deben ser copiados a memoria principal para ser accedidos, los DBMS implementan <strong>buffering &amp; caching</strong> para acelerar los tiempos de acceso. Los DBMS tienen sus propias técnicas de buffering aparte de las del SO residente. Por otro lado, el DBMS debe pensar un plan de ejecución eficiente para las consultas que se le realizan según las estructuras de almacenamiento que este disponga.</p>
+</li>
+<li><p><strong>Backup y recovery</strong>: Cuando algo falla, un DBMS debe ser capaz de mantener la DB en un estado coherente en el que estaba antes de que el sistema fallase. También deben mantenerse backups de disco en caso de fallos de disco.</p>
+</li>
+<li><p><strong>Proveer de muchas interfaces</strong>: Debe dar interfaces para todos los usuarios: Apps, lenguajes de consulta, interfaces para lenguajes de programación y comandos. Interfaces GUI y web-GUI.</p>
+</li>
+<li><p><strong>Representar relaciones complejas entre los datos</strong>: Nada, debe saber representar todo, definir nuevas relaciones cuando aparecen y actualizar los datos de forma fácil y eficiente.</p>
+</li>
+<li><p><strong>Forzar restricciones de integridad</strong>: Hay ciertas restricciones que mantienen la base de datos en un estado coherente. Un DBMS debe proveer de las funciones para definir y hacer valer estas restricciones. (Ej: la edad es un int y mayor a 18). Las restricciones sobre un registro que hacen referencia a otros registros se le llaman <strong>referential integrity constraint</strong>. Una clásica es la unicidad de items en un registro (<strong>key or uniqueness constraint</strong>). Estas restricciones se derivan de la semántica de los datos y del UoD que representan. Algunas restricciones tendrán que ser verificadas por los programas que actualizan la DB o ingresan datos. A estas constraints se las llama <strong>business rules</strong>. Las constraints inherentes a un modelo especifico de datos se les llama <strong>inherent rules of the data model</strong>.</p>
+</li>
+<li><p><strong>Permitir Inferencias y acciones usando reglas y triggers</strong>: Algunos DB systems tiene que proveer la capacidad para definir reglas deductivas para inferir nueva información de la que se encuentra en la DB. A estos se los llama <strong>deductive database systems</strong>. Un ejemplo es un conjunto de reglas para definir si un alumno está suspendido. Estas se expresan de forma <em>declarativa como reglas</em>, las cuales son mantenidas por el DBMS para determinar quienes son todos los alumnos suspendidos. Sistemas modernos le asocian <strong>triggers</strong> a las tablas, un trigger es una forma de regla que se activa cuando se actualiza la tabla, realizando operaciones sobre otra tabla, enviando msgs, etc. Estos son llevados a cabo por los llamados <em>active database systems</em>. Triggers complejos se los suele llamar <em>stored procedures</em>.</p>
+</li>
+<li><p>Implicaciones adicionales: Forzar un standard, reducir tiempos de desarrollo, flexibilidad, disponibilidad de información actualizada, economía de escala, etc.</p>
+</li>
+</ol>
+<h3 id="cuando-no-usar-un-dbms">Cuando no usar un DBMS</h3>
+<p>Existen situaciones donde no vale la pena usar una base de datos. Los costos de inversion en hardware y software, tener personal especializado, la generalidad de un DBMS, y todo lo que implica generan overhead que hacen que no valga la pena tener una DB en sistemas simples cuya estructura de datos  no cambia en el tiempo. Sistemas real-time donde la performance es todo, sistemas embebidos con poca memoria o donde no interesa que muchas personas accedan a los datos a la misma vez. </p>
+<h2 id="conceptos-y-arquitectura-de-un-sistema-de-bases-de-datos">Conceptos y arquitectura de un sistema de bases de datos</h2>
+<p>La arquitectura de un DBMS ha evolucionado de un sistema monolítico a un sistema modular con una arquitectura servidor/cliente, acompaño las tendencias en la industria.</p>
+<h3 id="data-models-schemas-instances">Data models, schemas &amp; instances</h3>
+<p>Ona característica fundamental del database approach es que provee <strong>data abstraction</strong>, estos es la supresión de detalles de como están organizados los datos. Diferentes usuarios pueden percibir los datos a su nivel preferido de detalle. Un <strong>data model</strong> - una colección de conceptos para describir la estructura de la DB - permite lograr esta abstracción. La estructura de una base de datos son los data types, relaciones y constraints que se aplican sobre los datos. Muchas DB incluyen un set de <strong>basic operations</strong> para especificar el uso de la DB. Es común incluir conceptos que modelan la parte dinámica del comportamiento del sistema, por ejemplo la de determinar si un estudiante está suspendido.</p>
+<p>Existen 3 categorías de modelos de datos: <strong>Alto Nivel (Conceptual), Lógicos (de implementación) y Bajo Nivel (Físico).</strong> El modelo conceptual usa conceptos como <em>entidades, atributos y relaciones</em>. Una <strong>entidad representa un objeto real o concepto</strong>, un <strong>atributo representa una propiedad de interés que describe una entidad</strong> y una <strong>relación entre 2 o más entidades representa una asociación entre las mismas</strong>. Un ejemplo de data model conceptual es el MER (Modelo entidad-relación). Los modelos de datos de implementación son los mas usados en los DBMS, estos incluyen el modelo relacional. (Otros en desuso son los network y hierarchical models). Estos modelos representan los datos usando estructuras tipo registro, por lo que se les llama <strong>record-based data models</strong>, una alternativa a estos son los <strong>object data models</strong>.
+Los modelos de datos físicos hablan de como los datos se representa la información y los access path - estructura de búsqueda que hace que buscar records sea eficiente (hash,index), ej: index, arboles, tablas de hash.</p>
+<p>La descripción de una DB se le llama <strong>DB schema</strong>, se especifica durante la etapa de diseño y no se espera que cambie mucho. Una visualización de un schema se le llama <strong>schema diagram</strong>:</p>
+<p><img src="assets/schemaEx.png" alt="schema diagram"></p>
+<p>Cada objeto del schema se le llama <strong>schema construct</strong>. Notar que un diagrama muestra algunos aspectos del schema. Por ej, las constraints y los tipos de datos se omiten. El contenido de una DB cambia frecuentemente, los datos que se encuentran en un momento dado se llaman <strong>database state/snapshot</strong> o <strong>set actual de ocurrencias, instancia de una DB</strong>. Cuando definimos una nueva DB, le damos un schema al DBMS, al principio tendremos una instancia vacía de una DB, sin datos. Cada vez que se actualizan los datos, la db cambia a un nuevo estado. El estado actual se le llama <strong>current state</strong>. El DBMS es responsable que cada cambio de instancia sea hacia un <strong>valid state</strong>. Ie. que satisfaga el schema. Recordar que el DBMS guarda el schema en el catalogo. Adicionalmente, un DBMS provee operaciones para cambiar el schema para una DB ya poblada. A esto se le llama <strong>schema evolution</strong>.</p>
+<h3 id="three-schema-architecture-and-data-independence">Three-schema Architecture and Data Independence</h3>
+<p>La arquitectura de 3 esquemas permite separar los usuarios de la DB física. Se definen 3 niveles:</p>
+<ol>
+<li><p><strong>internal level</strong>: Tiene un schema interno que describe la <em>estructura física</em> de la DB. Usa un <strong>modelo físico</strong> de datos y se encarga de las minuciosidades del almacenamiento.</p>
+</li>
+<li><p><strong>conceptual level</strong>: Tiene un schema conceptual que describe la estructura de <strong>toda</strong> la DB para una comunidad de usuarios. Se reservan los detalles de implementación. Se suele usar un modelo de datos representacional para describir el <strong>conceptual schema</strong>. El schema conceptual suele basarse en un high-level data model.</p>
+</li>
+<li><p><strong>external or view level</strong>: Tiene muchos schemas externos o visiones de usuario. Describe una parte de la DB. Suele implementarse con un <strong>representational data model</strong>, basado en un external schema design de un high level conceptual data model. </p>
+</li>
+</ol>
+<p><img src="assets/3schema.png" alt="The three-schema architecture"></p>
+<p>Los 3 esquemas no siempre están completamente separados, depende de la implementación. Notar que los esquemas son <strong>descripciones</strong> de los datos. Notar que los datos que se extraen de una DB deben ser formateados para coincidir con la vision externa que tenia un usuario en particular, a esto se le llama <strong>mapping</strong>. Estos pueden consumir muchos recursos, por lo que algunos DBMS no soportan lo de tener muchas external views.</p>
+<p>La independencia de datos se define como la capacidad de cambiar un schema de un nivel sin la necesidad de cambiar un schema de los niveles mas altos. Se definen dos tipos:</p>
+<ol>
+<li><p>Independencia lógica de datos: Es la capacidad de cambiar un schema conceptual si cambiar los schemas externos. Se pueden agregar registros o constraints y no necesariamente tener que cambiar el schema externo y los programas que lo utilizan. A lo sumo tendrá que cambiarse los mapping para transformar la vision del usuario.</p>
+</li>
+<li><p>Independencia física de datos: Es la capacidad de cambiar un schema interno sin tener que cambiar el schema conceptual. Poder cambiar la organización de archivos, indexes, paths etc.</p>
+</li>
+</ol>
+<h3 id="database-languages-and-interfaces">Database languages and interfaces</h3>
+<p>Los schemas se definen utilizando un lenguaje. Existen varios tipos para distintas etapas, aunque actualmente se usa un solo lenguaje para todas las etapas.</p>
+<ul>
+<li><p>Data definition language (DDL): Se utilizan para definir db que no usan muchos niveles. El DBMS tiene un compilador que construye la descripción del esquema en el catalogo. </p>
+</li>
+<li><p>Storage definition language (SDL): Se utiliza para representar el internal schema. Usualmente se reemplaza por una combinación de parámetros y funciones administradas por el DBA.</p>
+</li>
+<li><p>View definition language (VDL): Especifica las user views y los mappings al conceptual schema. </p>
+</li>
+<li><p>Data manipulation language (DML): Se utiliza para que los usuarios puedan manipular la base de datos. Existen dos tipos: <strong>High-Level/Non-procedural y Low-Level/procedural</strong>. El primero puede usarse para especificar pedidos completos y específicos al DBMS.  Pot otro lado un procedural necesita la ayuda de un lenguaje turing-completo para loopear de forma iterativa sobre los pedidos. Por ello, los low-level se les llama record-at-a-time ya que procesan de a uno. Los high-level son set-at-a-time o set-oriented ya que devuelven sets enteros de datos. SQL es high level. <em>A query in a high-level DML often specifies which data to retrieve rather than how to retrieve it</em> (declarative).</p>
+</li>
+</ul>
+<p>En las bases de datos modernas todos estos lenguajes se agrupan en uno solo que integra todas las funcionalidades: SQL. El SDL se reemplaza por ajustes, funciones y parámetros del DBMS que el DBA es encargado. Cuando un DML esta embebido en (por ej) C++ se le llama a c++ el host language y a SQL data sublanguage. Cuando SQL se usa de forma standalone se le  suele llamar query language. Los lenguajes 4GL son procedurlaes y orientados al acceso de BDs. </p>
+<h3 id="dbms-interfaces">DBMS Interfaces</h3>
+<p>Muchas interfaces user-friendly son provistas para los distintos usuarios. Por ejemplo menu-based interface for web-clients. Apps for mobile devices. Forms-based interfaces (herramientas tipo encuestas para rellenar datos). GUI para mostrar schemas y interfaces en lenguaje natural (el DBMS trata de interpretarlas). Basadas en keywords, speech I/O (Hey Siri), interfaces para usuarios parametricos y para DBA(comandos).</p>
+<h3 id="the-database-system-environment">The Database System environment</h3>
+<h4 id="modules">Modules</h4>
+<p><img src="assets/DBMSComponents.png" alt="DBMS Components"></p>
+<p>La imagen ilustra los componentes típicos de un DBMS. Se divide en userland y los módulos internos.  El DDL compiler procesa definiciones de schemas y guarda tales descripciones en el catalogo del DBMS. El query compiler evaluá la sintaxis, nombre de las entidades, etc. de las consultas de los usuarios para compilarlas a código interno. Este es luego optimizado por el <em>query optimizer</em>. Adicionalmente en las <em>canned operations</em> los pre-compiladores de los lenguajes mandan el código al DML compiler para transformarlo en object code para su linkeditación. El <em>runtime database processor</em> ejecuta los comandos del DBA, query plans y las canned transactions con runtime parameters. Trabaja con el catalogo para cargarle estadísticas y con el <em>stored data manager</em> para optimizar el disk I/O. Dependiendo del sistema el DBMS va a tener más o menos libertad para administrar el hardware.</p>
+<p>Los DBMS adicionalmente proveen utilidades como herramientas para cargar datos ya existentes a una DB (Con su respectiva conversión), herramientas de backup, reorganización de almacenamiento y monitoreo de performance, etc.</p>
+<p>Computer-aided software engineering tools are used in the design of database systems. Los data dictionaries brindan información adicional que un catalogo. Grandes organizaciones usan <strong>data dictionaries (data repository)</strong> con información de schemata, restricciones, estándares de uso, descripción de programas e información de usuario. A estos se les llama <em>information repositories</em> y son accedidos usualmente por los usuarios más que el DBMS. Por ultimo, los DBMS tiene software de comunicación para comunicarse en redes e integran el sistema DB/DC system. (database/data communication) para el sistema cliente/servidor.</p>
+<h4 id="arquitectura-centralizada-y-cliente-servidor">Arquitectura centralizada y cliente/servidor</h4>
+<p>Originalmente toda la estructura del DBMS se encontraba centralizada en un mainframe. Desde la consola se hacían las queries y las conexiones de red eran muy primitivas. Con el tiempo los sistemas DBMS empezaron a explotar la capacidad de cómputo del user-side, llevando a la arquitectura DBMS cliente/servidor. El cliente tiene las interfaces e interfaces para acceder al DBMS. Existen 2 principales tiers de arquitectura cliente servidor:</p>
+<ol>
+<li><p>Tier-2: Las queries y procesamiento del SQL se hacen desde el servidor, a este se le llama query/transaction server. En los RDBMS se le llama servidor SQL. Cuando un cliente quiere acceder al DBMS se utiliza una API. El asenso de la internet genero un cambio en los roles del cliente y servidor, llevando al tier3.</p>
+</li>
+<li><p>Tier-3: Aparece un servidor en el medio que es el que provee una interfaz y modela la interacción de los clientes de acuerdo a las reglas de negocio del sistema. A este se le llama web server o application server. Esto aumenta la seguridad ya que el cliente no interactuá de forma directa con la base de datos. </p>
+</li>
+</ol>
+<p><img src="assets/tier3.png" alt="Three-tier client server architecture"></p>
+<h3 id="clasificaci-n-de-dbms">Clasificación de DBMS</h3>
+<p>Un DBMS puede clasificarse por muchos criterios. El central es el modelo de datos. Algunos criterios adicionales son:</p>
+<ul>
+<li>Numero de usuarios. Single-user systems vs multi-user systems (la mayoría).</li>
+<li>Distribución. La base de datos puede estar centralizada en una computadora o en varias, lo que se conoce como distributed DBMS (DDBMS). Los sistemas Big Data son distribuidos y los datos son replicados para su reliability. Los DDBMS se dividen en <ul>
+<li>Homogéneos: Usan el mismo DBMS en todos sus nodos.</li>
+<li>Heterogéneos: Usando distintos DBMS y middleware para acceder a las distintas bases de datos. Los nodos pueden tener autonomía, llevando a un DBMS federado (o multi database system).</li>
+</ul>
+</li>
+<li>Costo: Podes usar PostgreSQL free o pagar millones por un sistema gigante.</li>
+<li>Tipos de access path: Como almacenan los archivos (has, tabla de archivos invertida, etc)</li>
+<li>Propósito: Pueden ser de propósito general o especializados. Cuando la performance es esencial se construyen DBMS especializados para procesar datos definidos a velocidades elevadas. A los sistemas que deben responder rápido y tienen concurrencia se les llama OLTP (Online transaction processing), tienen que soportar altas concurrencias sin delays excesivos.</li>
+</ul>
+<h4 id="modelo-de-datos">Modelo de datos</h4>
+<p>Este es el criterio central para clasificar un DBMS. Existen varios tipos siendo el relacional el de mayor proliferación (El de objetos esta ganando en el big data...)</p>
+<ul>
+<li>Relacional: Representa la base de datos como una colección de tablas, donde cada tabla puede almacenarse en archivos separados. Utilizan el lenguaje SQL y soportan visiones de usuario limitadas.</li>
+<li>Object: Define la database en términos de objetos, sus propiedades y operaciones. Aparecen las clases (estas se organizan en DAGs) y sus operaciones se especifican en métodos.</li>
+<li>KeyValue: Asocia una clave única con cada valor y provee accesos rápidos.</li>
+<li>Document: Se basa en JSON y guarda los datos como documentos (ensamblando objetos complejos)</li>
+<li>Basados en columnas: Guarda las columnas de las filas en paginas de disco para acceso rápido y tener muchas versiones de los datos. </li>
+<li>XML: Forma de intercambio de datos en la WEB, los DBMS dan operaciones para su manejo</li>
+<li>Legacy: Están los hierarchical, network set type que se usaban en el pasado pero ya no tienen relevancia.</li>
+</ul>
+<p><img src="assets/resumenp1.png" alt="Three-tier client server architecture"></p>
+<h1 id="parte-ii-conceptual-data-modelling-and-database-design-">Parte II (Conceptual Data Modelling and Database design)</h1>
+<h2 id="data-modelling-using-the-entity-relationship-er-model">Data Modelling using the Entity-Relationship (ER) Model</h2>
+<h3 id="apuntes-of2">Apuntes OF2</h3>
+<p>Nos centrarémos en los conceptual schema. A través del modelado conceptual. I.e actividad en la cual se construyen esquemas conceptuales de la realidad. Primer etapa de diseño de una DB. </p>
+<h4 id="modelos-conceptuales">modelos conceptuales</h4>
+<ul>
+<li>Modelos de datos de muy alto nivel</li>
+<li>Se concentran en describir el dominio del problema, mostrando estructuras y relaciones de integridad</li>
+<li>Suelen tener un representación gráfica asociada</li>
+<li>Ejemplos<ul>
+<li>MER </li>
+<li>ER-Extended</li>
+<li>SDM </li>
+</ul>
+</li>
+</ul>
+<p>El esquema conceptual luego pasara por el esquema lógico, estos tendrían que ser equivalentes y es importante aclarar donde no lo son.</p>
+<h5 id="conceptos-b-sicos">Conceptos básicos</h5>
+<p>Elementos identificables:</p>
+<ol>
+<li>Conjuntos: Elementos de interés aparecen agrupados o clasificados en conjuntos de acuerdo a sus características. &#39;</li>
+<li>Relaciones entre conjuntos. (Conjuntos de parejas,ternas,cuaternas,etc.)</li>
+<li>Restricciones de integridad.</li>
+<li>Atributo: Característica que nos interesa de un determinado elemento de la realidad (Nombre de un niño). Suele tener un type.</li>
+<li>Cardinalidad
+ -N:1 Dado A,B se dice que tiene cardinalidad N:1 si dado un elemento cualquiera de A, puede haber en la relación <em>solo una pareja con ese elemento</em>. Ej = {(a1,b2),(a2,b1),(a3,b1)}. (Es una restricción de integridad!)
+ -N:N Dado un elemento de A, puede haber cualquier cantidad de elementos de B.</li>
+<li>Totalidad: Dada una relación entre A y B, se dice que es <strong>total</strong> con respecto a A si todos los elementos de A debe aparecer en alguna pareja de la relación. </li>
+</ol>
+<h5 id="principios-del-modelado-conceptual">Principios del modelado conceptual</h5>
+<ol>
+<li>Principio del 100%: El esquema conceptual asociado a un problema debe representar todos sus aspectos.</li>
+<li>Principio de Conceptualización: El schema conceptual no debe incluir ningún elemento asociado a la implementación del esquema o ningún elemento orientado a la performance de la DB.</li>
+</ol>
+<h4 id="modelo-entidad-relaci-n">Modelo Entidad-Relación</h4>
+<p>Modelo conceptual muy usado propuesto por Chen (lmao) en 1976. Existen variantes, los modelos Orientados a Objetos se inspiran y toman ideas de este modelo. </p>
+<p>Conceptos básicos:</p>
+<ol>
+<li>Entidad: elemento de la reality</li>
+<li>Relación: asociación entre elementos.</li>
+</ol>
+<p>El MER tiene un DDL gráfico orientado a mostrar las estructuras de datos y restricciones de integridad. Pero no tiene un DML standard. El MER tiene dos elementos básicos:</p>
+<ol>
+<li>Diagrama de entidad relación</li>
+<li>Restricciones no estructurales: Formulas lógicas que no pueden ser expresadas en el diagrama por su complejidad o por falta de notación. Deben escribirse en lenguaje lógico, semiformal y en el peor de los casos en lenguaje natural.</li>
+</ol>
+<p>A diferencia del UML, los objetos no tienen identificación en si misma, solo podemos conocer a las entidades a través de sus atributos. Podría estar en el problema de tener dos entidades con los mismos atributos, y ahi estamos en un problema de identificación... Otra diferencia es que UML se utiliza tanto para modelado conceptual como lógico, a diferencia del MER que es solo conceptual.</p>
+<h5 id="constructores">Constructores</h5>
+<ol>
+<li>Conjunto de Entidades: Modela los objetos de la realidad</li>
+<li>Relación: Modela asociaciones entre objetos</li>
+<li>Atributo: Modela propiedades de tipo de entidades o de relaciones</li>
+<li>Agregación: representa un tipo de relación como un tipo de entidad.</li>
+<li>Especialización: Modela sub tipos de entidades.</li>
+<li>Débil: Permite expresar dependencia.</li>
+</ol>
+<p>No confundir el schema (esquema) ER de la DB con el diagrama ER de la base. El diagrama es una representación gráfica de la estructura de los datos de la base. El esquema es la estructura de datos representada por el diagrama. El lenguaje tiene una semántica bien definida.</p>
+<p>Como aplico el MER para representar la realidad? Seguir los siguientes pasos:</p>
+<ol>
+<li>Identificar elementos de nuestro problema</li>
+<li>Identificar relaciones entre los elementos</li>
+<li>Representar las propiedades que nos interesan de los elementos.</li>
+</ol>
+<h5 id="diagrama-de-entidad-relaci-n">Diagrama de entidad-relación</h5>
+<p>Los conjuntos de entidades se presentan con un rectángulo con el nombre, del que &quot;cuelgan&quot; los atributos. Las relaciones son un rombo con el nombre y conecta al set de entidades que relaciona. Hay notaciones particulares para las distintas restricciones.</p>
+<h5 id="atributos">Atributos</h5>
+<p>Un atributo es una función tal que dado un elemento de un determinado conjunto de entidades devuelve un valor de un determinado conjunto de valores. Ej: Para el conjunto de entidades persona. Tengo una función llamada Nombre : $Personas \rightarrow Nombres$ que devuelve el nombre de una persona.</p>
+<h6 id="atributos-estructurados">Atributos estructurados</h6>
+<p>Permiten representar atributos compuestos que están formados por varias partes independientes. La función dirección va a un producto cartesiano.  Ej: <code>(Dir Ciudad (Vivienda Nro Calle))</code>. Dir: $Persona: Personas \rightarrow Ciudad \times Vivienda, Ciudad: Ciudades \times Viv \rightarrow Ciudades$  </p>
+<p><img src="assets/mer1.png" alt="ejemplo"></p>
+<h6 id="atributos-multi-valorados">Atributos multi-valorados</h6>
+<p>Son funciones que devuelven un valor de tipo conjunto de otro dominio. Devuelven un elemento del conjunto Potencia de otro dominio. Ej: Función que para un libro me devuelve un conjunto de autores. Autores: $Libros \rightarrow 2^{autores}$. Estos se ilustran en el schema con un asterisco.</p>
+<p><img src="assets/mer2.png" alt="ejemplo"></p>
+<h6 id="restricciones-sobre-conjuntos-de-entidades">Restricciones sobre conjuntos de entidades</h6>
+<p>Se dice que un atributo es <strong>determinante</strong> cuando no pueden existir dos entidades en el conjunto que entregan el mismo valor en ese atributo. Un conjunto de entidades puede tener varios atributos determinantes. Los determinantes permiten identificar las entidades. Una característica que se verá más adelante es que toda entidad de la base de datos debe ser identificable. En el schema se representan subrayando el atributo</p>
+<h5 id="relaciones">Relaciones</h5>
+<p>Una relación es un conjunto entidades. En el schema se representan con un rombo que uno los conjuntos de entidades participantes. Existen restricciones sobre las relaciones: Cardinalidad y totalidad. La cardinalidad responde a la pregunta: Cuantos b&#39;s pude estar relacionado un a? La totalidad fuerza a que todo a esté relacionado con un b.</p>
+<p><img src="assets/mer3.png" alt="ejemplo"></p>
+<p>Pueden existir relaciones que requieren restricciones que no tienen una notación en el MER (restricciones no estructurales). Para estas usamos lógica de primer orden (recordar que una relación es un set!).</p>
+<p>Las relaciones pueden tener atributos. Las relaciones son conjuntos, alas tenemos una función que va de un conjunto a un dominio. Una auto-relación es una relación donde A y B son la misma entidad. Para caracterizar la relación en esta caso se agregan etiquetas llamados 
+&quot;roles&quot;. </p>
+<p><img src="assets/mer4.png" alt="ejemplo"></p>
+<p>Las relaciones multiples asocian más de 2 entidades. Recordar que todas las partes deben estar presentes (ej: las ternas). Para pensar la cardinalidad fijamos n-1 entidades y nos preguntamos con cuantos conjuntos de n-1 entidades se puede relacionar esa entidad. </p>
+<p><img src="assets/mer5.png" alt="ejemplo"></p>
+<h5 id="agregaciones">Agregaciones</h5>
+<p>Trata de representar asociaciones entre elementos de relaciones y de otros conjuntos de entidades. Es un operator de casting, interpreta una relación como si fuera un conjunto de entidades. Se representan rodeando la relación y sus entidades participantes en un cuadrado (o cosa deforme). Desde el punto de vista fuera del cuadrado todo es una entidad, por lo que podemos relacionarla con otras entidades fuera del area interior. Las agregaciones permiten representar más situaciones, pero son menos claras que les relaciones múltiples. </p>
+<p><img src="assets/mer6.png" alt="ejemplo"></p>
+<h5 id="especializaci-n">Especialización</h5>
+<p>Se representa en el scheme con un triangulo que une las demás sub-entidades. Se usa cuando tenemos una entidad que puede tener atributos y relaciones diferentes. Las sub-entidades son subconjuntos. En un  principio se puede ser muchas cosas a la vez, o no ser ninguna. </p>
+<p><img src="assets/mer7.png" alt="ejemplo"></p>
+<h5 id="entidad-d-bil">Entidad Débil</h5>
+<p>Una entidad es débil cuando su identificación es débil. Para poder identificarla necesito ir a su identidad fuerte. (Ej: Las salas de un hospital, necesito al hospital para identificarlas). Se ilustran con una flecha que empieza con un punto que va de la entidad débil a la entidad fuerte (En el medio de la flecha esta el rombo del nombre de la relación). Podrían no tener atributos determinantes, pero por lo general tienen atributos determinantes, los cuales son débiles y se subrayan con un punteado. No olvidar agregar la cardinalidad!</p>
+<p><img src="assets/mer8.png" alt="ejemplo"></p>
+<h2 id="control-de-calidad">Control de calidad</h2>
+<p>Para asegurar la calidad de los esquemas conceptuales se define un conjunto de propiedades que se deben chequear durante y al final de su desarrollo:</p>
+<ul>
+<li>Completitud (Maximizar)</li>
+<li>Correctitud (Maximizar)</li>
+<li>Minimalidad (Maximizar)</li>
+<li>Expresividad (Balancear)</li>
+<li>Explicitud (Balancear)</li>
+</ul>
+<h3 id="completitud">Completitud</h3>
+<p>Un esquema es completo cuando se representan todas las características relevantes de la realidad planteada.</p>
+<blockquote>
+<p>&quot;En criollo: No me comí nada&quot;</p>
+</blockquote>
+<p><strong>Chequeo</strong>: Se debe controlar que todos los conceptos del problema estén representados en alguna parte del esquema. A su vez tenemos que control que todos los requerimientos sean realizables por el sistema (podemos obtener todo lo que nos piden desde la base). Otra técnica es hacer paráfrasis del esquema. I.e a partir del esquema escribir un texto que lo represente. Luego se compara el texto generado con el de la letra.</p>
+<h3 id="correctitud">Correctitud</h3>
+<p>Existen dos tipos:</p>
+<ol>
+<li><p><strong>Sintáctica</strong>: Habla de la forma en que se especifica el esquema con respecto al lenguaje usado para hacer esa especificación. Un esquema es <em>correcto sintácticamente</em> cuando las distintas partes de este están construidas correctamente con respecto al lenguaje utilizado. Por ej: respetar la sintaxis de las agregaciones. Algunos ejemplos de chequeo son:</p>
+<ul>
+<li>Existencia de cardinalidades en cada relación</li>
+<li>Existencia de atributos determinantes en cada entidad, si no existen then verificar que sea entidad débil con respecto a otra.</li>
+<li>Existencia de <em>una y solo una relación</em> y todas las entidades que intervienen en la misma dentro de cada agregación.</li>
+</ul>
+</li>
+<li><p><strong>Semántica</strong>: Habla de la forma en que la especificación representa el problema. . Un esquema es <em>correcto semánticamente</em> si cada elemento del problema se representa utilizando las estructuras adecuadas. Este concepto es una entidad o relación? Una sola categoría de entidades o mas de una? Las relaciones que participan son binarias o multiples? cual es el mecanismo de determinación del conjunto de entidades? Están bien las cardinalidades y totalidades?</p>
+</li>
+</ol>
+<h3 id="minimalidad">Minimalidad</h3>
+<p>Un esquema es minimal si cualquier elemento de la realidad aparece <strong>solo una vez</strong> en el esquema. Tener cuidado con los atributos que implican otros. Por ejemplo, una sala tiene x paciente. Y el hospital, compuesto por salas lleva el total de pacientes. Estamos llevando la cuenta de pacientes en dos lugares! Tenemos que tratarlo con cuidado, ya sea indicando que es un atributo calculado y como se calcula o no incluirlo y escribirlo como comentario fuera del diagrama. </p>
+<p>Se debe chequear donde está representado en el esquema cada elemento de la realidad y a que elemento de la realidad corresponde cada elemento del esquema. </p>
+<h3 id="expresividad">Expresividad</h3>
+<p>Un esquema es <strong>expresivo</strong> si representa la realidad en una forma natural que puede ser fácilmente comprensible basándose unicamente en la semántica del modelo.</p>
+<h3 id="explicitud">Explicitud</h3>
+<p>Un esquema es <strong>explícito</strong> si no utiliza mas formalismos que el diagrama ER. Recordamos que el orden para la explicitud es: MER-&gt;Logica de primer orden -&gt; Comentarios</p>
+<p>Tenemos que tratar de buscar un balance entre todas las propiedades para conseguir un buen diagrama.</p>
+<h1 id="modelo-relacional">Modelo Relacional</h1>
+<p>Modelo de datos <strong>totalmente distinto</strong> al MER. Es un modelo de datos lógico (con ciertas características conceptuales), se usa como modelo implementado por el DBMS. </p>
+<h2 id="vision-informal-del-modelo">Vision informal del modelo</h2>
+<p>Las estructuras consisten en TABLAS. Cuyas columnas corresponden a ATRIBUTOS de tipo atómico y las filas corresponden a registros de datos. Las operaciones están fundamentalmente orientadas al modelo de TABLAS, como conjunto de registro.
+Es un modelo de datos simple y claro pero con mucho potencial para modelar casi todas las aplicaciones de database.</p>
+<h2 id="conceptos-generales">Conceptos generales</h2>
+<ul>
+<li><p><em>Dominio</em> $D.$ : Es un conjunto de valores atómicos.</p>
+</li>
+<li><p><em>Esquema de relación</em> $R(A_1,A_2,...)$: Donde $R$ es el nombre de la relación y $A_n$ son los atributos con dominios $D_n$.</p>
+</li>
+<li><p><em>Relación</em> $r(R)$: Es una instancia de un esquema de relación R. Consiste en un conjunto de t-uplas: $r= {<a_1,\dots,a_n>,<b_1,\dots,b_n>,<c_1,\dots,c_n> \dots }$ . El primer elemento de cada tupla es un elemento de $D_1$ hasta el ultimo de $D_n$.</p>
+</li>
+<li><p><em>Tupla</em>: Recordar que la instancia de un esquema de relación es un conjunto de tuplas: Ejemplo $Esquema: ESTU(CI,nombre,dir$. Y una instancia es $(<5421345-3,"Nog","Canelones 123"> \ &lt;\dots&gt;)$ . La tupla es un elemento de un producto cartesiano de N dominios. Esta puede verse de dos formas distintas:</p>
+<ul>
+<li>Puede verse como un array: Utilizamos la posición en el arreglo para tomar cada parte. Ej: $<a,b,c>[2]=b$</li>
+<li>Puede verse como una función del nombre de los atributos en el contenido: $t: { CI,nombre,dir } \rightarrow Nro \cup Strings$ . Ejemplo: $<a,b,c>(CI)=a$
+Ambos métodos tienen sus ventajas y desventajas. Como array nos importa el orden... mientras que en el otro da igual el orden. </li>
+</ul>
+</li>
+<li><p><em>Esquema de DB relacional o esquema relacional</em>: Conjunto de esquemas de relación.</p>
+</li>
+</ul>
+<h2 id="caracter-sticas-de-las-relaciones">Características de las relaciones</h2>
+<p>Las relaciones son un conjunto de tuplas: No están ordenados y no hay repetidos.
+Los valores de los atributos en tuplas son atómicos (indivisibles).
+Las tuplas están ordenadas en la visión de producto cartesiano, pero en la visión tuplas como funciones no lo están.</p>
+<h2 id="restricciones-de-integridad-en-el-modelo-relacional">Restricciones de integridad en el modelo relacional</h2>
+<h3 id="restricciones-de-dominios">restricciones de Dominios</h3>
+<p>Restricciones de tipo en los $D_i$ . Indica a que tipo pertenecen los valores, pueden incluir subrangos o enumerados.
+Ejemplo: FUN(CI,Nombre,Dir,Edad)</p>
+<ul>
+<li>CI: number(9); Nombre: Dir: String; Edad: number(2); Edad &gt; 18;</li>
+</ul>
+<h3 id="superclave">Superclave</h3>
+<p>Dado $R(A_1,\dots,A_n)$ se dice que $ X \subseteq { A_1,\dots,A_n}$ es <strong>superclave</strong> en un esquema $R$, si no puede existir ninguna $r(R)$ tq tenga dos tuplas con valores iguales de X ($t[X]=t&#39;[X]$)</p>
+<h3 id="clave">Clave</h3>
+<p>Una clave es una superclave que no contiene propiamente una superclave (o sea minimal). Las claves se marcan con un subrayado. </p>
+<h3 id="claves-for-neas">Claves Foráneas</h3>
+<p>Dado $R$, un conjunto de atributos $X$ es una <em>FK</em> (foreign key) de $R$ con respecto a $S$: si los atributos de $X$ coinciden en dominio con los de una clave $Y$ de $S$ . Los valores de $X$ en tuplas de $r(R)$ (para toda r) corresponden a valores de $Y$ en la relación $s(S)$.</p>
+<p>Ej: Si tengo un atributo ID_ESTU en examen entonces tiene que haber un estudiante que tenga el ID_ESTU. (Es una clave de los estudiantes que se encuentra en otra tabla).</p>
+<p>Para notar una clave foranea lo escribimos como por ejemplo: Inscriptos.CI <strong>FK</strong> Estudiantes.CI</p>
+<h3 id="observaciones">Observaciones</h3>
+<p>Una BD se considera valida si todas las relaciones r satisfacen las RIs, todas las instancias actuales de todas las relaciones declaradas en el esquema relacional satisfacen todas las RIs (Restricciones de Integridad).</p>
+<p>Las RI surgen de la observación en la realidad, no de la observación de relaciones.
+Las RI se definen a nivel de Esquema de relación, no a nivel de instancia
+Las RI son verificadas o violadas por relaciones (instancias) no por esquemas de relación.</p>
+<h2 id="operaciones-de-modificaci-n">Operaciones de modificación</h2>
+<h3 id="insert">Insert</h3>
+<p>Sea $R(A,B,C)$ y $r(R)$ , insert $<a,b,c>$ <strong>into</strong> R. Esto hace que se incluya la tupla $<a,b,c>$ en la relación r. Las tuplas insertadas deben cumplir las RI.</p>
+<h3 id="delete">Delete</h3>
+<p>Sea $R(A,B,C)$ y $r(R)$: <strong>Delete from</strong> R where $<cond>$, hace que se borren las tuplas de r que cumplen con la condición cont. Notar que borrar tuplas puede generar violaciones de integridad.</p>
+<h3 id="update">Update</h3>
+<p><strong>update R set $<atributo>$ = $<valor>$ where $<cond>$</strong>. Modifica las tuplas de r que cumplen la condición $<cond>$. También puede generar violaciones de las restricciones de integridad. </p>
+<h1 id="calculo-relacional">Calculo Relacional</h1>
+<p>Es un lenguaje de consulta para el Modelo Relacional. Tienen como objetivo recuperar datos de la instancia actual de la database. Esta basado en formulas de lógica de primer orden para definir conjuntos por comprensión. Una consulta en CR es una especificación de un conjunto por comprensión de un conjunto de tuplas.
+Existen dos sublenguajes del mismo:</p>
+<ul>
+<li>Calculo de tuplas: Variables de tipo tupla, es decir el universo esta formado por tuplas. Sus expresiones son de la forma: $ {<t_1,\dots,t_n> / \phi(x_1,\dots,x_n) } $. </li>
+<li>Calculo de dominios: Variables por valor de atributo, es decir, el universo está formado por valores individuales.</li>
+</ul>
+<p>Se deben considerar tres aspectos al definir un lenguaje de consulta:</p>
+<ol>
+<li>Sintaxis: Una descripción de cuales son las frases correctamente escritas en dicho lenguaje</li>
+<li>Semántica: Una forma de establecer la correspondencia de cada frase bien escrita según la sintaxis con un significado dado</li>
+<li>Pragmática: Como el contexto influye en el uso del lenguaje. Este contexto esta dado por el esquema (Estructura y restricciones) y el significado de dicho esquema para quienes interpretan los datos.</li>
+</ol>
+<p>El calculo relacional es una familia de lenguajes de consulta sobre el modelo relacional basado en formulas de lógica de primer orden para construcción por comprensión de conjuntos de tuplas. Existen dos sublenguajes:</p>
+<ol>
+<li>Calculo de tuplas: Variables de tipo tupla, esto es, el universo formado por tuplas</li>
+<li>Calculo de dominios: Variables por valor de atributo, es decir el universo esta formado por valores individuales
+En el curso solo se trabaja con calculo de tuplas.</li>
+</ol>
+<h2 id="calculo-de-tuplas">Calculo de tuplas</h2>
+<h3 id="sintaxis">Sintaxis</h3>
+<p>Las expresiones son de la forma:</p>
+<p>$ { <t_1,\dots,t_n> / \phi(x_1,\dots,x_n) } $ donde:
+$t_i$ son términos de la forma $x_i.A_k$ o de la forma $c_i$. Aquí x_i es una variable libre de $\phi$ y $A_k$ un atributo de la tabla para que $x_i$ representa una tupla y $c_i$ una constante de algún dominio.
+$\phi$ es una formula donde las $x_i$ que aparecen a la izquierda de la barra son exactamente las variables libres de $\phi$</p>
+<p>Definiciones formales:</p>
+<p><img src="assets/cr1.png" alt="Txex"></p>
+<p><img src="assets/cr2.png" alt="Txex"></p>
+<h3 id="sem-ntica">Semántica</h3>
+<p>El universo está formado por todas las tuplas que se pueden construir con todos los dominios.
+El resultado de una consulta está dado por todas las tuplas del universo que cumplen con la condición expresada en la fórmula de la consulta.</p>
+<p><img src="assets/cr3.png" alt="Txex">
+<img src="assets/cr4.png" alt="Txex"></p>
+<p>Notar que el universo siempre es el conjunto de todas las tuplas que es posible formar con todos los dominios de los atributos. Por lo que es un conjunto infinito, con tuplas de cualquier aridad y dominio en cualquier posición. </p>
+<h3 id="f-rmulas-inseguras">Fórmulas Inseguras</h3>
+<p>Una formula insegura es aquella que permite resultados infinitos en consultas CRT <em>(Calculo relacional de tuplas)</em>. Esto pasa porque el universo es infinito, por lo que pueden construirse consultas que hagan yield de resultados infinitos.</p>
+<p><strong>Dominio de una expresión CRT</strong>: Es el conjunto de todos los valores que aparecen como valores constantes en la expresión o bien existen en cualquier tupla de las relaciones a las que se hace referencia en la expresión</p>
+<p>Se dice que una expresión CRT es segura si todos los valores de su resultado pertenecen al dominio de la expresión.
+Ejemplos:</p>
+<p><img src="assets/cr5.png" alt="Txex"></p>
+<h4 id="criterios-generales">Criterios generales</h4>
+<p>Para verificar que una formula es segura podemos:</p>
+<ol>
+<li>Pensar en la formula de la consulta y traducirla a $\land \ \lor \ \lnot $.</li>
+<li>Si la formula tiene la forma $\phi_1 \lor \dots \lor \phi_n \rightarrow$ Deben aparecer todas las variables libres en un predicado no negado.</li>
+<li>Si la formula tiene la forma $\phi_1 \land \dots \land \phi_n \rightarrow$ Cada variable libre debe aparecer en al menos una $\phi_i$ del predicado no negado.</li>
+</ol>
+<h3 id="pragm-tica">Pragmática</h3>
+<p>Recordar que al realizar consultas, se accede a las claves de un elemento y luego se relacionan elementos a través de estas claves.
+Formulas útiles a recordar:</p>
+<p><img src="assets/cr6.png" alt="Txex"></p>
+<h2 id="calculo-de-dominios">Calculo de Dominios</h2>
+<p>En el calculo relacional de dominios, el universo es todas las uniones de dominios que tenemos. En el calc. de dominios tenemos directamente los valores de los dominios, no trabajamos con tuplas. </p>
+<p>Se suele usar el underscore para marcar variables que estarían con un existencial. Es como para decir que existe algo pero no me importa que es.</p>
+<p>No todas las consultas son necesariamente resolubles en calculo. Por ejemplo, si tenemos una condición que implica &quot;contar&quot;, puede que no sea posible formular una sentencia para la misma.</p>
+<h1 id="structured-query-language-sql-">Structured Query Language (SQL)</h1>
+<p>Structured query language es el lenguaje comercial de consulta más aceptado, standard aprobado por ANSI e ISO en 1986. Existen varios dialectos de este: SQL-86,SQL-1999,SQL-2006,etc. Se pensaba que los gerentes iban a poder hacer consultas de forma directa usando SQL... lmao.</p>
+<p>El SQL puede definirse en 3 partes:</p>
+<ol>
+<li>Data Definition Language (DDL): Create Table, Alter Table, etc. (Definir las tablas)</li>
+<li>Data Manipulation Language (DML): Insert, Delete, Update... (Modificar la instancia de una database)</li>
+<li>Query Language (Lo más famoso): Select, etc. (Hacer consultas)</li>
+</ol>
+<p>También hay instrucciones para manejo de seguridad, manejo de restricciones, etc. A su vez cada DBMS implementa operaciones adicionales sobre SQL.</p>
+<h2 id="sql-vs-c-lculo-de-tuplas">SQL vs Cálculo de tuplas</h2>
+<p>Una estructura básica de una consulta SQL tiene la forma:</p>
+<p>$SELECT T_1.a_2,T_2.a_5,\dots$ (Selecciono las tablas y sus atributos, estoy creando una nueva tabla &quot;virtual en esta declaración&quot;)
+$FROM T_1,T_2,\dots$ (Estoy eligiendo de donde vienen los datos que van a ser cargados a la tabla.)
+$WHERE \phi$ (Declaro que es lo que deben cumplir los datos.)</p>
+<p>En cálculo de tuplas sería algo como $<x_1.,a_x.x_2> / T_1(x_1),T_2(x_2)\dots \exists x_1 (T_1(x_1)\dots \phi)$</p>
+<h2 id="conceptos-generales">Conceptos generales</h2>
+<p>En SQL se pueden anidar consultas. Las variables que se definen por fuera pueden ser referenciadas en las consultas anidadas.
+El asterisco en las consultas funciona como una wildcard. Equivale a listar todos los atributos de una tabla.</p>
+<p>El WHERE EXISTS(...) equivale a decir que si existe algo en la consulta anidada entonces devuelvo algo (true).</p>
+<p>IN y NOT IN es un operador que indica sobre que conjunto debe cumplirse la condición.</p>
+<p>Existen operaciones adicionales posibles SQL que no se ven en el curso. Por ejemplo, recursividad, manejo temporal, consultas sobre tablas modificadas al &quot;vuelo&quot;. También provee DDL y DML: Create Table, insert, delete, grant,etc.
+el as permite hacerle un alias a una tabla. </p>
+<p>También puedo hacer operaciones aritméticas!!! Select fecha, numP producto, F.nombre, precioUnit*cantV from itemVta as F</p>
+<h2 id="join">Join</h2>
+<p>El problema de unir dos tablas con una key y una foreign key es un problema usual en las database. De ello surge el operador de Join que permite explicitar esta intención. Es decir, en lugar de imponer la igualdad de keys puedo usar el operador JOIN:
+$SELECT nombre, #prod$
+$FROM (VENTAS OIN FABRICANTES ON VENTAS.#fab=FABRICANTES.#fab)$</p>
+<p>Otra opción es el NATURAL JOIN que elimina columnas con nombres repetidos
+$SELECT nombre,#prod FROM (VENTAS NATURAL JOIN FABRICANTES)$</p>
+<p>Existen las variantes left join y right join que incluyen las entradas de la tabla respectiva que no tienen una foreign keys en su tabla compañera. También está ale FULL JOIN que hace que se incluya todo.</p>
+<p>Clausulas de join adicionales:</p>
+<p><img src="assets/joinjoin.png" alt="Txex">
+<img src="assets/outerJoin.png" alt="Txex"></p>
+<h2 id="sql-ddl">SQL- DDL</h2>
+<p>Create table <nombre> ( <nomatt> <tipo> [<restricción att> [...] [<restricción tab> [...]]])
+Ejemplos:
+Create table Fabs(numF integer primary key, nombre varchar[128 not null, dir varchar[256]])
+Create table Prods(numP integer primary key, desc text)</p>
+<p><img src="assets/sqlcreate.png" alt="Txex"></p>
+<p>El varchar[128] indica un string de largo variable topeada a 128 bytes. Existen otras palabras reservadas como unique, default, etc. Existen multiples tipos de datatypes. Numéricos, de tipo character-string, bit-string, boolean, date, timestamp, intervalos, etc.</p>
+<p>También se pueden definir dominios usando CREATE DOMAIN nombre AS EX. Donde EX puede ser un tipo como CHAR(9)</p>
+<h2 id="sql-consultas">SQL - Consultas</h2>
+<p>Recordar que las tablas SQL son un multiset de tuplas. Es decir, pueden haber elementos repetidos. Esto es diferente al calculo relacional donde se trabaja con <strong>sets</strong> de tuplas.
+La forma básica de una consulta SQL es:</p>
+<p><img src="assets/sqlquery.png" alt="Txex"></p>
+<p>In SQL, the basic logical comparison operators for comparing attribute values with one another and with literal constants are =, &lt;, &lt;=, &gt;, &gt;=, and &lt;&gt;. Los atributos especificados en el SELECT se les llama <strong>atributos proyectados</strong>. Y la formula lógica en el where se le conoce como <strong>selection condition</strong>. Se les llama <strong>join condition</strong> a las condiciones que combinan dos tuplas (por ejemplo, dos tablas).</p>
+<p>Algunos operadores destacados:</p>
+<ol>
+<li>Select <lista de salida></li>
+<li>From &lt;lista de tablas</li>
+<li>Where <condiciones sobre tuplas></li>
+<li>Group by <lista de atributos></li>
+<li>Having <condiciones sobre grupos></li>
+<li>Order by <lista de atributos></li>
+</ol>
+<p>El order by permite devolver las entradas de forma ordenada según un criterio. El primer atributo es el de mayor orden. Para indicar si se quiere ordenar de manera ascendente(default) o descendente un atributo se pueden usar las keywords DESC y ASC.</p>
+<p>Existen funciónes agregadas y el modificador Distinct. Este ultimo hace que las funciones agregadas trabajen sobre valores en vez de trabajar sobre tuplas.
+La lista de atributos en el GROUP BY indica sobre qué atributos sse deben agrupar las tuplas de la tabla base. El resultado de la consulta es una tupla pro grupo. Por lo tanto, hay que garantizar que los valores de salida (Select) son únicos para cada grupo. La condición Having selecciona los grupos que quedan en el resultado.
+Ejemplo:</p>
+<p><img src="assets/sqlext1.png" alt="Txex"></p>
+<p><img src="assets/sqlext2.png" alt="Txex"></p>
+<h1 id="algebra-relacional">Algebra Relacional</h1>
+<h2 id="idea-general">Idea general</h2>
+<p>Tenemos un conjunto de operadores para consultar relational databases. Se define un conjunto de operaciones estándar y operadores que reciben y devuelven relaciones, tanto sobre conjuntos de tuplas (union,diferencia,cartesian product) como específicos para relational databases (selección, proyección, join, etc.)</p>
+<h2 id="sintaxis">Sintaxis</h2>
+<p>Cuando una sentencia se vuelve muy larga podemos darle un alias para utilizar más adelante:
+$A \equiv \Pi<em>{f,p}(fabs * Ventas) $ . Se puede cambiar de estrategia de mención de atributos al usar este alias: $res \equiv A \bowtie</em>{$2=$3} Prods$</p>
+<h3 id="selecci-n">Selección</h3>
+<p>Permite obtener las tuplas que cumplen una cierta condición. Su sintaxis es $\sigma<em>{<condición>(<relación>)}$ donde condición es una condición lógica sobre valores de los atributos de las tuplas resultado y relación es una relación o expresión relacional.
+Por ejemplo, $\sigma</em>\theta(R)$ da como resultado una relación con esquema igual a R e instancia el conjunto de tuplas de la instancia de R que cumplen con $\theta$. Ej: $\sigma_{Salario &gt; 3000}(Empleado)$</p>
+<h3 id="proyecci-n">Proyección</h3>
+<p>Permite obtener las tuplas con un cierto conjunto de atributos. Su sintaxis es $\Pi_{<lista\ attr>}(<relación>)$ . Donde lista<em>attr es una lista de atributos que aparece en la relación resultado. Relación es una relación o expresión relacional.
+Eg: $\Pi</em>{nombre,dirección}(FABS)$ nos devuelve una nueva tabla con las tuplas nombre y dirección de la relación FABS. Recordar que la proyección trabaja sobre sets de tuplas, por lo tanto <strong>no existen tuplas repetidas</strong>.</p>
+<h3 id="union">Union</h3>
+<p>La union no es más que la union de dos conjuntos de tuplas. Sin embargo, ambos sets de tuplas deben ser compatibles, esto es cuando tenemos los mismos dominios en el mismo orden en ambos esquemas. Ej: $R \cup S$ da como resultado otra relación cuyo esquema es igual al de R (y S) y que tienen como conjunto de tuplas la union de los conjuntos de tuplas R y S. </p>
+<h3 id="diferencia">Diferencia</h3>
+<p>Permite obtener la diferencia de dos relaciones tomadas por un mismo conjunto de tuplas. Tiene los mismos requerimientos que la union. $R - S$ me devuelve una nueva relación con el mismo esquema de R y con las tuplas de R que no están en S</p>
+<h3 id="intersecci-n">Intersección</h3>
+<p>Permite obtener la intersección entre conjuntos de tablas...</p>
+<h3 id="producto-cartesiano">Producto Cartesiano</h3>
+<p>Permite obtener el producto cartesiano de dos relaciones tomadas como conjuntos de tuplas $(<rel>)\times (<rel2>)$ donde el resultado es la concatenación de los esquemas de R y S. Es decir, todas las combinaciones posibles de las tuplas de las dos tablas.</p>
+<p>Tengo que tener cuidado con los atributos con identificador repetido. Al suceder esto no tengo otra opción que referirme a los atributos utilizando referencias por posiciones. Esto se hace con la sintaxis $ \$x,\$y$ donde x e y son atributos según su posición en el esquema. Recordar que no se puede hacer un híbrido entre posiciones y nombre de los  atributos.</p>
+<p>Estos son los operadores básicos, toda consulta la puedo hacer con estos, aunque muchas veces quedan horribles. Se presentan operaciones adicionales para simplificar:</p>
+<h3 id="join">Join</h3>
+<p>Permite combinar tuplas de dos relaciones a través de una condición sobre los atributos. Corresponde a una selección sobre el Prod. Cartesiano de las relaciones. Su sintaxis es $(<r1>)\bowtie_{<cnd>}(<r2>)$ . Donde r1 y r2 son 2 relaciónes y cnd una condición. Es equivalente a hacer la selección con la condición cnd sobre el producto cartesiano entre R y S.</p>
+<h3 id="join-natural">Join Natural</h3>
+<p>El join natural se nota como $R*S$ o $R \bowtie S$. Es equivalente a realizar el $\theta$ -join con la condición de igualdad entre los atributos de igual nombre y luego proyectar eliminando columnas con ese nombre repetido.</p>
+<p>Como se ejecuta un Join?</p>
+<p>Cuando se realiza un join entre relaciones (R y S), cada vez que una tupla R y otra de S cumplen la condición del join, se genera un tupla en el resultado. Para que se genere una tupla en el resultado alcanza con que exista una tupla en T y otra n S que se &quot;conecten&quot; por la condición del join.</p>
+<h3 id="divisi-n">División</h3>
+<p>Sean R y S dos relaciones con esquemas $(a_1,a_n,b_1,\dots,b_m)$ y $(b_1,\dots,b_m)$ respectivamente, la operación $R \div S$ da como resultado otra relación con el esquema $(a_1,\dots,a_n)$ cuyo contenido es las tuplas tomadas a partir de las de r(R) tq su valor $(a_1,\dots,a_n)$ está asociado en r(R) con <strong>TODOS</strong> los valores (b_1,\dots,b_m) que están en s(S).</p>
+<p>Observar que se le llama a esta operación cociente porque $A=A \div B \times B + R$</p>
+<h2 id="algebra-vs-calculo">Algebra vs Calculo</h2>
+<p>Existen formulas que resuelven cada operador de algebra relacional en calculo. Mostrando que ambas formas son equivalentes.</p>
+<h1 id="pasaje-mer-a-modelo-relacional">Pasaje MER a Modelo Relacional</h1>
+<p>Como pasamos del esquema conceptual a un esquema lógico que siga siendo fiel a la realidad? (Equivalencia MER a Relacional)
+Se debe hallar una expresión equivalente para cada una de las estructuras del MER.</p>
+<h2 id="dependencias-de-inclusi-n">Dependencias de inclusión</h2>
+<p>Es otra restricción sobre el modelo relacional. Expresa que una proyección de ciertos atributos de una tabla debe estar incluida en la proyección de otros atributos de otra (o la misma ) tabla. EJ: $\Pi<em>{a1,a2}(A) \subseteq \Pi</em>{b1,b2}(B)$</p>
+<h2 id="entidades">Entidades</h2>
+<p><strong>Por cada entidad se debe crear una tabla</strong>. Por cada atributo simple se crea un atributo en la tabla. Los atributos estructurados se crean tantos atributos como &quot;hojas&quot; tenga esta estructura. La clave primaria de la tabla se selecciona como uno de los atributos determinantes de la entidad. Los restantes atributos determinantes (si existen) se marcan como claves alternativas.</p>
+<p>Los multivaluados se debe crear una tabla aparte que tenga como clave la clave de la tabla inicial y el multivalued. De esta forma tenemos una tabla que puede tener varias entradas para una clave pero combinaciones únicas de clave/atributo.</p>
+<p>Recordar que las claves alternativas se marcan aparte. Las que van subrayado son siempre las claves primarias. </p>
+<h2 id="relaciones">Relaciones</h2>
+<h3 id="n-n">N:N</h3>
+<p><strong>Para cada relación binaria con cardinalidad N:N se crea una tabla donde:</strong> Se colocan las claves primarias de las tablas que representan a cada una de las entidades participantes. Si existen atributos en la relación se tratan como si fuesen los de una entidad. La clave primaria está formada por los atributos correspondientes a las claves primarias de las tablas que representan las entidades participantes.</p>
+<p>A su vez, por cada entidad participante en una relación se agrega una dependencia de inclusión: Sea R la tabla de la relación y Q la tabla de un participante: $\Pi_{q<em>pk}(R) \subseteq \Pi</em>{q_pk}(Q)$ . si la relación R es total sobre Q, se agrega también la inclusión al revés.</p>
+<p>La estrategia es análoga para las relaciones ternarias. (N:N:N)</p>
+<h3 id="1-n">1:N</h3>
+<p>Se divide en dos casos: 1:N con y sin totalidad del lado N. Si es con totalidad del lado N, no se crea tabla para la relación y se agrega la clave de la tabla de la entidad del lado 1 en la tabla de la entidad del lado N. En el otro caso se trata como una N:N excepto por la primary key que es la clave del lado N.</p>
+<h2 id="entidades-d-biles">Entidades débiles</h2>
+<p><strong>Por cada entidad de bil se crea una tabla</strong>. Se procede con las relaciones 1:N y totales del lado N, no creando la tabla de la relación y agregando la clave primaria de la tabla de ela entidad fuerte en la tabla de la entidad débil. La clave primera de esta tabla va a ser la clave de la entidad fuerte + los atributos que son identificadores parciales.</p>
+<h2 id="agregaciones">Agregaciones</h2>
+<p>Se crea una tabla con las claves primarias de la tabla creada anteriormente para la relación.   </p>
+<h2 id="categorizaciones">Categorizaciones</h2>
+<p>Hay diferentes opciones de implementación. Existen por lo menos 4 formas de implementarlas:</p>
+<ol>
+<li>Por joins: Se aplica a cualquier caso, aunque puede tener menos performance que el caso 4. En esencia tengo tablas para las especializaciones y la entidad general. Cada tabla con sus atributos y una primaryKey que es semanticamente compartida con la clase principal.</li>
+<li>Por vistas: Si es total (General = esp1+esp2+esp3). Tengo las tablas especializadas con sus atributos y claves. Tengo la entidad general como una vista: Esto es un conjunto de tuplas definido por comprensión en base a las especializaciones: $Personal \equiv {<t.cedula,t.nombre,t.cuidad> / medico(t) \lor enfermero(t) \lor administrativo(t)}$</li>
+<li>Con atributo de tipo: Si es disjunta. Tengo una única tabla con todas los atributos de todas las especializaciones. Tengo un atributo extra tipo que indica que tipo de especialización es (y por ende que atributos son validos). Puedo tener instancias de tuplas con atributos nulos!!!</li>
+<li>Con atributo booleanos: También se puede aplicar en cualquier caso, aunque suele gastar mas memoria que el caso 1. Es análogo al caso 3, pero en vez de tener un atributo tipo tengo booleanos para cada especialización indicando si la tupla pertenece a alguna de estas (o a ninguna). Los atributos validos van a ser aquellos donde el booleano vale true.</li>
+</ol>
+<blockquote>
+<p>Vistas: Consultas con un nombre.</p>
+</blockquote>
+<h1 id="dependencias-funcionales">Dependencias Funcionales</h1>
+<p>Como podemos evaluar la calidad de un schema? Algunas medidas informales son:</p>
+<ol>
+<li>Semántica de los atributos</li>
+<li>Reducción de valores redundantes en tuplas</li>
+<li>Reducción de los valores nulos en tuplas</li>
+<li>No generación de tuplas erroneas. </li>
+</ol>
+<p>De estos se derivan las siguientes pautas:</p>
+<blockquote>
+<p>Diseñe un esquema de relación de modo que sea fácil explicar su significado. No combine atributos de varios tipos de entidades y tipos de vínculos en una sola relación.</p>
+<p>Diseñe los esquemas de las relaciones de modo que no haya anomalías de inserción, eliminación o modificación en las relaciones. Si hay anomalías señálelas con claridad a fin de que los programas que actualicen la BD operen correctamente.</p>
+<p>Hasta donde sea posible, evite incluir en una relación atributos cuyos valores pueden ser nulos. Si no es posible, asegúrese de que se apliquen solo en casos excepcionales y no a la mayoría de las tuplas de una relación.</p>
+<p>Diseñe los esquemas de modo que puedan reunirse por condición de igualdad sobre atributos claves, para garantizar que no se formen tuplas erróneas.</p>
+</blockquote>
+<p>Es decir, se quiere evitar las anomalías en la inserción, modificación y eliminación de tuplas por redundancia. El desperdicio de espacio y dificultad para las operaciones por valores nulos y la generación de datos erroneos por joins hechos relacionando mal las relaciones. </p>
+<p>Para evitar estos errores se presentaran conceptos y teorías formales que permitan detectar y evitar estos problemas.</p>
+<h2 id="definici-n">Definición</h2>
+<p>Una dependencia funcional $X \rightarrow Y$ entre 2 conjuntos de atributos X e Y que son subconjuntos de R, especifica una restricción sobre las posibles tuplas que formarían una instancia r de R. Esta restricción es $(\forall t_1,t_2 \in r)(t_1[X]=t_2[X]\rightarrow t_1[Y]=t_2[Y])$ donde $t_1 y t_2$ son dos tuplas pertenecientes a $r$ . En español, $X \rightarrow Y$ implica que si una tupla tiene los mismos valores en X, entonces tiene los mismos valores en Y. Ejemplo: ${Nombres,Apellidos} \rightarrow {CI}$</p>
+<h2 id="clausura-de-f-f-">Clausura de $F: F+$</h2>
+<p>Se define $F$ como el conjunto de dependencias funcionales que se especifican sobre un esquema de relación R y $F+$ el conjunto de todas las dfs que se cumplan en todas las instancias que satisfacen a F. </p>
+<p>Las reglas de inferencia permiten identificar a $F+$:</p>
+<ul>
+<li>(RI1) reflexiva - Si $X \rightarrow Y$, entonces $X \rightarrow Y$</li>
+<li>(RI2) de aumento - ${X \rightarrow Y}$ |= $XZ \rightarrow YZ$</li>
+<li>(RI3) transitiva - ${X \rightarrow Y, Y \rightarrow Z} |= X \rightarrow Z$</li>
+<li>(RI4) descomposición - ${X \ rightarrow YZ} |= X \rightarrow Y$</li>
+<li>(RI5) unión - ${X \rightarrow Y, X \rightarrow Z} |= X \rightarrow YZ$</li>
+<li>(RI6) pseudotransitiva - ${X \rightarrow Y, WY \rightarrow Z} |= WX \rightarrow Z$</li>
+</ul>
+<p>Las reglas RI1-RI3, son minimales y se las conoce como <strong>Reglas de Armstrong</strong>.</p>
+<h2 id="clausura-de-x-bajo-f-x-">Clausura de $X$ bajo $F$: $X+$</h2>
+<p>$X+$ es el conjunto de atributos determinados
+funcionalmente por $X$</p>
+<p>Se presenta un algortimo para determinar $X+$ bajo F:</p>
+<p><img src="assets/algo0.png" alt="nice"></p>
+<h2 id="equivalencia-de-conjuntos-funcionales">Equivalencia de conjuntos funcionales</h2>
+<p>Dos conjuntos de dfs E y F son equivalentes $\leftrightarrow E+ = F+$ . Esto es, todas las dfs en E se pueden inferir de F y
+todas las dfs en F se pueden inferir de E. E cubre a F y F cubre a E.</p>
+<p>Para cada df $X \rightarrow Y \in E$ calculamos $X+(F)$ y verificamos que $X+$ incluya los atributos de Y. Si se cumple para todas las dependencias, entonces estas son equivalentes.</p>
+<h2 id="conjunto-minimal-de-dfs-">Conjunto minimal de dfs.</h2>
+<p>Un conjunto de dfs es minimal si y solo si:</p>
+<ul>
+<li>Toda df en F tiene un solo atributo a la derecha</li>
+<li>No podemos reemplazar ninguna df $X \rightarrow A \in F$ por una df $Y \rightarrow A$, donde $Y \subset X$ y seguir teniendo o un con conjunto de dfs equivalente a F.</li>
+<li>No podemos quitar ninguna df de F y seguir teniendo un conjunto de dfs equivalente a F.</li>
+</ul>
+<p>Se le llama <strong>cubrimiento minimal de F</strong> al conjunto minimal $F_{min}$ que es equivalente a $F$.</p>
+<p>Algoritmo para hallar un cubrimiento minimal:</p>
+<p><img src="assets/alg1.png" alt="nice"></p>
+<h1 id="formas-normales">Formas normales</h1>
+<p>Las formas normales son como un &quot;certificado&quot; que indique que un esquema de relación cumple un conjunto de buenas propiedades. La normalización puede entenderse como el proceso donde los esquemas de relación (er) insatifactorios se descomponen repartiendo sus atributos entre esquemas de relación más pequeños que poseen propiedades deseables.</p>
+<p>Adicionalmente, la normalización no aseguro un buen diseño de BD que cumpla estas dos propiedades importantes:</p>
+<ul>
+<li>Join sin pérdida (JSP)</li>
+<li>Preservación de despendencias (PDD)</li>
+</ul>
+<h2 id="definiciones">Definiciones</h2>
+<p><strong>Superclave</strong>: Una superclave de $R={A_1,...,A_n}$ es un conjunto de atributos $ S \subseteq R$ tal que no existen 2 tuplas distintas $t_1, t_2$ tq $t_1[S]=t_2[S]$</p>
+<p><strong>Clave</strong>: Una clave $K$ es una superclave que cumple que si se le quita alguno de sus atributos deja de ser superclave.</p>
+<p><strong>Clave candidata, clave primaria</strong>: Si una relación tiene más de una clave, cada una es una clave candidata. Una de ellas es arbitrariamente designada como clave primaria. El resto son secundarias.</p>
+<p><strong>Atributo Primo</strong>: Un atributo del esquema de relación R es <strong>primo</strong> si es miembro de alguna clave de R.</p>
+<p><strong>Dependencia Total</strong>: $X \rightarrow Y$ es una df total si la eliminación de cualquier atributo $A$ de $X$ hace que la df deje de ser válida. (Esto es, no hay atributos redundantes a la izquierda)</p>
+<p><strong>Dependencia Parcial</strong>:  $X \rightarrow Y $es una df parcial si es posible eliminar un atributo $A$ de $X$ y que la df siga siendo válida (I.e dependencia NO total)</p>
+<p><strong>Dependencia Transitiva</strong>: $X \rightarrow Y$ es una df transitiva si existe un set de atributos $Z$ que no sea un subconjunto de una clave R, y se cumple tanto $X \rightarrow Z$ como $Z \rightarrow Y$</p>
+<h2 id="formas-normales">Formas Normales</h2>
+<p><strong>Primera Forma Normal (1NF)</strong>: Los dominios de los atributos deben incluir solo valores atómicos (no pueden haber atributos multivaluados o compuestos)</p>
+<p><strong>Segunda Forma Normal (2NF)</strong>: Está en 1NF y Ningún atributo <strong>no primo</strong> $A$ de $R$ depende <em>parcialmente</em> de cualquier clave de $R$ . En otras palabras,  dada una clave y cualquier atributo que no sea un constituyente de dicha clave, el atributo no clave depende de solo una parte de la clave en vez de ella entera.</p>
+<p><strong>Tercera Forma Normal (3NF)</strong>: Está en 2NF y ningún atributo <strong>no primo</strong> de R depende transitivamente de una clave de R. Un esquema de relación R está en 3NF si, siempre que tenemos una df $X \rightarrow A$ se cumple en R, alguna de las 2 siguientes:</p>
+<ol>
+<li>$X$ es una superclave de R</li>
+<li>A es un atributo primo de R</li>
+</ol>
+<p><strong>Forma Normal de Boyce-Codd (BCNF)</strong>: Un esquema de realción está en BCNF si, siempre que una df $X \rightarrow A$ se cumple en R, entonces X es una superclave de R.</p>
+<h2 id="algoritmos-de-dise-o">Algoritmos de Diseño</h2>
+<h3 id="definiciones">Definiciones</h3>
+<p><strong>Esquema de relación universal R</strong>: Se define $R=(A_1,A_2,\dots,A_n)$ que contiene todos los atributos de la DB.</p>
+<p><strong>Descomposición de R: D</strong>: $D=(R_1,R_2,\dots,R<em>m)$ que se obtiene mediante los algoritmos que realizan la descomposión utilizando las dependencias funcionales. Debe verificarse que $\bigcup</em>{i=1}^m R_i = R$ (La unión de la descomposión de ni mas ni menos que todo el esquema universal.)</p>
+<p><strong>Proyección de un conjunto de dependencias sobre un Esquema de Relación</strong>: Dado un conjunto de dfs $F$ sobre R, la *proyección de $F$ sobre $R<em>i$, $Pi</em>{R_i}(F)$, donde $R_i$, es un subconjunto de R, es el set de dfs $X \rightarrow Y$ en $F+$ tq los atributos de $X \cup Y$ estén todos contenidos en $R_i$</p>
+<p><strong>Preservación de dependencias (PDD)</strong>: Una descomposición $D=(R_1,\dots,R<em>m)$ de R preserva las dependencias respecto a F si se cumple: $((\Pi</em>{R1}(F))\cup \dots \cup (\Pi_{Rm}(F)))+ = F+$</p>
+<h3 id="descomposici-n-3nf-con-pres-de-dependencias-pdd-">Descomposición 3NF con Pres. de Dependencias (PDD)</h3>
+<h4 id="algoritmo">Algoritmo</h4>
+<pre><code>1. Encontrar un cubrimiento minimal <span class="hljs-keyword">G</span> para <span class="hljs-built_in">F</span>
+2. <span class="hljs-keyword">For</span> each miembro izq X <span class="hljs-keyword">de</span> las df <span class="hljs-keyword">de</span> <span class="hljs-keyword">G</span>:
+    2.1 crear un esquema <span class="hljs-keyword">de</span> relació<span class="hljs-keyword">n</span> {X union A_1 ... A_m} <span class="hljs-keyword">en</span> <span class="hljs-keyword">D</span>, donde X -&gt;A_1, ... , X-&gt;A_m sean las únicas dfs <span class="hljs-keyword">en</span> <span class="hljs-keyword">G</span> con X como miembro izq. 
+3. Colocar todos los atributos restantes (<span class="hljs-keyword">que</span> <span class="hljs-keyword">no</span> fueron colocados <span class="hljs-keyword">en</span> ningú<span class="hljs-keyword">n</span> esquema) <span class="hljs-keyword">en</span> un solo ER para asegurar <span class="hljs-keyword">la</span> <span class="hljs-keyword">prop</span>. <span class="hljs-keyword">de</span> preservació<span class="hljs-keyword">n</span> <span class="hljs-keyword">de</span> dependencias (PDD)
+</code></pre><h3 id="join-sin-p-rdida-jsp-">Join sin Pérdida (JSP)</h3>
+<blockquote>
+<p><strong>Definición</strong>: Una descomposión $D=(R_1,R_2,\dots,R_m)$ de R tiene la propiedad de JSP respecto al conjunto de dfs F sobre R, si por cada instancia de relación r de R que satisfaga F, se cumple lo siguiente: $ \ast^m<em>1((\Pi</em>{R1}(r)),\dots,(\Pi_{Rm}(r)))=r$</p>
+<p><strong>Propiedad</strong>: $D=(R_1,R_2)$ de R tiene JSP respecto a F sobre R si y solo si: la df $((R_1 \cap R_2) \rightarrow (R_1 - R_2) \in F+)\ \lor \ ((R_1 \cap R_2) \rightarrow (R_2 - R_1) \in F+)$</p>
+</blockquote>
+<h4 id="algoritmo">Algoritmo</h4>
+<pre><code>1. crear una matriz S con una fila i por cada relació<span class="hljs-keyword">n</span> Ri <span class="hljs-keyword">en</span> <span class="hljs-keyword">la</span> descomposició<span class="hljs-keyword">n</span> <span class="hljs-keyword">D</span>, y una columna j por cada atributo Aj <span class="hljs-keyword">en</span> R;
+2. hacer <span class="hljs-built_in">S</span>(i,j) := bij para todas las entradas <span class="hljs-keyword">de</span> <span class="hljs-keyword">la</span> matriz;
+3. <span class="hljs-keyword">For</span> each fila i <span class="hljs-keyword">que</span> represente el er Ri:
+    <span class="hljs-keyword">For</span> each columna j <span class="hljs-keyword">que</span> represente el atributo Aj:
+        <span class="hljs-keyword">if</span> Ri incluye a Aj
+            <span class="hljs-built_in">S</span>(i,j) := aj;
+4. <span class="hljs-keyword">while</span> <span class="hljs-keyword">la</span> iteració<span class="hljs-keyword">n</span> modifique S:
+    <span class="hljs-keyword">For</span> each df X-&gt;Y <span class="hljs-keyword">en</span> <span class="hljs-built_in">F</span>
+        igualar los símbolos <span class="hljs-keyword">en</span> los atributos <span class="hljs-keyword">de</span> Y para aquellas filas <span class="hljs-keyword">que</span> coinciden <span class="hljs-keyword">en</span> los atributos <span class="hljs-keyword">de</span> X;
+5. si una fila tiene todos símbolos “a”, <span class="hljs-keyword">la</span> <span class="hljs-keyword">desc</span> es con JSP, <span class="hljs-keyword">en</span> caso contrario, <span class="hljs-keyword">no</span> lo es;
+</code></pre><h4 id="algoritmo-descomposici-n-en-bcnf-con-jsp">Algoritmo Descomposición en BCNF con JSP</h4>
+<pre><code>1. Hacer <span class="hljs-keyword">D</span>:={R};
+2. <span class="hljs-keyword">While</span> haya un esquema <span class="hljs-keyword">de</span> relació<span class="hljs-keyword">n</span> Q <span class="hljs-keyword">en</span> <span class="hljs-keyword">D</span> <span class="hljs-keyword">que</span> <span class="hljs-keyword">no</span> <span class="hljs-keyword">est</span>é <span class="hljs-keyword">en</span> BCNF hacer:
+    2.1 Escoger un esquema <span class="hljs-keyword">de</span> relació<span class="hljs-keyword">n</span> Q <span class="hljs-keyword">en</span> <span class="hljs-keyword">D</span> <span class="hljs-keyword">que</span> <span class="hljs-keyword">no</span> <span class="hljs-keyword">est</span>é <span class="hljs-keyword">en</span> BCNF;
+    2.2 Encontrar una df X-&gt;Y <span class="hljs-keyword">en</span> Q <span class="hljs-keyword">que</span> viole BCNF;
+    2.3 Reemplazar Q <span class="hljs-keyword">en</span> <span class="hljs-keyword">D</span> por dos esquemas (Q-y) y (X union Y)
+</code></pre><h4 id="algoritmo-descomposici-n-en-3nf-con-jsp-y-pdd">Algoritmo Descomposición en 3NF con JSP y PDD</h4>
+<pre><code>1. Encontrar un cubrimiento minimal <span class="hljs-keyword">G</span> para F;
+2. <span class="hljs-keyword">For</span> each miembro izq X <span class="hljs-keyword">de</span> una df <span class="hljs-keyword">que</span> aparezca <span class="hljs-keyword">en</span> <span class="hljs-keyword">G</span>:
+    2.1 crear un esquema <span class="hljs-keyword">de</span> realció<span class="hljs-keyword">n</span> {X union A_1 union A_2 ... union A_1m} <span class="hljs-keyword">en</span> <span class="hljs-keyword">D</span>, donde X-&gt;A_1,X-&gt;A_2,...,X-&gt;A_m sean todas las dfs <span class="hljs-keyword">en</span> <span class="hljs-keyword">G</span> con X como miembro izq.
+3. Si alguno <span class="hljs-keyword">de</span> los esquemas <span class="hljs-keyword">de</span> realció<span class="hljs-keyword">n</span> contiene una clave <span class="hljs-keyword">de</span> R, crear un ER adicional <span class="hljs-keyword">que</span> contenga los atributos <span class="hljs-keyword">que</span> formen una clave <span class="hljs-keyword">de</span> R;
+4. Eliminar ER redundates, es decir <span class="hljs-keyword">que</span> <span class="hljs-keyword">est</span>é<span class="hljs-keyword">n</span> contenidos <span class="hljs-keyword">en</span> otro ya generado.
+</code></pre><h1 id="dependencias-multi-valuadas">Dependencias Multi-valuadas</h1>
+<h2 id="idea-intuitiva">Idea intuitiva</h2>
+<p>Si se tienen 2 o más atributos que tienen <strong>más</strong> de un valor asociado con determinado objecto y que son <strong>independientes</strong> entre sí, se tendrán que repetir todos los valores de uno de los atributos con cada valor del otro atributo manteniendo la misma referencia para los objetos con el fin de que las tublas de la relación sigan siendo consistentes. Esta restricción se le llama <strong>dependencia multi-valuada</strong>.</p>
+<h2 id="definici-n-formal">Definición Formal</h2>
+<p>Una dependencia funcional multivaluada $ X \twoheadrightarrow Y$ especificada sobre el esquema de relación R, especifica la siguiente restricción sobre cualquier relación r de R:</p>
+<p>Si existen 2 tuplas $t_1 y t_2 $ en r tales que $t_1(X)=t_2(X)$ , entonces deberán existir también 2 tuplas $t_3, t_4$ en r tales que:</p>
+<ol>
+<li>$ t_3(X)=t_4(X) = t_1(X)=t_2(X)$</li>
+<li>$ t_3(Y)=t_1(Y) = t_4(Y)=t_2(Y)$</li>
+<li>$ t_3[R-XY] = t_2[R-XY], t_4[R-XY] = t_1[R-XY] $</li>
+</ol>
+<h3 id="dvm-trivial">DVM Trivial</h3>
+<p>Se le llama dmv $ X \twoheadrightarrow Y$  trivial si $ Y \subseteq X $ o $ X \cup Y = R$ 
+Tener una dmv no trivial en una relación implica tener valores redundantes en las tuplas. </p>
+<h2 id="reglas-de-inferencia">Reglas de inferencia</h2>
+<p><img src="assets/dmv.png" alt="dmv"></p>
+<h2 id="cuarta-forma-normal">Cuarta forma normal</h2>
+<p>Un esquema de relación R está en 4NF respecto a un conjunto de dependencias F si para cada dmv no trivial $ X \twoheadrightarrow Y$ en F+, <strong>X es una superclave de R</strong>.</p>
+<p>Recordamos la propiedad de descomposición con JSP: D=(R_1,R_2) tiene JSP respecto a F sobre R sii
+La dmv $(R_1 \cap R_2) \twoheadrightarrow (R_1 - R_2) \in F+$</p>
+<p>OR</p>
+<p>La dmv $(R_1 \cap R_2) \twoheadrightarrow (R_2 - R_1) \in F+$</p>
+<p>Algoritmo 4nf con JSP:</p>
+<p><img src="assets/jsp4nf.png" alt="dmv"></p>
+<h2 id="dependencias-multi-valuadas-embebidas">Dependencias multi-valuadas embebidas</h2>
+<p>Decimos que en un esquema de relación $R$ se cumple la dependencia  $X \twoheadrightarrow Y | Z$ cuando en cualquier subesquema $R_i$ de $$R$ tal que $R_i = X \cup Y \cup Z$ se debe cumplir la dependencia $X \twoheadrightarrow Y$</p>
+<p>Decimos que $ X \twoheadrightarrow Y |Z $ es una dependencia multivaluada embebida sobre R.</p>
+<h2 id="estrategias-de-un-relational-database-management-system">Estrategias de un Relational Database Management system</h2>
+<p>Un DBMS se puede dividir en 3 planos:</p>
+<ol>
+<li><p><strong>Comunicación con el usuario</strong>: Aquí están las APIs e interfaces que los clientes utilizan para acceder a la DB. Por ejemplo, consultas interactivas (tipo consola), enunciados en DDL y ordenes privilegiadas para los administradores, APIs con pre-compiladores para los programadores, etc. Los usuarios paramétricos pasan directamente al plano de gestion de operaciones con transacciones previamente programadas</p>
+</li>
+<li><p><strong>Gestion de operaciones</strong>: En la gestion de operaciones se define como se va a acceder a la base de datos, la estrategia para responder a las consultas. procesador de base de datos lee estas sentencias del DML compiladas para decidir el mejor plan para llevar a cabo la consulta.</p>
+</li>
+<li><p><strong>Gestion de datos</strong>: Los datos de la base literalmente. Que estrategias se van a utilizar para leer los datos (indexes, algorithms, etc.). También se incluye el sub-sistema de control de concurrencia y recuperación. </p>
+</li>
+</ol>
+<p><img src="assets/arq.png" alt="arq"></p>
+<h1 id="procesamiento-y-organizaci-n-de-consultas-">Procesamiento y organización de consultas.</h1>
+<p>Se distinguen 6 conceptos clave:</p>
+<ul>
+<li><p><strong>Organización y acceso a los datos</strong>: Definir las estructuras de datos que implementan los DBMS y como se utilizan</p>
+</li>
+<li><p><strong>Procesamiento de consultas</strong>: Los algoritmos que implementan los operadores del algebra relacional.</p>
+</li>
+<li><p><strong>Optimizacion de consultas</strong>: Estrategias que utiliza el manejador para modificar las consultas (pero manteniendo la equivalencia) y elegir los algoritmos a ejecutar.</p>
+</li>
+</ul>
+<p><strong>Transacciones</strong>: Entender a un conjunto de operaciones complejas como algo atomico y cuantificable.</p>
+<p><strong>Concurrencia</strong>: Considerar que el DBMS debe poder permitir que varios procesos accedan a la base de datos de forma simultanea y manejar las situaciones que esto genera.</p>
+<p><strong>Estrategias de recuperación</strong>: Mecanismos que implementa el DBMS para asegurar la integridad de la bse de datos (recuperación) ante fallas en el sistema.</p>
+<h2 id="organizaci-n-f-sica-de-las-consultas">Organización física de las consultas</h2>
+<p>Los registros (tuplas) de una tabla se encuentran y forman archivos los cuales son una estructura lógica de acceso secuencial del file system. Estos archivos se ubican en una estructura lógica a nivel de disco llamada bloques. Estos bloques son la minima unidad de transferencia de datos entre la memoria y el disco. Un conjunto de bloques de disco constituye una <em>particion</em>. Los bloques del disco al ser leidos se mueven a memoria a trabas de buffers. Es en este punto que los datos pueden ser recién leidos por el DBMS. </p>
+<p><img src="assets/org.png" alt="org"></p>
+<p>Dado que el acceso a datos es un aspecto esencial de un DBMS, estos implementan mecanismos que optimizan todo el proceso de acceso a los datos. Reimplementado: estructuras de datos, algoritmos de manipulaicon y organización y mecanismos de buffereing y paginado. En cierto sentido, los DBMS implementan su propio <em>filesystem</em> en un area de l disco. </p>
+<p>El acceso secuencial de los discos no es siempre ventajoso para las consultas. Se hacen loops innecesarios para buscar cosas y para los joins. Por ejemplo, los JOINS de dos tablas costarian O(MxN) lo cual es costoso. Esto se puede mejorar utilizando estructuras que faciliten el acceso al disco a entradas en particular (i.e indices).</p>
+<p><img src="assets/indexing.png" alt="arq"></p>
+<p>El indice es una estructura compleja típicamente ordenada o disperasa según la clave con punteros a los datos. Buscar algo en un indice es mas eficiente que la busqueda secuencial.</p>
+<h3 id="tipos-de-indices">Tipos de indices</h3>
+<ul>
+<li><p><em>Físicos v Lógicos</em> : Los index físicos son del estilo donde <K,P> donde para la entrada K hay un puntero P que apunta al sector de disco donde esta el elemento. Por otro lado los indices lógicos proveen un nivel mas: <K,K_p> donde K_p es la dirección donde se encuentra el puntero al sector. Sirve para base de datos donde la ubicación en disco de la base cambia con frecuencia. La contra es el overhead adicional de la doble busqueda para obtener el puntero.</p>
+</li>
+<li><p><em>Ordenados vs No-Ordenados</em> : Requieren o no del ordenamiento de los datos en la database de los atributos a indexar. </p>
+</li>
+<li><p><em>Densos o no densos</em>: Un index denso tiene una entrada para valor de busqueda posible. Mientras que un indice no denso (sparse) tiene entradas para solo algunos valores. Un indice primario es un ejemplo de indice sparse.</p>
+</li>
+<li><p><em>Simples vs Multi-nivel</em>: El index tiene la ubicación directa del sector o se deben hacer varios accesos (ya sea a memoria o disco) para obtener la ubicación. Ejemplo clásico: Ordered list vs B+ tree. </p>
+</li>
+</ul>
+<h3 id="indices-ordenados">Indices ordenados</h3>
+<ul>
+<li><p><strong>Indice primario</strong>: Es sobre la primary key de la tupla. Por cada clave se tiene la dirección en el disco: (bloque o bloque+offset)</p>
+</li>
+<li><p><strong>De Agrupamiento (cluster index)</strong>: Se realizan sobre atributos que no son clave primaria. <em>For each valor distinto</em>, se agrega una entrada con la dirección en el disco al primer registro del grupo (bloque o bloque + offset). Es un ejemplo de index sparse. Notar que se necesita que los registros estén ordenados por los tipos de datos no primarios (clustering field), a estos archivos se llaman clustering files.</p>
+</li>
+</ul>
+<h2 id="indices-con-datos-no-ordenados">Indices con datos no ordenados</h2>
+<h3 id="indices-secundarios">Indices secundarios</h3>
+<p>Se crean estructuras auxiliares ordenadas por el campo a indexar. Por cada entrada de index hay un puntero al bloque donde se encuentra el valor. (Si tengo muchos valores, tengo una lista con punteros como tantos bloques contengan el valor). </p>
+<p><img src="assets/Pindex.png" alt="arq">
+<img src="assets/Cindex.png" alt="arq">
+<img src="assets/Sindex.png" alt="arq"></p>
+<h2 id="otras-estructuras-de-index">Otras estructuras de index</h2>
+<h3 id="hash">Hash</h3>
+<p>Andan bien para la inserción y la recuperación de condiciones por igualdad. Sin embargo no proporcionan un buen funcionamiento para condiciones de ordenamiento. </p>
+<h3 id="arboles-b-y-b-">Arboles B y B+</h3>
+<p>Buen comportamiento en recuperación tanto para condiciones de igualdad como de orden. Anda bien para la inserción, la contra es que ocupa espacio adicional en el disco. 
+<a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">Animación B-Tree</a>. 
+La diferencia clave entre un B tree y un B+ tree es que en el B+ los datos están unicamente en las hojas del árbol:</p>
+<p><img src="assets/BvsB.png" alt="arq"></p>
+<p>Por lo general, como la mayoria de los datos de un árbol B terminan estanado en las hojas. Es mas eficiente el árbol B+.</p>
+<p>Para comparar las estructuras se utiliza la metrica mas relevanate: Cantidad de operaciones I/O. Se debe considerar que un bloque del disco puede almacenar varios nodos de una estructura de datos. Y que el acceso al disco, se hace por lo general con buffers que leen simultaneamente mas de un bloque. Esto ultimo trae mejoras en los lagoritmos. </p>
+<h3 id="resumen">Resumen</h3>
+<p>Los DBMS implementan las siguientes estrategias para organizar registros:</p>
+<ol>
+<li>Registros desordenados con acceso sequential.</li>
+<li>Registros ordenados con acceso secuencial.</li>
+<li>Registros ordenados e indexados por clave primaria con indice primario</li>
+<li>Registros ordenados e indexados por otro atributo con un indice cluster</li>
+<li>Registros desordenados e indexados por otro atributo con un indice secundario</li>
+<li>Indices implementados como hashes o arboles B+ </li>
+</ol>
+<h1 id="procesamiento-y-optimizaci-n-de-consultas">Procesamiento y optimización de consultas</h1>
+<p>El proceso de resolución de una consulta se ilustra en esta imagen:</p>
+<p><img src="assets/process.png" alt="process"></p>
+<p>Este proceso puede optimizarse en sus distitnas fases. Existen 2 tipos de optimizacion:</p>
+<ol>
+<li>Optimización Heurística: Basada en equivalencia de las expresiones del algebra y ciertas estrategias básicas para limitar el tamaño de los resultasos</li>
+<li>Optimización por Costos: Basada en estimaciones4s y datos del catálogo que permiten seleccionar mejor el plan de acceso. </li>
+</ol>
+<p>El parser y generador de código realizan los siguientes pasos para trabajar:</p>
+<p><img src="assets/parser.png" alt="parser"></p>
+<p>Los pasos del proceso de optimización son:</p>
+<ol>
+<li><p>Generación del Algebra (+ Árbol canónico)</p>
+</li>
+<li><p>Generacion de planes lógicos (Optimización heuristica). Implica la aplicación de las heurísticas y consultas al catalogo para conocer el tamaño de las relaciones para transformar el árbol original</p>
+</li>
+<li><p>Generacion de planes físicos (Optimizacion por costos). Implica asociar a cada operacion los planes lógicos generados por una o mas implementaciones. Depende de las estructuras de datos disponibles.</p>
+</li>
+<li><p>Selección del plan final (Optimizacion por costos). Implica la evaluacion de lso planes físicos generados en base a la cantidad de operaciones IO de cada algoritmo. </p>
+</li>
+</ol>
+<h2 id="optimizacion-por-heuristicas">Optimizacion por heuristicas</h2>
+<p>Cambiar la consulta original por otra equivalente para minimizar los resultados intermedios. Pueden existir varias formas y se basa en aplicar equivalencias de los operadores del algebra para que las selecciones y las proyecciones se apliquen lo antes posible.</p>
+<p>Reglas de equivalencia:</p>
+<p><img src="assets/eq.png" alt="eq">
+<img src="assets/eq2.png" alt="eq"></p>
+<h3 id="heur-sticas">Heurísticas</h3>
+<p>Las reglas que se aplican para reducir los tamaños intermedios son:</p>
+<ol>
+<li>Cambiar selecciones conjuntuivas por una <strong>cascada</strong> de selecciones simples.</li>
+<li>Mover las selecciones lo mas abajo que se pueda del árbol</li>
+<li>Poner a la <strong>izquierda</strong> los productos de las <strong>hojas</strong> que generen menos tuplas, asegurando que el orgfen de las hojas cno cause operaciones de producto cartesiano</li>
+<li>Cambiar secuencias de selecciones y productos por joins</li>
+<li>Mover las proyecciones lo mas abajo posible del árbol, agregando las proyecciones que sean necesarias. </li>
+</ol>
+<h2 id="optimizacion-por-costos">Optimizacion por costos</h2>
+<h3 id="plan-f-sico">Plan físico</h3>
+<p>Le asocia a cada operador del algebra que aparece un un plan lógico una implemetnacion. Como se pueden considerar diferentes implementaciones para cada operador, entonces un mismo plan lógico puede originar diferentes planes físicos. Se estima el costo de cada uno mediante parametros que consideran la cantidad de operaciones IO.</p>
+<p><img src="assets/param.png" alt="eq">
+<img src="assets/param2.png" alt="eq"></p>
+<h3 id="implementaciones-de-los-operadores">Implementaciones de los operadores</h3>
+<p>A cada operador de un plan lógico se el asigna una implementación. Hay que estimar los costos según cada algoritmo.
+Es importante la estrategia de implementation:</p>
+<ol>
+<li>Pipelines: Hay operadores que se ejecutan simultaneamente y pueden pasarse los resultados a medida que se generan. No graban resultados intermedios</li>
+<li>No pipelined: Los operadores se ejecutan secuencialmente y es necesario grabar resultados intermedios. </li>
+</ol>
+<p>En este curso vamos a <strong>asumir</strong> que la selección y el join es <strong>no pipelined</strong> y la proyección es <strong>pipelined</strong> (tiene sentido desu)</p>
+<p>En el costo se considera solo los acceso a disco (IO). Siempre se realizan operaciones de a bloque (pagina), las cuales contienen varios registros de indice o datos. Los costos de lectura dependen de como están organizados. </p>
+<p>El costo de grabación <strong>siempre</strong> es el costo de grabar todo el resultado (R): $\lceil n_r / bf_r \rceil $ donde $bf_r = #bytesXbloque / #bytesXtupla $. </p>
+<h4 id="implementaci-n-de-la-selecci-n">Implementación de la selección</h4>
+<ol>
+<li><p><strong>Búsqueda lineal:</strong> No tiene restricciones de uso. Lee cada registro uno a uno y si cumple la condición se lo pone en el resultado. Es $O(b_r)$ (promedio $b_r/2$ ) </p>
+</li>
+<li><p><strong>Búsqueda binaria</strong>: Requiere que los registros estén ordenados. Lee el bloque del medio y en función de una función de orden decide buscar hacia la izquierda io derecha. El costo de lectura de esto es $log_2 (b_r) + \lceil s / bf_r \rceil -1$</p>
+</li>
+<li><p><strong>Con índice primario o cluster</strong>: Requiere registros ordenados. El costo es $ x +  \lceil s / bf_r \rceil $ (x = cant. niveles del indice) </p>
+</li>
+<li><p><strong>Hash</strong>: Solo sirve para condiciones de igualdad. Los costos de lectura son 1 o 2 dependiendo del tipo de Hash.</p>
+</li>
+<li><p><strong>Secundario con B+</strong>: No tienen restricción. El costo es $O(x+s)$</p>
+</li>
+</ol>
+<h3 id="implementaci-n-del-join-r-a-b-s">Implementación del Join R |&gt;&lt;| (A=B) S</h3>
+<ol>
+<li><p><strong>Loop anidado por registros</strong>: No tiene restricciones de uso. Para cada <strong>registro</strong> de R, acceder a todos los bloques de S y combinar ese registro R con todos los de S. El costo es $O(b_R + n_R*b_s)$</p>
+</li>
+<li><p><strong>Loop anidado por bloques</strong>: No tiene restricciones de uso. Para cada <strong>bloque</strong>de R, combinar todos los registros de ese bloque con todos los de S. El costo es $O(b_r + \lceil b_r / (M-2) \rceil * b_s$ donde M es la cantidad de buffers.</p>
+</li>
+<li><p><strong>Sort-Merge Join</strong>: Requiere que las dos tablas tengan los registros ordenados. De lo contrario hay costo de ordenarlas. Se recorre R y S en paralelo combinando los registros. Costo $O(b_r + b_s)$ si se tuviese que ordenar el costo de ordenar sería $2<em> b </em> (1+log_2 b)$</p>
+</li>
+<li><p><strong>Index Join (Single loop)</strong>: Tiene que existir un índice para S. Consiste en recorrer R y acceder por el índice a S. El costo es O(b_r + n_r * Z) donde Z depende del tipo de indice.</p>
+<ol>
+<li>Secundario: Z = x+s_s</li>
+<li>Cluster Z = x + \lceil s_s / bf_s \rceil </li>
+<li>Primario: Z= x+1</li>
+<li>Hash = h</li>
+</ol>
+</li>
+</ol>
+<p><img src="assets/op1.png" alt="eq">
+<img src="assets/op2.png" alt="eq"></p>
+<h1 id="control-de-concurrencia-y-recuperaci-n">Control de Concurrencia y Recuperación</h1>
+<blockquote>
+<p>Control de concurrencia es la coordinación de procesos concurrentes que operan sobre datos compartidos y que podrian interferir entre ellos. </p>
+</blockquote>
+<p>A cada uno de los procesos concurrentes que se ejecuta sobre datos compartidos se le llama <strong>TRANSACCIÓN</strong> si cumple las propiedades <strong>ACID</strong>.</p>
+<ol>
+<li><strong>Atomicity</strong>: Desde el punto de vista del resultado, este se ejecuta totalmente o no. </li>
+<li><strong>Consistency preservation</strong>: La base de datos siempre cambia de un estado consistente a otro consistente.</li>
+<li><strong>Isolation</strong>: Una transacción no debe interferir con otra.</li>
+<li><strong>Durability</strong>: Los cambios de una transacción confirmada deben persistirse en la database </li>
+</ol>
+<p>Para garantizar el ACID, las transacciones pasan por los siguientes estadoS:</p>
+<p><img src="assets/states.png" alt="eq"></p>
+<h4 id="notaci-n-y-definiciones">Notación y Definiciones</h4>
+<p>Las transacciones realizan las siguientes operaciones que se notan:</p>
+<ol>
+<li>$r_i(X)$ : La transaccion i lee el item X de la base</li>
+<li>$w_i(X)$ : La transaccion i escribe el item X de la base</li>
+<li>$c_i$ : La transaccion i confirma que todas sus modificaciones son persistidas en la base</li>
+<li><p>$a_i$ : La transacción i indica que ninguna de sus modificaciones son persistidas en la base</p>
+</li>
+<li><p><strong>Rollback</strong>: Es la accion de recuperar el estado anterior de la base de datos frente al abort de una transacción. </p>
+</li>
+<li><strong>Transaction Manager</strong>: Es el que administra las transacciones. Recibe las instrucciones que los programas preteneden ejecutar y se toma la libertad de reordenarlas, sin cambiar el orden relativo de los R/W. Para esto agrega instrucciones (aborts/commits) por su cuenta y demora las instrucciones.</li>
+<li><strong>Historia (Schedule)</strong>: Dado un conjunto de transacciones se le llama historia o schedule a una ordenación de todas lasoperaciones que interviene nen las transacciones siempre que estas aparezcan en el mismo orden que la transaccion </li>
+<li><p><strong>Historia Completa</strong>: Es la historia que cumple que todas las operaciones de las transacciones están presentes. Cualquier par de la misma transaccion debe aparecer en la historia en el mismo orden que en el de la transaccion. Las operaciones en conflicto deben tener su orden d3e aparición definido en la historia. </p>
+</li>
+<li><p><strong>Operaciones en conflicto</strong>: dos operaciones (R/W) están en conflicto si cumplen: (pertenecen a distintas transacciones &amp;&amp; acceden al mismo item &amp;&amp; una es un write)</p>
+</li>
+<li><p><strong>Historia Recuperable</strong>: Una historia es recuperable si ninguna transacción confirma lista que se confirmar on todas las transacciones desde las cuales leyó items. (Los commits están en el mismo orden que el flujo de datos ).</p>
+</li>
+<li><p><strong>Historia que evita Abortos en Cascada</strong>: Una historia evita abortos en cascada si ninguna transacción lee de transacciones no confirmadas. (Los commits tiene que estar antes de lso reads siguientes)</p>
+</li>
+<li><p><strong>Historia Estricta</strong>: Una historia es estricta si ningúna tarnsaccion lee o escriba hasta que todas a las transacciones que escribireron ese ítem fueron confirmadas (los commits tienen que estar antes de lso reads y writes siguientes)</p>
+</li>
+</ol>
+<h2 id="historias-serializables-y-recuperables">Historias serializables y recuperables</h2>
+<p>Si las operaciones se ejecutasen de forma serial, no habria concurrencia pero si correctitud. Si las historias son <em>entrelazadas</em>, podría suceder que queden datos erroneos que no se puedan corregir (hacer un rollback) si una transacción aborta. Por lo tanto, se quieren historias <strong>entrelazadas y con comportamiento de seriales</strong>.</p>
+<p><strong>Historia serializable</strong>: Es aquella historia que es <em>equivalente</em> a una historia serial con las mismas transacciones. Que significa equivalente? Existen dos nociones que siguen la idea de que las transacciones son equivalentes si dejan la base de datos en el mismo estado. Esta idea es difícil de garantizar, por lo que se utilizan las siguientes definiciones de equivalencia\</p>
+<ol>
+<li>Por conflicto: Si las transacciones tienen todas las operaciones en conflicto en el mismo orden estas son equivalentes (CURSO)</li>
+<li>Por vistas: Si cada $T_i$ lee las mismas $T_j, \dots ,T_n$ en $H$ y $H&#39;$</li>
+</ol>
+<h3 id="testeo-de-seriabilidad-por-conflictos-grafo-de-seriabilidad">Testeo de seriabilidad por conflictos: Grafo de seriabilidad</h3>
+<ol>
+<li>Poner un nodo por cada transaccion en la historia. Si $r_j(X)$ está después de $w_i(X)$, entonces hay un arco de $T_i$ a $T_j$.</li>
+<li>Si $w_j(X) está después de $r_i(X)$, entonces hay un arco de $T_i a T_j$</li>
+<li>Si $w_j(X) estád después de $w_i(X)$ entonces hay un arco de $T_i$ a $T_j$</li>
+</ol>
+<p>Es decir, siempre se pone un arco si hay una Pareja de operaciones en conflicto, desde la primera transaccion a la segunda según del orden de las operaciones en conflicto.</p>
+<h3 id="teorema-de-seriabilidad">Teorema de Seriabilidad</h3>
+<blockquote>
+<p>Una historia H es serializable si su grafo de seriabilidad es acíclico. (Gray, 1975)</p>
+</blockquote>
+<h3 id="clasificaci-n-de-historias">Clasificación de historias</h3>
+<p>Con las definiciones estudiadas, podemos concluir que:</p>
+<p><img src="assets/class.png" alt="eq"></p>
+<h2 id="control-de-seriabilidad-y-recuperaci-n">Control de seriabilidad y recuperación</h2>
+<p>El manejador deberia garantizar la construcción de historias serializables, que sean recuperables y que no tangan abortos en cascada. El manejador para esto demora las operaciones en conflicto con otras anteriores hasta que estas terminen. Los dos mecanismos para hacer esto es el de locking y timestamp.</p>
+<h3 id="locks">Locks</h3>
+<h4 id="lock-binario">Lock binario</h4>
+<p>Se consideran dos nuevas operaciones: $l_i(X)$ lock y $u_i(X)$ unlock. Cuando se ejecuta $l_i(X) el DBMS hace que cualquier operación sobre X por otra transaccion no termine hasta que se ejecute $u_i(X)$ . Es un comportamiento analogo a los semáforos de SO. La ventaja de estos locks es que son fáciles de implementar. Lo malo es que niega la lectura a otras transacciones cuando en realidad no seríá necesario.</p>
+<p>Para utilizarlo hay que hacer que antes de hacer un r/w sobre X ejecutar l(X), luego de ejecutar el r/w se debe ejecutar u(X)</p>
+<h4 id="read-write-lock">Read/Write Lock</h4>
+<p>Hay tres operaciones $read_lock_i(X)$ $(rl_i(X))$, $write_lock_i(X)$ $(wl_i(X))$ y $unlock_i(X)$ $(u_i(X))$ . Se permite que varias transacciones hagan un rl (pero no un wl) simultáneamente sobre el mismo ítem. Es mas complejo que el lock binario.</p>
+<p>Para utilizarlo hay que hacer que antes de un read, hacer un read_lock o write_lock, al terminar un unlock
+Si se quiere hacer un write, se debe pedir el write lock. 
+Los looks pueden ser promovidos o degradados en vez de desbloquearse</p>
+<h3 id="protocolos-de-locking">Protocolos de Locking</h3>
+<p>Los locks en si no garantizan la seriabilidad. Para ello se necesita un protocolo de locking: un conjunto de reglas del uso de los locks que sean mas fuertes que las anteriores y que si garanticen la seriabilidad . </p>
+<h4 id="2pl">2PL</h4>
+<p>Two phase locking dicta que una transacción tiene 2 fases: la fase de crecimiento y la de contración. En la primera se crean locks y en la segunda se liberan. Una funcion de locks sobre el tiempo tendría la forma de un pico de sierra.</p>
+<p>Existen distintas formas de 2PL.</p>
+<ol>
+<li>2PL Básico: 2 fases. Susceptible a deadlock</li>
+<li>2PL Conservador: Se exige que todos los locks se hagan al comienzo de la transacción. No es susceptible a deadlock, pero require saber de antemano todos los items que se van a leer/escribir (no siempre es posible)</li>
+<li>2PL Estricto: Exige que no se libere ningún write lock hasta despues de terminar la transacción. Garantiza historias estrictas, susceptible a deadlock.</li>
+<li>2PL Riguroso: Existe que no se libere ningún write/read lock hasta despues de terminar la transacción. Es más fácil de implementar que el estricto y es susceptible a deadlock.</li>
+</ol>
+<h3 id="deadlock">Deadlock</h3>
+<p>Se da cuando una o mas transacciones esperan por otras. Podemos determinar si hay un deadlock construyendo un grafo de espera. Si encontramos un ciclo... encontramos un deadlock!!</p>
+<h4 id="soluciones-para-deadlocks">Soluciones para Deadlocks</h4>
+<p>Existen los protoclos que previenen deadlocks: El 2PL conservador (aunque NO funciona en la practica 😞 ). Y los protoclos basados en TimeStamp. La idea de estos es: Cada transacción tiene asociado un timestamp único que permite discernir que transaccion empezó antes que otra. Si asumimos que T_i quiere un lock que tiene T_j, se pueden seguir las siguientes estrategias:</p>
+<ol>
+<li>Wait-die: Si TS(T_i) &lt; TS(T_j) entonces T_i está autorizada a esperar. Si TS(T_i) &gt; TS(T_j), T_i aborta y comienza más tarde con el mismo timestamp</li>
+<li>Wound-wait: Si TS(T_i) &lt; TS(T_j) entonces T_j aborta y es recomenzada más tarde con el mismo timetamp. De lo contrario, T_i espera. </li>
+</ol>
+<p>Estas soluciones pueden producir re-inicios y abortos innecesarios.</p>
+<p>Otras técnicas de deadlocks son:</p>
+<h5 id="detecci-n">Detección</h5>
+<p>Mantener un grafo de espera y si hay un ciclo, seleccionar una victima para que aborte. Utilizado para transacciones pequeñas. Si estas fuesen largas o trabajan sobre muchos items se genera mucho overhead y la prevencion es mejor</p>
+<h5 id="timeout">Timeout</h5>
+<p>Si una transacción espera mucho tiempo, el sistema la aborta sin importar si hay un deadlock o no.</p>
+<h4 id="problemas-de-locks-starvation">Problemas de locks: Starvation</h4>
+<p>Una transacción no puede ejecutar ninguna operación por un período indefinido de tiempo. Esto puede suceder, por ejemplo, si siempre se elige a la misma victima en la detección de deadlocks. es decir, un mecanismo de selección de victima equivocado.
+Las soluciones que se hacen son con estructuras similares a las utilizadas en SO: </p>
+<ol>
+<li>FIFO</li>
+<li>Manejo de prioridades</li>
+</ol>
+<p>Las estrategias con timestamp wait&amp;dia y wound&amp;wait no tienen este problema. </p>
+<h3 id="control-de-concurrencia-basado-en-ordenaci-n-de-timestamps">Control de concurrencia basado en ordenación de timestamps</h3>
+<p>Cada transacción tiene 1 timestamp. Cada item X tiene 2 timestamps, Read_TS(X) y Write_TS(X) que tienen el timestamp de la transacción más joven que leyó/grabó el ítem.
+La idea consiste en ejecutar las R/W de acuerdo al orden de los timestamps, si se viola el orden se aborta la transacción. </p>
+<ul>
+<li>Si T trata de hacer w(X): Si Read_TS(X) &gt; TS(T) o Write_TS(X) &gt; TS(T), T aborta y luego se reinicia con un <strong>nuevo</strong> timestamp. Else, se actualiza el WriteTS(X) por TS(T)</li>
+<li>Si T trata de hacer r(X): Si Write_TS(X) &gt; TS(T) se aborta y luego se reinicia T con un nuevo timestamp. Else, se ejecuta R(X) y se calcula Read_TS(X) como el maximo entre TS(T) y Read_TS(X) previo.</li>
+</ul>
+<h3 id="control-de-concurrencia-multiversion">Control de concurrencia multiversion</h3>
+<p>Los algoritmos anteriores muchas veces demoran las lecturas innecesariamente por locking o abortos en cascada. Una solución es mantener varias versiones de cada item y para cada transacción elegir la correcta. Esto acelera las lecturas pero tiene como desventaja que se precisa almacenamiento adicional para las versiones de cada item.
+La idea básica es que antes de cualquier modificación a un item X, se guarda una varsion X_i del mismo, generando para cada X una sucesión de versiones $(X_1,\dots,X_k)$ . Cada versión está formada por un valor de X, el Read_TS(X) y el write_TS(X) para ese valor en concreto.</p>
+<p>Hay dos reglas para asegurar la seriabilidad:</p>
+<p>Sea X_i la version de X con máximo Write_TS:</p>
+<ol>
+<li>w(X): Si T tal que $Write_TS(X_i) \leq TS(T) \le Read_TS(X_i)$, T aborta. En cualquier otro caso se crea $X_j$ con $Read_TS(X_j)=Write_TS(X_j)=TS(T)$</li>
+<li>r(X): Se busca X_i tal que $Write_TS(X_i)$ es el mas grande menor o igual que TS(T), se devuelve el valor de $X_i$ a T y se asigna $Read_TS(X_i)$ el maximo de $TS(T)$ y $Read_TS(X_i)$</li>
+</ol>
+<h2 id="granularidad">Granularidad</h2>
+<p>Que es un ítem? Este puede ser una tupla, un valor de una tupla, una tabla entera o incluso al base de datos completa! Cuanto mayor es el grado de granularidad, menor es el nivel de concurrencia permitido. Sin embargo, cuanto menor el grado de granularidad, mayor va a ser ekl overhead que e le impone a l sistema. 
+Si las transacciones acceden a pocos registros es mejor una baja granularidad, si las transacciones acceden a tables enteras, es mejor una granularidad alta.</p>
+<h2 id="inserci-n-y-eliminaci-n-">Inserción y Eliminación.</h2>
+<h3 id="locking-">Locking.</h3>
+<p>Al eliminar se hace un lock en forma exclusiva. En timestamp hay que garantizar que ninguna transacción posterior a la que elimina el registro haya leído o escrito el elemento.</p>
+<h3 id="inserci-n">Inserción</h3>
+<p>Al hacer una inserción se crea un lock, se inserta un registro y se libera en el momento adecuado según el protocolo. Para timestamp se asigna el TS(X) como WriteTS(X) y ReadTS(X)</p>
+<h3 id="ghost-locking">Ghost Locking</h3>
+<p>Un problema que puede pasar con esto de los lockeos es que una transacción T&#39; accede a registros que cumplen una condición X que fue insertada por una tarnsacción T. Si T&#39; lockea estos registros antes de que se inserte X, X se convierte uen un registro fantasma ya que
+T&#39; no conoce a X a pesar de necesitarlo. La solución a esto es implementar un lock sobre indíces.</p>
+<h1 id="recuperaci-n-de-informaci-n">Recuperación de Información</h1>
+<p>En un sistema, se pueden dar fallas que pongan en riesgo la integridad y la existencia misma de la base y por lo tanto de los datos. El DBMS tiene la responsabilidad de poder recuperar la base d3e datos a un estado consistente y conocido.</p>
+<h2 id="log">Log</h2>
+<p><img src="assets/log.png" alt="log"></p>
+<p>Es un registro de la actividad sobre la DB. Típicamente sus entradas cuentan con: </p>
+<pre><code>[start_transaction_T]
+[write_item,T,X,v_old,v_new]
+[read_item,T,X]
+[commit,T]
+[abort,T]
+</code></pre><p>Cada vez que una transacción va a realizar una operación sobre la base, se agrega un registro en el log. Tipicmante esta actualizancon la hace en un buffer en memoria. Por lo que cuando una transacción T confirma, se baja todo el log de T que no esté guardado, se actualiza la DB con los efectos de la transacción.
+Si se pierde la base y el log a la vez marchamos. Por lo que deberían encontrarse en espacios (computadores e incluso discos) distintos. (Y respaldos!)</p>
+<h2 id="algoritmos-de-recuperaci-n">Algoritmos de recuperación</h2>
+<p>Si hubo un desastre (perdida de disco) entonces se debe recuperar el ultimo respaldo de la base, recuperar el LOG hasta donde se pueda. Y se debe haber el redo de todas las operaciones indicadas en el log desde el momento en que se hizo el respaldo a la base.</p>
+<p>Si la falla fue menor (corte de energía), puede ser que haya que deshacer (undo) cambios ya realizados o rehacer cambios que no se hayan confirmado.</p>
+<h3 id="actualizaci-n-diferida-e-inmediata">Actualización diferida e inmediata</h3>
+<p>Si la falla no fue catastrofica hay dos técnicas básicas de recuperación:</p>
+<ol>
+<li>Actualización diferida: Cada transacción trabaja en un area local de disco o memoria y recién se baja al disco después que la transacción alcanza el commit. (Si hay una falla o abort, no es necesario hacer redos o undo)</li>
+<li>Actualización inmediata: La base es actualizada antes de que la transacción alcance el commit, si hay un abort o falla deben hacerse los redos necesarios. </li>
+</ol>
+<blockquote>
+<p>Siempre se graba primero el log para garantizar la recuperación. </p>
+</blockquote>
+<h3 id="before-image-y-after-image">BeFore IMage y AFter IMage</h3>
+<p>Para que el mecanismo de recuperación sea viable, es necesario considerar dos valores para cada item. Se tienen al menos dos valores:</p>
+<ul>
+<li>Before Image (BFIM): El valor del item antes de ser actualizado por la transacción</li>
+<li>After Image (AFIM): EL valor del item después de ser actualizado por una transacción</li>
+</ul>
+<p>De esta forma, los registros del Log pueden estar clasificados en:</p>
+<ol>
+<li>Tipo Undo: Contienen la operación y el BFIM</li>
+<li>Tipo Redo: Contienen la operación y el AFIM</li>
+<li>Combinados: Contienen la operación y los dos valores. Permiten estrategias UNDO/REDO</li>
+</ol>
+<h3 id="write-ahead-logging-wal-">Write Ahead Logging (WAL)</h3>
+<p>Es una estrategia en la cual esl mecanismo de rtecuperazion garantiza que el BFIM está en el Log y el Log está en disco <strong>ANTES</strong> que el AFIM actualiza el BFIm en la base del disco.</p>
+<p>Un protocolo WAL podría ser:</p>
+<ul>
+<li>Un AFIM de X no puede actualizar el BFIM de X hasta que todos los registros del Log de tipo Undo para esta transacción hayan sido escritos en disco. Nunca se puede completar el commit de una transacción haya que todos lso registros de Log hayan sido escruitos ene el disco. Para esto se lleva un lista de transacciones activas, confirmadas y abortadas.</li>
+</ul>
+<h3 id="checkpoint">Checkpoint</h3>
+<p>Registro del log que indica que todos los buffers modifcados de la base fueron actualizados al disco. Ninguna transacción T tal que [commit,T] aparece en el Log antes que [Checkpoint] necesita redo.\
+Para esto se tiene que:</p>
+<ol>
+<li>Suspender la ejecución de todas las transacciones</li>
+<li>Grabar todos los buffers modificados en el disco.</li>
+<li>Registrar el checkpoint en el log yt grabar el log en el disco.</li>
+<li>Permitir la continuación de las transacciones</li>
+</ol>
+<h3 id="rollback">Rollback</h3>
+<p>Se debe realizar cunado una transaccion aborta o hay una falla inesperada. </p>
+<p>Es la recuperación de todos los BFIM &#39;s de los items que modificó esa transaccion y de todas las transacciones que leyeron de la que abortó (abortos en casacada).
+Los abortos (rollbacks) en casacada pueden consumir mucho tiempo por l oque deben evitarse garantizando historias EAC o estrictas.</p>
+<h2 id="algoritmos">Algoritmos</h2>
+<p>Cualquier algoritmo de recuperación debería implementar las siguientes operaciones:</p>
+<ul>
+<li>Recuperación: Indica cual es al estrategia general de recuperación</li>
+<li>Undo: Indica como se debe hacer el undo de una operación</li>
+<li>Redo: Indica como se debe hacer el redo de una opearción</li>
+</ul>
+<p>Es <strong>fundamental</strong> que el redo sea idempotent. Por lo genearl se asume que las historias generadas son estrictas y serializable.</p>
+<h3 id="actualizaci-n-diferida">Actualización diferida</h3>
+<p>Demorar la escritura de la base en el disco hasta que la transacción alcance el commit. Para esto, la actualización se realiza en el Log y en los buffers o en una area local de la transacción. 
+Las dos reglas básicas del protocolo son:</p>
+<ol>
+<li>Los cambios realizados por la transacción T nunca son grabados en el disco hasta que la T alcanza el commit. </li>
+<li>Una transacción T nunca puede alcanzar el commit hasta que grabó todas sus operaciones de actualización en el Log y este fue grabado a disco.</li>
+</ol>
+<h3 id="actualizaci-n-inmediata">Actualización inmediata</h3>
+<p>Grabar en disco sin esperar el commit usando kas estrategia WAL (grabar log antes).
+Existen dos tipos</p>
+<ol>
+<li>Undo/No-Redo: Hay que garantizar que todas las modificaciones efectivamente fueron grabadas a la base.</li>
+<li>Undo/Redo: (Mas complex), no hay que garantizar nada.</li>
+</ol>
+<p>Se asume que las historias son estrictas y serializables.</p>
+<h2 id="recuperaci-n-basada-en-shadow-paging">Recuperación basada en Shadow Paging</h2>
+<p>Idea básica: La base de datos es un conjunto de paginas con un directorio con una entrada para cada pagina. Cada transacción que modifica algo mantiene dos copias: una que no modifica nunca y otra que modifica cada vez que modifica una pagina, creando una nueva. </p>
+<p><img src="assets/shadow.png" alt="shadow"></p>
+<p>Las ventajas de esta técnica: La recuperación se limita a elegir con que version de directorio se actualiza la base, en rollback se actualiza con el shawdow,, en commit se actualiza con el actual. Si se trabaja en un ambiente monotarea, no se precisa Log.
+La desventaja es que las paginas cambian de lugar, por lo que las estrategias de manipulacion en el disco son mas complejas, se debe implementar garbage collecting y que hay implementar de forma atomica la actualización del directorio. </p>
+
+
+<!-- NOTE END-->
+<hr>
+</article>
+<nav>
+    <ul>
+        <a href="../"><li class="yh">
+            <img src="/assets/return.svg" height="20em" width="20em">
+            &nbsp;/...&nbsp;
+            <span>- Return </span>
+        </li></a>
+    </ul>
+</nav>
+<hr>
+<div>
+    <i> Created the 19th of February 2022. Last edition on 21/2/2022</i>
+</div>
+</main>
+<footer>
+<hr>
+<div id="author">
+    <p>Guillermo Toyos Marfurt © 2022</p>
+</div>
+<div id="social">
+    <a href="https://www.github.com/Gtoyos"><img src="/assets/github.svg" height="40em" width="40em"></a>
+    <a href="https://webring.xxiivv.com/#toyos.dev" target="_blank"><img src="/assets/webring.svg" height="40em" width="40em" alt="XXIIVV webring"></a>
+</div>
+</footer>
+</body>
+<script src="/global.js"></script>
+</html>

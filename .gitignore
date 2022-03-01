@@ -1,0 +1,5 @@
+*.zip
+*.pdf
+.vscode/
+notes/FBD/assets/
+notes/REDES/assets/

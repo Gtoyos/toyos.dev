@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>toyos.dev</title>
+        <meta name="description" content="Guillermo Toyos' personal website.">
+        <meta name="author" content="Guillermo Toyos Marfurt">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="../assets/favicon.png">
+        <link href=../global.css rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="sombra border logo">
+                <a href="/">
+                    <img id="il" src="/assets/logo.svg">
+                </a>
+            </div>
+            <div onclick="" class="sombra border" id="hmenu">
+                <p><i id="quote">If I have seen further it is by standing on the shoulders of Giants.</i></p>
+            </div>
+        </header>
+        <main class="sombra border">
+
+            <article>
+                <h1>Colophon</h1>
+                <blockquote cite="https://en.wikipedia.org/wiki/Colophon_(publishing)">
+                    In publishing, a colophon (/ˈkɒləfən, -fɒn/) is a brief statement containing information about the publication
+                    of a book such as the place of publication, the publisher, and the date of publication. 
+                </blockquote>
+                <p> 
+                    Toyos.dev is a static website handcrafted in HTML with the beauty of simplicity in mind. There is no need for anything more complex. There is a global CSS file which
+                    contains the site theme and a tiny javascript that is used for generating the random quote on top of the page (which could be disabled without further inconvenience). 
+                    For serving it's documents, An Nginx web server hosted in an AWS instance located in West Virginia (USA) is used. 
+                <p>
+                    Toyos.dev was conceived in a night of February 2022 and finally made public on February 25th. See the <a href="/melange/changelog.html">changelog</a> if you're 
+                    intrested in what's new on this website. 
+                </p>
+                <div style="display: flex; justify-content: flex-end">
+                    <img src="/assets/logo.svg">
+                </div>
+                <hr>
+            </article>
+            <nav>
+                <ul>
+                    <a href="."><li class="yh">
+                        <img src="../assets/return.svg" height="20em" width="20em">
+                        &nbsp;/...&nbsp;
+                        <span>- Return </span>
+                    </li></a>
+                </ul>
+            </nav>
+            <hr>
+            <div class="article-foot">
+                <div id="pagets">
+                    <i> Created the 19th of February 2022. Last edition on 25/2/2022</i>
+                </div>
+                <div id="totop">
+                    <a href="#il">
+                        ▲
+                    </a>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <hr>
+            <div id="author">
+                <p>Guillermo Toyos Marfurt © 2022</p>
+            </div>
+            <div id="social">
+                <a href="https://www.github.com/Gtoyos"><img src="../assets/github.svg" height="40em" width="40em"></a>
+                <a href="https://webring.xxiivv.com/#toyos.dev" target="_blank"><img src="/assets/webring.svg" height="40em" width="40em" alt="XXIIVV webring"></a>
+            </div>
+        </footer>
+    </body>
+    <script src="/global.js"></script>
+</html>

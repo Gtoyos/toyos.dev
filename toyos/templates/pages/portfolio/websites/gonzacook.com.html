@@ -1,0 +1,49 @@
+{# templates/pages/websites/gonzacook.com.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>gonzacook.com</h1>
+<p> 
+    A website for a small cooking business. <a href="https://gonzacook.com">gonzacook.com</a> features a catalog of food products and a virtual kart for taking orders.
+    The website is dynamically generated using <a href="https://flask.palletsprojects.com">Flask</a> framework and it's hosted on a <a href="https://github.com/Pylons/waitress">Waitress</a> server over a <a href="https://nginx.org/">Nginx</a> reverse proxy. The website is mobile-first oriented and relies on
+    <a href="https://getbootstrap.com/">Bootstrap</a> for it's responsive components. 
+<p>
+<p>
+    The original website was made using <a href="https://en.wikipedia.org/wiki/Jakarta_Server_Pages">JSP</a>, but it was migrated to Flask on October 2022 because it proved to have faster responses,
+    more efficient deployment cycle, and it was easier to add new content to the website.
+</p>
+<p>
+    Despite using Flask, the core logic of the shopping kart is fully implemented in javascript, making the site interaction (cliking buttons, confirming forms, etc.) a seamless
+    experience. Flask is used as a way of assembling the website templates and fast deployment. 
+</p>
+<p>
+    If you are not at <a href="https://en.wikipedia.org/wiki/Montevideo">Montevideo</a> I'm afraid they wouldnt be able to take your order. Nevertheless, feel free to <a href="https://gonzacook.com">take a peek</a>
+    or see it's source code <a href="https://github.com/Gtoyos/GonzaCook">on github</a>. 
+</p>
+
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following technologies and tools:
+    </p>
+    <ul>
+        <li>Flask framework for web development.</li>
+        <li>Core web technologies: HTML, CSS and JS.</li>
+        <li>Deployment techniques with Nginx using AWS.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

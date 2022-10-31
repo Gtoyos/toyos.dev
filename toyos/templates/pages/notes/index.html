@@ -1,0 +1,49 @@
+{# templates/notes/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Notes</h1>
+<p> 
+    Notes of courses and books that you might find useful. Sometimes I take notes in markdown while reading the course's material or after hearing some gold nuggets my proffessor said
+    during class. The different images found in these notes are taken from the original sources I'd used to study. All copyrights and credits goes to its respective authors.
+</p>
+<p>
+    The notes are in Spanish. I believe that it's a great exercise trying to explain a concept or an idea you understood from one language to another. Building sentences that try
+    to reflect the same concept in both languages it's a way of understaing an idea from different angles and can reveal if you really understood something or not. 
+</p>
+<p>
+    I worte this notes in markdown first. So I'm afraid some Latex expressions are broken. You can find the orignal version in markdown at the end of each document.
+</p>
+<p>
+    <i>Disclaimer: I take no responsibility in the quality of this notes. Sorry if you find any mistakes or imprecisions. Nevertheless,
+        please contact me if you have a question or you find a mistake. I'd be glad to correct it.
+    </i>
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+<a href="redes.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Computer Networks&nbsp;
+    <span>- Computer Networking: A Top-down Approach by Jim Kurose (Spanish)</span>
+    <time>1/12/2021</time>
+</li></a>
+<a href="fbd.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Fundamentos de Bases de Datos&nbsp;
+    <span>- Database Fundamentals course of UDELAR (Spanish) </span>
+    <time>1/12/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

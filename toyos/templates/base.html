@@ -1,0 +1,39 @@
+{# templates/base.html #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include "templates/_head.html" %}
+  {% block head_extra %}
+  {% endblock head_extra %}
+</head>
+
+<body>
+  {% include "templates/_header.html" %}
+  <main class="sombra border">
+    <article>
+      {% block article %}
+      {% endblock article %}
+      <hr>
+    </article>
+    <nav>
+      <ul>
+        {% block navigation %}
+        {% endblock navigation %}
+      </ul>
+    </nav>
+    <hr>
+    <div class="article-foot">
+      <div id="pagets">
+          <i> Created on the {% block cdate %}{% endblock cdate %}. Last edition on {{edate}}</i>
+      </div>
+      <div id="totop">
+          <a href="#il">
+              ▲
+          </a>
+      </div>
+    </div>
+  </main>
+  {% include "templates/_footer.html" %}
+</body>
+</html>

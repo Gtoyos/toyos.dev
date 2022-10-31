@@ -1,0 +1,44 @@
+{# templates/about/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>About Toyos.dev</h1>
+<p> 
+    This website has two purposes. First of all, is a mean of advertising myself, so people can get to know about what I love to work on. 
+    It's a way of quickly introducing myself, if you want to know about me you just have to visit <a href="/" class="yh">toyos.dev</a>,
+    you can take a look at my projects with a few clicks. Additionally, I have authentic control of how I wish to convey in the way I desire.
+    I hope the simplicity of this website enchances the content of my projects. 
+<p>
+    On the other hand, this site is a little counter-movement against today's mainstream web, which is centered around less than a dozen domains handled by mammoth
+    tech companies. Having a personal website is like owning a little bastion of freedom to express oneself. Despite that more than ever we have the means to actively be part
+    of the Web, the internet has been reduced to advertising and consumerist business models. That's why I'm publishing this website for all internauts to discover.
+    It's up to us to make The World Wide Web an intresting place.
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+<a href="colophon.html"> <li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Colophon&nbsp;
+    <span>- Technical information about toyos.dev</span>
+    <time>{{cnt.dates["pages/about/colophon.html"]}}</time>
+</li></a>
+<a href="changelog.html"> <li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Changelog&nbsp;
+    <span>- Toyos.dev's changelog</span>
+    <time>{{cnt.dates["pages/about/changelog.html"]}}</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

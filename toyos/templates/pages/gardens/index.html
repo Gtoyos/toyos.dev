@@ -1,0 +1,41 @@
+{# templates/pages/gardens/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Garden</h1>
+<p> 
+    Welcome to my garden! This is a place where I store things that I want to document, work on or preserve.
+</p>
+<p>
+    In some way, this section can be thought as a <i>mélange</i> of resources but with some structured order provided
+    by the hyperlinks on each document. The <i>jardins</i> is a place for the curious eyes and the passionate internet surfers that
+    love exploring this kind of remote websites.
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+<a href="animaux/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;Animaux&nbsp;
+    <span>- Fluffy friends I met along the way.</span>
+    <time>{{cnt.dates["files/CV.pdf"]}}</time>
+</li></a>
+<a href="watashi.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;私&nbsp;
+    <span>- A little bit of japanese</span>
+    <time>{{cnt.dates["files/CV.pdf"]}}</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

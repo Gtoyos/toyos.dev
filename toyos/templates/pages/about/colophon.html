@@ -1,0 +1,37 @@
+{# templates/about/colophon.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Colophon</h1>
+<blockquote cite="https://en.wikipedia.org/wiki/Colophon_(publishing)">
+    In publishing, a colophon (/ˈkɒləfən, -fɒn/) is a brief statement containing information about the publication
+    of a book such as the place of publication, the publisher, and the date of publication. 
+</blockquote>
+<p> 
+    Toyos.dev is a static website built using <a href="https://flask.palletsprojects.com">Flask</a> with the beauty of simplicity in mind, there is no need
+    for anything more complex: HTML templates and a global CSS site theme. For deployment, a
+    <a href="https://github.com/Pylons/waitress">Waitress</a> WSGI server is used over a <a href="https://nginx.org/">Nginx</a> reverse proxy. These is hosted in an AWS instance
+    located in West Virginia (USA). 
+<p>
+    Toyos.dev was conceived in a night of February 2022 and finally made public on February 25th. See the <a class="yh" href="./changelog.html">changelog</a> if you're 
+    intrested in what's new on this website. 
+</p>
+<div style="display: flex; justify-content: flex-end">
+    <img src="{{url_for('static', filename='icons/logo.svg')}}">
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

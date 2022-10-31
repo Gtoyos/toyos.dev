@@ -1,0 +1,35 @@
+{# templates/about/colophon.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Animaux</h1>
+<p>
+    Here are some of my fluffy friends! 
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+<a href="gandalf.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Gandalf&nbsp;
+    <span>My dog.</span>
+    <time>24/2/2022</time>
+</li></a>
+<a href="simon.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Simón&nbsp;
+    <span>An Akita Inu.</span>
+    <time>24/2/2022</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}

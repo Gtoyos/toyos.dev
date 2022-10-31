@@ -1,0 +1,40 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>CS Projects</h1>
+{% endblock article %}
+
+{% block navigation %}
+<a href=".."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+  <time>Project end-date</time>
+</li></a>
+<a href="basuraGA.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;RecolecciónBasura-GA&nbsp;
+    <span>- An evolutionary algorithm for assigning garbage collection routes.</span>
+    <time>12/12/2021</time>
+</li></a>
+<a href="{{url_for('static', filename='files/gmres.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;GMRES&nbsp;
+    <span>- A comparative analysis between octave backslash and the GMRES algorithm for solving sparse linear systems. </span>
+    <time>1/8/2020</time>
+</li></a>
+<a href="{{url_for('static', filename='files/heatPDE.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;HeatEquation PDE&nbsp;
+    <span>- A study of a finite method for solving the Heat PDE. </span>
+    <time>20/10/2020</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

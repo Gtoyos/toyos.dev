@@ -1,0 +1,59 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>RecolecciónBasura-GA</h1>
+<p> 
+    Parallel Evolutionary Algorithm which tackles the problem of assigning routes to garbage trucks for picking up every garbage
+    container with certain restrictions while trying to minimize time and distance of the routes. Final project of Evolutionary
+    Algorithms course - UDELAR.
+</p>
+<p>
+    Using public available data from Uruguay's <a href="https://catalogodatos.gub.uy/">public datasets</a> on the location of garbage containers in the city of Montevideo. We've
+    tackled the probelm of assigning routes to garbage trucks with certain restrictions. 
+    Therefore we elaborated an original time/distance matrix dataset of all montevideo garbage containers which has been uploaded
+    to <a href="https://figshare.com/s/dc1aebc1336796069a14">Figshare</a>.
+</p>
+<p>
+    Below you can find a report about the algorithm (Explanation, experimental analysis and performance reports) and it's source code.
+    You can also find the source code on <a href="https://github.com/Gtoyos/RecoleccionBasura-GA">Github</a>.
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>Evolutionary algorithms theory and implementation.</li>
+        <li>How to make an experimental analysis.</li>
+        <li>Scientific writting</li>
+        <li>DevOps on a cluster environment.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/basuraGA.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Report&nbsp;
+    <span>- Algorithm report.</span>
+    <time>20/4/2021</time>
+</li></a>
+<a href="{{url_for('static', filename='files/RecoleccionBasura-GA-master.zip')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/zip.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- Download source files</span>
+    <time>20/4/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

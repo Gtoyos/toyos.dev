@@ -1,0 +1,24 @@
+{# templates/pages/404.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>404</h1>
+<p> 
+    It seems you're lost. The resource that you are looking for isn't available in these domains. 
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="/"><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return to landpage </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

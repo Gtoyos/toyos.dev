@@ -1,0 +1,40 @@
+{# templates/pages/portfolio/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Websites</h1>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+  <time>Project end-date</time>
+</li></a>
+<a href="entrenamos.uy.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;entrenamos.uy&nbsp;
+    <span>- Full-featured website for a virtual sports platform (concept)</span>
+    <time>11/11/2021</time>
+</li></a>
+<a href="gonzacook.com.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;gonzacook.com&nbsp;
+    <span>- E-commerce website for a small food business. </span>
+    <time>15/10/2022</time>
+</li></a>
+<a href="/about"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;toyos.dev&nbsp;
+    <span>- This website.</span>
+    <time>{{cnt.dates["pages/about/index.html"]}}</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

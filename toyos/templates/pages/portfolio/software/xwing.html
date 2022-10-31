@@ -1,0 +1,43 @@
+{# templates/pages/software/steam.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>X-WingSimulator</h1>
+<p> 
+    Online multiplayer toy program which simulates a 2D world where clients can connect and flight X-Wings together.
+    Computer Networks project of Facultad de Ingeniería - UDELAR. You can also find it's source code on <a href="https://github.com/Gtoyos/XWingSimulator">Github</a>. 
+</p>
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following:
+    </p>
+    <ul>
+        <li>Socket programming in python.</li>
+        <li>Multithreaded programming.</li>
+        <li>Client-server model programming</li>
+    </ul>
+</div>
+<h2>Gallery</h2>
+<img src="{{url_for('static', filename='imgs/XWing.gif')}}">
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/XWingSimulator-master.zip')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/zip.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- Download source files</span>
+    <time>20/4/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}

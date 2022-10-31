@@ -1,0 +1,55 @@
+{# templates/pages/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Welcome to my site!</h1>
+<p> 
+    Hello! I'm Guillermo. A computer scientist/engineering student from Uruguay.
+    This is my personal spot on the internet where you can find my <a class="yh" href="{{url_for('static', filename='files/CV.pdf')}}">CV</a>, <a class="yh" href="/portfolio/">portfolio</a>,
+    and other miscellaneous resources that I host. 
+</p>
+<p>
+    I'm glad you've found this place <i>internaute</i>. I hope you find something that catches
+    your eye. Feel free to linger and explore!
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="{{url_for('static', filename='files/CV.pdf')}}"> <li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;CV&nbsp;
+    <span>- My curriculum vitae</span>
+    <time>{{cnt.dates["files/CV.pdf"]}}</time>
+</li></a>
+<a href="/portfolio/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;Portfolio&nbsp;
+    <span>- Public available projects I've done. </span>
+    <time>{{cnt.dates["pages/portfolio/index.html"]}}</time>
+</li></a>
+<a href="/notes/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;Notes&nbsp;
+    <span>- Notes from different courses I've taken. </span>
+    <time>{{cnt.dates["pages/notes/index.html"]}}</time>
+</li></a>
+<a href="/gardens/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;Garden&nbsp;
+    <span>- Toyos.dev's jardin.</span>
+    <time>{{cnt.dates["pages/gardens/index.html"]}}</time>
+</li></a>
+<a href="/about/"> <li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;About&nbsp;
+    <span>- About this website.</span>
+    <time>{{cnt.dates["pages/about/index.html"]}}</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

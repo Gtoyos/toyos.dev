@@ -1,0 +1,26 @@
+{# templates/about/changelog.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Changelog</h1>
+<pre>
+[27/02/2022] Style improvements in the site's header. Click to read long quotes!
+[28/02/2022] Added CSS font rules.
+[31/10/2022] Refactored the website using <a href="https://flask.palletsprojects.com">Flask</a>.
+</pre>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

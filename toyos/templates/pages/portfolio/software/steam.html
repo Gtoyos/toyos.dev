@@ -1,0 +1,91 @@
+{# templates/pages/software/steam.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Steam-CLI</h1>
+<p> 
+    Medium sized toy program which implements a gaming platform enabling users to rate, subscribe and unsubscribe to Videogames and join & create games within them.
+    Game developers can publish new videogames and check out their stats inside the platform.
+     Programming IV course project of Facultad de Ingenieria - UDELAR.
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following technologies and tools:
+    </p>
+    <ul>
+        <li>Object-Oriented programming concepts</li>
+        <li>Design Patterns</li>
+        <li>C++ development.</li>
+        <li>UML tools for software development</li>
+    </ul>
+</div>
+<p>
+    This was the final project for the programming IV course of Facultad de Ingenieria - UDELAR I've made along 3 other colleagues, you can also
+    find its source code <a href="https://github.com/Gtoyos/steamV3.0">on Github</a>. 
+</p>
+<h2>Gallery</h2>
+<h3>Startpage</h3>
+<pre>
+Bienvenido a,
+
+[---REMOVED ASCII ART---]
+
+Fecha actual del sistema: 24/2/2022 - 12:42
+
+──────────  Menu Principal ──────────
+
+1. Alta de Usuario
+2. Iniciar sesion
+3. Modificar fecha del sistema
+4. Cargar datos de prueba
+5. Salir
+Por favor ingrese una opción:
+</pre>
+<h3>Player's Menu</h3>
+<pre>
+──────────  Menu Jugador ──────────
+
+1. Suscribirse a videojuego
+2. Asignar puntaje a videojuego
+3. Iniciar partida
+4. Abandonar partida multijugador
+5. Finalizar partida
+6. Ver información de videojuego
+7. Modificar fecha del sistema
+8. Salir
+Por favor ingrese una opción: 1
+</pre>
+<h3>Developer's Menu</h3>
+<pre>
+──────────  Menu Desarrollador ──────────
+
+1. Agregar categoria
+2. Publicar videojuego
+3. Eliminar videojuego
+4. Seleccionar estadisticas
+5. Consultar estadisticas
+6. Ver información de videojuego
+7. Modificar fecha del sistema
+8. Salir
+</pre>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/steamV3.0-master.zip')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/zip.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- Download source files</span>
+    <time>20/4/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}

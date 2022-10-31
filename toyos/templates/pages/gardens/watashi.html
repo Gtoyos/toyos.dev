@@ -1,0 +1,26 @@
+{# templates/about/colophon.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>私</h1>
+<p>
+    日本語は難し言語があります。でも、意を広げると思います。ここに、僕は、ちっと日本語を書いています。
+</p>
+<p>
+    いい意こと考えると、ここに置きますよ。。。
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}

@@ -1,0 +1,46 @@
+{# templates/pages/portfolio/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Portfolio</h1>
+<p> 
+    Projects I've worked on. Some of these were assignments from courses I took for my Computer Engineering
+    studies at the <a href="https://www.fing.edu.uy/">University of the Republic (UDELAR)</a> and master courses at <a href="https://www.telecom-paris.fr/">Tèlècom Paris</a>. Others were hobby projects which I found intresting and gave me good opportunities
+    to hone my skills in different technologies.
+<p>
+    Additionally, most of my projects and its code are hosted on my <a href="https://Github.com/Gtoyos">Github</a>. 
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return to landpage </span>
+</li></a>
+<a href="software/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;Software&nbsp;
+    <span>- Projects centered on software design and programming. </span>
+    <time>{{cnt.dates["pages/portfolio/software/index.html"]}}</time>
+</li></a>
+<a href="cs/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;CS&nbsp;
+    <span>- Projects focused on CS topics.</span>
+    <time>{{cnt.dates["pages/portfolio/cs/index.html"]}}</time>
+</li></a>
+<a href="websites/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
+    &nbsp;Websites&nbsp;
+    <span>- Websites I've designed. </span>
+    <time>{{cnt.dates["pages/portfolio/websites/index.html"]}}</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

@@ -1,0 +1,26 @@
+﻿{# templates/garden/animaux/simon.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Simón</h1>
+<h2>Gallery</h2>
+<img src="{{url_for('static', filename='imgs/simon/s1.jpg')}}">
+<img src="{{url_for('static', filename='imgs/simon/s2.jpg')}}">
+<img src="{{url_for('static', filename='imgs/simon/s3.jpg')}}">
+<img src="{{url_for('static', filename='imgs/simon/s4.jpg')}}">
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

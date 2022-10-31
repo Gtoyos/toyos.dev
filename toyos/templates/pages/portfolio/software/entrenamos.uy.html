@@ -1,0 +1,46 @@
+{# templates/pages/websites/entrenamos.uy.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>entrenamos.uy</h1>
+<p> 
+    Big sized distributed program which provides a platform for professors to create sport activities so users can enroll on them plus
+    many additional social functionalities such as Following/Unfollowing users, mark activities as favourite, raffle prizes and much more.
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following technologies and tools:
+    </p>
+    <ul>
+        <li>Java EE technologies (JSP, Swing, Apache CFX and JPA).</li>
+        <li>Core web technologies: HTML, CSS and JS.</li>
+        <li>Deployment techniques with Tomcat, Ant and Maven.</li>
+        <li>UML tools for software development</li>
+    </ul>
+</div>
+<p>
+    This was the final project for the programming V course of the <a href="https://www.fing.edu.uy/">University of the Republic (UDELAR)</a> I've made along 3 other colleagues.
+    You can find its source code on <a href="https://github.com/Gtoyos/entrenamos.uy">Github</a>. 
+</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/entrenamos.uy-master.zip')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/zip.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- Download source files</span>
+    <time>20/4/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

@@ -1,0 +1,27 @@
+{# templates/garden/animaux/gandalf.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Gandalf</h1>
+<h2>Gallery</h2>
+<img src="{{url_for('static', filename='imgs/gandalf/g1.jpg')}}">
+<img src="{{url_for('static', filename='imgs/gandalf/g2.jpg')}}">
+<img src="{{url_for('static', filename='imgs/gandalf/g3.jpg')}}">
+<img src="{{url_for('static', filename='imgs/gandalf/g4.jpg')}}">
+<img src="{{url_for('static', filename='imgs/gandalf/g5.jpg')}}">
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

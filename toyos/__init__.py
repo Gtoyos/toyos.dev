@@ -9,7 +9,6 @@ cnt = content.Cnt()
 @app.context_processor
 def load_site_variables():
     return dict(cnt=cnt,qod=cnt.newQod())
-print(cnt.dates)
 
 @app.route('/<path:pth>')
 def genericpath(pth):

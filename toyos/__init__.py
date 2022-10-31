@@ -5,6 +5,9 @@ from . import content
 app = Flask(__name__)
 cnt = content.Cnt()
 
+def create_app():
+    return app
+
 @app.context_processor
 def load_site_variables():
     return dict(cnt=cnt,qod=cnt.newQod())

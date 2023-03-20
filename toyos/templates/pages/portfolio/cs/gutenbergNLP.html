@@ -1,0 +1,59 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>ProjectGutenberg-NLP</h1>
+<p> 
+    This project studies the use of different machine learning tools for book classification by genre and topic.
+    Final project of SD201 - Mining of Large Datasets - Télécom Paris.
+</p>
+<p>
+    Using a collection of more than 30000 English books from the <a href="https://www.gutenberg.org/">Project Gutenberg</a> free digital library, we tried different machine learning techniques such as decision trees,
+     SVM and neural networks to create an algorithm that can give an appropriate subject label to a text. To extract features for the text,
+      we used different NLP techniques such as TF-IDF and Word2Vec. 
+</p>
+<p>
+    Below you can find a report about the algorithm (Explanation, experimental analysis and performance reports) and its source code. 
+    This was the final project of SD201 - Mining of Large Datasets at <a href="https://www.telecom-paris.fr/">Télécom Paris</a> I've made along 3 other colleagues. You can find its source code on <a href="https://github.com/Gtoyos/GutenbergNLP.uy">Github</a>.
+
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>Machine Learning.</li>
+        <li>Data Fetching and processing of raw data</li>
+        <li>Data mining.</li>
+        <li>Feature extraction.</li>
+        <li>Scientific writing.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/gutenbergNLP.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Report&nbsp;
+    <span>- Algorithm report.</span>
+    <time>20/4/2021</time>
+</li></a>
+<a href="{{url_for('static', filename='files/GutenbergNLP-master.zip')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/zip.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- Download source files</span>
+    <time>20/4/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of February 2022{% endblock cdate %}
+

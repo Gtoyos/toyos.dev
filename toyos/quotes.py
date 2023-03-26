@@ -9,7 +9,7 @@ QUOTES = [
         in the time to come when money power has become as dead a force as religion is now. Let my successors solve those new
         problems, as I have solved the one of today. - Foundation (Isaac Asimov)""",
     
-    "You shall know a word by the company it keeps. - John Rupert Firth"
+    "You shall know a word by the company it keeps. - John Rupert Firth",
     
     "If you torture the data long enough, it will confess to anything - Ronald Coase"
 ];

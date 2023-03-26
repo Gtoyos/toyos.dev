@@ -1,0 +1,52 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+Uso de Ray Tracing Cores para el problema
+k-nearest neighbours
+
+{% block article %}
+<h1>Using Ray Tracing cores for accelerating a KNN algorithm.</h1>
+<p> 
+    This project studies the use of ray tracing cores - a novel type of GPU hardware used for accelerating ray tracing algorithms - for accelerating a k-nearest neighbours algorithm.
+    Final project of GPGPU - General purpose computing in GPUs at <a href="https://www.fing.edu.uy/">Universidad de la República (UDELAR)</a>.
+</p>
+<p>
+    The aim of this project was to do a research of the state of the art in using ray tracing cores - introduced in Nvidia <a href="https://images.nvidia.com/aem-dam/en-zz/Solutions/design-visualization/technologies/turing-architecture/NVIDIA-Turing-Architecture-Whitepaper.pdf"> Turing architecture</a> - for general purpose computing.
+    Specifically, we studied the use of this new hardware for accelerating the KNN algorithm. This involved the analysis of how the original problem of the K nearest neighbours can be reformulated to a ray tracing problem.
+</p>
+<p>
+    Below you can find a report about the algorithm (Explanation, experimental analysis and performance reports) and its source code. Unfortunately, the report is only available in Spanish.
+    The appendix section contains a detailed explanation of how to use the <a href="https://developer.nvidia.com/rtx/ray-tracing/optix">OptiX library</a> for building a KNN algorithm that benefits from the ray tracing cores.
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>GPU programming.</li>
+        <li>Investigation of the state of the art in GPUs and RT cores.</li>
+        <li>Graphic programming with OptiX.</li>
+        <li>Algorithm analysis.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/GPGPU.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Report&nbsp;
+    <span>- Algorithm report.</span>
+    <time>20/7/2022</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}20th of March 2023{% endblock cdate %}
+

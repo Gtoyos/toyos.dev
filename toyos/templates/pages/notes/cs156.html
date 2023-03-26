@@ -1,0 +1,37 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+Uso de Ray Tracing Cores para el problema
+k-nearest neighbours
+
+{% block article %}
+<h1>Learning from data: A machine learning course</h1>
+<p> 
+    I stumbled upon this course while looking for additional material for my data science course at Telecom Paris. The fact that a full complete course of this quality is freely available for everyone
+    is almost unbelievable. The course is taught by Yaser Abu-Mostafa, a professor at Caltech, and is based on his book Learning from Data.
+</p>
+<p>
+    I think this is one of the best courses that I took that is freely available on the internet. The course material is available <a href=https://work.caltech.edu/telecourse>here</a>. Below you can download the course notes I took. 
+</p>
+
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/cs156.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Report&nbsp;
+    <span>- Course notes.</span>
+    <time>24/3/2023</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}26th of March 2023{% endblock cdate %}
+

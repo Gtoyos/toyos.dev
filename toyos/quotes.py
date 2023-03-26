@@ -10,4 +10,6 @@ QUOTES = [
         problems, as I have solved the one of today. - Foundation (Isaac Asimov)""",
     
     "You shall know a word by the company it keeps. - John Rupert Firth"
+    
+    "If you torture the data long enough, it will confess to anything - Ronald Coase"
 ];

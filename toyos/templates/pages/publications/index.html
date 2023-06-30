@@ -22,6 +22,11 @@
 {% endblock article %}
 
 {% block navigation %}
+<a href="../"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
 <a href="https://ieeexplore.ieee.org/document/10137089"><li class="yh">
     <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
     &nbsp;Evaluation of architecture-aware optimization techniques for Convolutional Neural Networks&nbsp;

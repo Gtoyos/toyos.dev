@@ -1,0 +1,55 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Kolmogorov Complexity of Kernels in CNN</h1>
+<p> 
+    This project studies the compressibility of convolutional neural networks and its relationship with Kolmogorov complexity.
+    Final project of IA225 - Algorithmic Information and Artificial Intelligence - Télécom Paris.
+</p>
+<p>
+    This experiment aimed to investigate if convolutional neural networks, after being trained, are compressible.
+    To do this, we applied compression and pruning techniques and verified that, without a significant loss in accuracy,
+    a CNN can be significantly compressed and their kernel matrices have visually appealing patterns.
+</p>
+<p>
+    The report of the project can be found at the <a href="https://teaching.dessalles.fr/FCI/Docs/_Proceedings_IA225_2023.pdf">course proceedings</a> along with the projects 
+    of my other classmates. This was the final project of IA225 - Algorithmic Information and Artificial Intelligence at <a href="https://www.telecom-paris.fr/">Télécom Paris</a>.
+</p>
+<p>
+    This course also has a MOOC version that is available <a href="https://aiai.telecom-paris.fr/">here</a>. I found this course to be very intresting as it
+    gave me new perspectives on AI, mathematics and even human intelligence. I highly recommend it. The professor in charge of the 
+    course, <a href="http://www.dessalles.fr/">Dr. Jean-Louis Dessalles</a>, has valuable insights over these subjects.
+</p>
+
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>Algorithmic information theory.</li>
+        <li>Artificial Intelligence</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="https://teaching.dessalles.fr/FCI/Docs/_Proceedings_IA225_2023.pdf"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Report&nbsp;
+    <span>- Algorithm report.</span>
+    <time>20/06/2023</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}30th of June 2023{% endblock cdate %}
+

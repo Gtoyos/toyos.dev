@@ -3,7 +3,6 @@
 {% extends "base.html" %}
 
 {% block head_extra %}
-<script src="{{url_for('static', filename='scripts/garden.js')}}"></script>
 {% endblock head_extra %}
 
 {% block article %}
@@ -55,3 +54,7 @@
 {% endblock navigation %}
 
 {% block cdate %}19th of February 2022{% endblock cdate %}
+
+{% block footer_extra %}
+<script src="{{url_for('static', filename='scripts/garden.js')}}"></script>
+{% endblock footer_extra %}

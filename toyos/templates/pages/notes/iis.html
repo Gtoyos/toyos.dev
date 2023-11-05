@@ -135,7 +135,7 @@
 <p>Ha habido intentos de crear un modelo universal de proceso de software. Un ejemplo de este es el Rational Unified Process (RUP), apoyado por IBM, aunque este nunca tuvo mucha popularidad.</p>
 <p>Observar que en sistemas complejos y en la realidad de la empresa se combinan cosas de los 3 modelos. Por ejemplo, el core de un sistema puede aplicarse una estructura waterfall mientras que los demás módulos se desarrollan de manera incremental.</p>
 <h4 id="the-waterfall-model">The waterfall model</h4>
-<p><img src="{{url_for('static', filename='imgs/iis/waterfall')}}" alt="waterfall model"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/waterfall.png')}}" alt="waterfall model"></p>
 <p>Derivado de los procesos de sistemas militares, representa el proceso de software como un numero de etapas secuenciales. Es un proceso plan-driven, ya que se planean todas las etapas del proceso antes de iniciar el desarrollo del software.</p>
 <p>Las etapas de desarrollo son:</p>
 <ol>
@@ -166,7 +166,7 @@
 <blockquote>
 <p>Incremental development is based on the idea of developing an initial implementation, getting feedback from users and others, and evolving the software through several versions until the required system has been developed </p>
 </blockquote>
-<p><img src="{{url_for('static', filename='imgs/iis/incremental')}}" alt="waterfall model"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/incremental.png')}}" alt="waterfall model"></p>
 <p>Este approach es el más común actualmente. Puede ser plan-driven, agile o una mezcla de estos. En plan-driven los incrementos se identifican de antemano, en el agile se miran los incrementos iniciales y los próximos se definen dependiendo de cómo va saliendo la cuestión.</p>
 <p>El sistema incremental es mejor que el waterfall cuando los requerimientos podrían llegar a cambiar durante el proceso de desarrollo. Como nunca se trabaja en una solución completa es más fácil hacer cambios a medida que se desarrolla el software.</p>
 <p>Otra ventaja es que el cliente puede ver el sistema en sus etapas tempranas y aportar feedback.</p>
@@ -189,7 +189,7 @@
 <p>The problems of incremental development become particularly acute for large, complex, long-lifetime systems</p>
 </blockquote>
 <h4 id="integration-and-configuration">Integration and Configuration</h4>
-<p><img src="{{url_for('static', filename='imgs/iis/intRec')}}" alt="waterfall model"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/intRec.png')}}" alt="waterfall model"></p>
 <blockquote>
 <p>In the majority of software projects, there is some software reuse. This often happens informally when people working on the project know of or search for code that is similar to what is required. They look for these, modify them as needed, and integrate them with the new code that they have developed.</p>
 </blockquote>
@@ -218,7 +218,7 @@
 </blockquote>
 <p>Esta es una parte critica del proceso, ya que errores en esta etapa inevitablemente trasladan los errores en las siguientes etapas de diseño e implementación. Antes de iniciar el proceso puede hacerse un estudio de mercado si el concepto general de producto tiene sentido.</p>
 <p>El proceso de requisitos tiene como objetivo producir un conjunto de requerimientos aceptados que especifican el sistema y satisfacen los requerimientos del cliente. Estos se presentan en dos niveles de detalle, uno para los clientes en alto-nivel y otro para los desarrolladores en alto detalle.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/requirements')}}" alt="The requirements engineering process"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/requirements.png')}}" alt="The requirements engineering process"></p>
 <p>Las tres actividades de este proceso son: </p>
 <ol>
 <li><p><strong>Relevamiento de requisitos</strong> y análisis: Se relevan los requerimientos a través de sistemas existentes, discusiones con los clientes, análisis de tareas, etc. Puede involucrar el desarrollo de modelos del sistema y prototipos. </p>
@@ -232,7 +232,7 @@
 <p>Requirements analysis continues during definition and specification, and new requirements come to light throughout the process. Therefore, the activities of analysis, definition, and specification are interleaved.</p>
 </blockquote>
 <h4 id="software-design-and-implementation">Software Design and Implementation</h4>
-<p><img src="{{url_for('static', filename='imgs/iis/design')}}" alt="A general model of the design process"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/design.png')}}" alt="A general model of the design process"></p>
 <blockquote>
 <p>A software design is a description of the structure of the software to be implemented, the data models and structures used by the system, the interfaces between system components and, sometimes, the algorithms used. </p>
 </blockquote>
@@ -253,7 +253,7 @@
 <h4 id="software-validation">Software Validation</h4>
 <p>Software validation, o de forma más general: Verification and Validation (V&amp;V) tiene como objetivo mostrar que un sistema sigue su especificación y alcanza las expectativas del cliente. El testing, donde el programa se testea con datos simulados es la principal forma de validación. Otras técnicas son las inspecciones y reviews en cada etapa de desarrollo. </p>
 <p>Existen tres etapas en el proceso de testing:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/testing')}}" alt="testing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/testing.png')}}" alt="testing"></p>
 <ol>
 <li><p><strong>Component testing</strong>: Se testea cada componente individualmente. Aquí es donde están los test automation tools como JUnit.</p>
 </li>
@@ -267,9 +267,9 @@
 </blockquote>
 <p>En un approach incremental, en cada incremento se debe realizar el testing. En test-driven development se realizan los tests junto a los requerimientos antes del proceso de desarrollo. En un plan-driven software process (i.e critical systems), el testeo se maneja con sets de planes de testeo. Equipos independientes de testers ponen en práctica estos planes.</p>
 <p>La siguiente imagen muestra la relación entre el testing y el desarrollo en las distintas actividades. Este se le llama el modelo V. Muestra las actividades de validación en el waterfall process model.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/vModel')}}" alt="testing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/vModel.png')}}" alt="testing"></p>
 <h4 id="software-evolution">Software Evolution</h4>
-<p><img src="{{url_for('static', filename='imgs/iis/evolution')}}" alt="testing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/evolution.png')}}" alt="testing"></p>
 <p>Hoy en día, la diferencia entre desarrollo del software y su mantenimiento esta más blurry. Ahora con las metodologías incrementares el software está en un constante estado de evolución, que varía con las necesidades del cliente con el tiempo. Ya no hay una clara línea divisoria entre el desarrollo hasta obtener un working system y el mantenimiento de este.</p>
 <h3 id="coping-with-change">Coping with Change</h3>
 <p>El cambio es inevitable. Las necesidades de los negocios cambian y esto implica un cambio en su software. El cambio agrega costos, ya que es trabajo adicional. El costo del retrabajo puede ser mayor o menor en medida de cómo está diseñado el sistema.</p>
@@ -288,12 +288,12 @@
 <p>Un prototipo puede ayudar a dilucidar la validación en el proceso de requerimientos del sistema. En la etapa de diseño un prototipo puede servir para explorar soluciones de software y en el desarrollo de una interfaz de usuario para el sistema.</p>
 <p>Un prototipo permite a los usuarios ver que tan bien el sistema cumple su trabajo, obtener nuevos requerimientos y encontrar fortalezas y debilidades en el software. Se puede utilizar para ver si un diseño de software es feasible. Si un diseño de base de datos cumple sus requerimientos. </p>
 <p>Es importante que al inicio del proceso los objetivos del prototipo estén claros, si se muestra un prototipo sin explicación previa puede generar confusión en sus usuarios. Luego de definir los objetivos, se debe definir que funcionalidades deben integrar el prototipo (y cuales no). Esto es importante para reducir costos. Luego de desarrollar el prototipo este debe evaluarse. ¿Qué cosas aportó el prototipo?</p>
-<p><img src="{{url_for('static', filename='imgs/iis/prototype')}}" alt="testing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/prototype.png')}}" alt="testing"></p>
 <h4 id="incremental-delivery">Incremental Delivery</h4>
 <blockquote>
 <p>Incremental delivery is an approach to software development where some of the developed increments are delivered to the customer and deployed for use in their working environment.</p>
 </blockquote>
-<p><img src="{{url_for('static', filename='imgs/iis/incrementalDelivery')}}" alt="testing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/incrementalDelivery.png')}}" alt="testing"></p>
 <p>En este modelo el cliente define las funcionalidades más importantes en orden. Luego un numero de entregas del software se definen donde cada uno agrega nuevas funcionalidades. Es como que se van agregando nuevas versiones que se les da al cliente. Cuando un nuevo incremento se envía, el cliente lo puede probar y aportar su feedback para los siguientes incrementos.</p>
 <p>Las ventajas de esto son:</p>
 <ul>
@@ -326,7 +326,7 @@
 <p>El proceso de mejora de procesos tiene 3 fases: Measure, Analysis and Change. Primero se debe medir atributos del proceso de software, luego estos se analizan y se proponen realizar ciertos cambios. </p>
 <p>Esta es una actividad a largo plazo y muchas veces resulta difícil a las empresas obtener datos para poder medir el proceso de desarrollo.</p>
 <p>En cuento al process maturity, se observan 5 niveles:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/mature')}}" alt="testing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/mature.png')}}" alt="testing"></p>
 <ol>
 <li><p><strong>Initial</strong>: Esta definido el proceso y lo que se debe hacer con todos los miembros del equipo. </p>
 </li>
@@ -365,13 +365,13 @@
 <li><p>Fuerte uso de herramientas para apoyar el proceso de desarrollo. (Configuration management, system integration, automation,etc.)</p>
 </li>
 </ol>
-<p><img src="{{url_for('static', filename='imgs/iis/agile')}}" alt="agile"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/agile.png')}}" alt="agile"></p>
 <p>El overhead del plan driven software se justifica en sistemas críticos, donde se deben coordinar múltiples equipos, y cuando muchas personas van a estar encargadas de mantener el software a lo largo de su ciclo de vida. Pero cuando el mismo approach se aplica en proyectos más pequeños, el overhead se vuelve tan grande que domina el proceso de desarrollo. </p>
 <blockquote>
 <p>More time is spent on how the system should be developed than on program development and testing.</p>
 </blockquote>
 <h3 id="principios">Principios</h3>
-<p><img src="{{url_for('static', filename='imgs/iis/principles')}}" alt="principles"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/principles.png')}}" alt="principles"></p>
 <pre><code>    We are uncovering better ways of developing software by doing it and helping others do it. Through this work we have come to value:
     
     Individuals and interactions over processes and tools
@@ -429,14 +429,14 @@
 <blockquote>
 <p>Scrum is an agile method insofar as it follows the principles from the agile manifesto. However, it focuses on providing a framework for agile project organization, and it does not mandate the use of specific development practices such as pair programming and test-first development. </p>
 </blockquote>
-<p><img src="{{url_for('static', filename='imgs/iis/scrum')}}" alt="scrum"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/scrum.png')}}" alt="scrum"></p>
 <p>El inicio de un ciclo de Sprint es el input del product backlog. El product owner prioriza los elementos del backlog que deben trabajarse con mayor prioridad. Luego todo el equipo decide cuantas/cuales de esas prioridades pueden realizarse en este print. Para ello se tiene en cuenta la velocity. Esto crea el <strong>Sprint Backlog</strong> que es lo que se debe hacer en un sprint. El equipo se organiza para definir quien trabaja en que. </p>
 <p>Durante el sprint se hacen reuniones diarias (Scrums) para revisar el progreso y prioridades. Se comparte información, los problemas que surgen y se buscan soluciones. De esta manera todos participan en el short-term planning y conocen el estado del proyecto.</p>
 <p>Al final de cada sprint hay una review meeting con todo el equipo. Ahí se revisa como trabajo el equipo con el afán de mejorar el proceso y se actualiza el <strong>Product Backlog</strong> para el siguiente sprint.</p>
 <p>Si bien el scrum master no tiene que ser el project manager suele serlo, y es quien le reporta a los de arriba en la organización del avance del proyecto.</p>
 <h4 id="distributed-scrum">Distributed SCRUM</h4>
 <p>Se deben tener algunas consideraciones adicionales en el caso de que los equipos se encuentren distribuidos en el mundo y se trabaje de manera remota:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/distScrum')}}" alt="scrum"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/distScrum.png')}}" alt="scrum"></p>
 <p>Las principales características de un multi-team scrum son:</p>
 <ol>
 <li><strong>Role Replication</strong>: Cada equipo tiene un product owner y un scum master. Puede haber un product owner y scrum-master principal para todo el proyecto.</li>
@@ -454,9 +454,9 @@
 </ol>
 <p>Los problemas para mantener software con métodos ágiles son la falta de documentación, mantener al cliente involucrado, y la continuidad del equipo de desarrollo (fuga de recursos humanos).</p>
 <p>Los problemas del método ágil se ilustran en este cuadro:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/scrumBad')}}" alt="bad"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/scrumBad.png')}}" alt="bad"></p>
 <p>Los factores que se ponen en consideración para elegir el nivel de <em>plan-driven</em> o <em>agile</em> development:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/scale')}}" alt="scale"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/scale.png')}}" alt="scale"></p>
 <p>De la imagen anterior salen los key issues:</p>
 <ol>
 <li><em>Que tan grande es el sistema?</em> Cuanto más grande el equipo menos eficiente es este método y se requiere de un plan driven approach.</li>
@@ -483,7 +483,7 @@
 <p>Software developers should be pragmatic and should choose those methods that are most effective for the type of system being developed, whether or not these are labeled agile or plan-driven.</p>
 </blockquote>
 <p>En sistemas grandes y complejos los factores principales que complejizan el desarrollo son:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/large')}}" alt="large"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/large.png')}}" alt="large"></p>
 <ol>
 <li>Systems of systems: Colección de sistemas que trabajan entre sí, cada uno con su equipo de desarrollo independiente. Es imposible que alguien sepa todo, y cada uno termina preocupándose por lo suyo.</li>
 <li>Brownfield systems. Esto es, cada sistema interactúa entre ellos. Cambiar una cosa puede alterar el equilibrio de todo. ¿Como puedo proponer modificar algo de un sistema que no es el mío a pesar de que es claro que es lo mejor? Problemas de gestión.</li>
@@ -577,7 +577,7 @@
 </ol>
 <p>El primero es algo que antes no se hacía mucho. Trata de estudiar la falibilidad de la propuesta. Ver si algo es posible de hacerse o no. El segundo es el intercambio con el cliente para obtener requisitos y su análisis para ver si tienen sentido. Luego la verificación consiste en mostrarle al cliente el resultado del análisis y preguntarle: &quot;Está correcto&quot;? Gestión es como hacer frente al cambio de los requisitos, saberlos manejar a lo largo de la evolución del proyecto. ¿Qué hago si de la nada el cliente no quiere algo que ya está implementado? Este proceso (a menos del estudio) es bastante iterativo y ocurre durante todo el ciclo de vida del software. </p>
 <p>Este proceso puede verse como un espiral (elícitar, especificar, validar, elícitar, especificar, validar, ...):</p>
-<p><img src="{{url_for('static', filename='imgs/iis/spiral')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/spiral.png')}}" alt="spiral"></p>
 <p>Las dificultades comunes en este proceso pueden ser:</p>
 <ul>
 <li>Los stakeholders no saben lo que quieren</li>
@@ -660,7 +660,7 @@
 <p>Las ventajas es que son útiles para explorar actitudes, impresiones, preferencias y necesidades de los usuarios. Es un encuentro rico cuando no es fácil acceder a los usuarios finales del producto. Lo malo es que los resultados son subjetivos, la información obtenida sirve para evaluar y priorizar requisitos.</p>
 <h6 id="prototipado">Prototipado</h6>
 <p>Implementación parcial de un requerimiento. Permite al usuario y desarrollador entender mejor los requisitos, que es lo necesario y deseable, acotar riesgos. Es una práctica común para definir la apariencia de las interfaces due usuario, arquitecturas y aspectos críticos del proyecto.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/prototipado')}}" alt="prototipado"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/prototipado.png')}}" alt="prototipado"></p>
 <blockquote>
 <p>“If a picture is worth 1000 words, then a prototype is worth a 1000 meetings ” </p>
 </blockquote>
@@ -683,11 +683,11 @@
 <ul>
 <li><strong>Prototipos en papel</strong>: De baja fidelidad, pero es una forma rápida y barata de explorar como lucirá un producto. Involucra herramientas simples (papel, tarjetas, post-its). La idea es explorar posibles alternativas de comportamiento sin perderse en los detalles y especificaciones. Facilitan una rápida interacción y se utiliza para refinar una UI frecuentemente. Ejemplo: Storyboards.</li>
 </ul>
-<p><img src="{{url_for('static', filename='imgs/iis/prototipoPapel')}}" alt="prototipoPapel"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/prototipoPapel.png')}}" alt="prototipoPapel"></p>
 <ul>
 <li><strong>Prototipos electrónicos</strong>: Alta fidelidad, existen herramientas de apoyo (Visio, PowerPoint, simuladores, canvas). La interacción con una versión similar a la final es un mecanismo valioso para estudiar el comportamiento de los usuarios.</li>
 </ul>
-<p><img src="{{url_for('static', filename='imgs/iis/prototipoElectr%C3%B3nico')}}" alt="prototipoElectrónico"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/prototipoElectr%C3%B3nico.png')}}" alt="prototipoElectrónico"></p>
 <p>Los prototipos deben evaluarse con el target-public adecuado. Para mejorar la evaluación se pueden realizar guías (ej. defensa de laboratorio, los casos de prueba a seguir). Hay que evitar explicarle a la persona como se debe usar el prototipo, debería ser intuitivo. Documentar todo lo ocurrido.</p>
 <blockquote>
 <p>Se aprende más observando a los usuarios trabajando con el prototipo que preguntado qué piensan de él</p>
@@ -744,9 +744,9 @@ La documentation más útil puede ser especificación de requisitos, procesos de
 <li>Información sobre actividades concurrentes</li>
 <li>Descripción del estado cuando finaliza el escenario.</li>
 </ul>
-<p><img src="{{url_for('static', filename='imgs/iis/escenario')}}" alt="esc"> </p>
+<p><img src="{{url_for('static', filename='imgs/iis/escenario.png')}}" alt="esc"> </p>
 <p>Los casos de uso son una técnica dentro de los escenarios. Un caso de uso puede ser un conjunto de escenarios. Es una técnica de UML. Un conjunto de casos de uso describe todas las posibles interacciones con el sistema, se identifica cada tipo interacción y los distintos actores. Tienen un modelo gráfico de alto nivel. Un diagrama de casos de uso ilustra todos los casos de uso y los actores que participan en cada uno:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/cu')}}" alt="cu"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/cu.png')}}" alt="cu"></p>
 <p>Es un formato simple y estructurado donde los usuarios y developers pueden trabajar juntos. No son de gran ayuda para identificar aspectos no funcionales. Mientras se definen los CU, puede ayudar definir las pantallas u objetos con que el usuario interactuará (por ejemplo, definir un formulario o campo y que tiene que tener, armar un prototipo). Podría llegar a ser utilizado en el diseño y testing del sistema.</p>
 <p>Las ventajas son que permiten visualizar la interacción del sistema con los actores, muy util si en la implementación y diseño se utiliza UML y programación orientada a objetos. Las desventajas pueden darse en sistemas que no tiene usuarios/pocas interfaces ya que no resulta muy útil esta técnica, tampoco modela adecuadamente requisitos no funcionales.</p>
 <p>Por otra parte, las historias de usuario refieren a descripciones cortas y de alto nivel de las funcionalidades expresadas en términos del cliente. </p>
@@ -758,10 +758,10 @@ La documentation más útil puede ser especificación de requisitos, procesos de
 <h5 id="modelado-de-procesos">Modelado de Procesos</h5>
 <p>Permite entender el trabajo con múltiples pasos y entidades. Event-driven, incluye actividades manuales, automáticas y condicionales. Pueden volverse complejos si no se estructuran con cuidado. Los procesos complejos se pueden descomponer para ayudar a su entendimiento</p>
 <p>Permite tener una visión de más alto nivel del proceso de negocio. Permite visualizar mejor los flujos de información. </p>
-<p><img src="{{url_for('static', filename='imgs/iis/proc')}}" alt="proc"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/proc.png')}}" alt="proc"></p>
 <h5 id="selección-de-técnicas-a-utilizar">Selección de técnicas a utilizar:</h5>
 <p>Las técnicas que se pueden utilizar están estrechamente relacionadas con la realidad del proyecto. Weigers realiza un cuadro con ciertas sugerencias:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/Weigers')}}" alt="Weigers"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/Weigers.png')}}" alt="Weigers"></p>
 <h5 id="consideraciones-generales">Consideraciones generales</h5>
 <p>Se recomienda organizar los requisitos según <em>viewpoints</em> (stakeholders), módulos, o sub-sistemas (<em>arquitectura</em>). Sin embargo, en la última ya estoy pensando cómo va a ser el diseño del sistema.</p>
 <p>No esperar a que los clientes presenten una idea completa, corta y sin ambigüedades.</p>
@@ -771,7 +771,7 @@ Cada escenario comprende una instancia de uso del sistema, un caso de uso contem
 <p>Esto es independiente de los métodos de diseño o lenguajes que se usarán en la implementación.</p>
 <p><em>Actor</em> es una entidad que interactúa con el sistema para realizar los casos de uso. Un diagrama de casos de uso provee una rep. de alto nivel de los requisitos del usuario.</p>
 <p>Los actores persona van con muñeco, los sistemas van con cuadrado y un arquetipo &lt;&lt; actor &gt;&gt;
-<img src="{{url_for('static', filename='imgs/iis/dcu')}}" alt="dcu"></p>
+<img src="{{url_for('static', filename='imgs/iis/dcu.png')}}" alt="dcu"></p>
 <p>Es importante que cada caso de uso tenga:</p>
 <ol>
 <li>Identificador (nombre único)</li>
@@ -781,7 +781,7 @@ Cada escenario comprende una instancia de uso del sistema, un caso de uso contem
 <li>Lista enumerada de pasos que ilustran la secuencia de interacciones entre el actor y el sistema.</li>
 </ol>
 <p>Además del flujo principal de pasos al realizar el caso de uso, se pueden tener varios flujos alternativos, estos describen otro escenario alternativo al principal (por ejemplo, en el caso de excepciones).</p>
-<p><img src="{{url_for('static', filename='imgs/iis/flow')}}" alt="assets"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/flow.png')}}" alt="assets"></p>
 <p>Por ejemplo:</p>
 <pre><code>    8 .SYS: Listas las cuentas del usuario
     9. SYS: Pide al usuario que seleccione la cuenta de origen de la lista o que la ingrese manualmente
@@ -810,7 +810,7 @@ Cada escenario comprende una instancia de uso del sistema, un caso de uso contem
 <p>Cuando el caso de uso solo incluye una descripción y pre/pos condiciones (sin flujo principal), a este se le llama CU de <strong>alto nivel</strong>, cuando se incluye los flujos alternativos (y los flujos normales), se le llama <strong>caso de uso expandido</strong>.</p>
 <h5 id="relaciones-entre-casos-de-uso">Relaciones entre casos de uso</h5>
 <p>Existen casos de uso que &quot;ejecutan&quot; otros casos de uso. El caso que incluye a otro se le llama caso <em>base</em> y al otro <em>incluido</em>. Se pueden incluir casos de uso tanto en flujo principal como alternativo.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/include')}}" alt="include"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/include.png')}}" alt="include"></p>
 <p>Por ejemplo, en el flujo:</p>
 <pre><code>    1. El usuario ingresa al sitio.
     2. &lt;&lt;Include&gt;&gt; &quot;Autenticar usuario&quot;
@@ -819,7 +819,7 @@ Cada escenario comprende una instancia de uso del sistema, un caso de uso contem
 </code></pre>
 <p>A su vez, los casos de uso se pueden <strong>extender</strong>. Es decir, se agregar comportamiento a otro caso de uso. Se puede utilizar para describir mecanismos alternativos complejos.</p>
 <p>Una extensión solo se ejecuta cuando se cumple una condición particular en un punto especifico del caso de uso a extender. </p>
-<p><img src="{{url_for('static', filename='imgs/iis/ext')}}" alt="ext"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/ext.png')}}" alt="ext"></p>
 <p>Ejemplo:</p>
 <pre><code>    CASO DE USO RETIRAR DINERO
     Flujo principal:
@@ -1082,18 +1082,18 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <blockquote>
 <p>Limites del sistema: Que cosas son las que van y que es lo que no. Definir esto tiene un efecto profundo sobre los <em>requisitos del sistema</em>.</p>
 </blockquote>
-<p><img src="{{url_for('static', filename='imgs/iis/ctx')}}" alt="ctx"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/ctx.png')}}" alt="ctx"></p>
 <h4 id="modelos-de-interacción">Modelos de interacción</h4>
 <p>Me permite modelar la interacción con usuarios, sistemas y componentes.</p>
 <p>Modelar la interacción con los usuarios ayuda a identificar requisitos. Modelar la interacción con otros sistemas permite identificar posibles problemas de interfaces. Modelar la interacción entre componentes permite entender si la estructura es apropiada para los requisitos no funcionales establecidos.</p>
 <p>En UML, podemos modelar la interacción de un sistema utilizando un <strong>modelo de casos de uso y diagramas de secuencia</strong>.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/seq')}}" alt="seq"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/seq.png')}}" alt="seq"></p>
 <p>Un diagrama de secuencia muestra la secuencia de interacciones que tienen lugar en un caso de uso particular o instancia de caso de uso.</p>
 <h4 id="modelos-estructurales">Modelos estructurales</h4>
 <p>Disponen la organización del sistema en términos de componentes que lo componen y sus relaciones.</p>
 <p>Pueden ser modelos estáticos con la estructura del sistema diseñado o dinámicos los cuales muestran la organización del sistema mientras se ejecutan (recordar instancia de cajas de objetos en uml). Sirven para discutir la arquitectura del sistema.</p>
 <p>Un ejemplo de esto son los diagramas de clase:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/ddc')}}" alt="ddc"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/ddc.png')}}" alt="ddc"></p>
 <p>En las fases tempranas de desarrollo los objetos representan objetos (conceptos) de la realidad.</p>
 <h4 id="modelos-comportamiento">Modelos comportamiento</h4>
 <p>Modelan el comportamiento dinámico de un sistema en ejecución. Muestran qué sucede o qué debe suceder cuando un sistema responde a los estímulos de su entorno.</p>
@@ -1111,19 +1111,19 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <h4 id="otros-modelos-de-requisitos-weigers">Otros modelos de requisitos: Weigers</h4>
 <p>Los modelos visuales ayudan a identificar requisitos faltantes o inconsistencias. Los modelos sirven tanto para explorar requisitos como para diseñar soluciones. No hay que interpretar que los clientes saben interpretar un modelo. En general, no se puede modelar todo el sistema, lo mejor es modelar las porciones del sistema más riesgosas/críticas.</p>
 <p>El diagrama de flujo de datos de Weigers se utiliza para ilustrar la idea del flujo de datos. Es bastante flexible... era bastante popular en los 80 xd.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/data')}}" alt="data"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/data.png')}}" alt="data"></p>
 <p>Otro tipo de diagramas bastante utilizado (precursor a los casos de uso) son los diagramas de andariveles, y son fáciles de entender para el cliente.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/anda')}}" alt="anda"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/anda.png')}}" alt="anda"></p>
 <p>Los diagramas de estados de Weigers, no son UML, por lo que son más simples de entender para el cliente. Nos permite ver cómo nos movemos de estado a estado. En los casos en que los estados son simples, también podemos utilizar una tabla de estados. La cual es más &quot;fácil&quot; de entender. Nos permite chequear la completitud de las transiciones entre estados, ya que chequeo explícitamente las distintas combinaciones.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/diagE')}}" alt="diagE"></p>
-<p><img src="{{url_for('static', filename='imgs/iis/diagT')}}" alt="diagT"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/diagE.png')}}" alt="diagE"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/diagT.png')}}" alt="diagT"></p>
 <p>Los mapas de dialogo son una forma de modelar cuales son los diálogos que le van a aparecer al usuario a medida que navega por el sistema. Cada evento nos lleva a un dialogo distinto (transición). Es bastante útil para quienes trabajan con interfaces de usuario o diseñadores. </p>
-<p><img src="{{url_for('static', filename='imgs/iis/diagM')}}" alt="diagM"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/diagM.png')}}" alt="diagM"></p>
 <p>Otra herramienta cool son los árboles de decisión (o tablas). Nos permite visualizar de forma clara algoritmos que se basan en condiciones. Esta bueno porque lo entiende cualquiera.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/desTree')}}" alt="desTree"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/desTree.png')}}" alt="desTree"></p>
 <p>Otro tipo de diagrama son las tablas de evento respuesta. (Por lo general se representan mejor con proceso de negocio...) es bastante complejo y no se usa mucho. Permite representar la respuesta del sistema a los posibles eventos que pueden ocurrir. Un evento es un cambio o actividad que tiene lugar en el ambiente de usuario que estimula una respuesta en el sistema.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/ter1')}}" alt="ter1"></p>
-<p><img src="{{url_for('static', filename='imgs/iis/ter2')}}" alt="ter2">]</p>
+<p><img src="{{url_for('static', filename='imgs/iis/ter1.png')}}" alt="ter1"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/ter2.png')}}" alt="ter2">]</p>
 <h3 id="documento-de-requisitos">Documento de requisitos</h3>
 <blockquote>
 <p>Los requisitos no se dejan por ahí sueltos, sino que se estructuran en un documento. El <em>SRS</em> (Software Requirements Specification) es como la declaración <em>oficial</em> de los requisitos. Hay muchos estándares que lo modelan...</p>
@@ -1191,13 +1191,13 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <li><strong>Comparación por pares y ranking:</strong> Se hace un ranking generan de todos los requisitos comparando de a pares.</li>
 <li><strong>Escala de 3 niveles:</strong> Se utilizan dos dimensiones:</li>
 </ol>
-<p><a href="assets/3lvl')}}">3lvl</a></p>
+<p><a href="assets/3lvl.png')}}">3lvl</a></p>
 <ol start="4">
 <li><strong>4 niveles</strong> (debe, debería, podría, no va.)</li>
 <li><strong>100 dólares</strong>. (¡Muy popular en agile dev!): Asignar dinero disponible y luego &quot;invertirlo&quot; en los requisitos a priorizar.</li>
 <li>Producción basada en valores, costos y riesgos:</li>
 </ol>
-<p><a href="assets/risk')}}">risk</a></p>
+<p><a href="assets/risk.png')}}">risk</a></p>
 <h3 id="validación-de-requisitos">Validación de requisitos</h3>
 <p>Es el proceso por el cual se determina si los requisitos relevados son consistentes con las necesidades del cliente.</p>
 <ul>
@@ -1209,7 +1209,7 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <p>En el proceso hay que planificar quién (que stakeholder) va a validar qué (artefacto de software) y cómo (técnica). Siempre que se evalúa tiene que haber un registro con reporte de validación y firma del stakeholder.</p>
 <p>Un problema común en el software es que con el tiempo las expectativas del cliente suben (el cliente se queda maquinando en lo que pidió y como se lo imagina) y las expectativas del desarrollador bajan (el desarrollador va investigando y cada vez le parecen más triviales las cosas que quiere hacer). Si no se hace nada al respecto con esta disparidad de expectativas, al entregar el producto final pueden haber malas situaciones como la frustración del cliente y que este piense que el trabajo final es una &quot;porquería&quot;, no era lo que esperaba y que se reúse a pagar o exija más trabajo del acordado.</p>
 <p>Para evitar esta diferencia de expectativas, lo que se hace es tener encuentros de contacto con el cliente, donde se muestra el trabajo se da opinión y se aclaran conceptos. De esta forma mantiene un gap máximo entre las expectativas. Esta idea se ilustra en:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/needs')}}" alt="needs"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/needs.png')}}" alt="needs"></p>
 <h4 id="chequeo-de-requisitos">Chequeo de requisitos</h4>
 <p>Se debe chequear:</p>
 <ol>
@@ -1233,11 +1233,11 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <li><strong>Automatizado</strong>: Chequeo automático de ref. cruzadas, ejecución de modelos para verificar funciones y relaciones, construcción de prototipos y simulaciones.</li>
 </ol>
 <p>Realizar verificación y validación me permite ahorrar trabajo en las etapas posteriores a la implementación. Lo que genero al principio puede usarse al final. Esto es justamente el proceso <strong>V</strong> de desarrollo:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/v')}}" alt="v"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/v.png')}}" alt="v"></p>
 <h4 id="criterios-de-aceptación">Criterios de aceptación</h4>
 <p>Dado que el cliente es el que tiene la decisión final sobre el producto, la idea es establecer (de forma complementaria a la def. de los requisitos) los criterios de aceptación por los cual se aceptarán los requerimientos.</p>
 <p>Los criterios de aceptación no son pruebas funcionales o unitarias, son condiciones que debe cumplir el sistema: Las pruebas son más completas y prueba todos los flujos funcionales, excepciones, etc.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/accept')}}" alt="accept"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/accept.png')}}" alt="accept"></p>
 <h3 id="gestión-de-requisitos">Gestión de requisitos</h3>
 <p>¡Es el proceso donde ya tengo los requisitos... pero me pueden surgir cambios! Incluso cuando ya estoy construyendo.</p>
 <p>Por ello, es esencial mantener una trazabilidad de los requisitos y referencias entre estos. Esto me permite realizar un análisis de impacto ante posibles cambios.</p>
@@ -1252,7 +1252,7 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <li><strong>Soporte de herramientas</strong>: Las herramientas que se utilizará n para implementar esto (planillas, software de gestión, etc.).</li>
 </ol>
 <p>El proceso de cambio para decidir si un cambio debe aceptarse o no son requiere un análisis previo de especificación (¿el cambio es válido?), calcular los costos de cambiar el análisis (se tiene que evaluar el <strong>efecto</strong> (trazabilidad y estabilidad del sistema), definir si proceder o no). Si se pasan los chequeos, se implementa el cambio.</p>
-<p><a href="assets/idp')}}">a</a></p>
+<p><a href="assets/idp.png')}}">a</a></p>
 <h4 id="cambios-en-procesos-ágiles">Cambios en procesos ágiles.</h4>
 <p>Cuando un usuario propone un cambio, no se pasa por un proceso formal de gestión.
 El usuario debe definir la prioridad de dicho cambio y se es de alta prioridad debe decidir qué características quitar de la iteración para dar espacio a implementar dicho cambio. ¿Pero... qué pasa si ya empezamos? ¿Queda para la siguiente iteración? En un sistema con múltiples stakeholders los cambios no benefician necesariamente a todas las partes interesadas. En situaciones complejas puede ser bueno tener una autoridad independiente de los stakeholders que equilibre las necesidades de los mismos (counselling).</p>
@@ -1442,7 +1442,7 @@ El usuario debe definir la prioridad de dicho cambio y se es de alta prioridad d
 <li><strong>Disadvantages</strong>: Single point failure, inefficiencies en la comunicación, dificultades al distribuir el repositorio.</li>
 </ul>
 <p>Existe una variante llamada <strong>pizarrón</strong> donde los componentes se activan <em>dependiendo</em> de los datos con que se trabaja:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/pizza')}}" alt="pizza"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/pizza.png')}}" alt="pizza"></p>
 <h5 id="arquitectura-clienteservidor">Arquitectura Cliente/Servidor</h5>
 <ul>
 <li><strong>Descripción</strong>: Funcionalidades basadas en servicio, cada servicio lo atiende un servidor y los clientes los utilizan.</li>
@@ -1459,7 +1459,7 @@ El usuario debe definir la prioridad de dicho cambio y se es de alta prioridad d
 <li><strong>Disadvantages</strong>: Se debe acordar formatos entre componentes. Diferencias de formatos puede dificultar reutilizar transformaciones (filtros) que utilizan otro formato de datos.</li>
 </ul>
 <p>Esta arquitectura es terrible para sistemas interactivos.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/pipe')}}" alt="pipe"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/pipe.png')}}" alt="pipe"></p>
 <h5 id="arquitecturas-de-aplicación">Arquitecturas de Aplicación</h5>
 <blockquote>
 <p>Encapsulan las principales características de una clase de sistemas.</p>
@@ -1469,24 +1469,24 @@ El usuario debe definir la prioridad de dicho cambio y se es de alta prioridad d
 <p>Procesan peticiones del usuario mediante información o una base de datos. Recordar que una <strong>transacción</strong> es una secuencia de operaciones que se trata como una sola unidad. i.e la transacción se hace o no se hace.</p>
 <p>Estos son sistemas interactivos donde los usuarios hacen peticiones <em>asíncronas</em> de servicios.
 Pueden organizarse con arquitectura de tubería y filtro.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/atm')}}" alt="atm"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/atm.png')}}" alt="atm"></p>
 <h6 id="sistemas-de-información">Sistemas de Información</h6>
 <blockquote>
 <p>Todo sistema que interactúe con una database se considera un sistema TI.</p>
 </blockquote>
 <p>Permite el acceso controlado a una gran base de información. Existe una tendencia popular a que estos sistemas se basen en Web, con acceso a través del Web Browser.
 Un modelo clásico de estos sistemas está basado en capas:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/lay')}}" alt="lay"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/lay.png')}}" alt="lay"></p>
 <h6 id="sistemas-de-procesamiento-del-lenguaje">Sistemas de Procesamiento del Lenguaje</h6>
 <p>Convierten un lenguaje (natural o artificial) en otras representaciones. Ejemplos de esto son compiladores, reconocedores de texto, parsers, etc. 
 Un ejemplo de esto son los compiladores, para estos se utiliza una <strong>composición de arquitectura repositorio con tubería y filtro</strong>.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/compiler')}}" alt="compiler"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/compiler.png')}}" alt="compiler"></p>
 <h3 id="vistas-arquitectónicas">Vistas Arquitectónicas</h3>
 <blockquote>
 <p>¿Qué vistas o perspectivas son útiles para diseñar y documentar una arquitectura?</p>
 </blockquote>
 <h4 id="modelo-41">Modelo 4+1</h4>
-<p><img src="{{url_for('static', filename='imgs/iis/4m1')}}" alt="4m1"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/4m1.png')}}" alt="4m1"></p>
 <ol>
 <li><strong>Vista lógica</strong>: Abstracciones clave del sistema (objetos, clases, etc.).</li>
 <li><strong>Vista de proceso</strong>: Como interactúan los procesos en tiempo de ejecución</li>
@@ -1499,13 +1499,13 @@ Un ejemplo de esto son los compiladores, para estos se utiliza una <strong>compo
 <p>Para la vista de casos de uso y escenarios podemos utilizar diagrams de caso de uso, para la de proceso: diagramas de actividad o BMPN (Business Process Model and Notation), para la vista lógica diagramas de clase, secuencia y actividad. Para la vista de desarrollo diagrama de componentes y para la vista física un diagrama de despliegue (deploy diagram).</p>
 <h5 id="diagrama-de-componentes">Diagrama de componentes</h5>
 <p>Un componente encapsula una parte reusable y reemplazable del software. Es como un bloque de construcción. Pueden ser de cualquier tamaño (desde una función hasta un subsistema entero).</p>
-<p><img src="{{url_for('static', filename='imgs/iis/comp')}}" alt="comp"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/comp.png')}}" alt="comp"></p>
 <p>Los componentes pueden ofrecer y requerir interfaces para funcionar:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/comp1')}}" alt="comp"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/comp1.png')}}" alt="comp"></p>
 <h5 id="diagrama-de-despliegue">Diagrama de despliegue</h5>
 <p>Muestra el vínculo entre hardware y software. Cada nodo es una pieza de hardware, dentro de cada nodo se pueden colocar artefactos de software que ejecutan en ese hardware. Cambien se muestra la comunicación entre nodos con líneas e indicando el protocolo de comunicación.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/deploy')}}" alt="deploy"></p>
-<p><img src="{{url_for('static', filename='imgs/iis/deploy2')}}" alt="deploy2"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/deploy.png')}}" alt="deploy"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/deploy2.png')}}" alt="deploy2"></p>
 <h3 id="ingeniería-de-software-basada-en-componentes-cbse">Ingeniería de software basada en componentes (CBSE)</h3>
 <p>Enfoque para el desarrollo de software basado en la <strong>Reutilización</strong> de entidades llamadas &quot;software components&quot;.</p>
 <p>Este enfoque surge del fracaso de OOP (Object oriented programming) para reutilizar clases de forma efectiva: Muchas veces las clases son demasiado detalladas y específicas.</p>
@@ -1548,7 +1548,7 @@ Un ejemplo de esto son los compiladores, para estos se utiliza una <strong>compo
 <p>Un ejemplo: Tener un .exe que hace algún trabajo. Ese .exe es bien conocido, se sabe su interfaz y lo podemos llamar desde otro lado. y es un programa entero!</p>
 <h4 id="interfaces">Interfaces</h4>
 <p>Los componentes proveen una interfaz (interfaz provista) y tienen una interfaz requerida (la cual son los servicios a los cual el componente tiene que conectarse para su operación correcta). </p>
-<p><img src="{{url_for('static', filename='imgs/iis/compo')}}" alt="compo"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/compo.png')}}" alt="compo"></p>
 <h4 id="acceso-a-componentes">Acceso a componentes</h4>
 <p>A los componentes se pueden acceder a través de llamadas a procedimientos remotos (RPC). Cada componente tiene un identificador único (ej. URL) y puede referenciarse por cualquier pc de la red.</p>
 <p><strong>Un modelo de componentes</strong> es una definición de estándares para <em>implementar, documentar y desplegar</em> componentes. Por ejemplo: EJB (Enterprise Java Beans), COM+ (.NET), COBRA, etc.</p>
@@ -1599,7 +1599,7 @@ Un ejemplo de esto son los compiladores, para estos se utiliza una <strong>compo
 <li>Componer componentes para crear el sistema final.</li>
 </ul>
 <p>Los componentes se pueden componer de tres formas: Secuencial (ejecución de componentes en secuencia), jerárquica (Componente que llama a varios otros componentes) y composición (Dos interfaces de componentes se juntan para formar un nuevo componente).</p>
-<p><img src="{{url_for('static', filename='imgs/iis/composici%C3%B3n')}}" alt="composición"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/composici%C3%B3n.png')}}" alt="composición"></p>
 <p>Los problemas que pueden surgir al componer componentes:</p>
 <p>Problemas de <em>adaptabilidad</em> de componentes. La solución a esto es utilizar wrappers.</p>
 <p>Para resolver conflictos cuando se componen componentes hay que considerar: Cual es la composición más efectiva que da los req. funcionales del sistema? Que composición es más adaptable cuando los req. cambien? Cuáles serán las prop. del sistema compuesto (rendimiento)?</p>
@@ -1652,7 +1652,7 @@ Un ejemplo de esto son los compiladores, para estos se utiliza una <strong>compo
 <h4 id="patrones-arquitectónicos-para-sistemas-distribuidos">Patrones Arquitectónicos para Sistemas Distribuidos</h4>
 <h5 id="maestroesclavo">Maestro/Esclavo</h5>
 <p>Es común para sistemas en tiempo real. Un proceso maestro es responsable del &quot;calculo&quot;, la coordinación, comunicación y control de los procesos esclavos. Los procesos esclavos están dedicados a realizar acciones específicas.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/master')}}" alt="master"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/master.png')}}" alt="master"></p>
 <h5 id="clienteservidor-2-niveles">Cliente/Servidor 2 niveles</h5>
 <p>Clásico servidor lógico único y cantidad indefinida de clientes. Existen un par de variantes:</p>
 <ul>
@@ -1735,7 +1735,7 @@ When coding, se debe considerar:</p>
 <p>Test Driven Development refiere al estilo de programación en el cual se escriben pruebas antes que el código mismo del programa.</p>
 <h4 id="middleware-1">Middleware</h4>
 <p>En el contexto de construcción, se entiende al middleware como todo software que provea servicio sobre la capa del sistema operativo y por debajo de la capa de aplicación. Puede proveer contenedores en tiempo de ejecución para los componentes del sistema y proveer un pasaje de mensajes, persistencia y alocación en la red. El middleware moderno orientado a mensajes provee un Enterprise Service Bus (ESB) que sirve para la interacción orientada a servicios.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/esb')}}" alt="esb"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/esb.png')}}" alt="esb"></p>
 <h4 id="cloud-computing">Cloud Computing</h4>
 <p>Refiere al nuevo paradigma de ofrecer servicios de computación sur internet. Los dos ejes centrales de este servicio son SaaS y PaaS (Platform as a Service). Este último refiere a la encapsulación de un ambiente de desarrollo y empaquetamiento de módulos o complementos que dan funcionalidades al entorno (persistencia, autenticación, mensajería, etc.) Ej: Microsoft Azure, Amazon EC2, etc. Existen modelos de servicio donde se ofrece un entono de desarrollo y control de la aplicación, en otros no se tiene casi ningún control. Existen modelos PaaS públicos, privados e híbridos.  </p>
 <p>Otro modelo de negocio es el de Infraestructura as a Service (IaaS) también llamado Hardware as a Service (HaaS), es básicamente alquilar servicios de cómputo por la red. Ejemplo: Amazon Web Services.</p>
@@ -1780,7 +1780,7 @@ su esencia se basa en que el software se desarrolla en equipos, por lo que se pr
 </blockquote>
 <h2 id="aspectos-generales">Aspectos Generales</h2>
 <p>Un <strong>error</strong> es una equivocación humana durante el relevamiento de requisitos, programación ,etc. Dicha interacción puede provocar una <strong>falta o defecto</strong> del sistema el cual genera una <strong>falla</strong> del sistema (se ve el efecto externo). (Se supone que viene del software, las condiciones del hardware son las correctas).</p>
-<p><img src="{{url_for('static', filename='imgs/iis/fallas')}}" alt="imagen del monstruo"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/fallas.png')}}" alt="imagen del monstruo"></p>
 <h3 id="fallas-de-software">Fallas de Software</h3>
 <blockquote>
 <p>El software falla respecto a una especificación.</p>
@@ -1885,7 +1885,7 @@ su esencia se basa en que el software se desarrolla en equipos, por lo que se pr
 <p>La diferencia clave es que un driver es un programa que llama al programa que quiero testear. Por ejemplo, un programa que calcula un área, un driver es un programa que utiliza el anterior para verificar que está correcto. Invoca al componente que se quiere testear. </p>
 <p>Por otra parte, los stubs son módulos que precisamos para poder testear el software, pero aún no se han implementado.</p>
 <p>Por ejemplo, para el módulo B:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/stub')}}" alt="stubs y drivers"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/stub.png')}}" alt="stubs y drivers"></p>
 <p>Un stub reúne ciertos parámetros de entrada y salida iguales al módulo faltante, pero con simplificación de comportamiento (realizarlo tiene un coste de todas formas). Si un stub devuelve siempre los mismos valores entonces este no permite hacer un testing adecuado. El stub puede producir resultados leyendo de un archivo, un tester humano, no hacer nada, o cubrir parcialmente un dominio de salida.</p>
 <p>Por otra parte, un driver es una pieza que simula el uso de un módulo a testear. Este es más barato que hacer un stub. El driver puede ser quien lee del sistema archivos y datos para dárselo al módulo. Es quien suministra los casos de prueba.</p>
 <h2 id="pruebas-de-integración">Pruebas de integración</h2>
@@ -1925,7 +1925,7 @@ su esencia se basa en que el software se desarrolla en equipos, por lo que se pr
 </blockquote>
 <p>Una vez que se pasan estas pruebas, se pasa a la fase <em>evolución</em> del ciclo de vida del software. Luego de instalada la versión 1.0 esta puede ir cambiando con el transcurso del tiempo, agregando y actualizando funcionalidades. El mantenimiento puede ser correctivo, adaptativo o evolutivo.</p>
 <p>En cada fase de los procesos incrementales se deben hacer pruebas de regresión para verificar que los cambios introducidos no hayan degradado (roto) el funcionamiento del sistema:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/reg')}}" alt="reg"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/reg.png')}}" alt="reg"></p>
 <blockquote>
 <p>En los equipos ágiles, los integrantes del equipo realizan pruebas de múltiples niveles</p>
 </blockquote>
@@ -1965,7 +1965,7 @@ su esencia se basa en que el software se desarrolla en equipos, por lo que se pr
 <h3 id="pruebas-dinámicas">Pruebas dinámicas</h3>
 <p>Las pruebas dinámicas el sistema se encuentra en ejecución. Existen 3 categorías: Caja negra, caja blanca y basadas en la experiencia. 
 La siguiente imagen muestra la diferencia entre las cajas.  </p>
-<p><img src="{{url_for('static', filename='imgs/iis/box')}}" alt="box"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/box.png')}}" alt="box"></p>
 <h4 id="técnicas-de-caja-negra">Técnicas de caja negra</h4>
 <p>En las técnicas de black box la estructura/diseño del objeto de prueba no se considera. Algunas de estas técnicas son:</p>
 <ol>
@@ -1985,7 +1985,7 @@ La siguiente imagen muestra la diferencia entre las cajas.  </p>
 <blockquote>
 <p>No confundir un caso de pruebas con el plan de pruebas del sistema! A test case is a specification of the inputs, execution conditions, testing procedure, and expected results that define a single test to be executed to achieve a particular software testing objective, such as to exercise a particular program path or to verify compliance with a specific requirement.</p>
 </blockquote>
-<p><img src="{{url_for('static', filename='imgs/iis/flow2')}}" alt="flow2"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/flow2.png')}}" alt="flow2"></p>
 <p>Es necesario incorporar las condiciones bordes de cada escenario. </p>
 <h5 id="técnicas-de-caja-blanca">Técnicas de caja blanca</h5>
 <p>La derivación de los casos de prueba se basa en la estructura/diseño del objeto de prueba. También se les llama técnicas basadas en estructura/código.</p>
@@ -2032,7 +2032,7 @@ La siguiente imagen muestra la diferencia entre las cajas.  </p>
 </blockquote>
 <h3 id="proceso-para-testear-un-módulo">Proceso para testear un módulo</h3>
 <p>Según Jacobson, se debe ejecutar primero la caja negra, cuando está todo bien complementar con caja blanca. Esto se debe a que, al corregir errores de caja negra, el código va a cambiar, invalidando las pruebas hechas anteriormente de tipo caja blanca.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/mods')}}" alt="mods"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/mods.png')}}" alt="mods"></p>
 <h3 id="comparación-de-técnicas">Comparación de técnicas</h3>
 <h4 id="estáticas">Estáticas</h4>
 <h5 id="ventajas">Ventajas</h5>
@@ -2170,9 +2170,9 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <p>Recordar, un sistema de software es un <strong>asset crítico</strong> para las organizaciones. Pero su valor decrece a medida que aumenta el desajuste entre lo que hace el software y la operativa de la organización. Por ello, los sistemas deben modificarse y actualizarse. </p>
 <p>Recordemos que las actividades principales de la ingeniería de software son: Especificación, Diseño e Implementación, Validación y Evolución.</p>
 <p>Las etapas de desarrollo y evolución del software pueden verse como una espiral, que va pasando por las etapas de especificación -&gt; Implementación -&gt; Validación -&gt; Operación en cada versión. Cuando existe una diferencia marcada entre desarrollo y evolución, a la etapa de evolución se le llama <strong>mantenimiento de software</strong>.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/spiral2')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/spiral2.png')}}" alt="spiral"></p>
 <p>Por otra parta, el software puede pasar por un ciclo de vida completo:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/life')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/life.png')}}" alt="spiral"></p>
 <ol>
 <li><p><strong>Evolución</strong>: En esta etapa el sistema se encuentra en su auge operacional y evoluciona cuando los nuevos requisitos son propuestos y se implementan en el sistema en cada nueva versión.</p>
 </li>
@@ -2188,9 +2188,9 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <p>Las sugerencias de cambios por lo general se basan en requisitos preexistentes que no fueron cumplidos antes de la liberación del sistema, nuevos requisitos que aparecen, errores reportados en el sistema y nuevas ideas del equipo de desarrollo.</p>
 <p>Es importante identificar y relacionar los componentes que son afectados por un cambio, para poder estimar el costo e impacto de este.</p>
 <p>La identificación de los cambios y la evolución continúan a lo largo de la vida del software. Los siguientes diagramas ilustran esta idea:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/life2')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/life2.png')}}" alt="spiral"></p>
 <p>Una sugerencia por lo general sigue este proceso de vida (¡si no muere en el camino!)</p>
-<p><img src="{{url_for('static', filename='imgs/iis/life3')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/life3.png')}}" alt="spiral"></p>
 <ul>
 <li><p><strong>Análisis de impacto</strong>: Se evalúa que tan afectado resultará el sistema y cuánto va a costar el cambio. Cuando el equipo de mantenimiento es distinto del desarrollo, hacer un cambio implica entender el módulo que será afectado, por lo que la comprensión de dicho programa será un coste adicional. El análisis de impacto resulta en la planificación de una nueva versión con los cambios aceptados.</p>
 </li>
@@ -2200,7 +2200,7 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 </li>
 </ul>
 <h2 id="implementación-del-cambio">Implementación del cambio</h2>
-<p><img src="{{url_for('static', filename='imgs/iis/life4')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/life4.png')}}" alt="spiral"></p>
 <p>Durante la implementación, pueden surgir modificaciones a los cambios propuestos. También se debe considerar que en las primeras etapas de implementación puede implicar entender el código fuente del programa. Particularmente si fueron otros quienes lo hicieron.</p>
 <h3 id="cambios-urgentes">Cambios Urgentes</h3>
 <p>Los cambios urgentes son aquellos cambios que tienen que implementarse sin pasar por todas las etapas del proceso de la organización. (O, mejor dicho, del proceso de la ingeniería de software).</p>
@@ -2217,7 +2217,7 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <h2 id="legacy-systems">Legacy Systems</h2>
 <p>Si bien los sistemas se reemplazan a medida que el negocio cambia, muchos sistemas muy viejos se siguen utilizando y tienen roles críticos. Estos son los <strong>legacy systems</strong>. Este concepto también puede abarcar hardware, librerías, software de soporte y procesos de negocio. Es un concepto abstracto. Tienen la característica de que han sido mantenidos por mucho tiempo, su estructura puede estar degradada y depender de hardware antiguo.</p>
 <p>También puede pasar de que no soporten los nuevos procesos de negocio de la organización.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/legacy')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/legacy.png')}}" alt="spiral"></p>
 <blockquote>
 <p>El mantenimiento de estos sistemas tiene dificultades y es costoso.</p>
 </blockquote>
@@ -2241,7 +2241,7 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <li>Reemplazar el sistema por uno nuevo.</li>
 </ol>
 <p>Elegir la estrategia depende de la calidad del sistema legado y el valor que este tiene para el negocio. Se puede utilizar dos ejes para dividir los sistemas legado en cuatro grupos:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/legacy2')}}" alt="spiral"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/legacy2.png')}}" alt="spiral"></p>
 <p>Los sistemas de baja calidad y poco valor se mandan a la papelera, los de buena calidad, pero poco valor puede verse de reemplazarse con componentes de terceros, desechar o mantener, los de baja calidad, pero alto valor si bien aportan al sistema son muy caros de mantener, por lo que deben reestructurarse o reemplazarse por otro sistema. Los que andan bien deben seguir en operación y mantenerse de forma normal.</p>
 <h4 id="valor-del-software">Valor del software</h4>
 <p>Para evaluar el valor de un sistema para un negocio se deben tomar muchos puntos de vista (usuarios finales, clientes, gerentes de línea, administradores, etc.). Hay que entrevistar a los distintos grupos y ponderar resultados. Algunos aspectos básicos a considerar son:</p>
@@ -2280,7 +2280,7 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <h3 id="predicción-del-mantenimiento">Predicción del mantenimiento</h3>
 <p>La predicción de mantenimiento es la técnica de evaluar <strong>cuales partes</strong> del sistema van a causar problemas e incurrirán en los mayores costos de mantenimiento. Los costos del mantenimiento dependen del número de cambios y el costo del cambio depende de la capacidad de mantenimiento (la cual se reduce cuando el sistema se degrada al implementar cambios).</p>
 <p>Notar que no es lo mismo que la predicción de cambios en el sistema.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/pie')}}" alt="pie"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/pie.png')}}" alt="pie"></p>
 <h4 id="métricas-de-complejidad">Métricas de complejidad</h4>
 <p>Las métricas de mantenimiento se pueden realizar mediante la evaluación de complejidad de los componentes del sistema. Está probado que el mayor esfuerzo de mantenimiento de un sistema se realiza sobre un numero pequeño de los componentes de este. Esta complejidad depende de las estructuras de control y datos que utiliza y los objetos, métodos y tamaño de los módulos.</p>
 <h4 id="métricas-de-procesos">Métricas de procesos</h4>
@@ -2298,10 +2298,10 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <p>Consiste en la reestructuración o reescritura parcial o completa de un sistema legado. Es aplicable cuando se tiene que mantener frecuentemente un sistema legado. La esencia de la reingeniería consiste en realizar un gran esfuerzo para que el sistema sea más fácil de mantener a largo plazo.</p>
 <p>Las ventajas de la reingeniería son la reducción del riesgo (Es menos riesgoso que desarrollar un nuevo software) y reducción de costo (es mucho más barato que hacer un software totalmente desde 0).</p>
 <p>El proceso de reingeniería se ilustra en el siguiente diagrama:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/ing')}}" alt="ing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/ing.png')}}" alt="ing"></p>
 <h3 id="enfoques-de-la-reingeniería">Enfoques de la reingeniería</h3>
 <p>A medida que se reestructura cada vez más un sistema, mayor es el costo de la reingeniería:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/ing2')}}" alt="ing"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/ing2.png')}}" alt="ing"></p>
 <p>Otros factores que afectan el costo es la calidad del software a diseñar, las herramientas disponibles para la reingeniería (inb4 gdb), el grado de conversión de datos que se requiere (y su flexibilidad), la disponibilidad de personal experto en reingeniería (¿dónde consigo un experto de COBOL-&gt;JAVA?)</p>
 <h2 id="refactorización">Refactorización</h2>
 <p>La refactorización es el proceso de hacer mejoras al sistema para reducir la degradación del sistema al realizar cambios.</p>
@@ -2386,7 +2386,7 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <li>En forma periódica durante el proyecto: Se debe hacer cuando hay desvíos que fuerzan a cambiar el plan.</li>
 </ol>
 <h5 id="proceso-de-planificación">Proceso de planificación</h5>
-<p><img src="{{url_for('static', filename='imgs/iis/proc2')}}" alt="proc2"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/proc2.png')}}" alt="proc2"></p>
 <h6 id="alcance">Alcance</h6>
 <p>Se define el <strong>alcance de un producto</strong> como las características y funciones que describen un producto, servicio o resultado.</p>
 <p>Se define el <strong>alcance de un proyecto</strong> como el trabajo a realizar para entregar un prodcuto/servicio/resultado con las funciones y características especificadas.</p>
@@ -2410,8 +2410,8 @@ Si bien es un cambio más suave, tiene el problema que conviven varios sistemas 
 <li>Utilizando los <em>entregables</em> principales como el segundo nivel</li>
 <li>Utilizando las <em>fases del ciclo de vida</em> como el segundo nivel</li>
 </ol>
-<p><img src="{{url_for('static', filename='imgs/iis/edt1')}}" alt="edt">
-<img src="{{url_for('static', filename='imgs/iis/edt2')}}" alt="edt"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/edt1.png')}}" alt="edt">
+<img src="{{url_for('static', filename='imgs/iis/edt2.png')}}" alt="edt"></p>
 <h2 id="actividades">Actividades</h2>
 <p>Es importante identificar las actividades de un proyecto: los paquetes de trabajo de la EDT.</p>
 <p>Estas actividades deben poder ser estimables, y formarán parte del cronograma.</p>
@@ -2486,7 +2486,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <li>Holgura libre: Cuanto se puede retrasar una actividad sin afectar la fecha de inicio temprana de cualquier actividad subsiguiente inmediata.</li>
 </ul>
 <p>Ahora bien, ahora que tenemos el grafo de precedencia armado podemos armar un cronograma (ubicar las tareas en el tiempo).</p>
-<p><img src="{{url_for('static', filename='imgs/iis/crono')}}" alt="crono"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/crono.png')}}" alt="crono"></p>
 <p>El problema está en que puede pasar que una semana quede sobrecargada de horas en relación a la capacidad de horas humanas que se dispone. La solución a esto es aplicar <strong>nivelación de recursos</strong>.</p>
 <h3 id="nivelación-de-recursos">Nivelación de recursos</h3>
 <p>Se ajustan fechas de inicio y/o fin cuando hay restricciones de recursos.</p>
@@ -2516,7 +2516,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 </ol>
 <h3 id="proceso-de-gestión">Proceso de Gestión</h3>
 <p>El siguiente diagrama ilustra las etapas de gestión de riesgos:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/risk2')}}" alt="risk2"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/risk2.png')}}" alt="risk2"></p>
 <h4 id="identificación">Identificación</h4>
 <p>Se determina qué riesgos pueden afectar y se documentan las características. Es una actividad de equipo (muchos puntos de vista). Se arma un checklist de los riesgos y cuales son de mayor impacto.</p>
 <h5 id="tipos-de-riesgo">Tipos de riesgo</h5>
@@ -2538,7 +2538,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 </ol>
 <p>El análisis cuantitativo aplica una técnica numérica para medir el efecto de los riesgos priorizados.</p>
 <p>Una buena forma de analizar los riesgos es con una matriz de probabilidad/impacto:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/matrix')}}" alt="matrix"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/matrix.png')}}" alt="matrix"></p>
 <p>Cada organización puede definir su umbral de riesgo, calificándolo como alto, moderado o bajo.</p>
 <h3 id="planificación-1">Planificación</h3>
 <p>Desarrollar acciones para mejorar las oportunidades y reducir las amenazas. (Según su severidad)</p>
@@ -2614,7 +2614,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <h3 id="motivación">Motivación</h3>
 <p>Existen 3 grandes teorías con respecto a la motivación de los wagies: La Jerarquía de Maslow, la teoría de Herzberg y la teoría X e Y de McGregor.</p>
 <h4 id="maslow-1954">Maslow 1954</h4>
-<p><img src="{{url_for('static', filename='imgs/iis/maslow')}}" alt="maslow"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/maslow.png')}}" alt="maslow"></p>
 <p>Necesito cumplir las necesidades de abajo para poder cumplir las de arriba. Si cumplo todas estoy motivado.</p>
 <h4 id="herzberg">Herzberg</h4>
 <p>Se habla de factores de higiene (son cosas que pueden destruir la motivación, pero no mejorarla). Por ejemplo: condiciones de seguridad, salario, salubridad, vida personal, etc.</p>
@@ -2713,7 +2713,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <p>Los 3 pilares son <strong>Transparencia, inspección y adaptación</strong>.</p>
 <p>Las estimaciones en SCRUM se hacen con técnicas basadas en Delphi, sucesión fibonacci o estimación relativa. Es discutido como hay que tratar la métrica velocity del development team. Se deben planear el Release plan de acuerdo a la velocity y prioridades.</p>
 <p>El <strong>sprint burnt down chart</strong> permite ver el equipo como va respecto al plan. Se puede usar para estudiar la tendencia del sprint. <strong>No es para que el PM haga seguimiento</strong>.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/sprint')}}" alt="sprint"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/sprint.png')}}" alt="sprint"></p>
 <h1 id="gestión-de-la-configuración">Gestión de la configuración</h1>
 <p>Los sistemas de software están en un continuo cambio durante su desarrollo y su uso. La gestión de la configuración son las <strong>políticas, procesos y herramientas</strong> para gestionar los cambios en los sistemas de software.</p>
 <p>Su propósito es evitar perder el tiempo o perder código fuente. (Ya sea al modificar versiones incorrectas o entregando versiones incorrectas de componentes o incluso el sistema entero).</p>
@@ -2724,7 +2724,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <li>Gestión de cambios: Mantener registro de los requerimientos de cambios que realizan los clientes y desarrolladores, calcular el costo y evaluar el impacto de estos para ver si se pueden implementar. Seguimiento del proceso de realizar cambios.</li>
 <li>Gestión de liberación: Preparar el software para la liberación externa y llevar un registro de las versiones del software que los clientes tienen.</li>
 </ol>
-<p><img src="{{url_for('static', filename='imgs/iis/change')}}" alt="assets"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/change.png')}}" alt="assets"></p>
 <blockquote>
 <p>La gestión de la configuración es la gestión de un sistema de software en evolución.</p>
 </blockquote>
@@ -2744,7 +2744,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <li><p><strong>Mainline</strong>: Secuencia de <strong>Baselines</strong> que representan distintas versiones de un sistema</p>
 </li>
 </ul>
-<p><img src="{{url_for('static', filename='imgs/iis/scmex')}}" alt="scmex"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/scmex.png')}}" alt="scmex"></p>
 <ul>
 <li><p><strong>Release (liberación)</strong>: Una versión del sistema que ha sido liberada a los clientes <em>para su uso</em>.</p>
 </li>
@@ -2783,9 +2783,9 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 </blockquote>
 <p>Existen 2 tipos, los sistemas <strong>centralizados</strong> donde hay un único repositorio que tiene todas las versiones y componentes de software (ya no se usa). Todo ocurre en un servidor compartide, se usan mecanismos de file locking (reserva de un recurso de forma explícita, se le hace check out para reservar un archivo y check in para devolverlo, un archivo bloqueado es read-only para los demás developers) y versión merging para evitar conflictos.</p>
 <p>Y por otro lado están los sistemas <strong>descentralizados</strong> donde existen múltiples versiones de un repositorio al mismo tiempo (Git). Tiene un menor riesgo de pérdida de datos, no hay una copia canónica del código y aprovecha que las operaciones de commit, revert y history son más rápidas.</p>
-<p><img src="{{url_for('static', filename='imgs/iis/branch')}}" alt="branch">
-<img src="{{url_for('static', filename='imgs/iis/check')}}" alt="check">
-<img src="{{url_for('static', filename='imgs/iis/delta')}}" alt="check"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/branch.png')}}" alt="branch">
+<img src="{{url_for('static', filename='imgs/iis/check.png')}}" alt="check">
+<img src="{{url_for('static', filename='imgs/iis/delta.png')}}" alt="check"></p>
 <h2 id="armado-del-sistema">Armado del sistema</h2>
 <blockquote>
 <p>Es el proceso de crear una versión completa y ejecutable del sistema mediante la compilación y el linkeo de sus componentes, librerías externas, archivos de configuración, etc.</p>
@@ -2804,9 +2804,9 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <li>Reporte de resultados</li>
 <li>Generación de documentación</li>
 </ol>
-<p><img src="{{url_for('static', filename='imgs/iis/cowtools')}}" alt="cowtools"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/cowtools.png')}}" alt="cowtools"></p>
 <p>El siguiente paso de las herramientas que automatizan el trabajo es el <strong>continuous integration</strong>:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/CI')}}" alt="cowtools"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/CI.png')}}" alt="cowtools"></p>
 <p>La integración continua es muy utilizada en las metodologías ágiles. Se recomienda complementar la CI con pruebas automatizadas. Permiten rápidamente resolver conflictos entre desarrolladores. No es buena cuando el sistema es muy grande o complejo, o existen diferencias entre la plataforma objetivo (target) y la de desarrollo.</p>
 <blockquote>
 <p>La integración continua es una práctica de desarrollo de software mediante la cual los desarrolladores combinan los cambios en el código en un repositorio central de forma periódica, tras lo cual se ejecutan versiones y pruebas automáticas.</p>
@@ -2818,7 +2818,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <blockquote>
 <p>Hay que decidir si es rentable implementar el cambio X en una nueva versión de un sistema.</p>
 </blockquote>
-<p><img src="{{url_for('static', filename='imgs/iis/change2')}}" alt="change"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/change2.png')}}" alt="change"></p>
 <p>Podemos observar que este proceso de gestión puede dividirse en 4 grupos.</p>
 <ol>
 <li>Cliente: El cliente es quien genera las peticiones de cambio. (Change requests)</li>
@@ -2838,9 +2838,9 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <p>Este comité podría estar compuesto por el cliente, el patrocinador y el director de proyectos; pero no existe una regla exacta que determine quiénes son los integrantes del comité.</p>
 </blockquote>
 <p>Ejemplo de formulario de petición de cambio:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/changeMe')}}" alt="ChangeMe"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/changeMe.png')}}" alt="ChangeMe"></p>
 <p>Otra cosa que se hace es llevar un historial de cambios:</p>
-<p><img src="{{url_for('static', filename='imgs/iis/histo')}}" alt="ChangeMe"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/histo.png')}}" alt="ChangeMe"></p>
 <p>Notar que estos ejemplos son muy anticuados. Hoy existen herramientas que proveen un soporte y proceso de gestión muy eficientes.</p>
 <p>Durante el desarrollo se usa un proceso de gestión de cambios más sencillo, un cambio que no afecta nada lo decide el desarrollador él solito si hacer un cambio o no. Si afecta varios módulos, es decisión del arquitecto.</p>
 <h3 id="en-metodologías-ágiles">En metodologías ágiles</h3>
@@ -2868,7 +2868,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
 <p>En general hay un mínimo de inversión para evitar catástrofes (tener un repositorio git).</p>
 <p>Al alcance de la gestión puede ir desde el producto (control de versiones, control de cambios y armado), soporte a nivel de proyecto (integración continua, actividades de gestión de cambios) hasta a nivel de la organización determinando procesos entre las actividades (flujo de trabajo).</p>
 <h2 id="gestión-de-ambientes">Gestión de ambientes</h2>
-<p><img src="{{url_for('static', filename='imgs/iis/env')}}" alt="env"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/env.png')}}" alt="env"></p>
 <ul>
 <li>Desarrollo: Es el ambiente donde se desarrolla el software, lo controlan los developers.</li>
 <li>Prueba: Es un ambiente aislado para ejecutar las pruebas del sistema (integración y regresión). Lo usa únicamente el área de Testing.</li>
@@ -2922,9 +2922,9 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
     &nbsp;/...&nbsp;
     <span>- Return </span>
 </li></a>
-<a href="{{url_for('static', filename='icons/markdown/apuntesFP.md')}}"><li class="yh">
+<a href="{{url_for('static', filename='icons/markdown/apuntesIIS.md')}}"><li class="yh">
     <img src="{{url_for('static', filename='icons/markdown.svg')}}" height="20em" width="20em">
-    &nbsp;Apuntes FP&nbsp;
+    &nbsp;Apuntes IIS&nbsp;
     <span>- Markdown version (Spanish)</span>
     <time>1/12/2021</time>
 </li></a>

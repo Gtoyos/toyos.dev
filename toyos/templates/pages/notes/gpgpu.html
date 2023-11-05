@@ -1,0 +1,183 @@
+{# templates/notes/gpgpu.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock head_extra %}
+
+{% block article %}
+<!-- NOTE START-->
+
+<h1 id="notas-libro-gpu">Notas libro GPU</h1>
+<p>Existe una diferencia clave entre run on <strong>host</strong> (CPU y RAM) y run on <strong>device</strong> (GPU y su memoria). Una función que ejecuta en un <em>device</em> se le llama <em>kernel</em>.
+Versión vainilla de <code>hello world</code> en una GPU:</p>
+<pre><code>#include &lt;iostream&gt;
+__global__ void kernel(void){ }
+int main(void) {
+    kernel&lt;&lt;&lt; 1,1 &gt;&gt;&gt;();
+    printf(&quot;Hello world \n&quot;);
+    return 0;
+}
+</code></pre>
+<p>El qualifier <strong>__global</strong> sirve para indicarle al compilador que esa función debe correr en un <em>device</em> y no en el <em>host</em>.</p>
+<p>El compilador para compilar en cuda es nvcc.</p>
+<blockquote>
+<p>One of the benefits of CUDA C is that it provides this language integration so that device function calls look very much like host function calls. </p>
+</blockquote>
+<p>Es necesario alocar memoria para realizar trabajo en el device. Incluso para retornar un valor al host. Para alocar memoria se usa la función cudaMalloc() que es similar al clásico malloc() de C. El primer parámetro es <strong>un puntero que apunto al puntero al cual se quiere guardar la dirección de la memoria alocada</strong>. El segundo es el tamaño de la memoria a alocar.</p>
+<p>Es importante aclarar que el puntero de cudaMalloc <strong>no debe usarse</strong> para leer/escribir desde el host, pero si se pude pasar como argumento, aplicar aritmética de punteros, etc.</p>
+<p>Para liberar memoria alocada con cudaMalloc, debemos usar cudaFree();. Este se comporta exactamente igual al querido free().</p>
+<p>Para acceder a la memoria (más bien pasar de un lado para el otro dato) de un device desde el host o viceversa utilizamos cudaMemcpy(). Esta se comporta igual a memcpy a menos de que se incluye un parámetro para indicar cuál de los dos punteros refiere a un puntero del device. Estos parámetros son <em>cudaMemcpyDeviceToHost</em> y <em>cudaMemcpyHostToDevice</em>. El primer puntero es el destino, el segundo la source.</p>
+<p>cudaGetDeviceCount() nos sirve para obtener la cantidad de dispositivos cuda en la PC. Luego hacemos cudaGetDeviceProperties(&amp;prop,id) para obtener un struct con las propiedades del dive. prop es del tipo cudaDeviceProp. Este incluye un name, memoria global, nros de registros, clock, cantidad de multiprocesadores, concurrent kernels, etc.</p>
+<blockquote>
+<p>There is no guarantee that the CUDA runtime will choose the best or most appropriate GPU for your application.</p>
+</blockquote>
+<h2 id="kernel-launch">Kernel launch</h2>
+<p>Un kernel serial se ejecuta como &lt;&lt; 1,1 &gt;&gt;. </p>
+<p>La primera entrada es la cantidad de bloques en paralelo que queremos que ejecuten dicho kernel. Cada invocación se le llama <strong>block</strong>. kernel &lt;&lt; 256,1 &gt;&gt;() estaríamos corriendo 256 bloques en paralelo en la GPU. </p>
+<p>Para poder modelar el comportamiento en cada bloque, existe una variable local a cada bloque: <strong>blockIdx.x</strong>. Esta tiene la id del bloque que está ejecutando el kernel. .x es porque podemos definir un grupo de bloques en varias dimensiones (la cantidad de dimensiones depende de la versión de CUDA, las más nuevas soportan 3). Esto es conveniente en problemas en varias dimensiones como matrices.</p>
+<blockquote>
+<p>Know that using two-dimensional indexing can sometimes be more convenient than one-dimensional indexing. But you never have to use it. We won’t be offended.</p>
+</blockquote>
+<p>Cuando hacemos &lt;&lt; N,1 &gt;&gt; estamos pidiendo una <strong>colección</strong> de N bloques paralelos. A esta colección se le llama <strong>grid</strong>. Al escribir un escalar (1) el runtime entiende que estamos pidiendo una <em>grid</em> de <strong>1</strong> dimensión con N bloques. Cada uno de estos hilos va a tener valores variando entre 0 y N-1.</p>
+<h2 id="2d-grid">2d grid</h2>
+<p>Para encapsular tuplas de varias dimensiones, CUDA provee la estructura <code>dim3</code>:</p>
+<pre><code>dim3 grid(N,M)
+kernel&lt;&lt;&lt;grid,1&gt;&gt;&gt;(ptr);
+</code></pre>
+<p>dim3 es una tupla en 3 dimensiones. si queremos usar solo dos dimensiones simplemente aclaramos que la tercera dimensión tiene valor 1. (Si se inicializa con 2 valores, la 3ra dimensión se inicializa con valor 1, como es en este caso.) Este struct se lo pasamos al operador &lt;&lt;&lt; &gt;&gt;&gt; para construir la grid multidimensional. En el kernel, para acceder a las dimensiones podemos hacer blockIdx.x, blocIdx.y y blockIdx.z</p>
+<p>Por otra parte, la variable <strong>gridDim</strong> nos devuelve las dimensiones de la grid del kernel que fue lanzado. Podemos obtener las dimensiones con los atributos x,y,z.</p>
+<blockquote>
+<p>when coders and APIs fight, the API always wins.</p>
+</blockquote>
+<h3 id="__-device-__-qualifier">__ device __ qualifier</h3>
+<p>el calificador device permite indicar que una función se va a ejecutar desde el device yt no desde el host. Por ello, estas funciones solo van a ser invocables desde el device (por ejemplo, desde otra función o kernel).</p>
+<p>Si definimos un struct, recordar incluir __ device __ en los constructores, sino no los vamos a poder utilizar en la tarjeta.</p>
+<h2 id="threads">Threads</h2>
+<p>CUDA permite dividir cada bloque de ejecución en múltiples <strong>threads</strong>. El segundo argumento del operador &lt;&lt;&lt; &gt;&gt;&gt; permite especificar la cantidad de threads a
+ejecutar en cada bloque.</p>
+<p>Para referirnos a un thread en el kernel basta con utilizar el struct threadIdx (con atributo x por ejemplo).</p>
+<p>Hay muchos menos threads por bloque que la cantidad de bloques en una GPU. Este número máximo de threads por bloque está en la variable: <code>maxThreadsPerBlock</code>.</p>
+<p>Podemos indexar de a bloques y threads con una sola id: <code>int tid = threadIdx.x blockIdx.x blockDim.x</code>. </p>
+<p>Blockdim tiene la cantidad de threads en cada dimensión del bloque donde se está invocando. Es similar a gridDim, la cual indicaba la cantidad de bloques en cada dimensión de la grid.</p>
+<blockquote>
+<p>CUDA runtime allows you to launch a 2D grid of blocks where each block is a 3D array of threads.</p>
+</blockquote>
+<p>Un patrón de diseño es tener una cantidad fija de threads por bloque. Luego, lanzar la cantidad necesaria de bloques para cumplir con la paralelización. A su vez, en la función de kernel ponemos guardas para asegurarnos de que, si invocamos threads de más, estos no hagan nada.</p>
+<p>Por otra parte, si la cantidad de threads necesaria es mayor a la cantidad de threads en todos los bloques de la grid. Tenemos que iterar en el kernel. Un patrón común para esto es hacer <code>tid += blockDim.x * gridDim.x</code>.</p>
+<p>Un ejemplo de lanzamiento de kernel para una imagen dividida en bloques:</p>
+<pre><code>dim3 blocks(DIM/16,DIM/16);
+dim3 threads(16,16);
+kernel&lt;&lt;&lt; blocks, threads &gt;&gt;&gt;f();
+</code></pre>
+<p><img src="{{url_for('static', filename='imgs/gpgpu/nice.png')}}" alt="nice"></p>
+<p>Luego en el kernel:</p>
+<pre><code>int x = threadIdx.x + blockId.x * blockDim.x
+int y = threadIdx.y + blockIdx.y * blockDim.y
+int offset = x + y *blockDim.x * gridDim.x
+</code></pre>
+<h1 id="shared-memory-and-synchronization">Shared memory and Synchronization</h1>
+<p>Existe un espacio de memory compartida en la tarjeta. Para ello se agrega el qualifier __ shared __ en las variables. Las variables shared se copian en cada uno de los bloques de la grid, por lo tanto, provee un mecanismo de cooperación entre threads. Esta memoria reside dentro de la GPU. La shared memory es útil como una memoria/cache compartida por bloque.</p>
+<p>Para poder declarar de forma dinámica la memoria shared necesito agregar <code>extern</code> de forma previa. </p>
+<p>Por ejemplo, para tener un array de tamaño la cantidad de threads: <code>__ shared __ float cache[threadsPerBlock]</code></p>
+<p>La memoria compartida se divide en módulos del mismo tamaño llamados <strong>bancos</strong>. En CC&gt;3.X el direccionamiento de los bancos es de 32 bits. Los bancos se acceden simultáneamente <em>a nivel de wrap</em>. Por lo tanto, si las lecturas o escrituras se hacen sobre bancos distintos, <em>estas se pueden hacer en simultaneo</em>. Es decir, cada banco puede atender <strong>una</strong> sola solicitud por ciclo. Sí hay más de una solicitud se serializa. Cada banco es de 32 bits (4byte).</p>
+<p>El acceso se ve potenciado cuando cada hilo accede a un banco distinto o a la misma palabra de un banco. Se pierde performance cuando se precisan palabras distintas de un mismo banco.</p>
+<p>La shared memory al ser más rápida que la global también se utiliza como caché intermedio de la memoria global o cuando se van a hacer accesos no coalesced a memoria global. Se carga de a fragmentos parte de la memoria global a la shared. Esta actividad se le llama <strong>tiling</strong> (la memoria global se divide en tiles).</p>
+<p><img src="{{url_for('static', filename='imgs/gpgpu/tiling.png')}}" alt="tiling"></p>
+<p>Esquema general de tiling:</p>
+<ol>
+<li>Identificar</li>
+</ol>
+<p>La directiva __ syncthreads() la podemos ejecutar dentro del kernel para hacer que todos los threads de un bloque se sincronicen al llegar a esta instrucción. Es importante observar que esta directiva fuerza a todos los hilos a esperar que estén todos juntitos en esta instrucción, por lo que si algún thread no llega a la instrucción syncthreads (ya sea por una terminación temprana o estructuras condicionales), el programa falla.</p>
+<h1 id="constant-memory-and-events">Constant memory and events</h1>
+<blockquote>
+<p>With hundreds of arithmetic units on the GPU, often the bottleneck is not the arithmetic throughput of the chip but rather the memory bandwidth of the chip.</p>
+</blockquote>
+<p>Existe una memoria muy eficiente llamada <em>constant memory</em>. Como indica su nombre, esta memorita no puede cambiar durante la ejecución del kernel. Usar esta memoria reduce el consumo de bandwidth de la tarjeta.</p>
+<p>Para esto, se utiliza la directiva __ constant __ . Notar que las variables con esta directiva se tienen que alocar de manera estática (no malloc).</p>
+<p>Para mandar algo desde el main a la memoria constante necesito la función cudaMemcpyToSymbol(). Es análoga a cudaMemcpy es que esta copia a la memoria constante.</p>
+<h2 id="beneficios">Beneficios</h2>
+<p>¿Y cuál es la ventaja de la memoria constante? Existen dos puntos clave:</p>
+<ol>
+<li>Un thread que hace read a una memoria constante realiza un &quot;broadcast&quot; de la lectura a sus threads &quot;cercanos&quot;</li>
+<li>La memoria constante se cachea, reads consecutivos a la misma dirección no generan tráfico adicional.</li>
+</ol>
+<p>¿Que significa “threads cercanos”? Los threds se encuentran agrupados en <strong>warps</strong>. Por lo general son 32 threads. Esta división está dada porque los threads se encuentran <strong>fisicamente</strong> en una misma estructura (fabric). Estos warps están entrelazados y se ejecutan en <strong>lockstep</strong>: En cada línea del programa, cada thread ejecuta la misma instrucción (literalmente) pero con diferentes datos.</p>
+<p>El hardware de NVIDIA brodcastea la lectura a memoria constante en cada <strong>half-warp</strong>. Por lo tanto, si el halfwarp es de 16 threads, solo se va a hacer un 1/16 de las lecturas que se harían con memoria normal.</p>
+<p>Por otra parte, el hardware cachea los datos constantes en la GPU, ¡otros half-warps que piden la misma address van a hacer un caché hit!</p>
+<p>Sin embargo, existen drawbacks en el uso de memoria constante. Se puede perder performance significativamente (de usar memeoria normal) si los accesos a memoria constante de los threads en el half-warp son a diferentes direcciones. Esto se da en esencia porque los accesos se serializan, mientras que los a memoria global, si bien consumen bandwidth, se pueden hacer en paralelo.</p>
+<h2 id="measuring-performance">Measuring performance</h2>
+<p>¿Como puedo verificar que los cambios que hago mejoran o empeoran al programa? Se podría hacer el profiling con el timer del sistema operativo. Pero este tiene latencia del SO, scheduling, etc. A su vez, si la computación también incluye trabajo del host es difícil determinar el trabajo de la tarjeta. Por ello, se va a utilizar CUDA event API para hacer el profiling.</p>
+<p>Un <em>evento</em> en cuda es una GPU <strong>timestamp</strong>. Para iniciar un timer y detenerlo:</p>
+<pre><code>cudaEvent_t start,stop;
+cudaEventCreate(&amp;start);
+cudaEventCreate(&amp;stop);
+cudaEventRecord(start,0);
+//... work on GPU
+cudaEventRecord(stop,0);
+</code></pre>
+<p>Las kernels calls de CUDA son <strong>asynchronous</strong>, es decir cuando hacemos la call, la GPU trabaja, pero la CPU continua ejecutando la siguiente línea de instrucciones.
+Por ello, cuando ejecutamos una instrucción en realidad la estamos encolando en la lista de ejecución de la GPU, por ello no podemos leer el stop de una tras invocar la instrucción, ya que la GPU puede seguir estando trabajando. Para ello, existe una función de sincronización <code>cudaEventSynchronize(stop)</code> la cual permite esperar a que todo el trabajo antes del evento haya terminado. </p>
+<p>Para medir la diferencia de tiempo, hacemos <code>cudaEventElapsedTime(&amp;float, start, stop);</code>
+Los eventos deben liberarse de memoria: <code>cudaEventDestroy(start);</code></p>
+<h1 id="texture-memory">Texture memory</h1>
+<p>La texture memory se beneficia considerablemente de la caché, particularmente tiene beneficios cuando existe una cierta <strong>coherencia espacial</strong> en los datos. (Por ejemplo, hacer computaciones con los pixeles cercanos en una imagen 2D). En estos casos, utilizar memoria gráfica trae mejor performance. Esta memoria inicialmente fue concebida para el pipeline gráfico de la tarjeta.</p>
+<p>Un ejemplo claro de coherencia espacial:</p>
+<p><img src="{{url_for('static', filename='imgs/gpgpu/spatial.png')}}" alt="spatial"></p>
+<p>En la caché de CPU, las 4 direcciones no son consecutivas. ¡Pero en la texture memory si!</p>
+<p>Definir variables en la textura de memoria se realiza a través de referencias genéricas: <code>texture&lt;float&gt; texIn,texOut;</code>
+Luego de definir las variables, se debe bindear estas referencias a memoria con la llamada <code>cudaBindTexture(NULL,texIn,data.dev)inSrc,SIZE)</code>.</p>
+<p>Para leer una dirección en la texture memory tenemos que utilizar métodos de accesso especiales: <code>tex1Dfetch(reference,index)</code> (texture 1 dimensión fetch)</p>
+<p>Las referencias a texturas deben declararse de forma global en el archivo. tex1Dfetch <strong>no</strong> es realmente una función, pero una ayuda del compilador. Por lo que reference no es un argumento sino un parámetro que se escribe de forma estática, es decir, el compilador sabe de antemano la referencia antes de compilar.</p>
+<p>La memoria de textura también puede instanciarse en 2D: <code>texture&lt; float,2 &gt; texIn;</code>. En este caso hay que cambiar la forma de acceder a esta: <code>tex2D(texIn,x,y);</code> y las binding calls:</p>
+<pre><code>cudaChannelFormatDesc desc = cudaCreateChannelDesc&lt;float&gt;();
+cudaBindTexure2D(NULL, texIn, data.dev_inSrc, desc, DIM, DIM, sizseof(float)*DIM);
+</code></pre>
+<h1 id="atomics">Atomics</h1>
+<p>¿Como puedo hacer un read-modify-wirite atómico en GPU?</p>
+<p>CUDA API nos provee la función atomicAdd(ptr,inc) la cual nos permite incrementar una variable de forma atómica. Notar que esto puede impactar negativamente en la performance y paralelismo. Ya que fuerza a encolar los accesos a una dirección de memoria por los distintos threads.</p>
+<h1 id="coalesced-memory">Coalesced memory</h1>
+<p>Coalesced memory access or memory coalescing refers to combining multiple memory accesses into a single transaction. On compute capability &gt; 2.0, every successive 128 bytes (32 single precision words) memory can be accessed by a warp (32 consecutive threads) in a single transaction. However, the following conditions may result in uncoalesced load, i.e., memory access becomes serialized:</p>
+<ol>
+<li>Memory is not sequential.</li>
+<li>Memory access is sparse.</li>
+<li>Misaligned memory Access.</li>
+</ol>
+<p>Una forma de aprovechar la coalesced memory cuando iteramos sobre structs es utilizar estructuras de datos <strong>struct of arrays</strong> en vez de la clasica <strong>array of structs</strong>. Esto es:</p>
+<p>Array of structs: persona[1].casa; persona[1].nombre; persona[1].edad;
+Struct of arrays: personas.casa[1] personas.nombre[1]; personas.edad[1];</p>
+<h1 id="transferencias-a-memoria">Transferencias a memoria</h1>
+<h2 id="no-paginable">No paginable</h2>
+<p>Para pasar datos de la CPU a la GPU la memoria tiene que estar en NO-Paginable. CUDA avisa que la memoria esta en este estado para.</p>
+<h1 id="appendix">Appendix</h1>
+<h2 id="math-indexing">Math indexing:</h2>
+<p>Un truco esencial para obtener el menor múltiplo de x que sea mayor o igual a N es realizar la cuenta: \((N+(x-1))/x\)</p>
+<h2 id="ray-tracing">Ray Tracing</h2>
+<p>Ray Tracing es una técnica para producir una imagen 2D de una escena 3D. Es una técnica alternativa a la tradicional técnica que utilizan las GPU&#39;s: rasterización. La idea de ray tracing es simple: En cada pixel nos imaginamos que hay un ojo, el resultado del pixel es determinar la luz que producen los objetos al llegar al ojo.</p>
+<p>En su implementación, es más simple pensarlo al revés: El ojo larga un rayo, la idea es determinar que objetos impactan en los rayos que tiene el ojo. La computación del ray tracing es la intersección de estos rayos con los objetos de la escena. Sin embargo, esto se complejiza: Los rayos se puden reflejar, transparentar, refractar, etc.</p>
+<h2 id="volatile">Volatile</h2>
+<p>La keyword volatile previa a una variable sirve para indicar que la misma puede cambiar en cualquier momento sin ninguna de las acciones que el compilador considera que están en el scope de la variable.</p>
+<h2 id="nvcc">NVCC</h2>
+<p>Nvcc es el compilador CUDA. Una de las banderas de este es para especificar que la arquitectura a compilar es de una compute capability definida. Por ejemplo, para exigir compute capability mínima 1.2 se compila con la bandera: <code>nvcc -arch=sm_12</code></p>
+<p>Observar que no es lo mismo la versión CUDA que la compute capability de una GPU, las versiones de cuda soportan GPUs con distintas compute capabilities. CUDA es la API, está en ella soportar la Comp. Capabilities de las distintas GPUs.</p>
+
+<!-- NOTE END-->
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='icons/markdown/apuntesFP.md')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/markdown.svg')}}" height="20em" width="20em">
+    &nbsp;Apuntes FP&nbsp;
+    <span>- Markdown version (Spanish)</span>
+    <time>1/12/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}20th July 2022{% endblock cdate %}

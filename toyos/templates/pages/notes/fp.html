@@ -1,0 +1,1419 @@
+{# templates/notes/fp.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endblock head_extra %}
+
+{% block article %}
+<!-- NOTE START-->
+
+<h1 id="the-craft-of-functional-programming-notes">The craft of functional programming notes</h1>
+<p>With functional programming languages, it is so much easier to test... Test suits or randomly generated data don&#39;t give full assurance that a program will never go wrong. A proof does.</p>
+<p>The Haskell development platform includes:</p>
+<ul>
+<li>GHC: The Glasgow Haskell Compiler</li>
+<li>GHCi: The interactive version of GHC</li>
+<li>Cabal: Sth for importing libraries</li>
+<li>Haddock: For writing docs</li>
+</ul>
+<p>GHCI includes commands prefixed by &quot;:&quot;. For instance,: reload reloads the file that have been loaded to ghci if modified.</p>
+<p>Some nice commands:</p>
+<ul>
+<li>load file </li>
+<li>info name --get information about name</li>
+<li>browse name --browse the definitions in a file called name.hs</li>
+<li>quit</li>
+<li>! cmd --execute an UNIX command</li>
+<li>edit file.hs --edit a file. Hs is needed</li>
+<li>let s = exp --define a variable for ghci runtime</li>
+</ul>
+<p>To make programs manageable we use modules to divide it in smaller components. A module has a <em>name</em> and a collection of definitions.</p>
+<p>A Haskell module begins with:</p>
+<pre><code>module MODULE_NAME where
+</code></pre>
+<p>and to import one we write:</p>
+<pre><code>import MODULE_NAME
+</code></pre>
+<p>importing means we can use the definitions from other modules in the module we are writing.</p>
+<p>Expressions like 2 or True are called literals because the result of evaluating them is the literal itself. </p>
+<p>Observe the precedence of operators: This is interpreted as negate minus 34: negate -34. Parenthesis should be applied.</p>
+<p>maxBound gives the value of the maximum Int.</p>
+<p>Many functions and operators are overloaded in Haskell. The function == carries the signatures Int -&gt; Int -&gt; Bool and Bool -&gt; Bool -&gt; Bool for example.</p>
+<p>To hide functions min, max defined in the prelude you can use the line:</p>
+<pre><code>import Prelude hiding (min, max)
+</code></pre>
+<p>The standard library Data.Char contains many functions for handling chars lick isDigit or toUpper.</p>
+<p>To print characters into the screen we have the primitive Haskell function putStr :: String -&gt; IO () which has the effect of putting the argument string on the screen.</p>
+<p>String can be concatenated using the operator &quot;++&quot; so &quot;pog&quot;++&quot;ger&quot;++&quot;s&quot;=&quot;poggers&quot;.</p>
+<p>The functions show and read we can convert values to string and vice versa. In the situations when the return value of a function is not clear you can give a proper output type by:</p>
+<pre><code>(read &quot;3&quot;) :: Int -- This will output an Int
+</code></pre>
+<p>Haskell supports scientific notation for floats.
+For instance: 231.61e7 = 2 316 100 000</p>
+<p>Haskell indentation uses the offside rule. When you write a definition it creates a box. It is expected that everything written in the box forms part of the definition</p>
+<p>The textbook recommended layout for long definitions is:</p>
+<p>fun v1 v2 ... vn
+  | a long guard...
+    go over a number of lines
+      = very long expression
+        which goes over a number of lines
+  | g2           = e2
+  | ...</p>
+<p>An example of writing out of the box which gives a parsing error:</p>
+<p>funny x = x+
+1</p>
+<p>The names used in definitions of values must begin with a small letter, as must variables and type variables. Capital letters at the beginning are reserved for type Names (Int), constructors, and type classes.</p>
+<p>Haskell is built on top of the Unicode. So, you can write whatever you want without prejudice. Unicode characters can be inputted as a 16-bit sequence in the form \uhhh.</p>
+<p>In Haskell each non associative operator is classified as either left or light associative. For instance, &#39;-&#39; is left-associative:</p>
+<pre><code>4-2-1 evaluates to (4-2)-1.
+</code></pre>
+<p>When we have expressions with different operators we have to compare it’s <strong>binding power</strong> for instance * has binding power 7 while + has 6, and ^ 7.</p>
+<p>Binding most tightly is function application. I.e., f n +1 binds to f(n_+1. </p>
+<p>Haskell lets you define our own infix operators. Operator names are built from the operator symbols like !,#,%,+,.,/,&lt;,=,~,etc.</p>
+<p>For instance, for defining the operator x &amp;&amp;&amp; y we write:</p>
+<p>(&amp;&amp;&amp;) :: Integer -&gt; Integer -&gt; Integer
+x &amp;&amp;&amp; y
+  | x &gt; y = y
+  | otherwise, x</p>
+<h2 id="chapter-4-designing-and-writing-programs">Chapter 4: Designing and writing programs</h2>
+<blockquote>
+<p>Design is what we do before we start writing detailed Haskell code.</p>
+</blockquote>
+<blockquote>
+<p>What if I had any functions I wanted? Which could I use in writing the solution?</p>
+</blockquote>
+<p>The latter is the so-called top-down approach: We work by breaking a problem into smaller individual problems.</p>
+<p>Dividing a function into local definitions using where is a key principle in programming with Haskell. The let expression let a; b; c; in f is also used occasionally.</p>
+<p>The recommended indentation for local functions is:</p>
+<p>f p1 p2... pk
+  | g1           = e1
+  | ...
+  | otherwise    = er
+    where
+    v1 a1 an     = r1
+    v2           = r2
+    ....</p>
+<p>It is also possible to include the signature of local functions, and it is suggested when the locally defined object is not obvious.</p>
+<h3 id="scope">Scope</h3>
+<p>You can use definitions that are declared before in the script when you are writing new functions.</p>
+<p>When using a quickCheck with custom data. We need to define an Arbitrary constructor:</p>
+<p>instance Arbitrary DataType where
+ dataType = elements [e1,e2,...,en]</p>
+<p> Deriving sth gives the datatype additional capabilities. Deriving Ord, lets you use &lt;&#39;s operators, Eq the == and Show functions to print the Enum on screen. The Ord is given by the order of elements when they are defined.</p>
+<p> You can give string errors in Haskell by writing error &quot;msg&quot;. For example:
+ f n
+  | n==0 = 0
+  | n&lt;0= error &quot;n has to be 0&quot;</p>
+<h3 id="testing">Testing</h3>
+<blockquote>
+<p>The art of testing is then to choose the inputs to be as comprehensive as possible. That is, we want to test data to represent all the different ‘kinds’ of input that can be presented to the function.</p>
+</blockquote>
+<p>Como elegimos los datos de prueba? Existen dos approaches. Uno es mirar la especificación del programa y hacer tests en base a esto (black box) el otro es mirar como está hecho la función y hacer las pruebas con esto en mente (White box testing).</p>
+<h2 id="chapter-5-data-types-tuples-and-lists">Chapter 5: Data types; tuples and lists</h2>
+<blockquote>
+<p>In a tuple, we combine a fixed number of values of fixed types – which might be different – into a single object.
+In a list we combine an arbitrary number of values – all of the same type – into a single object.</p>
+</blockquote>
+<h3 id="tuples">Tuples</h3>
+<p>Podemos nombrar un tipo tuple de la siguiente manera</p>
+<p>  type ShopItem = (String, Int)</p>
+<p>Para declarar que algo es de un type en particular:</p>
+<p>  (&quot;Salt: 1kg&quot;,139) :: ShopItem</p>
+<p>Los items de una lista se pueden escribir como:</p>
+<p>  type Basket = [ ShopItem ]
+  type String = [ Char ]</p>
+<p>Es importante que las listas sean siempre del mismo tipo para mantener la propiedad de type checking previo a ejecución.</p>
+<p>Las tuples son útiles para retornar varios &quot;valores&quot; desde una función.</p>
+<p>Haskell implementa pattern matching para las tuples. Por ejemplo:</p>
+<p>addPair :: (integer, Integer) -&gt; Integer
+addPair (x,y) = x+y</p>
+<p>addPair :: (integer, Integer) -&gt; Integer
+addPair (0,0) = 0
+addPair (0,y) = y
+addPair (0,x) = x
+addPair (x,y) = x+y\</p>
+<p>Se aplican las reglas clásicas del Pattern Matching.</p>
+<p>Adicionalmente para las 2-úplas (x,y), existen las funciones selectoras <strong>fst</strong> y <strong>snd</strong> . However, this is discouraged.</p>
+<p>  fst (x,y) = x
+  snd (x,y) = y</p>
+<p>Se deben definir funciones selectoras para poder acceder a los elementos de las tuplas.</p>
+<h3 id="algebraic-types">Algebraic Types</h3>
+<p>Un tipo algebraico vendría a ser un struct de c. Se introducen con el keyword data, les sigue su nombre y un igual con la información de como se construyen estos elementos.</p>
+<p>Estructura de un tipo algebraico:</p>
+<p>  data name = C_1 a_1 ... a_1k |
+              ...
+              C_n a_n ... a_nk</p>
+<p>Donde C_n es un constructor. Los nombres de type y los constructores comienzan con mayúsculas.</p>
+<h4 id="product-type">Product type</h4>
+<p>Se le llama al tipo de dato algebraico que tiene un numero arbitrario de campos de tipo <strong>type</strong>.
+Por ejemplo:</p>
+<p>  data People = Person Name Age
+              deriving (Eq,Show)
+  donde:
+  type Name = String
+  type Age = Int</p>
+<p>A los constructores se les puede aplicar pattern matching:</p>
+<p>data Shape = Circle Float |
+          Rectangle Float Float
+          deriving (Eq,Ord,Show)</p>
+<p>area :: Shape -&gt; Float
+area (Circle r) = pi * r * r
+area (Rectangle h w) = h * w</p>
+<p>Es importante notar que podemos ponerle el mismo nombre a un tipo de dato algebraico y a un constructor, pero esto es extremadamente confuso por lo que se sugiriere evitarlo.</p>
+<p>Podemos entender los constructores como funciones que construyen el objeto Shape:</p>
+<p>Circle :: Float -&gt; Shape
+Rectangle :: Float -&gt; Float -&gt; Shape</p>
+<p>Es importante subrayar la diferencia entre <em>type</em> y <em>data</em>. El primero es un sinónimo, se puede escribir de la manera larga y es prescindible del programa. Por otro lado, un <em>data</em> no. Es un nuevo tipo de dato que antes no existía. Más adelante se verá que los tipos algebraicos pueden ser recursivos y polimórficos.</p>
+<h3 id="lists">Lists</h3>
+<blockquote>
+<p>A list in Haskell is a collection of items from a given type. For every type t there is a Haskell type [ t ] of lists of elements from t.</p>
+</blockquote>
+<pre><code>[’a’,’a’,’b’] :: String
+&quot;aab&quot; :: String
+</code></pre>
+<p>También podemos tener listas de funciones, o listas de listas:</p>
+<pre><code>[fastFib,fastFib] :: [ Integer -&gt; Integer ]
+[[12,2],[2,12],[]] :: [ [Integer] ]
+</code></pre>
+<p>A su vez, la lista vacía representada como [] pertenece a todos los tipos de listas.</p>
+<p>Las listas de tipos enumerados (integers, chars, etc.) pueden escribirse con notaciones especiales:</p>
+<pre><code>[n .. m] is the list [n,n+1,...,m]; if n exceeds m, the list is empty:
+[3.1 .. 7.0] -&gt; [3.1,4.1,5.1,6.1,7.1]
+[’a’ .. ’m’] -&gt; &quot;abcdefghijklm&quot;
+
+[n,p .. m] is the list of numbers whose first two elements are n and p and whose
+last is m, with the numbers ascending in steps of p-n. For example,
+[0.0,0.3 .. 1.0] -&gt; [0.0,0.3,0.6,0.8999999999999999]
+[’a’,’c’ .. ’n’] -&gt; &quot;acegikm&quot;
+</code></pre>
+<h4 id="strings">Strings</h4>
+<p>Los strings se concatenan con el operador ++. Existen las funciones show y read que permiten imprimir un string y leer de un string respectivamente.
+Cuando no es claro cual es el resultado de la función read, se puede aclarar realizando:</p>
+<pre><code>(read &quot;3&quot;) :: Integer
+</code></pre>
+<h4 id="list-comprehensions">List Comprehensions</h4>
+<blockquote>
+<p>In a list comprehension we write down a description of a list in terms of the elements of another list. </p>
+</blockquote>
+<p>Primero, tenemos un <strong>generador</strong> de onde provienen los elementos de la lista, luego tenemos multiples <strong>tests</strong> para saber si incluir o no un elemento generado, por ultimo los elementos que pasan los test se <strong>transforman</strong>.</p>
+<p>Ejemplos:
+    ex = [1,2,3]
+    [2*n | n&lt;-ex] -&gt; [2,4,6]
+    [n+1 | n&lt;-ex, isEven n] -&gt; [3]</p>
+<p>También podemos aplicar técnicas de pattern matching sobre el generador:</p>
+<pre><code>addPairs :: [(Integer,Integer)] -&gt; [Integer]
+addPairs list2 = [m+n | (m,n)&lt;-list2, m&gt;0]
+</code></pre>
+<p>Observar que una list comprehension puede formar parte de la definición de una función:</p>
+<pre><code>allEven xs = (xs == [x | x&lt;-xs, isEven x])
+</code></pre>
+<p>De la misma manera que el patrón del generador no tiene que hacer matching de todos los elementos de la lista, así excluyéndolos:</p>
+<pre><code>circles :: [Shape] -&gt; Int
+circles shapes = sum [1 | Circle r &lt;- shapes]
+</code></pre>
+<h2 id="chapter-vi-programming-with-lists">Chapter VI: Programming With Lists</h2>
+<p>En haskell las funciones pueden ser polimórficas. Estas funciones se ven acotadas por su forma.</p>
+<blockquote>
+<p>At work here is the principle that a function’s type is as general as possible, consistent with the constraints put upon the types by its definition.</p>
+</blockquote>
+<p>Ejemplos de declaraciones polimórficas:</p>
+<pre><code>a -&gt; b -&gt; a
+[a] -&gt; a -&gt; (a,[a])
+a -&gt; Int -&gt; b
+</code></pre>
+<p>Se dice que una signature es <em>una instancia</em> de una más general si obedece su forma polimórfica.</p>
+<p>Se puede obtener el tipo de una función escribiendo :type f en GHCi.</p>
+<p>Es importante aclarar que el <em>polimorfismo</em> y la <em>sobrecarga</em> son dos cosas distintas. Una función polimórfica tiene una sola definición, mientras que la sobrecarga son varias declaraciones de funciones con el mismo nombre para distintos tipos de datos, y por ello son funciones distintas. </p>
+<h3 id="haskell-functions-prelude">Haskell functions: Prelude</h3>
+<p><img src="{{url_for('static', filename='imgs/fp/prelude.png')}}" alt="Prelude">
+<img src="{{url_for('static', filename='imgs/fp/prelude2.png')}}" alt="Prelude"></p>
+<p>En Haskell se tiene por convención que los nombres de los módulos tengan un orden jerárquico utilizando palabras separadas por puntos y con letra capital. Las palabras más a la izquierda son las jerarquías más superiores.</p>
+<p>Muchos módulos de Haskell importan todos sus sub-módulos hijos, por ejemplo Foreign.C importa Foreign.C.(Types,String,Error)</p>
+<p>Las librerías más importantes de Haskell son:</p>
+<ul>
+<li><p>Prelude: La librería estándar, viene importada por defecto.</p>
+</li>
+<li><p>Control: Control.Monad contiene definiciones para operar IO en Haskell, así como operaciones con side-effects.</p>
+</li>
+<li><p>Foreign: Librerías para soportar la ejecución de programas escritos en otros idiomas.</p>
+</li>
+<li><p>Numeric: Funciones para leer/escribir números en varios formatos</p>
+</li>
+<li><p>System: Handling de I/O, System Calls, interacción con sistema UNIX.</p>
+</li>
+</ul>
+<p><strong>The Haskell Platform</strong> es un bundle de GHC que incluye varias herramientas estándar (incluyendo GHCi).</p>
+<p><strong>HackageDB</strong> es el repositorio de módulos de Haskell más importante. </p>
+<p>Existe un sistema para generar documentación de módulos llamado <strong>Haddock</strong>.</p>
+<h4 id="cabal">Cabal</h4>
+<p><strong>Cabal</strong> es una herramienta para instalar paquetes y sus dependencias. Los comandos más importantes son:</p>
+<ul>
+<li>cabal update: Actualiza los paquetes disponibles</li>
+<li>cabal list <em>s</em>: lista los paquetes cuya descripción contengan <em>s</em>.</li>
+<li>cabal install <em>pkg</em>: Instala la última version del paquete <em>pkg</em></li>
+<li>cabal install <em>pkg-1.0</em>: Instala la versión 1.0 de <em>pkg</em></li>
+<li>cabal install <em>pkg &lt;2</em>: Instala una version de <em>pkg</em> anterior a la 2.0</li>
+<li>cabal install <em>pkg</em> --dry-run : Instala pkg a ver qué pasa, no se hace efectivo el cambio.</li>
+<li>cabal help</li>
+<li>ghc-pkg list: Lista todos los paquetes instalados</li>
+</ul>
+<p>Mucha de la documentación de los paquetes se encuentra disponible en <a href="http://hackage.haskell.org/package/">Hackage</a>. Existen herramientas de búsqueda de funciones y módulos como <a href="http://www.haskell.org/hoogle/">Hoogle</a></p>
+<h2 id="chapter-vii-defining-functions-over-lists">Chapter VII: Defining functions over lists</h2>
+<h3 id="pattern-matching-ii">Pattern Matching II</h3>
+<p>El símbolo wildcard se utiliza para hacer matching de cualquier cosa, se utiliza para no asignarle un nombre al patrón.
+Ejemplo
+    foo 0 y = y
+    foo x _ = x</p>
+<p>Un patrón puede estar compuesto por:</p>
+<ol>
+<li>Un valor literal. Por ejemplo: 24, &#39;f&#39;, True.</li>
+<li>Una variable: x,y ...</li>
+<li>Un wildcard: _ . Matches cualquier valor</li>
+<li>Patrón tuple: (p_1,..,p_n). Matches tuples de valor (v_1,..,v_n) donde cada v_k matches p_k</li>
+<li>Un constructor aplicado a un numero de patrones (C p_1 p_2 ... p_n). Esto fuerza que el valor haya sido construido por C y cada argumento v_k matches p_k</li>
+</ol>
+<p>Recordar nuevamente que los patrones se evalúan de manera <strong>secuencial</strong>.</p>
+<h3 id="list-patterns">List Patterns</h3>
+<p>[] es la lista vacía. Las listas no vacías tienen un <em>head</em> y un <em>tail</em>, head es el primer elemento y tail es el resto de la lista si se le quita dicho elemento. A su vez, las listas tienen un constructor elemental llamado <strong>cons</strong> que se escribe &quot;:&quot;</p>
+<pre><code>  (:) :: a -&gt; [a] -&gt; [a]]
+(:) x xs ---&gt; [x]++xs
+</code></pre>
+<p>Cons tiene la propiedad interesante de que toda lista tiene una <strong>única</strong> forma de ser construida con el operador <em>cons</em>. Esto no se cumple, por ejemplo, con el operador de concatenación <strong>++</strong>.</p>
+<p>Algunos ejemplos de pattern matching clásicos con estas listas son:</p>
+<ul>
+<li>(x:_) : matches el head de la lista y el resto de la misma</li>
+<li>(_ : _) : matches cualquier elemento excepto la lista vacía</li>
+</ul>
+<p>Recordar que la función tiene precedencia al cons, por lo que f x:xs != f (x:xs).</p>
+<blockquote>
+<p>A list will match the pattern (p:ps) if it is non-empty, and also if its head matches the pattern p and its tail the pattern ps.</p>
+</blockquote>
+<p>Nota: No se puede hacer chequeos de igualdad en el pattern matching. Por ejemplo, el siguiente patrón no es válido en Haskell: <code>x (x:ys)</code></p>
+<h3 id="case-expression">Case expression</h3>
+<p>Utilizamos case para hacer pattern matching de varios casos. Similar a las guardas | pero en vez de evaluar una condición se realiza el primer caso en que el patrón coincide.</p>
+<p>En forma general:</p>
+<pre><code>case e of 
+  p1 -&gt; e1
+  p2 -&gt; e2
+  ...
+  pn -&gt; en
+</code></pre>
+<p>Por ejemplo:</p>
+<pre><code>firstDigit :: String -&gt; Char
+firstDigit xs =
+  case (digits xs) of
+    [] -&gt; &#39;\0&#39;
+    (x:_) -&gt; x
+</code></pre>
+<h3 id="recursión-sobre-listas">Recursión sobre listas</h3>
+<p>El uso de cons para la recursión sobre las listas es esencial. Esto junto al paso base de la lista vacía [] nos permite desarrollar cualquier esquema de recursión primitiva.</p>
+<p>La idea de recursión es responder la pregunta:</p>
+<blockquote>
+<p>What if we were given the value fun xs. How could we define fun (x:xs) from it?</p>
+</blockquote>
+<h4 id="ejemplo-insertion-sort">Ejemplo: Insertion Sort</h4>
+<p>Algoritmo de ordenamiento clásico. Consiste en iterar sobre cada elemento y volver a iterar la lista asegurando que los números a la izquierda son más pequeños que el elemento fijado:</p>
+<pre><code>iSort :: [Integer -&gt; Integer]
+iSort (x:xs) = ins x (iSort xs)
+
+ins :: Integer -&gt; [Integer] -&gt; [Integer]
+ins x [] = [x]
+ins x (y: ys)
+  | x &lt;= y = x:(y:ys)
+  | otherwise = y : ins x ys
+</code></pre>
+<h4 id="ejemplo-quicksort">Ejemplo: Quicksort</h4>
+<blockquote>
+<p>It is striking to see how close this program is to our informal description of the algorithm, and this expressiveness is one of the important advantages of a functional approach.</p>
+</blockquote>
+<pre><code>qSort :: [Integer] -&gt; [Integer]
+qSort [] = []
+qSort (x:xs) = (qSort [y | y&lt;-xs, y&lt;=x]) ++ [x] ++ (qSort [y | y&lt;-xs, y&gt;x])
+</code></pre>
+<h2 id="chapter-viii-io-in-haskell">Chapter VIII: I/O in Haskell</h2>
+<p>La solución al problema de I/O en Haskell se basa en introducir el type <code>IO a</code> . El cual se puede entender como un <em>programa</em> que realiza actividades de entrada/salida y luego <em>retorna</em> un valor de tipo <code>a</code>.</p>
+<blockquote>
+<p>One way of looking at the IO types is that they provide a small imperative programming language for writing I/O programs on top of Haskell, without compromising the functional model of Haskell itself.</p>
+</blockquote>
+<p>Las funciones clásicas de input son: <code>getLine :: IO String</code> y <code>getChar :: IO Char</code>. </p>
+<h3 id="type-">Type ()</h3>
+<p>Haskell tiene el tipo <code>()</code> el cual contiene un solo elemento que se escribe <code>()</code>. Este valor no aporta información. Se utiliza para la signature de programas I/O para indicar que el resultado que retorna no tiene ninguna importancia. Por ejemplo: <code>putChar :: Char -&gt; IO ()</code></p>
+<h3 id="main-module">Main module</h3>
+<p>Al compilar un programa con GHC, este produce un ejecutable que ejecuta la función <code>main :: IO t</code>. Donde t es un tipo, usualmente <code>()</code>. Por defecto se espera que el programa main se encuentre en el modulo Main. </p>
+<h3 id="hello-world">Hello World</h3>
+<pre><code>putStr :: String -&gt; IO ()
+helloWorld :: IO ()
+helloWorld = putStr &quot;Hello, World!&quot;
+</code></pre>
+<p><strong>NOTA</strong>: Es importante destacar que GHCi embebe las ejecuciones de las funciones en el programa <code>show</code>. Por lo que cuando se muestra el resultado de las funciones, GHCi está embebiendo la función en un programa I/O de forma discreta.</p>
+<h3 id="show">Show</h3>
+<p>Los valores que se pueden imprimir en general son los que pertenecen a la clase <code>Show</code>. Por ejemplo, para decir que un tipo <code>a</code> debe pertenecer a dicha clase en la signature de una función: <code>print :: Show a =&gt; a-&gt; IO ()</code></p>
+<h3 id="return">Return</h3>
+<p>Para obtener el resultado de un programa I/O precisamos la función de Haskell <code>return :: a -&gt; IO a</code>. La cual retorna el resultado <code>a</code>. Si escribimos <code>return ()</code> esto es equivalente a no hacer nada, no se retorna ningún valor. Un uso de esto es:</p>
+<pre><code>if condition then action else return ()
+</code></pre>
+<h3 id="do">Do</h3>
+<p>La estructura Do es el pilar fundamental para los programas estructurados en haskell. Permite <em>secuenciar</em> un programa I/O y <em>nombrar (bind)</em> valores retornados por acciones I/O.</p>
+<p>Por ejemplo, para realizar varias acciones I/O en forma secuencial:</p>
+<p>put4times :: String -&gt; IO ()
+put4times str =
+  do str putStrLn
+     str putStrLn
+     str putStrLn
+     str putStrLn</p>
+<p>Para capturar un valor de un programa I/O se utiliza el operador <code>&lt;-</code>:</p>
+<pre><code>getNPut :: IO ()
+getNPut =
+  do line &lt;-getLine
+    putStrLn line
+  --line tiene el resultado de getLine!
+</code></pre>
+<p>El <code>&lt;-</code> puede entenderse como el let que guarda un valor, ya que binds una variable un valor, pero luego este no se puede modificar. A su vez, los let clásicos se pueden utilizar con juicio para realizar definiciones locales:</p>
+<pre><code>readme :: IO ()
+readme  =
+  do lect &lt;- readLine
+    let toPrint = f lect
+    putStr toPrint
+    putStr toPrint
+</code></pre>
+<p>Es importante observar que el type de <code>ch &lt;- getChar</code> es <code>Char</code> y el de <code>let ch = getChar</code> es <code>IO Char</code>.</p>
+<h3 id="read">Read</h3>
+<p>Haskell contiene la clase <code>Read</code> con la función <code>read :: Read a =&gt; String -&gt; a</code> la cual sirve for parsing un string y obtener un valor.
+Por ejemplo, para obtener un entero desde la entrada:</p>
+<pre><code>getInt :: IO Integer
+getInt = do line &lt;- getLine
+    return (read line :: Integer)
+</code></pre>
+<h3 id="loops">Loops</h3>
+<p>Los programas secuenciales en Haskell pueden ser iterativos mediante recursión. Por ejemplo:</p>
+<pre><code>copyN :: Integer -&gt; IO ()
+copyN n = if n &lt;= 0 then return () else
+  do
+    line &lt;- getLine
+    putStrLn line
+    copyN (n-1)
+</code></pre>
+<p>A las variables que se utilizan para controlar una recursión se les suele llamar <em>loop data</em>.</p>
+<h2 id="chapter-ix-proofs">Chapter IX: Proofs</h2>
+<p>Uno de los aspectos interesantes de la programación funcional es la capacidad que nos proporciona para probar propiedades de las funciones que construimos. Es decir, podemos probar la correctitud de una función.</p>
+<p>Para ello nos basamos fuertemente en el principio de inducción primitiva y general (PIP) y la manipulación simbólica.</p>
+<h3 id="definedness-termination-and-finiteness">Definedness, termination and finiteness</h3>
+<p>Evaluar una expresión tiene dos resultados. O la evaluación termina, dando un resultado o esta continúa evaluándose para siempre.
+Cuando una expresión no llega a un resultado decimos que es <strong>undefined</strong>, en el caso contrario <strong>defined</strong>.</p>
+<p>La evaluación de Haskell es <strong>lazy</strong>, es decir, los argumentos de las funciones se evalúan solamente cuando su valor realmente se necesite. Este método de computación nos permite definir y utilizar <em>infinite lists</em> como <code>[1,2,...]</code> y <em>partially defined lists</em> . Las listas <em>finite</em> son aquellas de largo finito y elementos <em>defined</em>.</p>
+<h2 id="chapter-x-patterns-of-computation">Chapter X: Patterns of Computation</h2>
+<p>Reutilizar el software es un objetivo importante de la programación. Haskell nos permite cumplir este objetivo mediante polimorfismo y patrones clásicos de filtrado/combinación junto a <strong>funciones de alto orden</strong>.</p>
+<blockquote>
+<p>A function is higher-order if it takes a function as an argument or returns a function as a result, or does both. </p>
+</blockquote>
+<h3 id="mapping">Mapping</h3>
+<p>Este patrón se da cuando queremos aplicar una transformación a todos los objetos de una lista.</p>
+<p>la función map de Haskell nos permite realizar mappings sin tener que nombrar funciones específicas para cada caso:</p>
+<pre><code>map :: (a -&gt; b) -&gt; [a] -&gt; b
+map f xs = [f x | x &lt;- xs]
+</code></pre>
+<p>Observar que la notación <code>(signature)</code> nos permite definir el tipo función.</p>
+<h4 id="zipwith">ZipWith</h4>
+<p>¿Existe un caso más general para la función zip? Notar el caso en que tenemos dos listas y queremos realizar operaciones sobre ella tomando un elemento de cada lista y aplicando una transformación. Para ello Haskell nos provee de la función <code>zipWith</code>:</p>
+<pre><code>zipWith :: (a-&gt;b-&gt;c) -&gt; [a] -&gt; [b] -&gt; [c]
+zipWith f (x:xs) (y:ys) = f x y : zipWith f xs ys
+zipWith f _ _ = []
+</code></pre>
+<h3 id="filtering">Filtering</h3>
+<p>Este patrón se da cuando queremos seleccionar los elementos de una lista que cumplen una propiedad.</p>
+<p>Para ello definimos nuestra propiedad <code>p :: a -&gt; Bool</code>. Por convención las propiedades suelen identificarse con el prefijo <code>is</code>. 
+Aplicar el filtro consiste en utilizar la función <code>filter</code>:</p>
+<pre><code>filter :: (a -&gt; Bool) -&gt; a -&gt; [a]
+filter p [] = []
+filter p (x :xs)
+  | p x = x : filter p xs
+  | otherwise = filter p xs
+</code></pre>
+<h3 id="folding">Folding</h3>
+<p>Este patrón se da cuando queremos computar una función utilizando los elementos de la lista.</p>
+<p>Para ello utilizamos las funciones foldr y foldl de haskell. 
+Estas son: <code>foldr :: (a-&gt;b-&gt;b) -&gt; b -&gt;[a]-&gt; b</code> y <code>foldl :: (b-&gt;a-&gt;b)-&gt;b-&gt;[a]-&gt;b</code>.
+La primera empieza de la derecha, la segunda desde la izquierda.</p>
+<p>Conceptualmente tienen un mecanismo distinto de funcionamiento:</p>
+<p>Foldl es:</p>
+<ol>
+<li>Left associative</li>
+<li><strong>Tail recursive</strong></li>
+<li>Lazy</li>
+<li>Backwards</li>
+</ol>
+<p>Foldr es:</p>
+<ol>
+<li>Right associative</li>
+<li>Recursive into the argument.</li>
+<li>Lazy</li>
+<li>Backwards</li>
+</ol>
+<p>Existe una variante llamada <code>foldl&#39;</code> que implementa un fold estricto (se evalua en seguida el argumento). Lo cual es util para mejorar la performance de foldl grandes.</p>
+<h4 id="implementación">Implementación</h4>
+<pre><code>foldr f z [] = z
+foldr f z (x:xs) = f x (foldr f z xs)
+
+foldl f z [] = z
+foldl f z (x:xs) = foldl f (f z x) xs
+</code></pre>
+<h2 id="chapter-xi-higher-order-functions">Chapter XI: Higher-Order Functions</h2>
+<blockquote>
+<p>Haskell is a functional programming language: that means that the main way in which we compute things is by defining functions which describe how to transform the inputs into the required output. Haskell is also functional in a more distinctive way: functions are data in Haskell, and can be treated just like data of any other type.</p>
+</blockquote>
+<blockquote>
+<p>Una función de alto orden es una función que toma una función como parámetro o retorna una función como resultado.</p>
+</blockquote>
+<h3 id="operadores--y-">Operadores <code>$</code> y <code>.</code></h3>
+<p>El operador <code>.</code> nos permite realizar composición de funciones con la misma semántica que en matemática:</p>
+<pre><code>(.) :: (b-&gt;c) -&gt; (a-&gt;b) -&gt; (a-&gt;c)
+</code></pre>
+<p>El operador <code>.</code> asocia a la derecha: f . g . h = f . (g . h)</p>
+<p>El operador de aplicación <code>$</code> nos permite aplicar un argumento sobre una función:</p>
+<pre><code>($) :: (a-&gt;b) -&gt; a -&gt; b
+</code></pre>
+<p>Por ejemplo, f $ x = (f x). El operador se utiliza para omitir paréntesis en funciones como <code>f (g (h x)) = f $ g \$ h x</code>
+También sirve cuando necesitamos que la aplicación en si sea una función. Por ejemplo: <code>zipWith ($) [sum,product] [ [1,2],[3,4] ]</code> nos permite aplicar las funciones que se encuentran en la primera lista sobre los elementos de la segunda.</p>
+<h3 id="abstracciones-lambda">Abstracciones lambda</h3>
+<p>Haskell nos permite escribir funciones que no tienen un nombre asociado. A esto se les llama expresiones lambda.
+Por ejemplo: <code>\x -&gt; x+1</code> es la función que suma 1.</p>
+<p>Estas funciones también sirven cuando no podemos definir una función de forma independiente:</p>
+<pre><code>mapFun fs x = map (\f -&gt; f x) fs
+</code></pre>
+<p>Notar que x no es parte de los argumentos de la función, pero si es parte de la definición. La única forma de replicar esto sin utilizar lambdas es con definiciones locales:</p>
+<pre><code>mapFun fs x = map FOO fs
+  where FOO f = f x
+</code></pre>
+<p>Las funciones lambda pueden tomar varias entradas. Por ejemplo: <code>comp2 f g = (\x y -&gt; g (f x) (f y))</code></p>
+<h3 id="partial-application">Partial Application</h3>
+<blockquote>
+<p>any function taking two or more arguments can be partially applied to one or more arguments. This gives a powerful way of forming functions as results.</p>
+</blockquote>
+<p>por ejemplo: <code>doubleAll = map (multiply 2)</code> retorna una función que tiene como entrada una lista y devuelve esta lista duplicada. Se retorna una función por application parcial de map, ya que faltaba el argumento de la lista. A su vez, también se aplica aplicación parcial sobre la función multiply. Ya que se deja fijo un argumento, se retorna una función de tipo Int-&gt;Int.</p>
+<p>Sin embargo, no siempre se puede realizar aplicación parcial de forma directa, esto es porque el argumento que queremos aplicarle la función no siempre es el primero. Esto se soluciona fácilmente con una función lambda. Ejemplo: <code>partial = (\x -&gt; notPartial x 2)</code></p>
+<h4 id="operator-sections">Operator Sections.</h4>
+<p>Los operadores se pueden aplicar parcialmente de ambos lados, a eso se le conoce como <em>operator sections</em>. Los mismos siguen esta regla:</p>
+<pre><code>(op x) y = y op x
+(x op) y = x op y
+</code></pre>
+<p>Ejemplos de esto:</p>
+<pre><code>(+2) = (\x -&gt; x+2)
+(&gt;2) = (\x -&gt; x&gt;2)
+(3:) = (\xs -&gt; 3:xs)
+($ 3) = (\f -&gt; f $ 3)
+</code></pre>
+<h3 id="curried-functions">Curried functions</h3>
+<blockquote>
+<p>Partial application can appear confusing: in some contexts, functions appear to take one argument, and in others more than one. In fact, every function in Haskell takes exactly one argument.</p>
+</blockquote>
+<p>En efecto, la firma <code>a -&gt; b -&gt; c -&gt; d</code> es la simplificación de <code>a -&gt; (b-&gt; (c-&gt;d))</code> . Esto se da porque el operador <code>-&gt;</code> es <em>right associative</em>.</p>
+<p>Observar que la flecha <code>-&gt;</code> no es asociativa. Por ejemplo, <code>f (a-&gt;a)-&gt;b</code> \(\neq\) <code>f a-&gt;a-&gt;b</code>. La primera función espera como argumento una función de <code>a</code> a <code>a</code> y retorna <code>b</code> mientras que la segunda espera dos argumentos de tipo <code>a</code>.</p>
+<h4 id="rule-of-cancellation">Rule of cancellation</h4>
+<p>Para determinar el <em>type</em> de una función aplicamos la regla de la cancelación:</p>
+<p>Dada una función <code>t1-&gt;t2-&gt;...-&gt;tn-&gt;t</code> y sus argumentos aplicados <code>e1::t1,e2::t2,...,ek::tk</code>. Suponiendo $k&lt;n$ el resultado se da **cancelando** los tipos desde \([1\dots k \) : <code>tk+1 -&gt; tk+2 -&gt; ... -&gt; tn -&gt; t</code></p>
+<h4 id="currying-and-uncurrying">Currying and uncurrying</h4>
+<p>Existen dos formas de modelar funciones. La forma <em>uncurried</em> se basa en mandar todos los argumentos como una tuple. Por ejemplo:</p>
+<pre><code>(*uc) :: (Integer,Integer) -&gt; Integer
+(*uc) (x,y) = x*y
+</code></pre>
+<p>Mientras que la version curryficada es:</p>
+<pre><code>( * ) Integer -&gt; Integer -&gt; Integer
+( * ) x y = x * y
+</code></pre>
+<p>La forma curryficada tiene dos ventajas: Notación más legible y permite <em>partial application</em>. Es posible pasar de notación curry a uncurry sin dificultades. Las funciones <code>curry</code> y <code>uncurry</code> del Prelude permiten esta transformación.</p>
+<pre><code>curry :: ((a,b)-&gt;c) -&gt; (a-&gt;b-&gt;c)
+curry f x y = f (x,y)
+
+uncurry :: (a-&gt;b-&gt;c) -&gt; ((a,b)-&gt;c)
+uncurry f (x,y) = f x y
+</code></pre>
+<h3 id="datatype-constructors">Datatype Constructors</h3>
+<p>¡Los constructores de datatypes también son funciones! Pueden aplicarse parcialmente, pasarse como argumentos y retornados como resultados. 
+El siguiente ejemplo crea una lista de personas utilizando listas: <code>zipWith Person [&quot;GeraInt&quot;,&quot;Bob&quot;] [22,23]</code></p>
+<h3 id="verification--general-functions">Verification &amp; General functions</h3>
+<h4 id="principle-of-extensionality">Principle of extensionality</h4>
+<blockquote>
+<p>Two functions f and g are equal if they have the same value at every argument.</p>
+</blockquote>
+<blockquote>
+<p>This is called extensionality in contrast to the idea of intentionality in which we say two functions are the same only if they have the same definitions – we no longer think of them as black boxes; we are allowed to look inside them to see how the mechanisms work, as it were. </p>
+</blockquote>
+<p>Esto quiere decir, para probar que dos funciones son iguales utilizo su definición para probar que ambas tienen el mismo resultado para todo argumento.</p>
+<p>NOTA: No podemos utilizar QuickCheck de forma convencional para funciones de alto orden. Podemos pasarle una función de ejemplo, o probar con una instancia de su signature con funciones concretas.</p>
+<h2 id="chapter-xii-developing-higher-order-programs">Chapter XII: Developing Higher order Programs</h2>
+<p>A <em>combinator</em> is a function, typically of higher order. Its etymology comes from the \(\lambda\) calculus.</p>
+<blockquote>
+<p>How can the program be designed? We focus on the data structures which the program will produce, and we can see the program as working by making a series of modifications to the data with which we begin. </p>
+</blockquote>
+<p>La filosofa de diseño <em>data-driven</em> es una práctica común en la programación funcional.</p>
+<h2 id="chapter-xiii-overloading-type-classes--type-checking">Chapter XIII: Overloading, type classes &amp; type checking</h2>
+<h3 id="overloading">Overloading</h3>
+<p>Why should we overload?</p>
+<ol>
+<li>Reuse: Se puede reutilizar la función sobre muchos tipos distintos.</li>
+<li>Readability: Es más legible tener una única función con un significado semántico claro que varias para cada caso.</li>
+</ol>
+<p>Overloading nos permite tener un == global:</p>
+<pre><code>(==) :: Char -&gt; Bool
+(==) :: [Char] -&gt; Bool
+</code></pre>
+<h3 id="classes">Classes</h3>
+<blockquote>
+<p> We call the collection of types over which a function is defined a type class or simply a class.</p>
+</blockquote>
+<p>Los tipos que pueden ser equiparados son los que forman parte de la clase <code>Eq</code>. </p>
+<p>La definición de una clase es la siguiente:</p>
+<pre><code>class Name ty where
+    ... signature involving type variable ty ...
+</code></pre>
+<p>Por ejemplo:</p>
+<pre><code>class Eq a where
+  (==) :: a-&gt;a-&gt;Bool
+</code></pre>
+<p>Los miembros de un type class se le llaman sus <em>instancias</em>. Y un tipo es una instancia de una clase si se proporciona <strong>una implementación de la interfaz para ese tipo</strong>.</p>
+<p>¿Como exigimos que los tipos de una función pertenezcan a una clase? Tenemos que exigir un <strong>context</strong>. En la signature, por ejemplo:</p>
+<pre><code>allEqual :: Eq a =&gt; a-&gt;a-&gt;a-&gt;Bool
+</code></pre>
+<h4 id="instances">Instances</h4>
+<p>Para definir una instancia de un tipo debemos implementar su interface:</p>
+<pre><code>instance Eq Bool where
+  True == True = True
+  False == False = True
+  _ == _ = False 
+</code></pre>
+<p>A su vez, a una instancia se le puede exigir un contexto. Por ejemplo</p>
+<pre><code>instance Info a =&gt; Info [a] where ...
+</code></pre>
+<p>De esta manera exigimos que el tipo adentro de la lista también sea instancia de Info.</p>
+<h4 id="limitaciones">Limitaciones</h4>
+<p>Las instancias en Haskell son globales, no son locales a un módulo. También hay limitaciones sobre lo que puede ser una instancia. El tipo de una instancia puede ser un tipo base, una lista, 2-úplas o un constructor tipo shape. Se puede flexibilizar este control, desactivando este estándar de Haskell 2010 mediante la bandera de GHC: <code>{-# OPTIONS GHC -XFlexibleInstances #-}</code></p>
+<h4 id="default-definitions">Default definitions</h4>
+<p>A una clase se le pueden dar definiciones por default, estas pueden ser <em>overridden</em> en la declaración de una instancia.</p>
+<pre><code>class Eq a where
+(==),(/=) :: a-&gt;a-&gt;Bool 
+x /= y = not (x==y)
+x == y = not (x/=y)
+</code></pre>
+<h4 id="derivaciones">Derivaciones</h4>
+<p>A su vez, una clase o instancia puede depender que los tipos con que trabaja pertenezcan a otras clases. Por ejemplo, una instancia de <code>Ord</code> también debe estar en <code>Eq</code>. Para reflejar esto:</p>
+<pre><code>class Eq a =&gt; Ord a where
+ (&lt;), (&lt;=), (&gt;), (&gt;=) :: a-&gt;a-&gt;Bool
+ max,min :: a-&gt;a-&gt;a
+ compare :: a-&gt;a-&gt;Ordering
+</code></pre>
+<p>Podemos entender que la clase <code>Ord</code> <strong>hereda</strong> las operaciones de la clase <code>Eq</code>!</p>
+<h4 id="multiple-constraints">Multiple constraints</h4>
+<p>Para indiciar que un tipo debe pertenecer a varias clases:</p>
+<pre><code>vSort :: (Ord a, Show a) =&gt; [a] -&gt;String
+
+instance (Eq a, Eq b) =&gt; Eq (a,b) where
+(x,y) == (z,w) = x==z &amp;&amp; y==w
+
+class (Ord a, show a) =&gt; OrdShow a
+</code></pre>
+<p>Esto puede verse como <em>multiple inheritance</em>.</p>
+<h3 id="haskell-classes">Haskell Classes</h3>
+<p><img src="{{url_for('static', filename='imgs/fp/classes.png')}}" alt="Haskell 2010 classes"></p>
+<ol>
+<li>Eq: Exige las operaciones == y /=</li>
+<li>Ord: Exige los operadores de comparación, min y max.</li>
+<li>Enum: Funciones de sucesor y predecesor, fromEnum toEnum, etc.</li>
+<li>Bounded: Existe dos números cotas max y min.</li>
+<li>Show: Implementa la función show para poder transformar el obj a string.</li>
+<li>Read: Parses un string para obtener el obj.</li>
+</ol>
+<p>La clase base de todos los números es <code>Num</code>. La cual exige los operadores <code>+,-,*</code>, la negación, valor absoluto, sucesor, y transformar desde entero a dicho tipo.</p>
+<p>Los integer pertenecen a la clase integral la cual tiene las funciones <code>quot,rem</code> y <code>div,mod</code>.</p>
+<p>La clase <code>Fractional</code> sirve para representar números Racionales. Exige el operador de división, el inverso, etc.</p>
+<h3 id="derivar-instancias">Derivar instancias</h3>
+<p>Para evitar tener que escribir <code>instance</code> triviales. Tenemos la syntactic sugar de deriving, la cual nos permite declarar de que clase es un tipo, utilizando las operaciones default de este. Nonetheless, podemos cambiar las operaciones default por las nuestras:</p>
+<pre><code>data People = Person Name Age
+  deriving (Eq,Show)
+</code></pre>
+<p>Una diferencia notable entre Haskell y lenguajes orientados a objetos como Java es que el primero no tiene  <em>dynamic binding</em>, es decir. Si bien existen tipos polimórficos, una instancia de un objeto es de un tipo en concreto. Por ejemplo, una lista es homogénea en ese sentido.</p>
+<h3 id="type-declarations">Type Declarations</h3>
+<p>¿Por que declarar el tipo de una función?</p>
+<ol>
+<li><blockquote>
+<p>The type of an object is the most important single piece of documentation for the object, since it tells us how it can be used – what arguments need to be passed to it, and what type the result has – without us having to understand precisely how it is implemented.</p>
+</blockquote>
+</li>
+<li><p>Nos permite dar un tipo más específico a una función.</p>
+</li>
+<li><p>Nos permite detectar errores al definir una función.</p>
+</li>
+</ol>
+<h3 id="type-checking">Type Checking</h3>
+<p>Al chequear una función se debe verificar que:</p>
+<ol>
+<li>Las guardas, si hay, son de tipo Bool.</li>
+<li>Los valores de las expresiones coinciden con el valor de retorno</li>
+<li>Los patrones son consistentes con los argumentos.</li>
+</ol>
+<p>Se dice que un patrón es <strong>consistente</strong> si matches (algún) elemento del tipo. </p>
+<h2 id="chapter-xiv-algebraic-types">Chapter XIV: Algebraic Types</h2>
+<p>Los tipos algebraicos ya vistos son la suma (<code>data Type = A | B</code>) y el producto (<code>data Type = A B</code>). Se dice que este tipo de datos es algebraico porque el Data Type está compuesto mediante operaciones algebraicas.</p>
+<p>Adicionalmente los tipos de datos algebraicos pueden ser recursivos:</p>
+<pre><code>data NTree = NilT | Node Integer NTree NTree
+</code></pre>
+<p>Finalmente, el nombre del tipo de dato puede estar seguido de variables en el lado derecho de la igualdad, volviéndolo <strong>polimórfico</strong>.
+Por ejemplo, el tipo de dato <code>Maybe</code> utilizado para modelar errores:</p>
+<pre><code>data Maybe a = Nothing | Just a
+</code></pre>
+<p>Notar que los enumerados son constructores sin argumentos, los tipos productos tienen un solo constructor y los de suma tienen varios constructores con múltiples argumentos.</p>
+<p>Las definiciones sobre datos algebraicos usan pattern matching para distinguir entre las distintas alternativas.</p>
+<p>Es posible derivar instancias de clases de tipos algebraicos utilizando la syntactic sugar <em>deriving</em>:</p>
+<pre><code>data Season = Spring | Summer | Autumn | Winter 
+  deriving(Eq,Ord,Enum,Show,Read)
+</code></pre>
+<p>Para los tipos recursivos, la recursión primitiva es un mecanismo seguro para implementar funciones sobre los mismos.</p>
+<h3 id="constructores-infijos">Constructores infijos</h3>
+<p>Se puede expresar los constructores mediante notación infija rodeándolos del carácter &quot;:&quot;. Por ejemplo:</p>
+<pre><code>data Expr = Lit Integer |
+            Expr :+: Expr |
+            Expr :-: Expr
+</code></pre>
+<p>Se le llama a un conjunto de funciones <em>mutually recursive</em> si realizan varias llamadas recursivas entre ellas.</p>
+<h3 id="polymorphic">Polymorphic</h3>
+<p>Los tipos algebraicos pueden tener variables para volverlos polimórficos: <code>data Paris a = Pr a a</code>
+Instancias de lo anterior son:</p>
+<pre><code>Pr 2 3 :: Paris Integer
+Pr [] [3] :: Paris [Integer]
+</code></pre>
+<p>Podemos definir funciones polimórficas sobre estos tipos:</p>
+<pre><code>equalPair :: Eq a =&gt; Pairs a -&gt; Bool
+equalPair (Pr x y) = x==y
+</code></pre>
+<p>Dado que las definiciones pueden tener ms de un parámetro: </p>
+<pre><code>data Either a b = Left a | Right b
+  deriving (Eq,Ord,Read,Show)
+Left &quot;Duke of&quot; :: Either String Int
+Right 3312 :: Either String Int
+
+isLeft :: Either a b -&gt; Bool
+isLeft (Left _) = True
+isRight (Right _) = False
+</code></pre>
+<h3 id="modelling-program-errors">Modelling program errors</h3>
+<p>El problema de la función error es que toda computación útil que se haya realizado se pierde.
+Existen dos approaches para resolver este problema</p>
+<h4 id="dummy-values">Dummy values</h4>
+<p>Para toda función f podemos envolverla para que devuelva un aviso de error dado una condición:</p>
+<pre><code>fErr y x
+  | cond = y
+    otherwise = f x
+</code></pre>
+<h4 id="error-types">Error Types</h4>
+<blockquote>
+<p>Why not instead return an error value as a result?</p>
+</blockquote>
+<pre><code>data Maybe a = Nothing | Just a
+  deriving (Eq,Ord,Read,Show)
+</code></pre>
+<p>De esta manera podemos definir:</p>
+<pre><code>fErr x 
+  | cond = Nothing --There was an error.
+  | otherwise = Just (f x)
+</code></pre>
+<p>El tipo Maybe nos permite levantar una excepción. Cuando se da una excepción podemos:</p>
+<ol>
+<li>Trasmitir el error a traves de la función (mapMaybe)
+ mapMaybe g Nothing = Nothing
+ mapMaybe g (Just x) = Just (g x)</li>
+<li>Atrapar el error (maybe)
+ maybe n f Nothing = n
+ maybe n f (Just x) = f x</li>
+</ol>
+<h2 id="chapter-xv-huffman-codes">Chapter XV: Huffman codes</h2>
+<h3 id="modules">Modules</h3>
+<blockquote>
+<p>In the definition of Haskell 2010, there is no identification between modules and files. Nonetheless, we choose here to write one module per file, and indeed this is required by GHC.</p>
+</blockquote>
+<p>Para importar un módulo desde un archivo:</p>
+<pre><code>module Bee where
+
+import Ant
+</code></pre>
+<p>Por defecto se exportan todas las definiciones de un módulo y se exportan todas las del mismo.</p>
+<p>Para controlar lo que el módulo exporta podemos controlarlo mediante la declarativa module: <code>module Bee (beeKeeper, Ants (..), anteater) where ...</code>. Esto hace que únicamente se exporte las funciones beekeeper, anteater, y el data Ants con sus constructores. Si se omite &quot;(..)&quot; no se importan los constructores generando un tipo de dato abstracto.</p>
+<p>Observar que para decir que todas las definiciones de un módulo deben ser exportadas escribimos <code>module M</code>. Por ejemplo:</p>
+<pre><code>module Bee (module Bee, module Ant) where
+</code></pre>
+<p>Notar que todo sistema compilado requiere un módulo Main. Un archivo sin declaración de module se supone que tiene como header <code>module Main(main) where</code>    </p>
+<p>En vez de decir lo que necesitamos de un módulo, podemos declarar lo que <strong>no</strong> necesitamos. Por ejemplo: <code>import Ant hiding (anteater)</code></p>
+<p>Para evitar que dos funciones con el mismo nombre tengan conflicto, podemos utilizar el <em>qualified name</em> de un módulo. De forma de que las funciones de un módulo se invocan mediante <code>moduleName.foo</code> . Para esto especificamos: <code>import qualified moduleName</code>. Si no se importa un módulo qualified se pueden utilizar ambas formas para mencionar una función (module.foo or foo). </p>
+<h3 id="modular-design">Modular design</h3>
+<p>Las características de un módulo son bastante similares a la que debe tener una clase o un archivo de C:</p>
+<ol>
+<li>Cada módulo tiene un claro rol identificable.</li>
+<li>Cada módulo hace una <strong>sola</strong> tarea. </li>
+<li>Un módulo debe hacer una cosa, pero hacerla completamente. Debe ser <em>autocontenido</em>.</li>
+<li>Cada módulo debe exportar únicamente lo necesario (i.e su interfaz). Esto sigue el principio de <em>information-hiding</em>.</li>
+<li>Los módulos deben ser pequeños. No más de una página de código.</li>
+</ol>
+<h2 id="chapter-xvi-abstract-data-types">Chapter XVI: Abstract data types</h2>
+<p>En esencia. Los tipos abstractos de datos son módulos donde se ocultan los constructores y se da un set de operaciones los cuales me permiten operar sobre estructuras de datos genéricas.</p>
+<p>ADT nos permite ocultar la información, encapsular comportamiento y reutilizar código a través de polimorfismo.</p>
+<p>Los tipos abstractos de datos (TAD) tienen 3 propiedades importantes:</p>
+<ol>
+<li>Son una representación natural de una estructura, avoids being over-specific. </li>
+<li>The signature of the data type is a firm interface between the user and the implementer. The dev of both systems can proceed independently</li>
+<li>If the implementation of a type changes, there should be no change in the programs that use such datatype.</li>
+</ol>
+<h2 id="chapter-xvii-lazy-programming">Chapter XVII: Lazy Programming</h2>
+<p>El método de evaluación perezosa de Haskell nos permite definir expresiones y estructuras de datos sin tener que construirlas completamente. Esto provee un estilo de programación único y permite aplicar nuevas técnicas de programación. </p>
+<p>El funcionamiento de lazy evaluation es el siguiente:</p>
+<ol>
+<li>arguments to functions are evaluated only when this is necessary for evaluation to continue;</li>
+<li>an argument is not necessarily evaluated fully: only the parts that are needed are examined;</li>
+<li>an argument is evaluated at most only once. This is done in the implementation by replacing expressions by graphs and calculating over them.</li>
+</ol>
+<p>A su vez en las definiciones con guardas y funciones locales, se aplica la definición únicamente si es necesaria. Para las condiciones de las guardas se verifica el pattern matching que coincida, luego se procede a evaluar las condiciones hasta que se llegue a una que de True. Una vez que se llega a una condición verdadera se remplaza simbólicamente la definición, no se continúa evaluando condiciones.</p>
+<p>Los operadores utilizan evaluación de circuito cerrado. Por ejemplo, el operador and &amp;&amp; si el operando izquierdo da False entonces no se evalúa el operando derecho. Esto se cumple de forma análoga para el or ||.</p>
+<h3 id="evaluation-order">Evaluation Order</h3>
+<p>Otra característica de Haskell es el <strong>orden</strong> en que se evalúan las funciones:</p>
+<p><strong>La sustitución se aplica de afuera para adentro</strong>. Por ejemplo: <code>f 30 (- 20 20) -&gt; 30+(-20 20)+(-20 20)</code>. Luego, la evaluación es de <strong>izquierda a derecha</strong>: <code>(+ 1 1) + (+ 2 2) = 2 + (+ 2 2)</code></p>
+<h3 id="list-comprehensions-1">List comprehensions</h3>
+<p>A list comprehension tiene la forma <code>[e | q1 , ... , qk ]</code> donde cada <code>q</code> puede ser un generador <code>p &lt;- lExp</code> donde <code>p</code> es un patrón y <code>lExp</code> es una expresión que tiene como resultado una lista. La otra opción es que <code>q</code> sea un test, es decir una expresión booleana.</p>
+<p>Las list comprehension con múltiples generadores dan como resultado la combinación de los elementos de cada generador. Por ejemplo <code>[(x,y) | x&lt;-[1,2] y&lt;-[4,5]] ---&gt; [(1,4) (1,5) (2,4) (2,5)]</code>. Es importante destacar como se procesa las funciones con múltiples generadores, ya que nos podemos basar en el primer generador para definir los generadores que van después. Esto se debe a que el generador actúa como una suerte de <em>for anidado</em>. Por ejemplo: <code>triangle n = [ (x,y) | x &lt;- [1 .. n] , y &lt;- [1 .. x] ]</code>.</p>
+<p>Un ejemplo del uso de esta técnica es para armar listas de permutaciones:</p>
+<pre><code>perms :: Eq a =&gt; [a] -&gt; [[a]]
+perms [] = [[]]
+perms xs = [x:ps | x&lt;-xs, ps&lt;-(xs\\[x])]
+</code></pre>
+<p>El operador <code>xs\\ys</code> definido en Data.List nos retorna la diferencia entre xs e ys , donde se remueve cada elemento que se encuentra en ys en xs, teniendo en cuenta multiplicidades.</p>
+<p>Ejemplo del producto entre dos matrices:</p>
+<pre><code>matrixProduct :: Matrix -&gt; Matrix -&gt; Matrix
+matrixProduct m p = [ [scalarProduct r c | c &lt;- columns p] | r &lt;- m ]
+  where columns y = [ [ z!!j | z &lt;- y ] | j &lt;- [0 .. s] ]
+    where s = length (head y)-1
+</code></pre>
+<p>Se dice que un patrón es <strong>refutable</strong> si el elemento que se tiene no encaja con el patrón que se solicita.</p>
+<h3 id="data-directed-programming">Data directed programming</h3>
+<blockquote>
+<p> This is an approach where we design the program by thinking about it as a sequence of transformations of data. In a traditional language it may well be too inefficient to do this in practice, as we might have to compute a series of complex data structures which are ‘internal’ to the program. In a lazy language these are only constructed as they are needed, and in practice they may never be constructed completely: we just build a data structure incrementally, and once a part of it has been used, it can be ‘recycled’. Luckily this is done by the implementation, and we do not have to worry about it ourselves.</p>
+</blockquote>
+<p>Por ejemplo, observar el siguiente comportamiento:</p>
+<pre><code>sumFourthPowers n = sum (map (^4) [1 .. n])
+
+sumFourthPowers n -&gt; sum (map (^4) [1 .. n]) -&gt;  sum (map (^4) (1:[2 .. n])) -&gt; sum (1^4 : map (^4) [2 .. n]) -&gt; (1^4) + sum (map (^4) [2 .. n]) -&gt; 1 + sum (map (^4) [2 .. n]) ...
+</code></pre>
+<p>Observar que nunca se construye la lista intermedia, a medida que se obtiene un ítem de la lista, ya se hacen los cálculos. Por lo tanto, no resulta ineficiente tener esta definición de lista. </p>
+<p>Un ejemplo muy interesante es el de hallar el mínimo de una lista. ¡En Haskell lo más eficiente es ordenarla y luego tomar el head! Esto es porque la operación de ordenar el primer paso que hace es obtener el elemento más grande y colocarlo al frente de la lista. Al hacer esto, haskell no continúa generando el resultado, sino que ya enseguida devuelve el ítem. ¡Por lo que la lista nunca se llega a ordenar!</p>
+<h3 id="infinite-lists">Infinite Lists</h3>
+<p>¡Como Haskell construye parcialmente una estructura de datos, es posible trabajar con estructuras infinitas!
+Por ejemplo: las sumas parciales sobre una lista infinita son calculables:</p>
+<pre><code>ones = 1: ones
+addFirstTwo (x:y:xs)= x+y
+addFirstTwo ones = 2
+</code></pre>
+<p>La función iterate nos permite generar una lista a partir de una función y un valor inicial. Por ejemplo: <code>iterate (+2) 0 = [0,2,4,6,7,...]</code>.</p>
+<p>Ejemplos elegantes del uso de listas infinitas es el de la generación de números primos:</p>
+<pre><code>primes  = sieve [2 .. ]
+sieve (x:xs) = x : sieve [ y | y &lt;- xs , y ‘mod‘ x &gt; 0]
+</code></pre>
+<p>Básicamente se va generando una lista donde cada vez se tienen que cumplir que los elementos que ya están en la lista, si se les hace el mod, tiene que dar 0.</p>
+<p>Es importante destacar que si nos preguntamos si un numero está en esta lista, hay una respuesta. ¿Pero cómo probamos que no hay? ¡No hay forma! ya que la lista es infinita. Para solucionar esto, se puede aplicar la propiedad de que la lista generada está en orden para parar en la raíz cuadrada del número. </p>
+<p>Otro ejemplo es un pseudo-generador de números aleatorios:</p>
+<pre><code>nextRand :: Integer -&gt; Integer
+nextRand n = (multiplier*n + increment) ‘mod‘ modulus
+randomSequence :: Integer -&gt; [Integer]
+randomSequence = iterate nextRand
+</code></pre>
+<h3 id="why-infinite-lists">Why infinite lists?</h3>
+<p>¿Por qué las listas infinitas son ventajosas en la programación funcional?</p>
+<p>Primero, las listas son una versión más <em>abstracta</em> de un programa. Son más simples y elegantes de escribir. Nos olvidamos del tamaño de las estructuras, no hay que alocar recursos para algo, sino que se va generando sobre la marcha.</p>
+<p>Por otro lado, las listas infinitas separan la generación de los datos de su transformación. Permite la <em>modularization</em>.</p>
+<p><img src="{{url_for('static', filename='imgs/fp/infi.png')}}" alt="inf"></p>
+<p>Las listas infinitas combinadas con transformaciones recursivas son una poderosa herramienta de la programación funcional.</p>
+<h3 id="proofs">Proofs</h3>
+<p>Es posible hacer demostraciones sobre listas infinitas. Para ello se recurre a la noción de resultados parciales y listas indefinidas.
+Una lista indefinida es aquella que su computación es indeterminada:</p>
+<pre><code>undef :: a 
+undef = undef
+</code></pre>
+<p>Una lista infinita puede entenderse como una lista con infinitas listas parciales:</p>
+<pre><code>n = [1 ..] - &gt; 1: [2 ..] , 1: 2 [3 ...], 1:2:3:[4, ..], 1:2:3:4:[5 ..]
+</code></pre>
+<p>Con estas definiciones podemos probar cosas sobre las listas parciales. Y aplicar inducción. Es decir, probar una propiedad P(xs) para todas las listas finitas y parciales tenemos que probar:</p>
+<ul>
+<li><strong>Base cases:</strong> Prove P([]) and P(undef).</li>
+<li><strong>Induction step:</strong> Prove P(x:xs) assuming that P(xs) holds already.</li>
+</ul>
+<p>Es importante destacar la técnica de &quot;lists of successes&quot; donde se interpreta el contenido de una lista como las respuestas de una función y la lista vacía cuando <em>no</em> hay respuesta.  </p>
+<blockquote>
+<p> In giving an infinite list of prime or random numbers we provide an unlimited resource: we do not have to know how much of the resource we need while constructing the program; this abstraction makes programming simpler and clearer.</p>
+</blockquote>
+<blockquote>
+<p>Infinite lists provide a mechanism for process-based programming in a functional setting.</p>
+</blockquote>
+<h3 id="notas-fing">Notas Fing</h3>
+<p>El modelo de computación de programación funcional es por <strong>reducción</strong>. Esto significa que las funciones actúan como reglas de cómputo. En cada paso de la evaluación de una expresión se debe deducir que subexpresión reducir.</p>
+<p>Se le llama <strong>redex</strong> a expresiones formadas por una función aplicada a argumentos la cual es posible reducirla.</p>
+<p>Dado que una expresión puede tener muchos redex, surge la pregunta de cuál se debe evaluar primero. Así surgiendo las <em>estrategias de evaluación</em>.</p>
+<p>Ejemplo de estas estrategias son <strong>leftmost innermost</strong> la cual reduce los redex más internos y más a la izquierda. El <strong>leftmost outermost</strong> reduce el redex más externo y más a la izquierda:</p>
+<p>Leftmost innermost: $square (1+2) -&gt; square (3) -&gt; 3x3 -&gt; 9$.</p>
+<p>Leftmost outermost: $square(1+2) -&gt; (1+2)x(1+2) -&gt; 3x(1+2) -&gt; 3x3 -&gt; 9$</p>
+<h4 id="undefined">Undefined</h4>
+<p>El valor indefinido, usualmente notado como ⊥ (bottom), denota tanto la no terminación como la terminación anormal de un programa. Podemos pensar que todos los tipos tienen un valor ⊥.</p>
+<h4 id="call-by-value--call-by-name">Call by value &amp; Call by name</h4>
+<p>Call by value refiere a que cuando se evalúa una expresión los argumentos se pasan por valor. Mientras que by name se pasa la expresión que lo genera. Ejemplo claro:</p>
+<pre><code>f x = 78x+4
+g x = (x,x+1)
+
+Call by value:
+g (f 1) -&gt; g (78*1+4) -&gt; g(82) -&gt; (82,82+1) -&gt; (82,83)
+Call by name:
+g (f 1) -&gt; g (f 1) -&gt; (f 1,(f 1)+1) -&gt; (82,82+1) -&gt; 83
+</code></pre>
+<p>En haskell, se utiliza un grafo de expresiones donde hay punteros que apuntan a mismos lugares donde ocurre una expresión, de esta manera un argumento <strong>será copiado una sola vez</strong>. El uso de call by name junto a esta forma de <em>sharing</em> se le conoce como <strong>lazy-evaluation</strong> o <strong>call-by-need</strong>.</p>
+<h4 id="funciones-estrictas">Funciones estrictas</h4>
+<p>Se dice que una función es estricta si cumple que:  \(f ⊥ = ⊥\) . De lo contrario, se le llama <em>no estricta</em>.</p>
+<p>¡En call by value todas las funciones son estrictas, pero en call by name no!</p>
+<h4 id="lazy-evaluation">Lazy Evaluation</h4>
+<blockquote>
+<p>Propiedad: Con lazy evaluation toda expresión se evalúa hasta lo que le requiera el contexto en que se encuentra</p>
+</blockquote>
+<p>Por lo tanto, las estructuras infinitas pueden entenderse más bien como estructuras <em>potencialmente infinitas</em>.
+Así permitiendo locuras como:</p>
+<pre><code>ones = 1 : ones
+take 5 ones = [1,1,1,1,1]
+</code></pre>
+<h2 id="mónadas">Mónadas</h2>
+<p>Una monada es una interfaz de programación que permite simular la concatenación de efectos computacionales en un lenguaje funcional como Haskell. También es una sintaxis que permite simplificar procesos repetitivos de código modelando el comportamiento del programa embebiendo los operadores <code>&gt;&gt;=</code> y <code>return</code>. Ejemplos de monadas en el Prelude son <code>IO</code>, <code>Maybe</code> y <code>[]</code></p>
+<p>En esencia, una clase <code>Monad</code> es aquella que implementa las siguientes funciones:</p>
+<pre><code>class Monad m where
+    (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b
+    (&gt;&gt;) :: m a -&gt; m b -&gt; m b -- opcional
+    return :: a -&gt; m a
+    fail :: String -&gt; m a --opcional
+    m &gt;&gt; k = m &gt;&gt;= \_ -&gt; k --default implementation
+
+Donde estas funciones deben cumplir las siguientes propiedades:
+
+return a&gt;&gt;=k = k a
+m &gt;&gt;= return = m
+m &gt;&gt;= (\x -&gt; k x &gt;&gt;= h) = (m &gt;&gt;= k) &gt;&gt;= h
+</code></pre>
+<p>Las operaciones de <em>bind</em> (<code>&gt;&gt;</code> y <code>&gt;&gt;=</code>) combinan dos valores monádicos mientras que el <code>return</code> <em>inyecta</em> un valor en una mónada. El resultado del bind <code>&gt;&gt;=</code> es el de combinar <code>ma</code> y <code>mb</code> en un valor monadico. El bind <code>&gt;&gt;</code> se usa cuando no nos interesa el resultado de la mónada a.</p>
+<blockquote>
+<p>The precise meaning of binding depends, of course, on the monad. For example, in the IO monad, x &gt;&gt;= y performs two actions sequentially, passing the result of the first into the second.</p>
+</blockquote>
+<p>Para trabajar con mónadas, muchas se trabajan en su versión con azúcar sintáctica. La notación <code>do</code> se basa en las siguientes reglas:</p>
+<p>do e1 ; e2 = e1 &gt;&gt; e2
+do p &lt;- e1 ; e2 = e1 &gt;&gt;= (\p -&gt; e2)</p>
+<p>En el caso de que una mónada pueda &quot;fallar&quot; las reglas de <code>do</code> son:</p>
+<p>do p &lt;- e1 ; e2 = e1 &gt;&gt;= (\v -&gt; case v of p-&gt; e2; _-&gt;fail &quot;s&quot;) </p>
+<p>Existe una clase especial llamada <code>MonadPlus</code> la cual se utiliza cuando la mónada tiene un <em>zero element</em> y una <em>plus operation</em>.</p>
+<pre><code>class (Monad m) =&gt; MonadPlus m where
+    mzero :: m a
+    mplus :: m a  -&gt; m a -&gt; m a 
+
+Donde:
+m &gt;&gt;= (\x -&gt; mzero) = mzero
+mzero &gt;&gt; m = mzero
+
+m `mplus` mzero = m
+mzero `mplus` m = m
+</code></pre>
+<p>La
+Recordar que un bloque de <em>do-notation</em> debe seguir indentación correcta (todos los componenetes al mismo nivel).</p>
+<p>Ahora veamos que podemos hacer con esto...</p>
+<h3 id="io-monad-review">IO Monad (Review)</h3>
+<p>La IO monad nos permite operar sobre la entrada y salida. Algunas de las mejores funciones son:</p>
+<pre><code>getLine :: IO String
+getChar :: IO Char 
+putChar :: Char -&gt; IO ()
+putStr :: String -&gt; IO ()
+putStrLn :: String -&gt; IO()
+</code></pre>
+<p>Y para el manejo de archivos:</p>
+<pre><code>type FilePath = String
+readFile :: FilePath → IO String
+writeFile :: FilePath → String → IO ()
+appendFile :: FilePath → String → IO ()
+</code></pre>
+<p>Así como colado, podemos imprimir una variable con la función <code>print :: Show a =&gt; a -&gt; IO ()</code></p>
+<h3 id="monad-ioref">Monad IORef</h3>
+<p>La mónada <code>Data.IORef</code></p>
+<pre><code>newIORef :: a -&gt; IO (IORef a)
+readIORef :: IORef a -&gt; IO a
+writeIOReff :: IORef a -&gt; a -&gt; IO ()
+modifyIORef :: IORef a -&gt; (a -&gt; a) -&gt; IO()
+</code></pre>
+<p>Esta monada permite mantener el estado de una referencia. Leer/Escribir en esta. Lo más parecido a una variable en programación imperativa.</p>
+<p>Ejemplo:</p>
+<pre><code>main = do v &lt;- newIORef 10
+          modifyIORef v (+5)
+          x &lt;- readIORef v
+          print x
+</code></pre>
+<p><code>writeIORef :: IORef a -&gt; a -&gt; IO ()</code> Sobrescribe una referencia. 
+<code>modifyIORef :: IORef a -&gt; (a -&gt; a) -&gt; IO ()</code> Aplica f sobre una referencia. 
+<code>readIORef :: IORef a -&gt; IO a</code> : lee una referencia, la guarda en la mónada IO.</p>
+<h3 id="monad-liftm2">Monad LiftM2</h3>
+<p>La mónada LiftM2 sirve para llevar datos puros de haskell a una mónada (particularmente 2 datos). Por ejemplo:</p>
+<p>lift M2 :: Monad m =&gt; (a -&gt; b -&gt; c) -&gt; m a -&gt; m b -&gt; m c
+lift M2 f m m2 = do x &lt;- m
+                    y &lt;- m2
+                    return (f x y)</p>
+<p>Podría usarse en:
+eval (Add x y) = liftM2 (+) (eval x) (eval y)</p>
+<h3 id="list-monad">List Monad</h3>
+<pre><code>(&gt;&gt;=) :: [a] -&gt; (a -&gt; [b]) -&gt; [b]
+(&gt;&gt;=) l f = concatMap f l 
+return :: [a]
+return x = [x]
+
+Donde concatMap :: Foldable t =&gt; (a -&gt; [b]) -&gt; t a -&gt; [b]
+Mapea una función sobre todos los elementos del input y concatena los resultados de los elementos en una sola lista.
+</code></pre>
+<blockquote>
+<p>What monads really provide is modularity. That is, by defining an operation monadically, we can hide underlying machinery in a way that allows new features to be incorporated into the monad transparently.</p>
+</blockquote>
+<h3 id="state-monad">State Monad</h3>
+<p>¿Como transportamos un estado?</p>
+<p>Veamos el ejemplo de llevar un estado para la recorrida de un arbol binario. La forma de hacer esto sin utilizar mónadas es:</p>
+<pre><code>numTree (Fork l r) = (\cont -&gt; let (l2,cont2) = numTree l cont; (r3,cont3)= numTree r cont2 in (Fork l2 r3 cont3)
+</code></pre>
+<p><code>Control.Monad.State</code> implementa una mónada de estado que hace esto más conveniente:</p>
+<pre><code>numTree :: Tree a -&gt; State Int (Tree (Int,a))
+numTree (Leaf a) = do   cont &lt;- get
+                        put (cont+1)
+                        return (Leaf (cont,a))
+numTree (Fork l r) = do l2 &lt;- numTree l
+                        r2 &lt;- numTree r
+                        return (Fork l2 r2)
+</code></pre>
+<p>Wow! El estado se mueve implícitamente en la mónada. Veamos cómo se implementa este mecanismo estudiando las definiciones de <code>&gt;&gt;=</code> y <code>return</code>:</p>
+<pre><code>type State s a = s -&gt; (a,s)
+
+return a = (\s -&gt; (a,s))
+(&gt;&gt;=) m f = (\s -&gt; let (a,s2) = m s in f a s2)
+</code></pre>
+<p>Por lo que:
+    numTree (Fork l r) = numTree l &gt;&gt;= (\a -&gt; numTree r s) &gt;&gt;= (\b -&gt; (\s -&gt; (Fork a b, s))</p>
+<pre><code>get = (\s -&gt; (s,s))
+put s = (\_ -&gt; ((),s))
+</code></pre>
+<p>Ejecutamos una mónada state con la función <code>runState :: State s a -&gt; s -&gt; (a,s)</code>. La cual dada una mónada y un estado inicial retorna una tuple (estado final, resultado)</p>
+<h3 id="maybe-monad">Maybe Monad</h3>
+<blockquote>
+<p>En el fondo lo que estamos es resolviendo el problema de escribir código repetitivo... no podemos abstraer este código en algunas operaciones/abstracciones para que pase &quot;tras bambalinas&quot; en el trabajo relevante de una función.</p>
+</blockquote>
+<p>return = Just
+m &gt;&gt;= f = case m of
+            Nothing -&gt; Nothing
+            Just x -&gt; f x 
+eval (Add x y) = eval x &gt;&gt;= (\a -&gt; eval y &gt;&gt;= (\b -&gt; return (a+b)))
+eval (Neg x) = eval x &gt;&gt;= (\a -&gt; return (-1*a))</p>
+<blockquote>
+<p>Tomo un maybe y una función que va a utilizar el valor de la mónada... (¡Explicación del bind!)</p>
+</blockquote>
+<p>En el fondo las lambda functions son los que transportan el efecto computacional de la mónada...</p>
+<p>La clave de esta mónada es que si una computación da <code>Nothing</code> entonces el resultado de las demás computaciones es <code>Nothing</code> too. Por ejemplo <code>m1 = do x&lt;- Just 3; y &lt;- Nothing; ¡return x</code> retorna Nothing a pesar de que el resultado de lo que se va a retornar dio bien!</p>
+<h3 id="reader-environment-monad">Reader (Environment) Monad</h3>
+<p><code>Control.Monad.Reader</code> nos sirve para realzar computaciones que leen valores de un <em>ambiente compartido</em>.</p>
+<pre><code>data Reader e a = Reader (e -&gt; a)
+runReader (Reader r) = r
+
+instance Monad (Reader e) where
+    return a = Reader $ (\e-&gt;a) 
+    (Reader r) &gt;&gt;= f = Reader $ (\e -&gt; runReader (f (r e)))
+
+    ask :: Reader e e 
+    ask = Reader id
+
+    local :: (e-&gt;e) -&gt; reader e a - &gt; Reader e a 
+    local f c = Reader $ (\e -&gt; runReadedr c (f e))
+</code></pre>
+<blockquote>
+<p>The Reader monad (also called the Environment monad). Represents a computation, which can read values from a shared environment, pass values from function to function, and execute sub-computations in a modified environment. Using Reader monad for such computations is often clearer and easier than using the State monad.</p>
+</blockquote>
+<p>La función ask sirve para obtener el environment de la mónada <code>ask :: Reader env env</code>. <code>runReader :: Reader env a -&gt; env -&gt; a</code> Permite leer un reader, con un ambiente inicial definido en env.</p>
+<p>Local permite modificar el ambiente <code>local :: (r-&gt;r) -&gt; m a -&gt; m a</code>. Donde r-&gt;r es la funcion que modifica el ambiente y el primer m a el reader que corre en el ambiente. Este local ejecuta una computación en este ambiente modificado.</p>
+<blockquote>
+<p>Any time you have a &quot;constant&quot; in a computation that you need at various points, but really you would like to be able to perform the same computation with different values, then you should use a reader monad.</p>
+</blockquote>
+<h2 id="annotations">Annotations:</h2>
+<h3 id="the-dot-operator">The dot operator</h3>
+<p>Es el operador de composición. Por lo tanto:</p>
+<p>  g(x) = f(h(z(x)))</p>
+<p>es equivalente a escribir en haskell:</p>
+<p>  g = f . h . z
+  g x = f ( h (z x))</p>
+<h3 id="operators">Operators</h3>
+<p>Los operadores se definen escribiéndolos entre paréntesis:
+(!@#) int -&gt; int -&gt; int
+(!@#) x y = 2</p>
+<p>¡Esto también sirve para escribirlos con notación prefija! Recordar que la notación infija se puede utilizar haciendo: 2 &#39;f&#39; 2</p>
+<h3 id="it-keyword">it keyword</h3>
+<p>La palabra it conserva el resultado de la última operación.
+Por lo tanto:
+    2+2
+    it+2
+    it*2
+    it
+imprime al final 12</p>
+<h3 id="quickcheck-operator-">QuickCheck operator ==&gt;</h3>
+<p>El operador ==&gt; funciona como un implica para verificar una propiedad. Modo de uso:</p>
+<pre><code>prop :: Integer -&gt; Integer -&gt; Property
+prop a b =
+  (b /= 0) ==&gt; a*((-b) `div` a)+b==0
+</code></pre>
+<p>Esto hace que la propiedad también se cumpla cuando b==0, ya que no se debe probar el consecuente del implica. </p>
+<p>dbp1 :: Database -&gt; BarCode -&gt; Name -&gt; Price -&gt; Property 
+dbp1 db bc n p = 
+    ((look db bc)==(&quot;Unknown Item&quot;,0)) ==&gt; (length (remCode bc (newCode bc n p db))) == (length db)\</p>
+<h4 id="re-implementaciones--quickcheck">Re-implementaciones + QuickCheck</h4>
+<p>QuickCheck es muy práctico para probar que el comportamiento de una función
+que debe ser igual a otra efectivamente lo es. Basta con definir la propiedad:</p>
+<pre><code>prop :: f -&gt; f -&gt; p -&gt; Bool
+prop f1 f2 p = f1 p == f2 p
+</code></pre>
+<h3 id="the-">The @</h3>
+<p>El <code>@</code> nos permite generar un alias. Se puede leer <code>x@y</code> como &quot;x as y&quot;. Un ejemplo de uso: <code>[x | x@(a,b)&lt;-xs,a&gt;0]</code> </p>
+<h2 id="funciones-memorables">Funciones memorables</h2>
+<p><code>sequence :: Monad m =&gt; [m a] -&gt; m [a]</code> : Evalúa cada acción de la sequencia de izquierda a derecha, retornando los resultados en una mónada con la lista.</p>
+<p><code>repeat :: a -&gt; [a]</code> : Retorna la lista infinita del elemento que se dio como entrada.</p>
+<p><code>elem (Foldable t, Eq a) =&gt; a -&gt; t a -&gt; Bool</code> : Busca un elemento x en una lista xs, retorna True o False.</p>
+<p><code>const :: a -&gt; b -&gt; a</code> : const x y = x para todo par (x,y).</p>
+<p><code>null :: Foldable t =&gt; t a -&gt; Bool</code> : Re torna true si la lista está vacía.</p>
+<p><code>all :: Foldable t =&gt; (a -&gt; Bool) -&gt; t a -&gt; Bool</code> : Retorna true si todos los elementos de la lista satisfacen el predicado.</p>
+<p><code>curry :: ((a, b) -&gt; c) -&gt; a -&gt; b -&gt; c</code> : Dada una función f (x,y), la currifica: f x y.</p>
+<p><code>uncurry :: (a-&gt;b-&gt;c) -&gt; (a,b) -&gt; c</code> : Uncurrifica una función f x y: f (x,y)</p>
+<h1 id="apuntes-programación-funcional-verano-2022">Apuntes Programación Funcional Verano 2022</h1>
+<h1 id="clase-tiposdefmp4">Clase TiposDef.mp4</h1>
+<blockquote>
+<p>Un programa en PF consiste esencialmente de una lista de definiciones (funciones). Estas se escriben como <strong>ecuaciones</strong> , eventualmente con una descripción de tipo (signature)</p>
+</blockquote>
+<p>Ej:
+    num::Integer
+    num = 3 + 6</p>
+<p>Obs: La signature es omisible ya que esta se puede inferir. Sin embargo, es recomendable utilizar la signature ya que forma parte de la documentación del programa.</p>
+<p>Para definir funciones, especificamos sus parámetros funcionales:</p>
+<pre><code>square :: Integer -&gt; Integer
+square x = x*x
+</code></pre>
+<p>Las funciones se cargan en el intérprete y luego pueden ser ejecutadas:</p>
+<pre><code>ghcl file.hs
+f (suponiendo que file.hs contiene la definición de f)
+</code></pre>
+<p>Los argumentos de una funcion se escriben con un espacio para ejecutarse: &quot;f 1 2 3&quot;</p>
+<p>Los tipos forman parte de la especificación del sistema, el tipado es esencial para la construcción de software confiable.</p>
+<blockquote>
+<p>El tipo de las expresiones de haskell nos cuenta mucho sobre su funcionamiento!</p>
+</blockquote>
+<p>El tipado en haskell es <strong>fuerte</strong>: Toda expresión debe tener un tipo. Toda constante, variable, operador y función debe tener un tipo.</p>
+<p>El chequeo de los tipos en haskell es <strong>estático</strong>: Se chequea en compilation time</p>
+<p>Haskell nos asegura <strong>type safety</strong>: Al ejecutar, los programas nunca van a errores de tipos.</p>
+<blockquote>
+<p>Well-typed programs never &quot;go wrong&quot;</p>
+</blockquote>
+<h1 id="tipos-basicos-de-haskell">Tipos basicos de Haskell</h1>
+<ul>
+<li>Bool: Boolean. Sus constantes son &quot;True&quot; y &quot;False&quot;</li>
+<li>Char</li>
+<li>String</li>
+<li>Int (entero acotado)</li>
+<li>Integer (entero no acotado)</li>
+<li>Float</li>
+<li>Double</li>
+</ul>
+<p>Obs: Los types siempre tienen mayúscula.</p>
+<h2 id="boolean">Boolean</h2>
+<p>Los booleanos tienen las primitivas habituales: &quot;not, &amp;&amp; y ||&quot;
+Ejemplo de función booleana:</p>
+<pre><code>exOr :: Bool -&gt; Bool -&gt; Bool
+exOr x y = (x||y) &amp;&amp; not(x&amp;&amp;y)
+</code></pre>
+<p>Una forma alternativa de definir funciones es utilizando la técnica de <strong>pattern matching</strong></p>
+<pre><code>exOr:: Bool-&gt;Bool-&gt;Bool
+exOr True y = not y
+exOr False y = y
+</code></pre>
+<h2 id="integers">Integers</h2>
+<p>Existen dos tipos de enteros: Int e Integer (no acotado).
+Tenemos los operadores habituales: +,-,*,^,div,mod,abs,negate.
+(Observar que los operadores están sobrecargados)</p>
+<p>Los enteros pueden ser comparados por operadores relacionales:
+&lt;,&gt;,&gt;=,==,/=,...</p>
+<p>Ejemplo:
+    min :: Integer -&gt; Integer -&gt; Integer
+    min x y = if x&lt;= y then x else y</p>
+<p>La conversión de Int a Integer no es explicita y debe ser utilizada al aplicar los operadores primitivos entre Int e Integer:</p>
+<pre><code>fromInteger :: Integer -&gt; Int
+toInteger :: Int -&gt; Integer
+</code></pre>
+<h2 id="characters">Characters</h2>
+<p>Los caracteres son codificados por la tabla ASCII.
+Se escriben entre comillas simples: &#39;a&#39;. A su vez tenemos los caracteres especiales con el backslash: &#39;\t&#39;,&#39;\&#39;,&#39;\n&#39;,etc.</p>
+<p>La conversión entre carácter y codificación ASCII es a través de:</p>
+<pre><code>fromEnum :: Char -&gt; Int
+toEnum :: Int -&gt; Char
+</code></pre>
+<h2 id="string">String</h2>
+<p>El tipo String se define como una <strong>Lista de caracteres</strong>.
+A diferencia de programación imperativa donde los strings son arreglos, aquí se usan listas.</p>
+<p>Las constantes de tipo string se escriben entre comillas dobles: &quot;Constante!!1!&quot;</p>
+<p>Las funciones show y read permiten convertir entre valores de otros tipos y String:</p>
+<pre><code>show(4+3) = &quot;7&quot;
+read(&quot;3&quot;)+4 = 7
+</code></pre>
+<p>Show te da un Stirng para que puedas mostrar, read te deja leer un string para poder interpretarlo.</p>
+<h2 id="reales">Reales</h2>
+<p>Para los reales tenemos Float y Double. Las operaciones aritméticas básicas están disponibles. También tenemos la división real y las trigonométricas.</p>
+<p>Existen funciones de conversión para trabajar con Reales y Enteros:</p>
+<pre><code>ceiling :: Float-&gt;Integer
+floor :: Float-&gt; Integer
+round :: Float -&gt; Integer
+
+fromInteger :: Integer -&gt; Float
+fromIntegral Int -&gt; Float
+</code></pre>
+<h1 id="clase-estructuradosmp4">Clase estructurados.mp4</h1>
+<p>Además de los tipos básicos, podemos definir tipos <em>estructurados</em>, estos objetos están compuesto por un conjunto de valores.</p>
+<h2 id="tuplas">Tuplas</h2>
+<p>Una tupla combina en un mismo objeto a un número <strong>fijo</strong> de valores, cada uno con un tipo determinado (pueden ser distintos).</p>
+<p>Es similar un struct de C. A diferencia que los componentes de defininen por un identificador y en las tuplas por la posición.</p>
+<p>Ejemplo: Coordenadas cartesianas</p>
+<pre><code>(8,23) :: (Int,Int)
+</code></pre>
+<p>El tipo $(t_1,...t_n) consiste en tuplas de valores (v_1,...,v_n) :: (t_1,...,t_n).</p>
+<p>Para aplicar funciones sobre tuplas se suele usar pattern matching:</p>
+<pre><code>nombre :: (String, Int, Int) -&gt; String
+nombre (n,e,s) = n
+</code></pre>
+<p>¡Observar que estamos ligando cada elemento de la tupla con un identificador de variable!</p>
+<p>Al aplicar la función, los componentes del patrón <em>matchean</em> con los componentes del argumento: (&quot;Pedro&quot;,44,1000) -&gt; &quot;Pedro&quot;</p>
+<p>También se pueden aplicar wildcards para ignorar componentes y no tener que utilizar identificadores para todos los componentes:</p>
+<pre><code>edad (_,e,_) = e
+sueldo(_,_,s) = s
+</code></pre>
+<p>Finalmente, se pueden <strong>forzar</strong> componentes utilizando literales:
+    esPedro(&quot;Pedro&quot;,<em>,</em>) = True
+    esPedro(<em>,</em>,_) = False</p>
+<p>El wildcard completo también puede escribirse como:</p>
+<pre><code>esPedro _ = False
+</code></pre>
+<p>Esto hace que se acepte cualquier elemento y retorne false.</p>
+<p>Como en el pattern matching se matchean las ecuaciones de arriba para abajo, el tener de nombre Pedro se va a matchear siempre con la primera ecuación.</p>
+<h2 id="sinónimos-de-tipos">Sinónimos de Tipos</h2>
+<p>En haskell le podemos dar nombres a los tipos. Al usar un <em>sinónimo</em> se tiene el mismo efecto de usar el tipo que representa.</p>
+<p>Ejemplos:</p>
+<pre><code>type Coord = (Int,Int)
+distancia: Coord -&gt; Coord -&gt; Float
+</code></pre>
+<h2 id="listas">Listas</h2>
+<p>Las listas combinan en un mismo objeto a un número q arbitrario de valores, <em>todos de un mismo tipo</em>.</p>
+<p>Es decir, a partir del tipo no sé cuántos valores puede contener, lo único que se es el tipo de valores que contiene.</p>
+<p>Ejemplos: 
+    [8,2,3,1,24] :: [Int]
+    [(&quot;Juan&quot;,23,1000),(&quot;Peter&quot;,12,400)] :: [Empleado]</p>
+<p>Recordar: Un String es una lista de caracteres:</p>
+<pre><code>type String = [Char]
+</code></pre>
+<h3 id="definición">Definición</h3>
+<p>Definimos inductivamente a las listas de tipo [t] como:</p>
+<pre><code>[] - lista vacía
+v : vs - lista con al menos 1 elemento donde v in and vs::[t] 
+</code></pre>
+<p>Este operador &quot;:&quot; se le llama cons, toma dos elementos y construye una lista con los objetos definidos a la derecha.</p>
+<p>Formas de construir una lista de enteros:</p>
+<p>[]
+[24]
+1 : (24 : [])
+3 : (1 : (24 : []))
+Como cons asocia a la derecha los paréntesis son no redundantes.
+El compilador soporta sintactic sugar utilizando cons:
+[1,2,3,4] el compilador lo entiende como 1 : 2 : 3 : 4 : [].</p>
+<h3 id="funciones-sobre-listas">Funciones sobre Listas</h3>
+<p>Existe una gran cantidad de funciones sobre listas en <em>Prelude</em>.
+Prelude es la librería que viene incluida por defecto en el compilador de haskell.</p>
+<p>Ejemplos: ( ++ (append) ,!!, length, replicate, take ,drop , reverse, etc.)</p>
+<p>Las nuevas funciones se definen combinando las funciones anteriores o pattern matching:</p>
+<pre><code>dupList xs = xd ++ xs
+
+null [] = True
+null(_:_) = False (Composicion con un cons)
+
+head (x : _) = x
+tail (_ : xs) = xs
+</code></pre>
+<h3 id="listas-por-comprensión">Listas por Comprensión</h3>
+<p>Notación que permite construir una listea a partir de una descripción de la misma en términos de otra.</p>
+<p>A partir de una lista se <strong>generan</strong> elementos, se <strong>testean</strong> y <strong>transforman</strong> para formar los elementos de la lista resultante.</p>
+<p>Ejemplo:
+    generación:
+    [x | x &lt;- [1,2,3,4]] ---&gt; [1,2,3,4]
+    testeo:
+    [x | x &lt;- [1,2,3,4], isEven x] ---&gt; [2,4]
+    transformación:	
+    [isEven x | x &lt;- [1,2,3,4]] ---&gt; [False,True,False,True]</p>
+<pre><code>Donde se liga cada elemento también se puede aplicar pattern matching:
+[(x+y) | (x,y) &lt;- [(1,2),(3,4),(4,5)]] ---&gt; [3,7,9]
+[(x,y) | x &lt;- [1,2], y &lt;- [3,4]] ---&gt; [(1,3),(1,4),(2,3),(2,4)]
+</code></pre>
+<p>Notar que la lista generada puede ser el parámetro de una función:</p>
+<pre><code>evens xs = [x | x&lt;- xd, isEven x]
+donde isEven x = mod x 2 == 0
+</code></pre>
+<h2 id="tipos-de-datos-algebraicos">Tipos de Datos Algebraicos</h2>
+<p>Mediante la definición de tipos de datos algebraicos podemos introducir <em>nuevos tipos</em></p>
+<p>Nos permiten definir, por ejemplo, enumerados:</p>
+<pre><code>data PuntoCardinal = Norte | Sur | Este | Oeste
+    deriving (Show,Eq)
+</code></pre>
+<p>Observar que se utiliza la palabra reservada data, el nombre y separado con pipes los componentes posibles del tipo. Observar que los componentes llevan mayúsculas, ya que son constantes.</p>
+<p>Finalmente, el deriving(Show,¡Eq) es opcional e indica que los valores de PuntoCardinal van a poderse pasar a String con la función show() y pueden compararse con el operador de igualdad (EQ) == != . Si lo anterior no se incluye no vamos a tener estas dos últimas propiedades.</p>
+<p>También podemos definir <strong>Productos</strong>:</p>
+<pre><code>data Empleado = Empleado String Int Int
+    deriving(Show,Eq)
+</code></pre>
+<p>Al definir un producto escribimos los parámetros que le pasamos al constructor Empleado y a eso decimos que es Data Empleado.</p>
+<p>Luego podemos hacer: Empleado &quot;Juan&quot; 25 50000</p>
+<p>El pattern matching se aplica a constructores. Ejemplo:</p>
+<pre><code>data TEmpleado = CEmpleado String Int Int
+    deriving(Show,Eq)
+esPedro :: TEmpleado -&gt; Bool
+esPedro (CEmpleado &quot;Pedro&quot; _ _) = True
+esPedro _			= False
+</code></pre>
+<p>En este ejemplo se observa que estamos matcheando el tipo de dato TEmpleado con aquellos construidos con el constructor CEmpleado, que a su vez el campo nombre es Pedro.</p>
+<p>Por último, también podemos expresar con tipos de datos algebraicos <strong>ALTERNATIVAS</strong> :</p>
+<pre><code>data Forma = Circulo Float
+        | Rectángulo Float Float
+    deriving (Show, Eq)
+</code></pre>
+<p>De esta manera, circulo 2.5 y Rectángulo 4.2 2.2 son dos objetos de un tipo Forma. </p>
+<p>En general,</p>
+<pre><code>data T = C_1 t_11,...,t1k1
+    | C_n t_n1,...,t_nk_n
+</code></pre>
+<p>donde T es el nuevo tipo a introducir y cada \(C_i\) es un constructor de dicho tipo, que toma \(k_i\) parámetros.</p>
+<p>Aplicación, Funciones:</p>
+<pre><code>area:: Forma -&gt; Float
+area (Circulo r) = 3.14 * r*r
+area (Rectángulo a b) = b*a
+
+cuadrado l = Rectángulo l l (Observar que esto es una función)
+</code></pre>
+<h1 id="clase-definicionesmp4">Clase definiciones.mp4</h1>
+<h2 id="ecuaciones-condicionales">Ecuaciones condicionales</h2>
+<p>Es posible definir ecuaciones condiciones (como en maths)</p>
+<pre><code>abs x | x&gt;=0 = x 
+| otherwise = -x
+</code></pre>
+<p>donde otherwise es una condición que siempre es verdadera. Las condiciones se evalúan en secuencia y se toma la <em>primer</em> condición verdadera. Si todas las condiciones son falsas, entonces vamos a tener un error.</p>
+<p>Una forma alternativa de construcción de abs x es utilizando un if:</p>
+<pre><code>abs x = if x&gt;= 0 then x else -x
+</code></pre>
+<p>Las funciones se pueden definir utilizando pattern matching. De forma infija:</p>
+<pre><code>True &amp;&amp; b = b
+False &amp;&amp; _ = False
+</code></pre>
+<p>Los patrones satisfacen la siguiente gramática:</p>
+<p>pat ::=
+    _ --wildcard
+  |	variable
+  |	literal
+  |	(pat1,...,patn)		--Una tupla
+  | 	pat:pat			--Cons
+  |	C pat1 ... patn 	--C es un constructor
+  |	var@pat			-- as pattern</p>
+<p>Ejemplos:</p>
+<pre><code>duplica(x:xs) = x : x : xs
+duplica s@(x: xs) = x:s
+</code></pre>
+<p>El s es como decir: (x:xs) AS s. Por lo que al escribir s vamos a estar refiriéndonos al patrón x:s. Esto nos sirve para no desarmar grandes estructuras cuando estamos definiendo una expresión.</p>
+<h3 id="definiciones-locales">Definiciones locales</h3>
+<p>f x y = (a+1) * (a+2)
+    where
+        a = (x+y)/2</p>
+<p>El <em>alcance</em> de dicha definición local es expresión en la parte derecha de la definición de f. Construyo un identificador que luego puedo invocar varias veces para mayor comodidad:</p>
+<p>f x y = (a+1)*(b-1)
+where
+    a = 1<em>212x
+    b= 3</em>23x-y</p>
+<p>Estas variables locales también las puedo aplicar en ecuaciones condicionales.</p>
+<p>Otra forma alternativa es utilizar let/in:</p>
+<p>f x y = let a = (x+y)/2 in (a+2)*(a*2) </p>
+<p>El alcance de la expresión a es lo que está en la expresión in.
+Es posible anidar construcciones con let:</p>
+<p>let x=2 in let y=x+3 in y*4 Wow! </p>
+<h2 id="operadores">Operadores</h2>
+<p>A las funciones definidas en forma infija se les suele llamar <strong>operadores</strong>. Al escribir un operador entre paréntesis lo convertimos en una <strong>función prefija currificada</strong>:</p>
+<pre><code>(+) 3 4
+(*) 7 8
+(&lt;) 2 3 -- Esto es equivalente a 2&lt;3
+</code></pre>
+<p>Esto nos sirve para pasar como argumento un operador a funciones:</p>
+<pre><code>suma = uncurry (+)
+leq = uncurry (&lt;=)
+</code></pre>
+<p>Los operadores infijos deben estar <em>saturados</em>. Esto es que estén presentes todos sus argumentos: 3+3 (OK) pero 3+ (FAIL)</p>
+<p>En cambio, al escribir un operador entre paréntesis es posible parametrizarlo parcialmente:</p>
+<p>(+) 3 :: Int - &gt; Int 
+(&lt;) 2 : Int - &gt; Bool</p>
+<h4 id="secciones">Secciones</h4>
+<p>Las secciones son una sintaxis especial para expresar la parametrización parcial de un operador infijo, se encierra entre paréntesis junto a unos de sus argumentos:</p>
+<p>(3+) :: Int - &gt; Int </p>
+<p>(3+) 4 ----&gt; 7</p>
+<h3 id="definiciones-anónimas">Definiciones Anónimas</h3>
+<p>Es posible definir funciones anonimias (es decir, sin nombre) mediante el uso de las llamadas expresiones lambda.</p>
+<pre><code>\lambda x -&gt; x+1
+</code></pre>
+<p>En haskell: \x - &gt; x + 1 </p>
+<p>La aplicación de una función anónima a sus argumentos se realiza de la misma forma que con las otras funciones:</p>
+<p>(\x -&gt; x+1) 2 ----&gt; Genera 3</p>
+<p>Las definiciones de funciones con nombre también pueden ser vistas como definiciones en términos de expresiones lambda:</p>
+<p>add = \x -&gt; (\y -&gt; x+y)</p>
+<h1 id="clase-operacioneslistasmp4">Clase operacionesListas.mp4</h1>
+<p>el tipo Lista es uno de las más usadas in Functional Programming. Su relevancia es comparable a los Sets in Mathematics.</p>
+<p>A diferencia que en Matemáticas, las listas se definen:</p>
+<p>Las listas son un tipo polimórfico (dos constructores): 
+    [] :: [a] (constructor nil)
+    (:) :: a -&gt; [a] -&gt; [a] (constructor cons)</p>
+<p>Ejemplo cons: 1:(2:(3:[])) -&gt; [1,2,3] 
+¡El constructor cons asocia a la derecha! Por lo que es equivalente:
+1 : 2 : 3 : [].</p>
+<p>Tambien existe un sugar syntax, permitiendo escribir directamente: [1,2,3].</p>
+<h2 id="generadores-de-listas">Generadores de listas</h2>
+<p>La expresión [m .. n] denota la lista de valores entre m y n. Por ejemplo [1..4]=[1,2,3,4]. Si m es mayor a n tenemos la lista vacía [].</p>
+<h2 id="divisores-de-un-numero">Divisores de un numero</h2>
+<p>m &#39;divide&#39; n = n &#39;mod&#39; m == 0</p>
+<p>Las funciones que toman dos argumentos pueden utilizarse de manera prefija o infija utilizando <code>backquotes</code>:</p>
+<pre><code>divide m n
+m `divide` n
+</code></pre>
+<p>Los divisores de un número es una lista definida por comprensión:</p>
+<p>divisores n = [d | d &lt;- [1..n], d &#39;divide&#39; n] </p>
+<p>Esto es equivalente a utilizar la función filter:</p>
+<p>divisores n = filter(<code>divide</code> n) [1..n]</p>
+<p>El máximo común divisor puede definirse como:</p>
+<p>mcd x y = maximum [d | d &lt;- divisores x, d &#39;divide&#39; y]</p>
+<p>Otra forma de definir el mcd es utilizando composición de funciones:</p>
+<p>mcd x y = máximum filter (&#39;divide&#39; y) . divisores $ x</p>
+<p>donde f $ x = f x</p>
+
+<!-- NOTE END-->
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='icons/markdown/apuntesFP.md')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/markdown.svg')}}" height="20em" width="20em">
+    &nbsp;Apuntes FP&nbsp;
+    <span>- Markdown version (Spanish)</span>
+    <time>1/12/2021</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}13th march 2022{% endblock cdate %}

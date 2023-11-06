@@ -42,7 +42,7 @@ Los layouts son el esquema de distribución de los elementos dentro de un diseñ
 
 ## Modelos
 
-Casi todos los componentes poseen un modelo. Sin embargo el programador no tiene por que conocerlos. Los más utiles son colecciones de elementos que serán mostrados por componentes. Por ejemplo si tenemos una lista de elementos y queremos mostrarlos en un JList, debemos trabajar sobre el modelo de la lista para que se vea decente en la pantalla. Otro ejemplo es para manipular info en un JTable. 
+Casi todos los componentes poseen un modelo. Sin embargo, el programador no tiene por qué conocerlos. Los más útiles son colecciones de elementos que serán mostrados por componentes. Por ejemplo, si tenemos una lista de elementos y queremos mostrarlos en un JList, debemos trabajar sobre el modelo de la lista para que se vea decente en la pantalla. Otro ejemplo es para manipular info en un JTable. 
 
 ## Eventos
 
@@ -53,7 +53,7 @@ Los eventos ocurren cuando el usuario interactúa con la Gui. Todo componente pu
 
 La idea es mantener un correcto versionado del sistema. Es esencial no perder archivos. Previenen el caso de sobrescribir código y la perdida de trabajo por falta de respaldo (Si se mantiene un respaldo). 
 
-Las herramientas SCM permiten que multiples desarrolladores modifiquen el mismo código. Automatizar las actualizaciones entre versiones. La capacidad de acceder a versiones previas de nuestro código. 
+Las herramientas SCM permiten que múltiples desarrolladores modifiquen el mismo código. Automatizar las actualizaciones entre versiones. La capacidad de acceder a versiones previas de nuestro código. 
 
 ## Conceptos principales
 
@@ -76,9 +76,9 @@ En el svn hay un solo servidor con todas las versiones. Todos saben en cada mome
 ### GIT
 
 #### Que es GIT?
-Git es un software de gestión de cambios. Controla los cambios sobre archivos y mantiene un versionado del sistema. Nace a eso de 2005 cuando BASED LINUX TORVALDS no se ejó ser estafado por BitKeeper y desarrolló git. Ahora todos usan git. Lmao bottom text.
+Git es un software de gestión de cambios. Controla los cambios sobre archivos y mantiene un versionado del sistema. Nace a eso de 2005 cuando BASED LINUX TORVALDS no se dejó ser estafado por BitKeeper y desarrolló git. Ahora todos usan git. Lmao bottom text.
 
-Distribuido (Entre comillas). Varias copias en cada usuario. Cada clone del repositorio es un backup de todos los datos, no hay un solo punto de falla. El problema es mas difícil saber en que están trabajando cada uno de los integrantes. Eventualmente hay que mandar las cosas al servidor remoto y eventualmente resolver los conflictos.
+Distribuido (Entre comillas). Varias copias en cada usuario. Cada clone del repositorio es un backup de todos los datos, no hay un solo punto de falla. El problema es más difícil saber en qué están trabajando cada uno de los integrantes. Eventualmente hay que mandar las cosas al servidor remoto y eventualmente resolver los conflictos.
 
 Los archivos en git pueden estar en 3 estados, committed, modificados y preparados (staged). Siempre al hacer un commit se crea un snapshot al que se puede acceder. 
 
@@ -95,16 +95,16 @@ Los archivos pueden trackearse o no trackearse. Tener en cuenta que los meta-dat
 Realizar las transiciones de estado para los archivos implica la invocación de un comando GIT
 
 #### Branchs
-Es una linea separada de código con su propia historia.
+Es una línea separada de código con su propia historia.
 Es un puntero a un commit. El branch principal por defecto es MASTER
 Las funcionalidades se deberían desarrollar en un branch y luego andar incorporándolas a master. 
 
-origin/master es el commit mas reciente que el servidor remoto recuerda. Es responsabilidad del prog ir actualizando...
+origin/master es el commit más reciente que el servidor remoto recuerda. Es responsabilidad del prog ir actualizando...
 `git commit -m "Jannies get the rope."`
 
 El git checkout -b funcionalidad crea una nueva branch. Cuando empiezo a commit voy a estar committing en la nueva branch.
 Luego checkout master hago para pararme en master. Para juntar la nueva branch con master hago `git merge funcionalidad.`
-Tras mergear es buena practica borrar la branch. Para ello: `gir branch -d funcionalidad`. 
+Tras mergear es buena práctica borrar la branch. Para ello: `gir branch -d funcionalidad`. 
 Para resolver un merge conflict debemos ejecutar `git mergetool`. Git mergetool debe configurarse para ejecutar un programa para resolver el conflicto (que nos asista) por ejemplo: Meld, emerge. 
 
 Para enviar cambios al servidor remoto tenemos que hacer `git push origin master`.
@@ -118,7 +118,7 @@ gitk es una herramienta que nos permite ver en una GUI el estado de un repositor
 
 # JAVA
 
-JAVA es un lenguaje de  programación con una sintaxis similar parecida a c++ aquí dejo algunas características adicionales:
+JAVA es un lenguaje de programación con una sintaxis similar parecida a c++ aquí dejo algunas características adicionales:
 
 Se añade el legendario for each loop:
 
@@ -146,7 +146,7 @@ Ejemplo de clase:
 Notar que las funciones tienen su visibilidad incluida. Static indica que el método es estático y no necesita al objeto para ser llamado.
 El constructor lleva el mismo nombre. Notar el uso del `this`. El atributo final indica que la variable no puede modificarse, en funciones significa que la función no se le puede hacer un override. 
 
-Para saber de que tipo es la instancia de un objeto podemos usar la función booleana `instance of`:
+Para saber de qué tipo es la instancia de un objeto podemos usar la función booleana `instance of`:
 
     String name = "LOL"
     boolean result1 = name instanceof String
@@ -223,7 +223,7 @@ Java tiene la capacidad de las reflections, lo que permite al programador inspec
 
 Las excepciones se realizan con un try...catch y pueden tener un finally al final para ejecutar código tanto si la op falla como si no.
 El throw nos permite tirar excepciones y el throws nos permite definirle a la clase el tipo de excepciones que podría tirar.
-También tenemos los try con recursos. El cual nos permite administrar recursos de manera mas eficiente. 
+También tenemos los try con recursos. El cual nos permite administrar recursos de manera más eficiente. 
 
 Las anotaciones de java es información para el compilador que nos permite detectar bugs de manera prematura. Por ejemplo `@override` indica nuestra intención de hacerle override a una función.
 
@@ -247,7 +247,7 @@ Diagrama para elegir una colección:
 Un error humano puede generar un defecto (interno) que puede generar una falla (externo)
 El software **falla** cuando no hace lo requerido o hace algo que no debería. Se debe de intentar corregir los **defectos** lo antes posible. 
 
-## Pueba
+## Prueba
 
 Proceso de ejecutar software con el fin de provocar fallas. Para provocar fallas creamos casos de prueba tomando en consideración:
 - Objetivo 
@@ -271,38 +271,38 @@ Técnicas de caja negra:
 1. Partición de clases de equivalencia
 2. Valores límite
 3. Tablas de descripción (reglas complejas)
-4. Basado en maquinas de estado
+4. Basado en máquinas de estado
 5. Basado en casos de uso (casos de prueba en alto nivel)
 6. etc.
 
 ##### Clases de equivalencia
 
-Se parte la entrada en clases de equivalencia. Datos de clase -> mismo comportamiento. Es el método más intuitivo. Por ejemplo: (identificar si una persona es mayor de edad. Dividimos en clases válidas e invalidas. Alfanuméricos, negativos, reales, edad maxima, etc.)
+Se parte la entrada en clases de equivalencia. Datos de clase -> mismo comportamiento. Es el método más intuitivo. Por ejemplo: (identificar si una persona es mayor de edad. Dividimos en clases válidas e invalidas. Alfanuméricos, negativos, reales, edad máxima, etc.)
 
-**Valores límite**: Para determinar las clases de equivalencia se se suelen usar los extremos de las mismas. Es normal encontrar defectos en los extremos. 
+**Valores límite**: Para determinar las clases de equivalencia se suelen usar los extremos de las mismas. Es normal encontrar defectos en los extremos. 
 
-**Múltiples entradas independientes**: Se tienen varias entradas que no tienen constraints entre si. Podemos partir cada uno de los dominios en clases de equivalencia. Se arman datos de prueba considerando que solo es necesario cubrir una clase invalidad a la vez y cubrir la mayor cantidad de clases validas. 
+**Múltiples entradas independientes**: Se tienen varias entradas que no tienen constraints entre sí. Podemos partir cada uno de los dominios en clases de equivalencia. Se arman datos de prueba considerando que solo es necesario cubrir una clase invalidad a la vez y cubrir la mayor cantidad de clases validas. 
 
-**Múltiples entradas dependientes**: En este caso las entradas no son independientes en lo que respecta al tratamiento de datos. Por ejemplo, el input de 3 lados de un triangulo para determinar si es isosceles. Aquí toma importancia la relación entre las entradas y para partir las entradas hay que basarse en el comportamiento trabajando con la *especificación*.
+**Múltiples entradas dependientes**: En este caso las entradas no son independientes en lo que respecta al tratamiento de datos. Por ejemplo, el input de 3 lados de un triángulo para determinar si es isósceles. Aquí toma importancia la relación entre las entradas y para partir las entradas hay que basarse en el comportamiento trabajando con la *especificación*.
 
 #### Técnicas de caja blanca
 
 Técnicas de caja blanca:
 
 - Basadas en flujo de control.
-    - Sentencias, condición, decision, condición/decision, condición simple, etc.
+    - Sentencias, condición, decisión, condición/decisión, condición simple, etc.
 - Basadas en flujo de datos.
     - Todos los c-usos, todos los p-usos, todos los caminos definición-uso, etc.
 - Basadas en mutantes.
 
-Se basan en el flujo de control del programa y los arboles de decisiones inherentes a los algoritmos.
+Se basan en el flujo de control del programa y los árboles de decisiones inherentes a los algoritmos.
 
 ## Cubrimiento de Sentencias
 
-Cuantas y cuales sentencias cubrimos al ejecutar el conjunto de casos de prueba?
+¿Cuántas y cuales sentencias cubrimos al ejecutar el conjunto de casos de prueba?
 El cubrimiento de sentencias se cumple cuando se ejecutan el 100% de las sentencias, al menos una vez, para ello se tienen que ejecutar un set de casos de prueba. Este cubrimiento es de caja blanca.
 
-Pueden haber trayectorias o datos que igual provoquen defectos tras cumplir con el cubrimiento de sentencias. Pero de todas formas ganamos más confianza en nuestro código y nuestros casos.
+Puede haber trayectorias o datos que igual provoquen defectos tras cumplir con el cubrimiento de sentencias. Pero de todas formas ganamos más confianza en nuestro código y nuestros casos.
 
 > La prueba (test) demuestra la presencia de faltas y nunca su ausencia (Dijkstra)
 
@@ -323,7 +323,7 @@ EclEmma:
 - Revisar el código: Aquí se detectan la mayor cantidad de defectos, si se detectan tempranamente mejor.
 - Construir y ejecutar (pruebas unitarias). Hacer casos de caja negra. Permite asegurar la funcionalidad del software.
 - Ver el cubrimiento alcanzado para continuar cubriendo caos.
-- Si a medida que implemento construyo casos entonces el testing no lleva tanto tiempo. Más aun comparándolo con el costo del re-trabajo.
+- Si a medida que implemento construyo casos entonces el testing no lleva tanto tiempo. Más aun comparándolo con el costo del retrabajo.
 
 # Desarrollo Web (+Java EE)
 
@@ -337,12 +337,12 @@ Formato simplificado de una URL:
 > query: Pares x=y separados con un &
 Host es el nombre o dirección IP del servidor. Port es el puerto TCP en el que el servidor web escucha. Por lo general es 80... no es necesario especificarlo. Abs_path es la ruta del archivo que se desea obtener. Query permite pasar parámetros extra al servidor (Ej: ?lenguaje=es&país=uy)
 
-Existen 9 métodos para el cliente se comunique con el serividor:
-1. GET: Pide un recurso (los parametros se pasan en la url) (Permite enviar poca info)
-2. POST: Envía información (Los parametros se pasan en el cuerpo del pedido, permite enviar archivos)
+Existen 9 métodos para el cliente se comunique con el servidor:
+1. GET: Pide un recurso (los parámetros se pasan en la url) (Permite enviar poca info)
+2. POST: Envía información (Los parámetros se pasan en el cuerpo del pedido, permite enviar archivos)
 3. PUT,DELETE,HEAD,OPTIONS,etc.
 
-El servidor puede responer con varios códigos:
+El servidor puede responder con varios códigos:
 1. 200: OK (no errors)
 2. 404: Page not found
 3. 500: Internal server Error (Error!)
@@ -355,11 +355,11 @@ Esta sesión es iniciada la primera vez que el usuario accede a la app usando el
 
 ## HTML
 
-HyperText Markup Language. Es un lenguaje para expresar el contenido para una pagina web, tiene una forma arborescente. Utiliza etiquetas para indicar los diferentes elementos de un documento. Documento HTML = Página web
+HyperText Markup Language. Es un lenguaje para expresar el contenido para una página web, tiene una forma arborescente. Utiliza etiquetas para indicar los diferentes elementos de un documento. Documento HTML = Página web
 
-Los navegadores convierten el código HTML en paginas visuales y audibles (wtf XDDD), es el más popular. La última version es HTML5.2 lanzada en 2017. (HTML nace en 1991)
+Los navegadores convierten el código HTML en páginas visuales y audibles (wtf XDDD), es el más popular. La última versión es HTML5.2 lanzada en 2017. (HTML nace en 1991)
 
-Todo HTML esta contenido en las etiquetas < html > < /html > seguido por un < head > ... < title > ... < /title > < /head > < body > .... Se sigue una estructura de árbol! Cada uno de estos nombres son las etiquetas que constituyen y definen la estructura de la webpage!!! Es bastante similar a XML. Podemos observar que las marcas vienen en pares, delimitan el contenido, tienen atributos y tienen un efecto recursivo.
+Todo HTML está contenido en las etiquetas < html > < /html > seguido por un < head > ... < title > ... < /title > < /head > < body > .... ¡Se sigue una estructura de árbol! ¡Cada uno de estos nombres son las etiquetas que constituyen y definen la estructura de la webpage!!! Es bastante similar a XML. Podemos observar que las marcas vienen en pares, delimitan el contenido, tienen atributos y tienen un efecto recursivo.
 Principales etiquetas: < hmtl >, < body> , < form>, < a>, < div>
 
 Estructura 
@@ -378,7 +378,7 @@ Estructura
 
 ### Formularios HTML
 
-Permiten el envío de información al servidor. Pueden utilizarse tanto con GET como POST, Es una etiqueta < form> que define donde se manda el pedido. Este esta constituido por etiquetas < input> la cual toma diferentes formas según el atributo type:
+Permiten el envío de información al servidor. Pueden utilizarse tanto con GET como POST, Es una etiqueta < form> que define donde se manda el pedido. Este está constituido por etiquetas < input> la cual toma diferentes formas según el atributo type:
 - text: text input (one-line)
 - password: text input con texto oculto
 - radio: botón con una opción excluyente
@@ -391,19 +391,19 @@ Cascading Style Sheets, permite definir la presentación de un documento HTML. E
 
 ![ej](assets/css.png)
 
-Las reglas CSS tiene especificidad. Pueden ser importantes y se pasan por encima las demas reglas, pueden ser inline y estar embebidas en el HTML, o normales. Y aplicarse según su orden.
+Las reglas CSS tiene especificidad. Pueden ser importantes y se pasan por encima las demás reglas, pueden ser inline y estar embebidas en el HTML, o normales. Y aplicarse según su orden.
 
 ## DOM
 
-Viene de Document Object Model. Es un modelo que permite representar un documento de forma independiente del lenguaje. Define una interfaz estándar para manipular documentos con estructura arborescente. Para HTML, permite acceder a los elemento, atributos y contendio mediante objetos **Node**. Existe un nodo raíz que se le llama **document**.
+Viene de Document Object Model. Es un modelo que permite representar un documento de forma independiente del lenguaje. Define una interfaz estándar para manipular documentos con estructura arborescente. Para HTML, permite acceder a los elementos, atributos y contenido mediante objetos **Node**. Existe un nodo raíz que se le llama **document**.
 
-De esta manera se puede recorrer todo el documento mediante metodos de Node (childNodes,firstChild,nextSibling,etc.). Se puede obtener un elemento con el método *getElementById* y se pueden crear *createElement*, agregar (*appendChild*) y borrar (*removeChild*) elementos. 
+De esta manera se puede recorrer todo el documento mediante métodos de Node (childNodes,firstChild,nextSibling,etc.). Se puede obtener un elemento con el método *getElementById* y se pueden crear *createElement*, agregar (*appendChild*) y borrar (*removeChild*) elementos. 
 
 ## JavaScript
 
-Es un lenguaje de programación importavio, interpretado, dinamico y débilmente tipado. Los navegadores ejecutan código JavaScript que viene de una pagina Web solicitada. Se puede embeber en la página HTML mediante la etiqueta < script> tanto en el head como en el body.
+Es un lenguaje de programación imperativo, interpretado, dinámico y débilmente tipado. Los navegadores ejecutan código JavaScript que viene de una página Web solicitada. Se puede embeber en la página HTML mediante la etiqueta < script> tanto en el head como en el body.
 Por lo general el código se incluye en archivos separados (tanto usando camino relativo o una URI): < script src="...">< /script>
-Un javascript puede cambiar la estructura, contendio y estilo de una pagina Web modificando su DOM: 
+Un JavaScript puede cambiar la estructura, contenido y estilo de una página Web modificando su DOM: 
 
     var unSpan = document.getElementById(“spanID");
     unSpan.innerHTML = “Hola JavaScript";
@@ -412,9 +412,9 @@ Un javascript puede cambiar la estructura, contendio y estilo de una pagina Web 
     unBoton.setAttribute(‘type’, ‘button’);
     document.getElementById(“formID").appendChild(unBoton );
 
-Aveces se embebe directamente el script para funcionalidades simples como el manejo de eventos. Por ejemplo: onclick, onload, onunload, onchange, onmouseover, etc.
+A veces se embebe directamente el script para funcionalidades simples como el manejo de eventos. Por ejemplo: onclick, onload, onunload, onchange, onmouseover, etc.
 
-> Recordar que este javascript se ejecuta del lado del cliente!!! Toda esa basura de JSP es "dinamismo" del lado del servidor, y se ejecuta dentro de el. Al usuario le devolvemos un html y fue.
+> Recordar que este JavaScript se ejecuta del lado del cliente!!! Toda esa basura de JSP es "dinamismo" del lado del servidor, y se ejecuta dentro de él. Al usuario le devolvemos un HTML y fue.
 
 
 ## jQuery
@@ -436,7 +436,7 @@ Ejemplos de queries son:
 
 ## AJAX
 
-Asynchronous JavaScript And XML. Permite que el navegador haga pedidos en segundo plano sin la necesidad de recargar la pagina cuando se recibe un pedido o se envía uo. Permite el desarrollo de *single page applications*. Utiliza el objeto XMLHttpRequest que lo implementa los navegadores. Un claro uso de esto son las sugerencias de la barra de busqueda.
+Asynchronous JavaScript And XML. Permite que el navegador haga pedidos en segundo plano sin la necesidad de recargar la página cuando se recibe un pedido o se envía uno. Permite el desarrollo de *single page applications*. Utiliza el objeto XMLHttpRequest que lo implementa los navegadores. Un claro uso de esto son las sugerencias de la barra de búsqueda.
 
 Ejemplo de uso:
 
@@ -460,22 +460,22 @@ Ejemplo de uso:
 
 ## Bootstrap
 
-Es un conjunto de herramientas para facilitar el desarrollo de paginas Web. Incluye pero no se limita a: CSS, fuentes, templates, extensiones JS, etc. Permite la creación de paginas "responisvas" y esta tiene en mente el uso en dispositivos mobiles. Las paginas que no son responsive en computadoras pueden andar bien pero en celular no tanto... :P
+Es un conjunto de herramientas para facilitar el desarrollo de páginas Web. Incluye, pero no se limita a: CSS, fuentes, templates, extensiones JS, etc. Permite la creación de páginas "responsivas" y esta tiene en mente el uso en dispositivos móviles. Las páginas que no son responsive en computadoras pueden andar bien, pero en celular no tanto... :P
 
-> Básicamente se la jugaron y todo el laburo en AJAX y eso lo packagearon en componentes de forma que las demás desarrolladores no tengan que reinventar la rueda. 
+> Básicamente se la jugaron y todo el laburo en AJAX y eso lo packagearon en componentes de forma que los demás desarrolladores no tengan que reinventar la rueda. 
 
 > Les recomiendo que no se maten tanto si les complica mucho usarlo xd
 
 ## Aplicaciones Web
 
-Son aquellas que residen en un servidor Web is son accesibles a través de la red usando un browser.
-Consta de recursos Web estaticos (paginas, fotos), y de componentes ejecutables. Los webserver ejecutan estos componentes y generan contenido dinamico para el cliente. Algunos componentes se los puede enviar al cliente para que el los ejecute (javascript).  Son hospedados en un webserver capaz de ejecutar estos componentes y enviar los recursos generados a los navegadores, aunque el cliente también puede ejecutar los recursos.
+Son aquellas que residen en un servidor Web y son accesibles a través de la red usando un browser.
+Consta de recursos Web estáticos (paginas, fotos), y de componentes ejecutables. Los webservers ejecutan estos componentes y generan contenido dinámico para el cliente. Algunos componentes se los puede enviar al cliente para que el los ejecute (JavaScript).  Son hospedados en un webserver capaz de ejecutar estos componentes y enviar los recursos generados a los navegadores, aunque el cliente también puede ejecutar los recursos.
 
 Las ventajas de las aplicaciones web son su fácil distribución (literalmente escribir la url en el navegador), actualización automática (no existe el concepto de versiones viejas), permite buen escalado ante muchos usuarios y estos solamente necesitan un navegador web para poder acceder. 
 
 ### Server Side Scripting
 
-Método de desarrollo Web en donde le código (script o programa) se ejecuta en el servidor para generar paginas web dinamicas. Los servidores web pueden directamente ejecutar el código o utilizar interpretes, módulos y ambientes externos para ejecutarlo.
+Método de desarrollo Web en donde le código (script o programa) se ejecuta en el servidor para generar páginas web dinámicas. Los servidores web pueden directamente ejecutar el código o utilizar intérpretes, módulos y ambientes externos para ejecutarlo.
 
 Algunos ejemplos de tecnologías son: Servlets/JSP/JSF (Java EE), ASP.NET, PHP, Ruby on Rails, JavaScript (Node.js), Python, Perl, etc.
 En java vamos a usar servlets y paginas JSP.
@@ -502,7 +502,7 @@ Un servlet (web component) corre en un Web Container.
 
 Un servidor de aplicaciones Java EE es un software que implementa algunos o todos los tipos de contenedores Java EE. Apache Tomcat es un servidor de aplicaciones que implementa JEE parcialmente.
 
-Java server pages ayuda a armar el HTML de manera más amigable que un servlets. Un servlets no es mas que un objeto que permite manejar una petición a una pagina web y devolver una respuesta ejecutando su código java. Mientras que JSP es HTML con código java embebido (util para HTML dinamico) 
+Java server pages ayuda a armar el HTML de manera más amigable que un servlets. Un servlets no es más que un objeto que permite manejar una petición a una página web y devolver una respuesta ejecutando su código java. Mientras que JSP es HTML con código java embebido (útil para HTML dinámico) 
 
 Por cada URL que se define necesito un servlet que atienda dicha solicitud. Para marcar el código Java embebido se los rodea con un <% ... %>.
 
@@ -519,13 +519,13 @@ Los modulos web se empaquetan en archivos war con la siguiente estructura:
 
 ##### Java API (javax.servlet.http.HttpServlet)
 
-Clase abstracta que define métodos que se llaman en distintas situaciones. Redefine algunos metodos para que el servlet funcione (ej. Método GET y POST (HttpServlet.doGet(HttpServletRequest req, HttpServletResponse response)))
+Clase abstracta que define métodos que se llaman en distintas situaciones. Redefine algunos métodos para que el servlet funcione (ej. Método GET y POST (HttpServlet.doGet(HttpServletRequest req, HttpServletResponse response)))
 
-El request y response encapsulan las peticiones y respuestas entre el cliente y el servidor. El ServletRequest tiene como métodos getParameter() que retorna el valor del parametro y getParametersNames() que retorna los nombres de los parametros. Por otro lado ServletResponse encapsula la respuesta. Se puede devolver los datos con getWriter() modo texto o en binario: getOutputStream()
+El request y response encapsulan las peticiones y respuestas entre el cliente y el servidor. El ServletRequest tiene como métodos getParameter() que retorna el valor del parametro y getParametersNames() que retorna los nombres de los parametros. Por otro lado, ServletResponse encapsula la respuesta. Se puede devolver los datos con getWriter() modo texto o en binario: getOutputStream()
 
 JAVA EE define dos clases para guardar información persistente a un Request/Response (HttpSession y ServletContext).
 HttpSession encapsula la sesión del cliente web con el servidor. Es compartida por todos los pedidos de un mismo cliente. (Se obtiene con el getSession de un request) y permite guardar información del estado de la sesión: setAttribute() y getAttribute()
-ServletContext encapsula el contexto de la aplicación web. Es analogo al session pero a nivel de la aplicación. Este se obtiene con el getServletContext()
+ServletContext encapsula el contexto de la aplicación web. Es análogo al session pero a nivel de la aplicación. Este se obtiene con el getServletContext()
 
 Ejemplo de Java servlet:
 
@@ -545,9 +545,9 @@ Ejemplo de Java servlet:
 
 ##### JSP
 
-Como es muy duro hacer Html a manopla nace el JavaServer Pages. Extiende los servlets y permite aplicar server side scripting a un documento HTML, siendo más apropiado para contenido dinámico. Apunta a separar la lógica de la generación de contenido con la presentación de los datos  generados. La lógica asociada a la presentación del contendio dinámico se incluye embebida dentro del contenido estático. Es como que JSP es el encargado de visualizar el contenido.
+Como es muy duro hacer Html a manopla nace el JavaServer Pages. Extiende los servlets y permite aplicar server side scripting a un documento HTML, siendo más apropiado para contenido dinámico. Apunta a separar la lógica de la generación de contenido con la presentación de los datos generados. La lógica asociada a la presentación del contenido dinámico se incluye embebida dentro del contenido estático. Es como que JSP es el encargado de visualizar el contenido.
 
-Las partes dinamicas se marcan con tags JSP. Son trozos de código Java llamados scriptlets.
+Las partes dinámicas se marcan con tags JSP. Son trozos de código Java llamados scriptlets.
 
 Ejemplo:
 
@@ -564,7 +564,7 @@ Ejemplo:
     </body>
     </html>
 
-Tomcat va a dirigir a un archivo .jsp (fuente), este se va a compilar y va a generar un servlet compilado que tomcat va a utilizar para servir la request. Desde un servlet puedo redirigir un JSP. Esto permite que el servlet defina la lógica y JSP se encargue unicamente de visualizarla.
+Tomcat va a dirigir a un archivo .jsp (fuente), este se va a compilar y va a generar un servlet compilado que tomcat va a utilizar para servir la request. Desde un servlet puedo redirigir un JSP. Esto permite que el servlet defina la lógica y JSP se encargue únicamente de visualizarla.
 
 ![ej](assets/jspdiag.png)
 
@@ -580,7 +580,7 @@ En jsp podemos aplicar templates con el tag: < jsp include page="name.(html|jsp)
 
 Es muy importante manejar las excepciones. El cliente no puede hacer click y que el servidor le devuelva la traza del error...
 Para ello se define en jsp: < %@page errorpage="..." %>
-Con esto basta para que redireccione a una pagina en caso de un error
+Con esto basta para que redireccione a una página en caso de un error
 
 Las errorpage se definen con el tag <%@ page isErrorPage="true" %>
 Y en el html body podemos trabajar con excepciones:
@@ -599,25 +599,25 @@ Tomcat es un servidor Web y un Contenedor de Servlets y JSP. Es el intermediario
 ![ej](assets/webjee.png)
 
 Las reglas de despacho URL de tomcat son programables. Se especifican en un archivo de mapping *web.xml*. 
-En lineas generales, se define el nombre del servlet, y la ubicación de la clase que lo implementa (tprog.servlet_hora.main_Servlet)
+En líneas generales, se define el nombre del servlet, y la ubicación de la clase que lo implementa (tprog.servlet_hora.main_Servlet)
 El patron de url se configura con el < servlet-mapping> < servlet-name> < url-pattern>
 
 
 ### Client Side Scripting
 
-Método de desarrollo Web en donde el código se envía al cliente para que este lo ejecute (navegador). Permite mostrar contenido dinamico y manejar las interacciones del usuario de forma similar a las aplicaciones de escritorio o nativas. Algunas tecnologías para client-side scripting son: JavaScript (nativo en browsers), TypeScript (transpilado (traducción lenguaje fuente->lenguaje fuente) a JavaScript) y las **Rich-Internet-Applications** las cuales requieren soporte adicional a través de un plug-in. Ejemplos de estas son: Flash/Silverlight/JavaFX
+Método de desarrollo Web en donde el código se envía al cliente para que este lo ejecute (navegador). Permite mostrar contenido dinámico y manejar las interacciones del usuario de forma similar a las aplicaciones de escritorio o nativas. Algunas tecnologías para client-side scripting son: JavaScript (nativo en browsers), TypeScript (transpilado (traducción lenguaje fuente->lenguaje fuente) a JavaScript) y las **Rich-Internet-Applications** las cuales requieren soporte adicional a través de un plug-in. Ejemplos de estas son: Flash/Silverlight/JavaFX
 
 ## Patrones de Diseño
 
-Como construir una aplicación Web que separe la lógica de Presentación... Flujo: Cliente consulta URL -> Servidor invoca capa lógica para consultar datos -> Se muestra una pagina particular.
+Como construir una aplicación Web que separe la lógica de Presentación... Flujo: Cliente consulta URL -> Servidor invoca capa lógica para consultar datos -> Se muestra una página particular.
 
-La solución de esto es el patron MVC: **Model-View-Controller**.
+La solución de esto es el patrón MVC: **Model-View-Controller**.
 
 En el caso de Java, los controladores son los Servlets. El controlador es el que decide que vista invocar. 
 
 El modelo es el que mantiene los datos y maneja la lógica de negocio. El controlador invoca o modifica al modelo para obtener los datos para mostrar.
 
-El controlador (servlet) invoca a una vista, la cual es una pagina jsp y recursos estáticos que muestra los recursos que decidió el controlador.
+El controlador (servlet) invoca a una vista, la cual es una página jsp y recursos estáticos que muestra los recursos que decidió el controlador.
 
 ![ej](assets/mvc.png)
 
@@ -642,7 +642,7 @@ An element is defined by a start tag, content and an end tag:
 
     <tagname>Content goes here...</tagname>
 
-An **html element** is everything from the start tag to the end tag. Es importante notar que algunos elementos no tienen contenido. Como el < br>, estos no tienen un end tag!!!
+An **html element** is everything from the start tag to the end tag. Es importante notar que algunos elementos no tienen contenido. ¡¡¡Como el < br>, estos no tienen un end tag!!!
 
 > All HTML documents must start with a document type declaration: < !DOCTYPE html>. The HTML document itself begins with < html> and ends with < /html>. The visible part of the HTML document is between < body> and < /body>. The < !DOCTYPE> declaration is not case sensitive.
 
@@ -670,7 +670,7 @@ Para las imágenes tenemos adicionalmente estos atributos:
 
 - width, height, alt (alternate text for the image if it cannot be displayed)
 
-En el html tag podemos especificar el lang, y en los párrafos un style= o un titulo.
+En el html tag podemos especificar el lang, y en los párrafos un style= o un título.
 The title attribute defines some extra information about an element.
 The lang attribute of the < html> tag declares the language of the Web page.
 
@@ -678,7 +678,7 @@ The lang attribute of the < html> tag declares the language of the Web page.
 
 Use HTML headings for headings only. Don't use headings to make text BIG or bold. Each HTML heading has a default size. However, you can specify the size for any heading with the style attribute, using the CSS font-size property.
 
-The < hr> tag defines a thematic break in an HTML page, and is most often displayed as a horizontal rule. The < hr> element is used to separate content (or define a change) in an HTML page. The < hr> tag is an empty tag, which means that it has no end tag. Also use < br> if you want a line break (a new line) without starting a new paragraph
+The < hr> tag defines a thematic break in an HTML page, and is most often displayed as a horizontal rule. The < hr> element is used to separate content (or define a change) in an HTML page. The < hr> tag is an empty tag, which means that it has no end tag. Also use < br> if you want a line break (a new line) without starting a new paragraph.
 
 The HTML < pre> element defines preformatted text. The text inside a < pre> element is displayed in a fixed-width font (usually Courier), and it preserves both spaces and line breaks:
 
@@ -848,7 +848,7 @@ Example:
     </map>
 
 La coordenada 0,0 es la coordenada del borde superior izquierdo. Notar que las coordenadas van de a pares.
-También podemos hacer que se ejecute javascript al clickear un area:
+También podemos hacer que se ejecute javascript al clickear un área:
 
     <map name="workmap">
     <area shape="circle" coords="337,300,44" href="coffee.htm" onclick="myFunction()">
@@ -860,7 +860,7 @@ También podemos hacer que se ejecute javascript al clickear un area:
     }
     </script>
 
-A todos los elementos se les puede ponder un atributo background image. Este es configurable via CSS.
+A todos los elementos se les puede poner un atributo background image. Este es configurable vía CSS.
 
 The HTML < picture> element allows you to display different pictures for different devices or screen sizes. The < picture> element contains one or more < source> elements, each referring to different images through the srcset attribute. This way the browser can choose the image that best fits the current view and/or device. Each <  source> element has a media attribute that defines when the image is the most suitable.
 
@@ -872,7 +872,7 @@ The HTML < picture> element allows you to display different pictures for differe
 
 > Note: Always specify an < img> element as the last child element of the < picture> element. The < img> element is used by browsers that do not support the < picture> element, or if none of the < source> tags match.
 
-Los dos motivos centrales para esta es funcionalidad es para ahorrar ancho de banda para mostrar fotos mas pequeñas cuando la pantalla también lo es (o viceversa) o para cargar fotos en distintos formatos cuando el navegador no soporta uno de estos.
+Los dos motivos centrales para esta es funcionalidad es para ahorrar ancho de banda para mostrar fotos más pequeñas cuando la pantalla también lo es (o viceversa) o para cargar fotos en distintos formatos cuando el navegador no soporta uno de estos.
 
 ## Tables
 
@@ -898,7 +898,7 @@ HTML tables allow web developers to arrange data into rows and columns. Example:
 
 Each table cell is defined by a < td> and a < /td> tag. (td=table data). Each table row starts with a < tr> and end with a < /tr> tag. (tr = table row)
 
-Si queres que alguna celda sea un header se puede reemplazar td por th. Por default quedan centrados y en negritas.
+Si quieres que alguna celda sea un header se puede reemplazar td por th. Por default quedan centrados y en negritas.
 
 En CSS, para evitar el efecto de doble borde:
 
@@ -970,7 +970,7 @@ Uns lista sin orden es con el tag < ul> (unordered list) y cada element es < li>
     <dd>- white cold drink</dd>
     </dl>
 
-Lsd listas pueden ser anidadas. También se pueden tener listas horizontales. Estas son muchas veces las barras de los menús!!!
+Lsd listas pueden ser anidadas. También se pueden tener listas horizontales. ¡¡¡Estas son muchas veces las barras de los menús!!!
 En las listas ordenadas el atributo type indica el marcador:
 
     <ol type="1">
@@ -1135,8 +1135,8 @@ Websites often display content in multiple columns (like a magazine or a newspap
 Las técnicas para definir layouts son:
 
 1. CSS Framework (W3.css, bootstrap)
-2. CSS Float property (usando float and clear. Es fácil de usar pero es un método bastante rígido)
-3. CSS Flexbox (es parecido a float pero permite ser mas responsive para diferentes resoluciones)
+2. CSS Float property (usando float and clear. Es fácil de usar, pero es un método bastante rígido)
+3. CSS Flexbox (es parecido a float pero permite ser más responsive para diferentes resoluciones)
 4. CSS Grid (Literalmente un sistema de columnas y filas que permite definir las posiciones de los elementos)
 
 ## Responsive
@@ -1174,7 +1174,7 @@ Un ejemplo clásico es el de media queries. With media queries you can define co
     }
     </style>
 
-Por suerte hay frameworks que simplifican todo esto: Un CSS framework is Bootstrap. Bootstrap uses HTML, CSS and jQuery to make responsive web pages. For example look at this crap:
+Por suerte hay frameworks que simplifican todo esto: Un CSS framework is Bootstrap. Bootstrap uses HTML, CSS and jQuery to make responsive web pages. For example, look at this crap:
 
     <!DOCTYPE html>
     <html lang="en">
@@ -1333,7 +1333,7 @@ Because URLs can only be sent over the Internet using the ASCII character-set. I
 
 ## XHTML
 
-XHTML is a stricter, more XML-based version of HTML, stands for EXtensible HyperText Markup Language. XHTML was developed to make HTML more extensible and flexible to work with other data formats (such as XML). In addition, browsers ignore errors in HTML pages, and try to display the website even if it has some errors in the markup. So XHTML comes with a much stricter error handling.
+XHTML is a stricter, more XML-based version of HTML, stands for EXtensible HyperText Markup Language. XHTML was developed to make HTML more extensible and flexible to work with other data formats (such as XML). In addition, browsers ignore errors in HTML pages, and try to display the website even if it has some errors in the markup. So, XHTML comes with a much stricter error handling.
 
 Differences: 
 
@@ -1457,7 +1457,7 @@ The < output> element represents the result of a calculation (like one performed
 
 ### Input types
 
-By default an input is of type text. This is a list of possible types:
+By default, an input is of type text. This is a list of possible types:
 
     <input type="button">
     <input type="checkbox"> //Checkboxes let a user select ZERO or MORE options of a limited number of choices.
@@ -1496,7 +1496,7 @@ This is a list of other input restrictions:
     checked	    Specifies that an input field should be pre-selected when the page loads (for type="checkbox" or type="radio")
     disabled	Specifies that an input field should be disabled
     max	        Specifies the maximum value for an input field
-    maxlength	Specifies the maximum number of character for an input field
+    maxlength	Specifies the maximum number of characters for an input field
     min	        Specifies the minimum value for an input field
     pattern	    Specifies a regular expression to check the input value against
     readonly	Specifies that an input field is read only (cannot be changed)
@@ -1507,7 +1507,7 @@ This is a list of other input restrictions:
 
 ### Input Attributes
 
-The input value attribute specifies an initial value for an input field. The input readonly attribute specifies that an input field is read-only (however, a user can tab to it, highlight it, and copy the text from it), it will be sent when submitted. However the disabled attribute specifies that the input is unusable and un-clickable and the input field will NOT be sent!
+The input value attribute specifies an initial value for an input field. The input readonly attribute specifies that an input field is read-only (however, a user can tab to it, highlight it, and copy the text from it), it will be sent when submitted. However, the disabled attribute specifies that the input is unusable and un-clickable and the input field will NOT be sent!
 
 The size attr indicates the size of the input. The input maxlength attribute specifies the maximum number of characters allowed in an input field, however it doesn't provide feedback (you need to add a javascript to alert the user). The input pattern attribute specifies a regular expression that the input field's value is checked against, when the form is submitted. The input placeholder attribute specifies a short hint that describes the expected value of an input field (a sample value or a short description of the expected format). The short hint is displayed in the input field before the user enters a value. The input required attribute specifies that an input field must be filled out before submitting the form:
 
@@ -2088,7 +2088,7 @@ Some examples of text-decoration are: overline, line-through and underline.
 
 The text-transform property is used to specify uppercase and lowercase letters in a text. It can be used to turn everything into uppercase or lowercase letters, or capitalize the first letter of each word.
 
-The text-indent property is used to specify the indentation of the first line of a text. The letter-spacing property is used to specify the space between the characters in a text. The line-height property is used to specify the space between lines. The word-spacing property is used to specify the space between the words in a text. The white-space property specifies how white-space inside an element is handled. For example nowrap doesn't breaks newlines after spaces.
+The text-indent property is used to specify the indentation of the first line of a text. The letter-spacing property is used to specify the space between the characters in a text. The line-height property is used to specify the space between lines. The word-spacing property is used to specify the space between the words in a text. The white-space property specifies how white-space inside an element is handled. For example, nowrap doesn't breaks newlines after spaces.
 
 You can add text-shadow with the values: horizontal - vertical - blur - color.
 
@@ -5115,19 +5115,19 @@ Media objects can also be nested (example: comment reply of a previous post):
 
 # Web Services
 
-Los web services van a ser la herramienta que va a realizar la comunicación entre el servidor web y el servidor central via web services. Ya no va a ser una librería .jar ahi barata sino literalmente un servidorcentral :DD.
+Los web services van a ser la herramienta que va a realizar la comunicación entre el servidor web y el servidor central vía web services. Ya no va a ser una librería .jar ahí barata sino literalmente un servidor central :DD.
 
-Los web services permiten comunicar sistemas ubicados en distintos hosts a traves de internet e incluso desarrollados en tecnologías distintas. Todo esto se basa en el concepto de sistemas distribuidos: procesamiento de la información que está distribuido entre dos o mas computadores en la red.
+Los web services permiten comunicar sistemas ubicados en distintos hosts a través de internet e incluso desarrollados en tecnologías distintas. Todo esto se basa en el concepto de sistemas distribuidos: procesamiento de la información que está distribuido entre dos o más computadores en la red.
 
 Existe un nuevo grado de complejidad (llevar a cabo la comunicación entre componentes): middleware, escalabilidad, apertura, tolerancia a fallas, concurrencia, etc.
-Los grandes sistemas de gran estacala hoy en día son sistemas distribuidos.
+Los grandes sistemas de gran escala hoy en día son sistemas distribuidos.
 
-En cuanto a la tarea, es hora de desacoplar todo!!! Va a haber comunicación entre la estación de trabajo y el servidor web a traves del servidor central que recibe ambas comunicaciones. Para eso vamos a utilizar herramientas de middleware.
+¡¡¡En cuanto a la tarea, es hora de desacoplar todo!!! Va a haber comunicación entre la estación de trabajo y el servidor web a través del servidor central que recibe ambas comunicaciones. Para eso vamos a utilizar herramientas de middleware.
 
 ## Middleware:
 
 Es el software que permite gestionar partes de un sistema distribuido asegurando que pueden comunicarse e intercambiar datos.
-Permite las interacciones a nivel de aplicación entre distintos componentes. (Ej: entre un servidor y una base de datos). Sin middleware se requeriría programmar módulos de comunicación de bajo nivel cada vez que se quiere hacer un cambio. 
+Permite las interacciones a nivel de aplicación entre distintos componentes. (Ej: entre un servidor y una base de datos). Sin middleware se requeriría programar módulos de comunicación de bajo nivel cada vez que se quiere hacer un cambio. 
 
 Tipos de middleware:
 
@@ -5144,7 +5144,7 @@ La idea de los web services es implementar comunicación entre sistemas con dist
 
 ## Web Services
 
-Es una tecnología que me permite comunicar sistemas en distinta tecnología y habilitar comunicación via interneat mas fácilmente. PErmiten una manera estándar de interpretar mensajes entre diferentes aplicaciones de software ejecutando en distintas plataformas.
+Es una tecnología que me permite comunicar sistemas en distinta tecnología y habilitar comunicación vía internet más fácilmente. Permiten una manera estándar de interpretar mensajes entre diferentes aplicaciones de software ejecutando en distintas plataformas.
 
 ### SOAP
 Orientada a operaciones. Utiliza XML y se comunica a traves de HTTP. Existen librerías ya existentes que permiten manejar la comunicación entre los clientes y servidor.
@@ -5156,14 +5156,14 @@ Existen 3 elementos que definen la comunicación de servicios web SOAP:
 
 WSDL Define los servicios que va a tener el webservice.
 XML Schema define la estructura de un documento XML (tipos, atributos, relaciones válidas)
-Por lo tanto un XML valido será aquel que obedece un XML schema.
-WSDL: ESte es mi servicio web, estas son las operaciones disponibles, estos son los mensajes de entrada y estos son los de salida.
+Por lo tanto, un XML valido será aquel que obedece un XML schema.
+WSDL: Este es mi servicio web, estas son las operaciones disponibles, estos son los mensajes de entrada y estos son los de salida.
 
-La definición de todos los XML y eso lo va a hacer todo automatico una librería!!! Que fantástico Eclipse EE! El proveedor es el que publica el WSDL que define al WS. 
+¡¡¡La definición de todos los XML y eso lo va a hacer todo automático una librería!!! ¡Que fantástico Eclipse EE! El proveedor es el que publica el WSDL que define al WS. 
 
-Existen servidores web ligeros (Lightweight web server) que provee java para facilitar la publicación de los web services sin la necesidad de hostear un tomcat. Permite el deployment rápido.
+Existen servidores web ligeros (Lightweight web server) que provee java para facilitar la publicación de los webs services sin la necesidad de hostear un tomcat. Permite el deployment rápido.
 
-El mensajes en si también es un XML.
+El mensaje en si también es un XML.
 
 > Para los usuarios estamos construyendo un sistema integrado, para nosotros es un sistema distribuido.
 
@@ -5171,17 +5171,17 @@ El mensajes en si también es un XML.
 
 ### REST
 
-Esta de moda porque no manejan el overhead de SOAP. Se manejan sobre XML, JSON, etc.
+Está de moda porque no manejan el overhead de SOAP. Se manejan sobre XML, JSON, etc.
 
 ## Implementación
 
-Vamos a tener dos estructuras (una en el servidor: Server Stub y otra en el cliente: Proxy) que nos van a permitir abstraer la comunicación entre los dos componentes. Estos son los que vana a empaquetar y desempaquetar los xml para pasarlos a objetos y viceversa. Haciendo la comunicación lo más seamless posible.  
+Vamos a tener dos estructuras (una en el servidor: Server Stub y otra en el cliente: Proxy) que nos van a permitir abstraer la comunicación entre los dos componentes. Estos son los que van a empaquetar y desempaquetar los xml para pasarlos a objetos y viceversa. Haciendo la comunicación lo más seamless posible.  
 
-El server Stub es quien hace posible la publicaacion y representa al lógica del servicio. El Proxy le brinda al cliente facilidades para acceder a un servicio. Encapsula la implementación asociada a dicho consumo, construyendo objetos  jaba obtenidos del mensaje de respuesta del servidor.
+El server Stub es quien hace posible la publicación y representa la lógica del servicio. El Proxy le brinda al cliente facilidades para acceder a un servicio. Encapsula la implementación asociada a dicho consumo, construyendo objetos java obtenidos del mensaje de respuesta del servidor.
 
 Se utiliza la anotación `@webmethod`.
 
-Me puedo asegurar que el publicador esta funcionando consultando desde el navegador el servicio (utiliza HTTP SOAP!) y este tendríá que devolver un XML con el contenido del objeto solicitado: localhost:6666/publicador?wsdl.
+Me puedo asegurar que el publicador está funcionando consultando desde el navegador el servicio (¡utiliza HTTP SOAP!) y este tendría que devolver un XML con el contenido del objeto solicitado: localhost:6666/publicador?wsdl.
 
 Hay un tal SOAP_UI que permite también testear al servidor web. 
 
@@ -5189,29 +5189,29 @@ Para la aplicación del cliente, existen dos formas de generar el Proxy.
 1. Usando el IDE (Nuevo WS, get URL ,listo...)
 2. Usando el wsimport (Abrimos consola, -keep url, listo...)
 
-Ambos metodos generan al nivel interno el código que permite al cliente hacer uso del servicio y creo una serie de objetos que son los que se utilizan de forma local. En ambos casos es impresindible indicar la URL de donde se encuentran los métodos.
+Ambos métodos generan al nivel interno el código que permite al cliente hacer uso del servicio y creo una serie de objetos que son los que se utilizan de forma local. En ambos casos es imprescindible indicar la URL de donde se encuentran los métodos.
 
 ## Pasos para crear un web service
 
 1. Definir que componente es el servidor
 2. Definir que componente es el cliente
 3. Para el servidor:
-    1. Anotar la clase o interfaz que correra en el servidor
+    1. Anotar la clase o interfaz que correrá en el servidor
     2. Definir la dirección en que se publica el servicio
     3. Publicar y generar Stubs del servidor (WSDL y WS)
 4. Para el cliente: 
     1. Escribir un cliente que usa el servidor (ej. Servlet)
     2. Generar los proxies necesarios desde el WSDL del WS
 
-Vamos a utilizar anotaciones para la generacion de WS y tipos válidos.
+Vamos a utilizar anotaciones para la generación de WS y tipos válidos.
 Ejemplos:
 
     @WebService: A nivel de clase, indica que la misma debe ser expuesta como WS
     @WebMethod: A nivel de método, indica que el método será incluido en la interfaz del servicio
-    @WebParam: A nivel de parametro, indica que el nombre y tipo que tomará dicho parametro en el servicio
+    @WebParam: A nivel de parámetro, indica que el nombre y tipo que tomará dicho parámetro en el servicio
 
     @SOAPBindiing: Indica el estilo de codificación SOAP que utilizará el servicio (RPC)
-    @XMLAccessorType: Determina el control sobre la serializacion por defecto de las propiedades
+    @XMLAccessorType: Determina el control sobre la serialización por defecto de las propiedades
 
 Los tipos de datos válidos para el WS son: 
 1. Tipos de datos nativos de java 
@@ -5221,13 +5221,13 @@ Los tipos de datos válidos para el WS son:
 
 # Persistencia
 
-Persistencia de objetos consiste en extender el tiempo de vida de un objeto mas alládel tiempo de vida del proceso que lo creó.
+Persistencia de objetos consiste en extender el tiempo de vida de un objeto más allá del tiempo de vida del proceso que lo creó.
 
 El destino de la persistencia puede ser una fuente de datos (Data Source) donde se persiste la información de una aplicación. O una BD Relacional, archivos XML, binarios, etc.
 
-Mecanismo de persistencia: Técnica básica que permite resolver la persistencai de objetos. Ejemplos son: acceso directo a una DB, mappeador objeto<->relacional, serialization de objetos, generador de código, etc.
+Mecanismo de persistencia: Técnica básica que permite resolver la persistencia de objetos. Ejemplos son: acceso directo a una DB, mappeador objeto<->relacional, serialization de objetos, generador de código, etc.
 
-Para acceder directo a la BD tiene la ventaja de  que hay un buen desempeño debido a que el acceso a la memoria es directo, la ventaja es la complejidad de diseñar la persistencia. Una herramienta para esto es la Java Database Connectivity (JDBC). 
+Para acceder directo a la BD tiene la ventaja de que hay un buen desempeño debido a que el acceso a la memoria es directo, la ventaja es la complejidad de diseñar la persistencia. Una herramienta para esto es la Java Database Connectivity (JDBC). 
 
 ## JDBC
 
@@ -5235,12 +5235,12 @@ Provee una arquitectura basada en drivers e interfaces estándar. Se basa en sen
 
 ## DAO
 
-Database access object. Es un partrón de diseño que encapsula todo el acceso a una fuente de datos utilizando la capa de acceso a datos. Cada objeto de negocio a ser persistido crea una DAO con la info necesaria, luego utiliza el objeto DAO para obtener y guardar información del origen de datos.
+Database access object. Es un patrón de diseño que encapsula todo el acceso a una fuente de datos utilizando la capa de acceso a datos. Cada objeto de negocio a ser persistido crea una DAO con la info necesaria, luego utiliza el objeto DAO para obtener y guardar información del origen de datos.
 
 Aquí es donde se puede dar el impedance mismatch. Donde el mappeo de la información del objeto no se puede traducir directamente a una base de datos relacional:
 
     Clases objetos <-> Tablas, Filas
-    Atributos, propiadades <-> Columnas
+    Atributos, propiedades <-> Columnas
     Identidad <-> Primary key
     Relaciones/ referencias a otra entidad <-> Foreign Key
     Herencia, polimorfismo <-> NO SOPORTADO
@@ -5249,7 +5249,7 @@ Aquí es donde se puede dar el impedance mismatch. Donde el mappeo de la informa
 
  ## Mappeador objeto relacional
 
- A traves de metadata que le pasamos le explicamos como hacer el mapping entre los objetos y la base de datos. Esto reduce la cantidad de código necesario para realizar la perisstencia. (ventaja). Como desventaja ahora hay que mantener metadata sobre las entidades.
+ A través de metadata que le pasamos le explicamos como hacer el mapping entre los objetos y la base de datos. Esto reduce la cantidad de código necesario para realizar la persistencia. (ventaja). Como desventaja ahora hay que mantener metadata sobre las entidades.
  Las herramientas JAVA para el mappeador son las JPA, la cuales están implementadas en Hibernate y EclipseLink
 
 ## JAVA Persistence API
@@ -5258,31 +5258,31 @@ Es un framework liviano para mapear objetos a BD relacionales usando la platafor
 
 Surge originalmente de la mano de EJB3.0 adoptando la experiencia de años de uso de Hibernate y Toplink. Es decir, vamos a trabajar con la API de JPA
 
-La persistence esta basada en POJOs (Plain Old Java Objects (Los objetos clásicos de toda la vida!))
+La persistence está basada en POJOs (¡Plain Old Java Objects (¡Los objetos clásicos de toda la vida!))
 La persistencia esta guiada por metadata en XML, anotaciones, configuración por excepción, etc.
 
 Para realizar consultas hay mecanismo para realizar consultas, recorrer objetos y acceder a sus propiedades. 
 
 ### Implementación 
 
-Las entidades se anotan con @Entity, tienen una propiedad anotada con @id, un zero argument constructor public/protected, no es final, puede extender a otra y ser abstracta. Y imporante: Es un POJO. Si cumple esto podemos decir que es una entidad y va a ser posible mappear utilizando JPA.
+Las entidades se anotan con @Entity, tienen una propiedad anotada con @id, un zero argument constructor public/protected, no es final, puede extender a otra y ser abstracta. Y importante: Es un POJO. Si cumple esto podemos decir que es una entidad y va a ser posible mappear utilizando JPA.
 
 Por default cada entidad tiene su tabla, esto se puede modificar con @Table(name="emp") para guardar las entidades en tablas ya definidas.
 
-Las id también podrian generarse automáticamente. Utilizando implementaciones del propio JPA (Se define con anotaciones)
+Las id también podrían generarse automáticamente. Utilizando implementaciones del propio JPA (Se define con anotaciones)
 
 Por defecto se persisten todos los atributos en columnas por defecto en el mismo nombre, si se quiere cambiar esto se puede hacer @(Col="X ")
 También hay anotaciones y cosas así: @ManyToOne, @JoinColumn(name="PSPACE_ID"), @OneToOne(mappedBy="parkingSpace"),@ManyToMany
 
-Es posible configurar absolutamente todo. Es posible configurar la tabla usada para mantener las relaciones a traves de la anotación @JoinTable(name="", joinColumns=@JoinColumn(name='"), inverseJoinColumnas=@JoinColumn(name=""))
+Es posible configurar absolutamente todo. Es posible configurar la tabla usada para mantener las relaciones a través de la anotación @JoinTable(name="", joinColumns=@JoinColumn(name='"), inverseJoinColumnas=@JoinColumn(name=""))
 
 ## Entity Manager
 
-Las entidades no se persisten a si mismas cuando son creadas, así como tampoco son removidas cuando el garbage collector recicla los objetos. Es la lógica de la aplicación la que debe manejar el ciclo de vida de persistencia. Para ello, JPA provee la interface Entity Manager. La EntityManagerFactory se obtiene de la clase Persistence:
+Las entidades no se persisten a sí mismas cuando son creadas, así como tampoco son removidas cuando el garbage collector recicla los objetos. Es la lógica de la aplicación la que debe manejar el ciclo de vida de persistencia. Para ello, JPA provee la interface Entity Manager. La EntityManagerFactory se obtiene de la clase Persistence:
 
     EntityManagerFactory e = Persistence.createEntityManagerFactory("X");
     EntityManager em = e.createEntityManager()
 
-Esta interfaz define una serie de métodos que permiten manejar las entidades. Por ejemplo: persistence de entidades, recuperacon de entidades , obtención de consultas, inicio y fin de transacciones.
+Esta interfaz define una serie de métodos que permiten manejar las entidades. Por ejemplo: persistencia de entidades, recuperación de entidades , obtención de consultas, inicio y fin de transacciones.
 
 ![uh](assets/emlife.png)

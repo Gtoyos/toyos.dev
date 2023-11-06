@@ -20,7 +20,7 @@ Es una tecnología java para la construcción de GUIs de escritorio. Biblioteca 
 </ul>
 <p>Las principales características son:</p>
 <ul>
-<li>Componentes:: Qué forma parte de la GUi</li>
+<li>Componentes:: Qué forma parte de la GUI</li>
 <li>LayourManagers:: Como se organizan los componentes</li>
 <li>Modelos:: como se muestra la información</li>
 <li>Eventos:: Como se realizan acciones</li>
@@ -216,8 +216,8 @@ ArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();
 </code></pre>
 <p>Luego puedo ir haciendo arrayList.add(1) e ir agregando elementos. 
 Diagrama para elegir una colección:
-<img src="{{url_for('static', filename='imgs/tprog/jcf')}}" alt="ej">
-<img src="{{url_for('static', filename='imgs/tprog/methods')}}" alt="ej"></p>
+<img src="{{url_for('static', filename='imgs/tprog/jcf.png')}}" alt="ej">
+<img src="{{url_for('static', filename='imgs/tprog/methods.png')}}" alt="ej"></p>
 <h1 id="testing">Testing</h1>
 <h2 id="error-defecto-falla">Error, defecto, falla</h2>
 <p>Un error humano puede generar un defecto (interno) que puede generar una falla (externo)
@@ -344,7 +344,7 @@ Acá va el contenido, lo que se va a mostrar.
 </ul>
 <h2 id="css">CSS</h2>
 <p>Cascading Style Sheets, permite definir la presentación de un documento HTML. Este independiza la presentación de la información del documento. Personaliza los colores, fuentes, distribución del texto, etc.</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/css')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/css.png')}}" alt="ej"></p>
 <p>Las reglas CSS tiene especificidad. Pueden ser importantes y se pasan por encima las demás reglas, pueden ser inline y estar embebidas en el HTML, o normales. Y aplicarse según su orden.</p>
 <h2 id="dom">DOM</h2>
 <p>Viene de Document Object Model. Es un modelo que permite representar un documento de forma independiente del lenguaje. Define una interfaz estándar para manipular documentos con estructura arborescente. Para HTML, permite acceder a los elementos, atributos y contenido mediante objetos <strong>Node</strong>. Existe un nodo raíz que se le llama <strong>document</strong>.</p>
@@ -417,7 +417,7 @@ Consta de recursos Web estáticos (paginas, fotos), y de componentes ejecutables
 <p>Método de desarrollo Web en donde le código (script o programa) se ejecuta en el servidor para generar páginas web dinámicas. Los servidores web pueden directamente ejecutar el código o utilizar intérpretes, módulos y ambientes externos para ejecutarlo.</p>
 <p>Algunos ejemplos de tecnologías son: Servlets/JSP/JSF (Java EE), ASP.NET, PHP, Ruby on Rails, JavaScript (Node.js), Python, Perl, etc.
 En java vamos a usar servlets y paginas JSP.</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/ssc')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/ssc.png')}}" alt="ej"></p>
 <h4 id="java-ee">Java EE</h4>
 <p>Java platform enterprise edition. Es una plataforma Java que facilita el desarrollo de aplicaciones Web, WebServices, sistemas distribuidos y arquitecturas en varios niveles. Los paquetes a utilizar son (algunos):</p>
 <ul>
@@ -443,7 +443,7 @@ capa de sistema de información empresarial (EIS) </p>
 deployment que se copian en el servidor de aplicaciones. Las unidades de deployment se llaman módulos donde módulo corresponde a un tipo de contenedor (ej. un módulo Web corresponde a un contenedor Web, un módulo EJB corresponde a un contenedor EJB).</p>
 <p>Cada módulo empaqueta uno o más componentes del mismo tipo de contenedor y un descriptor de deployment (opcional). 
 Los modulos web se empaquetan en archivos war con la siguiente estructura:</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/war')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/war.png')}}" alt="ej"></p>
 <h5 id="java-api-javaxservlethttphttpservlet">Java API (javax.servlet.http.HttpServlet)</h5>
 <p>Clase abstracta que define métodos que se llaman en distintas situaciones. Redefine algunos métodos para que el servlet funcione (ej. Método GET y POST (HttpServlet.doGet(HttpServletRequest req, HttpServletResponse response)))</p>
 <p>El request y response encapsulan las peticiones y respuestas entre el cliente y el servidor. El ServletRequest tiene como métodos getParameter() que retorna el valor del parametro y getParametersNames() que retorna los nombres de los parametros. Por otro lado, ServletResponse encapsula la respuesta. Se puede devolver los datos con getWriter() modo texto o en binario: getOutputStream()</p>
@@ -483,9 +483,9 @@ pageEncoding=&quot;UTF-8&quot;%&gt;
 &lt;/html&gt;
 </code></pre>
 <p>Tomcat va a dirigir a un archivo .jsp (fuente), este se va a compilar y va a generar un servlet compilado que tomcat va a utilizar para servir la request. Desde un servlet puedo redirigir un JSP. Esto permite que el servlet defina la lógica y JSP se encargue únicamente de visualizarla.</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/jspdiag')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/jspdiag.png')}}" alt="ej"></p>
 <p>Algunos objetos implícitos disponibles son:</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/exjsp')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/exjsp.png')}}" alt="ej"></p>
 <p>JSP también incluye funciones de templating. Lo que permite reutilizar grandes cantidades de código HTML. Se consigue la reducción de repetición de código HTML. <strong>Templating</strong> es una herramienta esencial en todo sentido.</p>
 <p>En jsp podemos aplicar templates con el tag: &lt; jsp include page=&quot;name.(html|jsp)&quot;&gt;</p>
 <h6 id="jsp-excepciones">JSP Excepciones</h6>
@@ -499,7 +499,7 @@ Y en el html body podemos trabajar con excepciones:
 <p>JavaServer Pages Standard Tag Library. Son etiquetas con lógica propia, permite embeber lógica sin usar scriplets. </p>
 <h3 id="tomcat">Tomcat</h3>
 <p>Tomcat es un servidor Web y un Contenedor de Servlets y JSP. Es el intermediario entre las HTTP requests y las tecnologías anteriores. Ej de otros servidores: Apache,nginx,etc.</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/webjee')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/webjee.png')}}" alt="ej"></p>
 <p>Las reglas de despacho URL de tomcat son programables. Se especifican en un archivo de mapping <em>web.xml</em>. 
 En líneas generales, se define el nombre del servlet, y la ubicación de la clase que lo implementa (tprog.servlet_hora.main_Servlet)
 El patron de url se configura con el &lt; servlet-mapping&gt; &lt; servlet-name&gt; &lt; url-pattern&gt;</p>
@@ -511,7 +511,7 @@ El patron de url se configura con el &lt; servlet-mapping&gt; &lt; servlet-name&
 <p>En el caso de Java, los controladores son los Servlets. El controlador es el que decide que vista invocar. </p>
 <p>El modelo es el que mantiene los datos y maneja la lógica de negocio. El controlador invoca o modifica al modelo para obtener los datos para mostrar.</p>
 <p>El controlador (servlet) invoca a una vista, la cual es una página jsp y recursos estáticos que muestra los recursos que decidió el controlador.</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/mvc')}}" alt="ej"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/mvc.png')}}" alt="ej"></p>
 <h1 id="w3s-html-tutorial">W3S HTML Tutorial</h1>
 <p>Simple html structure:</p>
 <pre><code>&lt;!DOCTYPE html&gt; //declaration defines that this document is an HTML5 document
@@ -1505,7 +1505,7 @@ flush();
 </code></pre>
 <h1 id="w3s-css-tutorial">W3S CSS Tutorial</h1>
 <p>A CSS rule consists of a selector and a declaration block:</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/w3css')}}" alt="off"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/w3css.png')}}" alt="off"></p>
 <p>The selector points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons. Each declaration includes a CSS property name and a value, separated by a colon. Multiple CSS declarations are separated with semicolons, and declaration blocks are surrounded by curly braces.</p>
 <h2 id="selectors">Selectors</h2>
 <p>CSS selectors are used to &quot;find&quot; (or select) the HTML elements you want to style. Can be divided in 5 categories:</p>
@@ -1740,7 +1740,7 @@ inherit     - The height/width will be inherited from its parent value
 <p>Remember that the height and width properties do not include padding, borders, or margins! They set the height/width of the area inside the padding, border, and margin of the element!</p>
 <h2 id="box-model">Box Model</h2>
 <p>In CSS, the term &quot;box model&quot; is used when talking about design and layout. The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content. The image below illustrates the box model:</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/boxmodel')}}" alt="off"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/boxmodel.png')}}" alt="off"></p>
 <h2 id="outline">Outline</h2>
 <p>An outline is a line drawn outside the element&#39;s border. It has similar semantics and syntax to the border. But unlike border, the outline is drawn outside the element&#39;s border, and may overlap other content. Also, the outline is NOT a part of the element&#39;s dimensions; the element&#39;s total width and height is not affected by the width of the outline.</p>
 <p>Properties: outline-style, outline-color, outline-width, outline-offset and outline (Shorthand). The outline-offset property adds space between an outline and the edge/border of an element. The space between an element and its outline is transparent. En example of outline:</p>
@@ -1800,7 +1800,7 @@ writing-mode	    Specifies whether lines of text are laid out horizontally or ve
 <li>Cursive fonts imitate human handwriting.</li>
 <li>Fantasy fonts are decorative/playful fonts.</li>
 </ol>
-<p><img src="{{url_for('static', filename='imgs/tprog/serif')}}" alt="off"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/serif.png')}}" alt="off"></p>
 <p>In CSS, we use the font-family property to specify the font of a text. The font-family property should hold several font names as a &quot;fallback&quot; system, to ensure maximum compatibility between browsers/operating systems. Start with the font you want, and end with a generic family (to let the browser pick a similar font in the generic family, if no other fonts are available). The font names should be separated with comma.</p>
 <p>Web safe fonts are fonts that are universally installed across all browsers and devices. However, there are no 100% completely web safe fonts. There is always a chance that a font is not found or is not installed properly. Therefore, it is very important to always use fallback fonts.</p>
 <p>Example:</p>
@@ -3241,7 +3241,7 @@ getFile();
 </code></pre>
 <h2 id="dom-1">DOM</h2>
 <p>When a web page is loaded, the browser creates a Document Object Model of the page. The HTML DOM model is constructed as a tree of Objects:</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/dom')}}" alt="lol"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/dom.png')}}" alt="lol"></p>
 <p>With the object model, JavaScript gets all the power it needs to create dynamic HTML:</p>
 <ol>
 <li>JavaScript can change all the HTML elements and attributes in the page and all the CSS styles in the page.</li>
@@ -3754,7 +3754,7 @@ $(&quot;p&quot;).css({&quot;background-color&quot;: &quot;yellow&quot;, &quot;fo
 <li>outerWidth()</li>
 <li>outerHeight()</li>
 </ul>
-<p><img src="{{url_for('static', filename='imgs/tprog/jqdim')}}" alt="bringe"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/jqdim.png')}}" alt="bringe"></p>
 <p>jQuery provides a variety of methods that allow us to traverse the DOM. The largest category of traversal methods are tree-traversal.</p>
 <p>Three useful jQuery methods for traversing up the DOM tree are:</p>
 <pre><code>parent()        //returns the direct parent element of the selected element.
@@ -4494,7 +4494,7 @@ También hay anotaciones y cosas así: @ManyToOne, @JoinColumn(name=&quot;PSPACE
 EntityManager em = e.createEntityManager()
 </code></pre>
 <p>Esta interfaz define una serie de métodos que permiten manejar las entidades. Por ejemplo: persistencia de entidades, recuperación de entidades , obtención de consultas, inicio y fin de transacciones.</p>
-<p><img src="{{url_for('static', filename='imgs/tprog/emlife')}}" alt="uh"></p>
+<p><img src="{{url_for('static', filename='imgs/tprog/emlife.png')}}" alt="uh"></p>
 
 <!-- NOTE END-->
 {% endblock article %}

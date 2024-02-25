@@ -11,5 +11,9 @@ QUOTES = [
     
     "You shall know a word by the company it keeps. - John Rupert Firth",
     
-    "If you torture the data long enough, it will confess to anything - Ronald Coase"
+    "If you torture the data long enough, it will confess to anything. - Ronald Coase",
+
+    "Une théorie est bonne quand elle est belle. - Henry Poincaré",
+
+    "Mathematics, rightly viewed, possesses not only truth, but supreme beauty�a beauty cold and austere, like that of sculpture, without appeal to any part of our weaker nature, without the gorgeous trappings of painting or music, yet sublimely pure, and capable of a stern perfection such as only the greatest art can show. -  Bertrand Russell"
 ];

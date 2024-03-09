@@ -14,7 +14,7 @@
     Among another colleague, we designed a data pipeline to leverage the <a href="https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole">Velib public API</a>, providing real-time insights into the status of Velib stations through computation of statistics and analysis.
 </p>
 <p>
-    
+    To achieve this, we used Apache Kafka to ingest the data, Apache Spark to process it and Plotly to visualize the results. The project was developed in Scala, and the final results presented in an online dashboard.
 </p>
 <div>
     <p>
@@ -29,7 +29,15 @@
     </ul>
 </div>
 <h2>Gallery</h2>
+<p>
+Velib stations are everywhere in Paris. Using the API we were able to get real-time analytics of the status of the stations. Here we present two tidbits of the results we obtained.
+</p>
+<img src="{{url_for('static', filename='imgs/velib/ex.jpg')}}">
+<p>
+How is the average Velib station composed? We can see that the average station will have around 62% empty docks, 14% with mechanical bikes and the 23% with electric bikes.
+</p>
 <img src="{{url_for('static', filename='imgs/velib/dist.jpg')}}">
+We can also check which stations have been malfunctioning lately. In this map, we can see the stations that have been offline for more than 24 hours.
 <img src="{{url_for('static', filename='imgs/velib/off.jpg')}}">
 {% endblock article %}
 
@@ -47,5 +55,5 @@
 </li></a>
 {% endblock navigation %}
 
-{% block cdate %}26th of March 2023{% endblock cdate %}
+{% block cdate %}10th of January 2024{% endblock cdate %}
 

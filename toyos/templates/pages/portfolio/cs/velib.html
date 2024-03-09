@@ -1,1 +1,51 @@
-Helloo.
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Vélib’ Métropole: Data Exploration, Analysis and Monitoring</h1>
+<p> 
+    Data Analytics of the Velib' Metropole service. This project was developed as part of the "Big Data Architecture" course at <a href="https://www.ip-paris.fr">IP Paris</a>.
+</p>
+<p>
+    Among another colleague, we designed a data pipeline to leverage the <a href="https://www.velib-metropole.fr/donnees-open-data-gbfs-du-service-velib-metropole">Velib public API</a>, providing real-time insights into the status of Velib stations through computation of statistics and analysis.
+</p>
+<p>
+    
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>Big data infrastructure.</li>
+        <li>Apache Spark.</li>
+        <li>Apache Kafka.</li>
+        <li>Scala programming language.</li>
+        <li>Data dashboards with Plotly.</li>
+    </ul>
+</div>
+<h2>Gallery</h2>
+<img src="{{url_for('static', filename='imgs/velib/dist.jpg')}}">
+<img src="{{url_for('static', filename='imgs/velib/off.jpg')}}">
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="{{url_for('static', filename='files/GPGPU.pdf')}}"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Report&nbsp;
+    <span>- Algorithm report.</span>
+    <time>20/7/2022</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}26th of March 2023{% endblock cdate %}
+

@@ -1,0 +1,44 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>N particles</h1>
+<p> 
+    Simulation of a N-body particle system in 2D. In this porject, among another colleague, we studied the barnes-hut and naive algorithms for simulating
+    the gravitational interaction between particles. Project for the "High Performance Computing" course at <a href="https://www.ip-paris.fr">IP Paris</a>.
+</p>
+<p>
+    We experimented with different approaches for implementing both algorithms and we compared their performance in runtime and memory usage. First we started with a simple parallel implementation using OpenMP,
+    then we moved to a more complex message passing aproach with MPI, which allowed us to scale the simulation to a cluster of computers. Finally we implemented a GPU version of the simulation using CUDA. The final
+    implementation was able to take advantage of heterogenous hardware, by running on multiple nodes with multiple GPUs and CPUs each.
+</p>
+<p>
+    The source code is available on <a href="https://github.com/Gtoyos/N-body">Github</a>.   
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following technologies and tools:
+    </p>
+    <ul>
+        <li>High Performance Computing</li>
+        <li>GPU Programming</li>
+        <li>C++ parallel programming libraries: MPI and OpenMP</li>
+        <li>Algorithm analysis.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}20th of October 2023{% endblock cdate %}
+

@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, request, send_from_directory, render_template
 from . import content
 
 app = Flask(__name__)
@@ -31,6 +30,15 @@ def genericpath(pth):
 def index():
     res = 'pages/index.html'
     return render_template(res,title="toyos.dev :: Home",edate=cnt.dates["pages/index.html"])
+
+# Override the default static file handling
+@app.after_request
+def add_header(response):
+    # Only apply to static files
+    if request.path.startswith('/static/'):
+        # Set the Cache-Control header for one hour
+        response.headers['Cache-Control'] = 'public, max-age=3600'
+    return response
 
 @app.errorhandler(404)
 def page_not_found(error):

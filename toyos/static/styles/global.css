@@ -16,7 +16,9 @@ img {
 pre {
     white-space: pre-wrap; 
 }
-
+li {
+    font-family: sans-serif;
+}
 p {
     font-size: 1em;
     line-height: 1.25;

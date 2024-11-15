@@ -9,12 +9,15 @@
 {% block article %}
 <h1>The UNIX Programming Environment</h1>
 <p> 
-   Text...
+   I found this dusty old book from my old library and decided to read it. 
+   Written by the fathers of UNIX, Brian W. Kernighan and Rob Pike in 1984, most content is
+   still relevant to this days and shows many of the design principles and motivations
+   behind modern UNIX based systems.
 </p>
 <p>
-   More text...
+   Of course some content can be considered legacy today, as how to create a text parser using Yacc and Lex, or
+   creating obscure filters with <a href='https://en.wikipedia.org/wiki/Sed'>sed</a> and awk. 
 </p>
-<img src="{{url_for('static', filename='imgs/unix/g1034.png')}}" alt="ej"></p>
 {% endblock article %}
 
 {% block navigation %}
@@ -23,10 +26,10 @@
   &nbsp;/...&nbsp;
   <span>- Return </span>
 </li></a>
-<a href="{{url_for('static', filename='files/cs156.pdf')}}"><li class="yh">
+<a href="{{url_for('static', filename='files/TheUNIXProgrammingEnvironment.pdf')}}"><li class="yh">
     <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
     &nbsp;CS156&nbsp;
-    <span>- Course notes.</span>
+    <span>- Handwritten book notes.</span>
     <time>24/3/2023</time>
 </li></a>
 {% endblock navigation %}

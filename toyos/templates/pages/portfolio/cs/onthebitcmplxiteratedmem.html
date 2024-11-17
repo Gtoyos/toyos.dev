@@ -1,0 +1,52 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>On the Bit Complexity of Iterated Memory</h1>
+
+<p>
+    This was my research project I did during my master in Parallel and Distributed
+    systems at <a href="https://www.ip-paris.fr/en">Institut Polytechnique de Paris</a> with
+    <a href="https://perso.telecom-paristech.fr/kuznetso/">Prof. Petr Kuznetsov</a>. 
+    The project was accepted for publication at the 31st International Colloquium on Structural Information and Communication Complexity (SIROCCO).
+</p>
+
+<h3>Paper Abstract</h3>
+<p>
+    Computability, in the presence of asynchrony and failures, is one of the central questions in distributed computing. The celebrated asynchronous computability theorem (ACT) charaterizes the computing power of the read-write shared-memory model through the geometric properties of its protocol complex: a combinatorial structure describing the states the model can reach via its finite executions. This characterization assumes that the memory is of unbounded capacity, in particular, it is able to store the exponentially growing states of the full-information protocol.
+    In this paper, we tackle an orthogonal question: what is the minimal memory capacity that allows us to simulate a given number of rounds of the full-information protocol? In the iterated immediate snapshot model (IIS), we determine necessary and sufficient conditions on the number of bits an IIS element should be able to store so that the resulting protocol is equivalent, up to isomorphism, to the full-information protocol. Our characterization implies that n≥3 processes can simulate r rounds of the full-information IIS protocol as long as the bit complexity per process is within Ω(rn) and O(rnlogn). Two processes, however, can simulate any number of rounds of the full-information protocol using only 2 bits per process, which implies, in particular, that just 2 bits per process are sufficient to solve ε-agreement for arbitrarily small ε.
+</p>
+
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>Distributed systems theory.</li>
+        <li>Combinatorial topology.</li>
+        <li>Algorithm design.</li>
+        <li>Scientific article production.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="https://arxiv.org/abs/2402.12484"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- ArXiv version</span>
+    <time>10/10/2024</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}10th of September 2024{% endblock cdate %}
+

@@ -1,0 +1,78 @@
+{# templates/pages/portfolio/cs/basuraGA.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>CustoDPP: Decentralized Traceability System for Supply Chains Using Blockchain Technology</h1>
+
+<p>
+The primary goal of this project was to design a solution enabling various participants in a supply chain—such as manufacturers,
+ auditors, and distributors— to share and record product traceability information without relying on a centralized service 
+ or external agent. This ensures that all stakeholders can independently access and add data securely and reliably.
+</p>
+
+<p>
+The system’s key innovation lies in its decentralized nature: instead of operating on a single server,
+ it functions across hundreds of interconnected computers that do not need to trust one another.
+  Thanks to the custom-designed algorithm, the system maintains data integrity as long as a proportion of these computers
+   are operating correctly. This design makes it highly resilient to failures and cyberattacks.
+</p>
+
+<p>
+This type of solution paves the way for more secure, decentralized, and resilient supply chains,
+ enabling more complex interactions and contributing to the development of a circular economy. 
+ As a case study, the project applied this system to the supply chain of electric vehicle batteries. 
+ It demonstrated how recycling facilities can access detailed, specific information about each battery 
+ to optimize recycling processes, all without compromising the confidentiality of data provided by 
+ other supply chain participants.
+</p>
+
+<p>
+    This project was done during my research internship at the <a href="cea.fr">Alterantive Energies and Atomic Comission</a>
+    research laboratory in Palaiseau, France for my Master's project.
+</p>
+
+<h5>Project abstract</h5>
+<p>
+    Traceability poses a significant challenge in modern supply chain systems. The Digital Product Passport (DPP)
+ aims to enhance recyclability and sustainability practices by aggregating product information. How to design
+ an e!ective DPP System, however, remains a significant challenge. In this paper, we propose a decentralized,
+ customizable, and self-deployable DPP system utilizing smart contracts and a distributed file system. To achieve
+ verifiable traceability of supply chain documents within a decentralized framework, we introduce a tokenization
+ algorithm employing Fractional Non-Fungible Tokens (F-NFTs) for DPP assets and an event-driven system for
+ their lifecycle management. Furthermore, we present an implementation of a DPP System and discuss key design
+ decisions and considerations essential for developing such systems.
+</p>
+
+<div>
+    <p>
+        This project was a great opportunity to gather experience in:
+    </p>
+    <ul>
+        <li>Decentralized Applications.</li>
+        <li>Reasearch skills.</li>
+        <li>Smart contract development</li>
+        <li>Software design and architecture.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="../software/custoDPP.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- About the prototype</span>
+    <time>10/10/2024</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}10th of September 2024{% endblock cdate %}
+

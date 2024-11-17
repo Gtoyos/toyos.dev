@@ -1,0 +1,52 @@
+{# templates/pages/software/steam.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>CustoDPP</h1>
+<h4>Customizable Digital Product Passport</h4>
+
+<p><i>Note: Go to the <a href="../cs/custoDPP.html">cs article version</a>
+     for more infomration about the project.</i></p>
+<p> 
+
+<p>
+    During my master's internship at the <a href="https://www.cea.fr/english/Pages/Welcome.aspx">French Alternative Energies and Atomic Energy Commission (CEA)</a>,
+    I developed a prototype of a software system designed to provide
+    decentralized traceability for supply chains using blockchain technology using the latest research in the field. 
+</p>
+<p>
+    The prototype provided the interfaces for interacting with the <a href="ethereum.org">Ethereum</a> blockchain through smart contracts and defined 
+    the behaviour of a decentralized file system for storing product information using the <a href="ipfs.io">InterPlanetary File System</a> protocols. 
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following:
+    </p>
+    <ul>
+        <li>Decentralized application development.</li>
+        <li>Smart contract programming in Solidity.</li>
+        <li>IPFS</li>
+        <li>Web application design.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="../cs/custoDPP.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- About the project</span>
+    <time>10/10/2024</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of October 2024{% endblock cdate %}

@@ -1,0 +1,52 @@
+{# templates/pages/software/steam.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Notara</h1>
+<h4>Efficient Blockchain Asset Notarization Service</h4>
+<p> 
+    Traditional asset notarization methods are inefficient, expensive,
+     vulnerable to fraud, and rely on the trust of a third party, such as a notary. 
+     In contrast, blockchain-based smart contracts enable the creation of
+      decentralized notarization services, ensuring transparency and security 
+      without intermediaries. However, existing blockchain-based solutions often 
+      lack the flexibility for specific deployment for individual entities our groups.
+       This work presents a demonstration for a unique customer-deployable notarization
+    service, based on blockchain smart contracts. Our solution is designed to be a 
+    cost-efficient notarization service that can be quickly integrated into 
+    decentralized applications requiring notarization functionalities.
+</p>
+<p>
+    This project was done during my internship at the <a href="https://www.cea.fr/english/Pages/Welcome.aspx">French Alternative Energies and Atomic Energy Commission (CEA)</a>.
+</p>
+<div>
+    <p>
+        This project was a great opportunity to gather experience in the following:
+    </p>
+    <ul>
+        <li>Decentralized application development.</li>
+        <li>Smart contract programming in Solidity.</li>
+        <li>Web application design.</li>
+    </ul>
+</div>
+{% endblock article %}
+
+{% block navigation %}
+<a href="."><li class="yh">
+  <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+  &nbsp;/...&nbsp;
+  <span>- Return </span>
+</li></a>
+<a href="https://redi.anii.org.uy/jspui/bitstream/20.500.12381/3686/1/Notara_CEA-3.pdf"><li class="yh">
+    <img src="{{url_for('static', filename='icons/pdf.svg')}}" height="20em" width="20em">
+    &nbsp;Sourcecode&nbsp;
+    <span>- View article</span>
+    <time>10/10/2024</time>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}19th of October 2024{% endblock cdate %}

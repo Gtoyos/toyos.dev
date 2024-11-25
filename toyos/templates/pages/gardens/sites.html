@@ -1,0 +1,29 @@
+{# templates/pages/gardens/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Sites</h1>
+
+Here is a list of websites with interesting content I have found on the web. 
+
+<ul>
+    <li><a href="
+        https://pages.stern.nyu.edu/~wstarbuc/Writing/Fussy.htm">Fussy Professor 
+        Starbuck's Cookbook of Handy-Dandy
+         Prescriptions for Ambitious Academic Authors</a>. An article with tips
+        on how to write great scientific articles.</li>
+</ul>
+{% endblock article %}
+
+{% block navigation %}
+<a href="../"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return </span>
+</li></a>
+{% endblock navigation %}
+{% block cdate %}30th of November 2024{% endblock cdate %}

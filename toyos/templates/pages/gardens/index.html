@@ -30,17 +30,23 @@
     &nbsp;/...&nbsp;
     <span>- Return </span>
 </li></a>
+<a href="sites.html"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;私&nbsp;
+    <span>- Intresting websites.</span>
+    <time>{{cnt.dates["pages/gardens/sites.html"]}}</time>
+</li></a>
 <a href="animaux/"><li class="yh">
     <img src="{{url_for('static', filename='icons/folder.svg')}}" height="20em" width="20em">
     &nbsp;Animaux&nbsp;
-    <span>- Fluffy friends I met along the way.</span>
-    <time>{{cnt.dates["files/CV.pdf"]}}</time>
+    <span>- Fluffy friends.</span>
+    <time>{{cnt.dates["pages/gardens/animaux/index.html"]}}</time>
 </li></a>
 <a href="watashi.html"><li class="yh">
     <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
     &nbsp;私&nbsp;
-    <span>- A little bit of japanese</span>
-    <time>{{cnt.dates["files/CV.pdf"]}}</time>
+    <span>- A little bit of japanese.</span>
+    <time>{{cnt.dates["pages/gardens/watashi.html"]}}</time>
 </li></a>
 {% endblock navigation %}
 

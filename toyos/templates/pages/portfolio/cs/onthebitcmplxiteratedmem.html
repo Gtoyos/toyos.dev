@@ -21,6 +21,53 @@
     In this paper, we tackle an orthogonal question: what is the minimal memory capacity that allows us to simulate a given number of rounds of the full-information protocol? In the iterated immediate snapshot model (IIS), we determine necessary and sufficient conditions on the number of bits an IIS element should be able to store so that the resulting protocol is equivalent, up to isomorphism, to the full-information protocol. Our characterization implies that n≥3 processes can simulate r rounds of the full-information IIS protocol as long as the bit complexity per process is within Ω(rn) and O(rnlogn). Two processes, however, can simulate any number of rounds of the full-information protocol using only 2 bits per process, which implies, in particular, that just 2 bits per process are sufficient to solve ε-agreement for arbitrarily small ε.
 </p>
 
+<h2>2-process Implementation</h2>
+
+<p>
+    I created a Golang implementation of the 2-process simulation of the full-information protocol. The code is available <a href="https://github.com/Gtoyos/optiMemApproxAgree">here</a>.
+</p>
+
+<p>
+We use uint8 as it is the smalles primitive atomic type in go.
+We use single-writer multiple-reader (SWMR) shared variables, assuming that uint8 operations are atomic. Specifically, when a uint8 variable is written by one process and read simultaneously, the behavior is deterministic: the reader observes either the previous value or the newly written value.
+Note that uint8 is atomit in any CPU that handles words bigger than 8 bits (current CPUs typically work with 64 bit words).
+</p>
+
+<p>
+    For calculating the agreement, we map the possible values on the protocol complex as follows:
+
+</p><p>
+A point $x$ in the protocol complex is defined as:
+
+
+$$
+x = \frac{i}{3^r} \ \ i\in\{0,1,3^r\}
+$$
+
+For generic inputs $a$ and $b$, we map the $0$-$1$ output complex to the extended segment as:
+
+$$
+x' = \min(a,b) + x \times |b-a|
+$$
+
+Therefore, the difference between consecutive points is:
+
+$$
+
+\delta = \frac{|b-a|}{3^r}
+$$
+
+To achieve a target agreement precision $\delta$ , the number of rounds  $r$  must satisfy:
+
+$$
+r > \frac{1}{\log{3}}(\log{|b-a|} - \log{\delta})
+$$
+</p>
+
+<p>
+    The primary goal of this project was to implement a distributed systems algorithm, specifically a novel one that I devised myself. Additionally, this project served as a hands-on opportunity to enhance my proficiency with the Go programming language.
+</p>
+
 <div>
     <p>
         This project was a great opportunity to gather experience in:
@@ -29,6 +76,7 @@
         <li>Distributed systems theory.</li>
         <li>Combinatorial topology.</li>
         <li>Algorithm design.</li>
+        <li>Programming in Golang.</li>
         <li>Scientific article production.</li>
     </ul>
 </div>

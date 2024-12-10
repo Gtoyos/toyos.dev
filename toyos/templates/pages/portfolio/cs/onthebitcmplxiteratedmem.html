@@ -3,6 +3,7 @@
 {% extends "base.html" %}
 
 {% block head_extra %}
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 {% endblock head_extra %}
 
 {% block article %}
@@ -57,7 +58,7 @@ Therefore, the difference between consecutive points is:
 \delta = \frac{|b-a|}{3^r}
 \)
 
-To achieve a target agreement precision $\delta$ , the number of rounds  $r$  must satisfy:
+To achieve a target agreement precision \(\delta\) , the number of rounds  $r$  must satisfy:
 
 \(
 r > \frac{1}{\log{3}}(\log{|b-a|} - \log{\delta})

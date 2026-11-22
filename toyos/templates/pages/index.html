@@ -6,6 +6,13 @@
 {% endblock head_extra %}
 
 {% block article %}
+<figure class="glyphfield" data-glyphfield>
+    <div class="gf-stage" aria-hidden="true">
+        <canvas></canvas>
+        <div class="gf-hud"></div>
+    </div>
+    <a class="gf-help" href="/publications/conflict-freedom/" title="What is going on here?" aria-label="What is this animation?">?</a>
+</figure>
 <h1>Guillermo Toyos-Marfurt: Computer Scientist, Engineer, and Researcher</h1>
 <p> 
     <bold>Hello!</bold> I'm Guillermo, a computer scientist and engineer from Uruguay.
@@ -58,4 +65,5 @@
 
 {% block footer_extra %}
 <script src="{{url_for('static', filename='scripts/garden.js')}}"></script>
+<script src="{{url_for('static', filename='scripts/glyphfield.js')}}"></script>
 {% endblock footer_extra %}

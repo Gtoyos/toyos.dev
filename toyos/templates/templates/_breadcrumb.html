@@ -1,0 +1,12 @@
+{# pages/templates/_breadcrumb.html: breadcrumb shown at the top of every page except the homepage #}
+{% if request.path != '/' %}
+{% set parts = request.path.strip('/').split('/') %}
+<p class="crumbs">
+    <a href="/">toyos.dev</a>
+    {%- for part in parts %} / {% if not loop.last -%}
+    <a href="/{{ parts[:loop.index]|join('/') }}/">{{ part }}</a>
+    {%- else -%}
+    <span>{{ part|replace('.html', '') }}</span>
+    {%- endif %}{% endfor %}
+</p>
+{% endif %}

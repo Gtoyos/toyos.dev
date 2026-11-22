@@ -1,4 +1,4 @@
-{# templates/pages/gardens/index.html #}
+{# templates/pages/publications/index.html #}
 
 {% extends "base.html" %}
 
@@ -8,65 +8,131 @@
 {% block article %}
 <h1>Publications</h1>
 
-<h3>2024</h3>
-<p>
-    During my internship at the <a href="https://www.cea.fr/english/Pages/Welcome.aspx">French Alternative Energies and Atomic Energy Commission (CEA)</a>, 
-    I designed and developed a decentralized notarization system for the Ethereum platform. This work was presented as a live demo at the BRAINS conference:
-    <ul>
-        <li>
-            <strong>G. Toyos-Marfurt</strong>, R. Abdallah and Á. García-Pérez. 
-            "Notara: Eﬃcient Blockchain Asset Notarization Service", 
-            2024 6th Conference on Blockchain Research & Applications for Innovative Networks and Services (BRAINS), Berlin,
-            Germany, 2024, pp. 1-3.
-        </li>
-    </ul>
-<p>
-    My master research project at the <a href="https://www.telecom-paris.fr/en/research/laboratories/information-processing-and-communication-laboratory-ltci">Laboratoire Traitement
-         et Communication de l'Information (LTCI)</a> of <a href="https://www.ip-paris.fr/">Institut Polytechnique de Paris</a> has been presented at SIROCCO:
-</p>
-<ul>
+<h3>2027</h3>
+<ul class="papers">
     <li>
-        <strong>G. Toyos-Marfurt</strong> and P. Kuznetsov, "On the Bit Complexity of Iterated Memory", 
-        2024, 31st International Colloquium on Structural Information and Communication Complexity (SIROCCO), Vietri sul Mare, Italy, 2024. Lecture Notes in Computer Science, vol 14662. Springer, Cham.
+        <span class="paper-title">Pending Conflicts Make Progress Impossible</span>
+        <span class="paper-links">
+            <a href="https://arxiv.org/abs/2602.04013">arXiv</a>
+            <a href="https://doi.org/10.1016/j.ipl.2026.106668">doi</a>
+        </span>
+        <span class="paper-meta">P. Kuznetsov, P. Sutra, <strong>G. Toyos-Marfurt</strong> · Information Processing Letters, vol. 196, 2027</span>
+        <span class="paper-hook">
+            Looking only at step contention is not enough: pending conflicts need synchronization!
+        </span>
     </li>
 </ul>
-<h3>2023</h3>
-<p>
-    This paper was the result of my work as a research assistant at the  <a href="https://www.fing.edu.uy/inco/grupos/gpgpu/">Heterogeneous Computing Laboratory</a> of the <a href="https://www.fing.edu.uy/">University of the Republic (UDELAR)</a>.
-</p>
-<ul>
+
+<h3>2026</h3>
+<ul class="papers">
     <li>
-        R. Marichal, <strong>G. Toyos</strong>, E. Dufrechou and P. Ezzatti, "Evaluation of architecture-aware optimization techniques for Convolutional Neural Networks", 
-        2023, 31st Euromicro International Conference on Parallel, Distributed and Network-Based Processing (PDP), Naples, Italy, 2023, pp. 177-184,
-         doi: 10.1109/PDP59025.2023.00036.
+        <span class="paper-title">Conflict-Freedom as a Progress Condition</span>
+        <span class="paper-links">
+            <a href="https://arxiv.org/abs/2605.19531">arXiv</a>
+            <a href="https://doi.org/10.1145/3796701.3815956">doi</a>
+        </span>
+        <span class="paper-meta">P. Kuznetsov, P. Sutra, <strong>G. Toyos-Marfurt</strong> · PODC 2026</span>
+        <span class="paper-hook">
+            If all pending operations commute, we can make progress using only reads and writes!
+        </span>
+    </li>
+    <li>
+        <span class="paper-title">The Complexity of Full-Information Iterated Protocols</span>
+        <span class="paper-links">
+            {# TODO: arXiv link for the TCS version #}
+            <a href="">arXiv</a>
+            <a href="https://doi.org/10.1016/j.tcs.2026.116202">doi</a>
+        </span>
+        <span class="paper-meta"><strong>G. Toyos-Marfurt</strong>, P. Kuznetsov · Theoretical Computer Science, vol. 1085, 2026</span>
+        <span class="paper-hook">
+            What is the bit/round complexity of full-information iterated protocols?
+        </span>
+    </li>
+    <li>
+        <span class="paper-title">Enabling Fine-Grained Traceability in Digital Product Passports Through Extended Fractional NFTs</span>
+        <span class="paper-links">
+            {# TODO: doi link and full conference name #}
+            <a href="">doi</a>
+        </span>
+        <span class="paper-meta">R. Abdallah, <strong>G. Toyos-Marfurt</strong>, S. Tucci-Piergiovanni · IEEE International Conference on Smart Sustainable Systems, 2026</span>
+    </li>
+</ul>
+
+<h3>2025</h3>
+<ul class="papers">
+    <li>
+        <span class="paper-title">Space-Time Trade-off in Bounded Iterated Memory</span>
+        <span class="paper-links">
+            <a href="https://arxiv.org/abs/2509.13157">arXiv</a>
+            <a href="https://doi.org/10.1007/978-3-032-11127-2_34">doi</a>
+        </span>
+        <span class="paper-meta"><strong>G. Toyos-Marfurt</strong>, P. Kuznetsov · SSS 2025</span>
+        <span class="paper-hook">
+            Fewer bits per memory entry cost more rounds: how many exactly?
+        </span>
+    </li>
+</ul>
+
+<h3>2024</h3>
+<ul class="papers">
+    <li>
+        <span class="paper-title">On the Bit Complexity of Iterated Memory</span>
+        <span class="paper-links">
+            <a href="https://arxiv.org/abs/2402.12484">arXiv</a>
+            <a href="https://doi.org/10.1007/978-3-031-60603-8_25">doi</a>
+            <a href="/portfolio/cs/bit-complexity-iterated-memory.html">notes &amp; code</a>
+        </span>
+        <span class="paper-meta"><strong>G. Toyos-Marfurt</strong>, P. Kuznetsov · SIROCCO 2024</span>
+        <span class="paper-hook">
+            My master's research project at the LTCI, Institut Polytechnique de Paris.
+        </span>
+    </li>
+    <li>
+        <span class="paper-title">Notara: Efficient Blockchain Asset Notarization Service</span>
+        <span class="paper-links">
+            <a href="https://doi.org/10.1109/BRAINS63024.2024.10732631">doi</a>
+            <a href="/portfolio/software/notara.html">project</a>
+        </span>
+        <span class="paper-meta"><strong>G. Toyos-Marfurt</strong>, R. Abdallah, Á. García-Pérez · BRAINS 2024 (demo)</span>
+        <span class="paper-hook">
+            From my internship at the CEA, presented as a live demo.
+        </span>
+    </li>
+</ul>
+
+<h3>2023</h3>
+<ul class="papers">
+    <li>
+        <span class="paper-title">Evaluation of Architecture-Aware Optimization Techniques for Convolutional Neural Networks</span>
+        <span class="paper-links">
+            <a href="https://doi.org/10.1109/PDP59025.2023.00036">doi</a>
+        </span>
+        <span class="paper-meta">R. Marichal, <strong>G. Toyos</strong>, E. Dufrechou, P. Ezzatti · PDP 2023</span>
+        <span class="paper-hook">
+            From my work as a research assistant at UDELAR's Heterogeneous Computing Laboratory.
+        </span>
+    </li>
+</ul>
+
+<h3>Patents</h3>
+<ul class="papers">
+    <li>
+        <span class="paper-title">A User-Customizable Decentralized Traceability System to Generate Digital Product Passport in Supply Chain, Method and Computer Program Product for the Same</span>
+        <span class="paper-links">
+            <a href="https://patents.google.com/patent/EP4703944A1/en">patent</a>
+            <a href="/portfolio/cs/custodpp.html">project</a>
+        </span>
+        <span class="paper-meta">R. Abdallah, <strong>G. Toyos-Marfurt</strong>, S. Tucci-Piergiovanni · EP 4703944 A1, 2026</span>
     </li>
 </ul>
 {% endblock article %}
 
 {% block navigation %}
 <a href="../"><li class="yh">
-    <img src="{{url_for('static', filename='icons/return.svg')}}"  height="20em" width="20em">
+    <img alt="Return icon" src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
     &nbsp;/...&nbsp;
     <span>- Return </span>
 </li></a>
-<a href="https://doi.org/10.1007/978-3-031-60603-8_25"><li class="yh">
-    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
-    &nbsp;On the bit Complexity of Iterated Memory&nbsp;
-    <span></span>
-    <time>11/6/2024</time>
-</li></a>
-<a href="https://doi.org/10.1109/BRAINS63024.2024.10732631"><li class="yh">
-    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
-    &nbsp;Notara: Eﬃcient Blockchain Asset Notarization Service&nbsp;
-    <span></span>
-    <time>11/10/2024</time>
-</li></a>
-<a href="https://doi.org/10.1109/PDP59025.2023.00036"><li class="yh">
-    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
-    &nbsp;Evaluation of architecture-aware optimization techniques for Convolutional Neural Networks&nbsp;
-    <span></span>
-    <time>1/3/2023</time>
-</li></a>
 {% endblock navigation %}
-{% block cdate %}30th of June 2023{% endblock cdate %}
 
+{% block cdate %}30th of June 2023{% endblock cdate %}

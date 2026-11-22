@@ -9,9 +9,9 @@
 </head>
 
 <body>
-  {% include "templates/_header.html" %}
   <main class="sombra border">
     <article>
+      {% block breadcrumb %}{% include "templates/_breadcrumb.html" %}{% endblock breadcrumb %}
       {% block article %}
       {% endblock article %}
       <hr>
@@ -25,10 +25,10 @@
     <hr>
     <div class="article-foot">
       <div id="pagets">
-          <i> Created on the {% block cdate %}{% endblock cdate %}. Last edition on {{edate}}</i>
+          {% block pagets %}<i> Created on the {% block cdate %}{% endblock cdate %}. Last edition on {{edate}}</i>{% endblock pagets %}
       </div>
       <div id="totop">
-          <a href="#il">
+          <a href="#">
               ▲
           </a>
       </div>

@@ -34,20 +34,6 @@ blockquote {
     font-family: sans-serif;
 }
 
-#quote {
-    font-style: italic;
-    font-size: 0.8em;
-    font-family: Helvetica, Arial,sans-serif;
-    white-space:nowrap;
-    text-overflow: ellipsis;
-    display: block;
-    overflow:hidden;
-    cursor: pointer;
-}
-#quote:hover {
-    white-space:normal;
-}
-
 h1 {
     font-size: 3em;
     margin-bottom: 0.8em;
@@ -69,11 +55,18 @@ body {
     }
 }
 
-header {
-    display: flex;
+/* Breadcrumb at the top of each page's box */
+.crumbs {
+    font-family: var(--font_mono);
+    font-size: 0.85em;
+    margin: 0;
 }
-header div {
-    background-color: var(--bg);
+article .crumbs a[href]::before,
+article .crumbs a[href]::after {
+    content: none;
+}
+.crumbs a:hover {
+    background-color: var(--yellow);
 }
 main {
     background-color: var(--bg);
@@ -100,27 +93,6 @@ main {
     top: 1rem;
     z-index: -1;
 }
-
-#hmenu { 
-    flex: 1;
-    align-items: flex-end;
-    padding-left: 1rem;
-    overflow: hidden;
-}
-
-
-.cont{
-    background-color: transparent;
-    min-width: 70px;
-}
-.logo {
-    margin-right: 1rem;
-}
-.logo img {
-    width: 3rem;
-    height: 100%;
-}
-
 
 article{
     padding: 2em 2em 0em 2em;
@@ -196,10 +168,7 @@ main nav time {
 /*START FOOTER APPEARANCE */
 footer {
     margin-top: 3rem;
-}
-#author {
-    float: left;
-    font-size: 0.7em;
+    display: flow-root;
 }
 #social {
     float: right;
@@ -244,3 +213,95 @@ article a[href*='//']::after {
     color: var(--bg);
 }
 /*END HYPERLINK APPEARANCE */
+
+/*START HOME */
+.home-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5em;
+}
+.home-head {
+    flex: 1;
+    min-width: 0;
+}
+.home-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 0.2em solid var(--fg);
+    margin-top: 1.5em;
+}
+@media (max-width: 600px) {
+    .home-top {
+        flex-direction: column-reverse;
+        gap: 0;
+    }
+    .home-photo {
+        width: 110px;
+        height: 110px;
+        margin-top: 0;
+    }
+}
+.nowrap {
+    white-space: nowrap;
+}
+.home h1 {
+    margin-bottom: 0.3em;
+}
+.home-id {
+    margin-top: 0;
+    font-size: 1.1em;
+}
+.home-links {
+    font-family: var(--font_mono);
+    font-size: 0.9em;
+}
+.home-links a {
+    margin-right: 0.4em;
+}
+.home-links a[href^="mailto"]:hover {
+    background-color: var(--yellow);
+}
+.home h2 {
+    margin-top: 1.8em;
+}
+.papers {
+    list-style: none;
+    padding: 0;
+}
+.papers li {
+    margin-bottom: 1.2em;
+    line-height: 1.35;
+}
+.paper-title {
+    font-weight: 700;
+    margin-right: 0.3em;
+}
+.paper-links {
+    font-family: var(--font_mono);
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+.paper-links a {
+    margin-right: 0.2em;
+}
+/* Links still to fill in (href="") keep the [ ] look of external links */
+.paper-links a[href=""]::before {
+    content: "[";
+}
+.paper-links a[href=""]::after {
+    content: "]";
+}
+.paper-meta,
+.paper-hook {
+    display: block;
+    font-size: 0.9em;
+}
+.paper-hook {
+    font-style: italic;
+    margin-top: 0.15em;
+}
+.papers-more {
+    font-size: 0.9em;
+}
+/*END HOME */

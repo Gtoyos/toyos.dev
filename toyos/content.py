@@ -1,8 +1,6 @@
 import os
 import pathlib
 import time
-import random
-from . import quotes
 
 class Cnt:
     def __init__(self):
@@ -17,7 +15,3 @@ class Cnt:
         for key,val in self.dates.items():
             y["/".join(key.split("/")[2:])] = val
         self.dates = y
-        self.qod = random.choice(quotes.QUOTES)
-    def newQod(self):
-        self.qod = random.choice(quotes.QUOTES)
-        return self.qod

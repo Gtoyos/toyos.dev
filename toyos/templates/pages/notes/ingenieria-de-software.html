@@ -687,7 +687,7 @@
 <ul>
 <li><strong>Prototipos electrónicos</strong>: Alta fidelidad, existen herramientas de apoyo (Visio, PowerPoint, simuladores, canvas). La interacción con una versión similar a la final es un mecanismo valioso para estudiar el comportamiento de los usuarios.</li>
 </ul>
-<p><img src="{{url_for('static', filename='imgs/iis/prototipoElectr%C3%B3nico.png')}}" alt="prototipoElectrónico"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/prototipoElectrónico.png')}}" alt="prototipoElectrónico"></p>
 <p>Los prototipos deben evaluarse con el target-public adecuado. Para mejorar la evaluación se pueden realizar guías (ej. defensa de laboratorio, los casos de prueba a seguir). Hay que evitar explicarle a la persona como se debe usar el prototipo, debería ser intuitivo. Documentar todo lo ocurrido.</p>
 <blockquote>
 <p>Se aprende más observando a los usuarios trabajando con el prototipo que preguntado qué piensan de él</p>
@@ -1191,13 +1191,13 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <li><strong>Comparación por pares y ranking:</strong> Se hace un ranking generan de todos los requisitos comparando de a pares.</li>
 <li><strong>Escala de 3 niveles:</strong> Se utilizan dos dimensiones:</li>
 </ol>
-<p><a href="assets/3lvl.png')}}">3lvl</a></p>
+<p><img src="{{url_for('static', filename='imgs/iis/3lvl.png')}}" alt="Escala de 3 niveles"></p>
 <ol start="4">
 <li><strong>4 niveles</strong> (debe, debería, podría, no va.)</li>
 <li><strong>100 dólares</strong>. (¡Muy popular en agile dev!): Asignar dinero disponible y luego &quot;invertirlo&quot; en los requisitos a priorizar.</li>
 <li>Producción basada en valores, costos y riesgos:</li>
 </ol>
-<p><a href="assets/risk.png')}}">risk</a></p>
+<p><img src="{{url_for('static', filename='imgs/iis/risk.png')}}" alt="Priorización por valor, costo y riesgo"></p>
 <h3 id="validación-de-requisitos">Validación de requisitos</h3>
 <p>Es el proceso por el cual se determina si los requisitos relevados son consistentes con las necesidades del cliente.</p>
 <ul>
@@ -1252,7 +1252,7 @@ Ayudan a resolver ciertas expectativas y permiten que el desarrollo sea más flu
 <li><strong>Soporte de herramientas</strong>: Las herramientas que se utilizará n para implementar esto (planillas, software de gestión, etc.).</li>
 </ol>
 <p>El proceso de cambio para decidir si un cambio debe aceptarse o no son requiere un análisis previo de especificación (¿el cambio es válido?), calcular los costos de cambiar el análisis (se tiene que evaluar el <strong>efecto</strong> (trazabilidad y estabilidad del sistema), definir si proceder o no). Si se pasan los chequeos, se implementa el cambio.</p>
-<p><a href="assets/idp.png')}}">a</a></p>
+<p><img src="{{url_for('static', filename='imgs/iis/idp.png')}}" alt="Proceso de cambio de requisitos"></p>
 <h4 id="cambios-en-procesos-ágiles">Cambios en procesos ágiles.</h4>
 <p>Cuando un usuario propone un cambio, no se pasa por un proceso formal de gestión.
 El usuario debe definir la prioridad de dicho cambio y se es de alta prioridad debe decidir qué características quitar de la iteración para dar espacio a implementar dicho cambio. ¿Pero... qué pasa si ya empezamos? ¿Queda para la siguiente iteración? En un sistema con múltiples stakeholders los cambios no benefician necesariamente a todas las partes interesadas. En situaciones complejas puede ser bueno tener una autoridad independiente de los stakeholders que equilibre las necesidades de los mismos (counselling).</p>
@@ -1599,7 +1599,7 @@ Un ejemplo de esto son los compiladores, para estos se utiliza una <strong>compo
 <li>Componer componentes para crear el sistema final.</li>
 </ul>
 <p>Los componentes se pueden componer de tres formas: Secuencial (ejecución de componentes en secuencia), jerárquica (Componente que llama a varios otros componentes) y composición (Dos interfaces de componentes se juntan para formar un nuevo componente).</p>
-<p><img src="{{url_for('static', filename='imgs/iis/composici%C3%B3n.png')}}" alt="composición"></p>
+<p><img src="{{url_for('static', filename='imgs/iis/composición.png')}}" alt="composición"></p>
 <p>Los problemas que pueden surgir al componer componentes:</p>
 <p>Problemas de <em>adaptabilidad</em> de componentes. La solución a esto es utilizar wrappers.</p>
 <p>Para resolver conflictos cuando se componen componentes hay que considerar: Cual es la composición más efectiva que da los req. funcionales del sistema? Que composición es más adaptable cuando los req. cambien? Cuáles serán las prop. del sistema compuesto (rendimiento)?</p>
@@ -2922,7 +2922,7 @@ Tiene 4 sub modelos: Composición de aplicaciones, diseño temprano, reúso y mo
     &nbsp;/...&nbsp;
     <span>- Return </span>
 </li></a>
-<a href="{{url_for('static', filename='icons/markdown/apuntesIIS.md')}}"><li class="yh">
+<a href="{{url_for('static', filename='files/markdown/apuntesIIS.md')}}"><li class="yh">
     <img src="{{url_for('static', filename='icons/markdown.svg')}}" height="20em" width="20em">
     &nbsp;Apuntes IIS&nbsp;
     <span>- Markdown version (Spanish)</span>

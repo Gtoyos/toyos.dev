@@ -1,4 +1,5 @@
-from flask import Flask, request, send_from_directory, render_template, redirect
+import os
+from flask import Flask, request, send_from_directory, render_template, redirect, url_for
 from . import content
 
 app = Flask(__name__)
@@ -33,9 +34,14 @@ REDIRECTS = {
     "about/changelog.html": "",
 }
 
+def static_v(filename):
+    """Static URL with ?v=<last modified time>, so caches (Cloudflare, browsers) fetch a changed file."""
+    mtime = int(os.path.getmtime(os.path.join(app.static_folder, filename)))
+    return url_for('static', filename=filename, v=mtime)
+
 @app.context_processor
 def load_site_variables():
-    return dict(cnt=cnt)
+    return dict(cnt=cnt, static_v=static_v)
 
 @app.route('/<path:pth>')
 def genericpath(pth):

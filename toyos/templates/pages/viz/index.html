@@ -1,0 +1,31 @@
+{# templates/pages/viz/index.html #}
+
+{% extends "base.html" %}
+
+{% block head_extra %}
+{% endblock head_extra %}
+
+{% block article %}
+<h1>Visualizations</h1>
+<p>Interactive visualizations of distributed algorithms. Source on <a href="https://github.com/Gtoyos/distcomp-viz">GitHub</a>.</p>
+{% endblock article %}
+
+{% block navigation %}
+<a href="/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/return.svg')}}" height="20em" width="20em">
+    &nbsp;/...&nbsp;
+    <span>- Return to landpage </span>
+</li></a>
+<a href="/viz/obstruction-free-consensus/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Obstruction-free consensus&nbsp;
+    <span>- Consensus from commit-adopt objects.</span>
+</li></a>
+<a href="/viz/immediate-snapshot/"><li class="yh">
+    <img src="{{url_for('static', filename='icons/file.svg')}}" height="20em" width="20em">
+    &nbsp;Snapshot and collect&nbsp;
+    <span>- Immediate snapshot, atomic snapshot and collect on Ch(&Delta;).</span>
+</li></a>
+{% endblock navigation %}
+
+{% block cdate %}27th of November 2026{% endblock cdate %}

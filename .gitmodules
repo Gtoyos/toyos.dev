@@ -1,0 +1,3 @@
+[submodule "distcomp-viz"]
+	path = distcomp-viz
+	url = https://github.com/Gtoyos/distcomp-viz.git

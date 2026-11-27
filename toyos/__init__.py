@@ -1,5 +1,6 @@
 import os
-from flask import Flask, request, send_from_directory, render_template, redirect, url_for
+from flask import Flask, request, send_from_directory, render_template, redirect, url_for, abort
+from werkzeug.security import safe_join
 from . import content
 
 app = Flask(__name__)
@@ -42,6 +43,20 @@ def static_v(filename):
 @app.context_processor
 def load_site_variables():
     return dict(cnt=cnt, static_v=static_v)
+
+# Visualizations: static pages from the distcomp-viz submodule, served as-is (not through Jinja)
+VIZ_WEB = os.path.join(os.path.dirname(app.root_path), 'distcomp-viz', 'web')
+
+@app.route('/viz/<path:pth>')
+def viz(pth):
+    full = safe_join(VIZ_WEB, pth)
+    if full is None:
+        abort(404)
+    if os.path.isdir(full):
+        if not pth.endswith('/'):
+            return redirect('/viz/' + pth + '/', code=301)  # pages use relative paths (../fonts/)
+        pth += 'index.html'
+    return send_from_directory(VIZ_WEB, pth)
 
 @app.route('/<path:pth>')
 def genericpath(pth):
